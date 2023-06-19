@@ -1,11 +1,11 @@
 # C276 Project - Recipe App
 
 Group Members:
-Jai Malhi
-Chau Pham
-Phillip Nguyen
-Lotus Liu
-Sean Lam
+* Jai Malhi
+* Chau Pham
+* Phillip Nguyen
+* Lotus Liu
+* Sean Lam
 
 ### Project Abstract:
 
