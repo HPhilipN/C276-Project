@@ -1,4 +1,4 @@
-# C276 Project - Recipe App
+# CMPT 276 Project - Recipe App
 
 Group Members:
 * Jai Malhi
