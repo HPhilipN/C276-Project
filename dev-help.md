@@ -8,3 +8,4 @@ The first time you are running Vite + React frontend you will need to do the fol
 
 ## Backend
 - The spring backend should run the similiarly to any previous assignments we have completed
+- when testing spring api's, thunderclient extension in VS-Code is convenient
