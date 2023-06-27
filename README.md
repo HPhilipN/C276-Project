@@ -7,32 +7,29 @@ Group Members:
 * Lotus Liu
 * Sean Lam
 
-### Project Abstract:
+## Project Abstract:
 Replicake is an online recipe aggregator allowing chefs to upload recipes for other people to use. Guests can view and browse recipes while logged-in users can also rate, and comment on others’ recipes and upload their own creations. Moderators will manually filter out inappropriate recipes which users try to upload, and malicious comments. Besides these features, there will be tags to filter down recipes. In these recipes, users can check for the nutrient value of each ingredient using Edamam’s Food Database API. When a user is not signed-in, the main feed will display mostly beginner-friendly recipes. Signed-in users will receive a feed of personalized recipes based on chosen tags. There will be a virtual cookbook where users can compile recipes they like into a PDF format and save or share them with others. 
 
-### Main Feature Breakdown:
-1. User Recipe Submission and Review Process: Your idea of having a review process for user-submitted recipes is great for quality control. Consider implementing a user-friendly submission form where users can input recipe details, including ingredients, instructions, and media (photos or videos). You can provide a confirmation message to users indicating that their recipe is under review.
-2. Virtual Cookbooks and PDF Generation: The ability for users to create virtual cookbooks is a valuable feature. To format recipes like a cookbook, you can provide predefined templates or themes for users to choose from. Additionally, offering an option to generate PDF versions of the cookbooks would allow users to easily save, print, or share their collections.
-3. Recipe Comparison: Allowing users to compare their uploaded recipes with existing ones from the Spoonacular API adds a useful feature. Consider providing a side-by-side comparison view, highlighting similarities and differences in ingredients, preparation methods, and nutrition information.
-4. Recommendation Feature & Filtering: Incorporating a recommendation system based on user preferences, dietary restrictions, and other factors can enhance user engagement. Besides filtering options like calories and food type, you could also consider adding features like personalized recipe suggestions, trending recipes, or seasonal recommendations
-5. Community Engagement and Reporting: To promote a healthy community, consider implementing features that encourage user interaction, such as comment sections for recipe discussions and sharing cooking tips. The Moderator role can handle user reports and ensure the platform maintains a respectful and constructive environment.
+### Spring endpoints **CURRENTLY UNTESTED**
+- `@GetMapping("/mod/viewUsers")` 
+    - view all users in users table
+    - returns JSON user object to frontend
+- `@PostMapping("/user/addUser")`
+    - add a user to the users table 
+- `@PutMapping("/user/update/{uid}")`
+    - user self-update their name, email, & password
+    - JSON user object expected from frontend
+    - the role-related booleans should *not* be affected here
+- `@PutMapping("/mod/update/{uid}")`
+    - moderator can update any attribute of a user
+    - JSON user object expected from frontend
+- `@DeleteMapping("/mod/delete/{uid}")`
+    - delete any user in user table
 
-### User Roles & Permissions:
-1. Guest User:
-   -  Access: Publicly accessible areas of the platform, such as browsing and searching for recipes.
-   -  Purpose: To allow non-registered users to explore the platform and encourage them to sign up for an account.
-2. Registered User:
-   -  Access: All features available to Guest Users, plus the following:
-      -  upload and view recipes
-      -  comment on and review recipes.
-   -  Purpose: To encourage user engagement and create a sense of community by allowing registered users to contribute their own recipes, share feedback, and interact with other users' recipes. This fosters collaboration and knowledge sharing among cooking enthusiasts.
-3. Moderator:
-   -  Access: Admin-like privileges with the ability to perform the following:
-      -  Handle user reports related to recipe errors, rude comments, review errors, etc.
-      -  Edit or remove inappropriate content.
-      -  Manage user accounts and resolve user-related issues.
-      -  Delete/Remove Users from the database
-   -  Purpose: To ensure a safe and respectful community environment, maintain quality control, and address any issues or disputes that may arise. Moderators play a crucial role in upholding community guidelines and ensuring the platform remains a valuable resource for all users.
-
+### Development Information
+- Refer to `dev-help.md` for start up and other information
 ### Technologies Utilized
-- *TBD* 
+- Java Spring (backend)
+- ReactJS (frontend)
+- PostgreSQL (database)
+- Render.com (hosting)
