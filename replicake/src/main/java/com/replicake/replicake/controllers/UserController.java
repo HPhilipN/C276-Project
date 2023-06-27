@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
-    @GetMapping("/mod/viewUsers")
+    @GetMapping("/mod/view/users")
     @ResponseBody
     public List<User> getAllUsers(Model model, HttpServletResponse response) {
         System.out.println("Getting all Users");
@@ -46,8 +46,23 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user/addUser")
-    public void addUser(@RequestBody User newUser, HttpServletResponse response) {
+    @GetMapping("/mod/view/{uid}")
+    @ResponseBody
+    public User getIndividualUser(@PathVariable String uid, Model model, HttpServletResponse response) {
+        System.out.println("Getting User with id: " + uid);
+        int userId = Integer.parseInt(uid);
+        try {
+            User user = userRepo.findByUid(userId);
+            return user;
+        } catch (Exception e) {
+            System.out.println("Invalid uid");
+            response.setStatus(404); // 404 = not found
+            return null;
+        }
+    }
+
+    @PostMapping("/user/add/user")
+    public void addIndividualUser(@RequestBody User newUser, HttpServletResponse response) {
         System.out.println("Adding new User");
         try {
             String newName = newUser.getName();
@@ -117,7 +132,7 @@ public class UserController {
     }
 
     @DeleteMapping("/mod/delete/{uid}")
-    public void deleteUser(@PathVariable String uid, HttpServletResponse response) {
+    public void deleteIndividualUser(@PathVariable String uid, HttpServletResponse response) {
         System.out.println("Deleting User");
         try {
             int userId = Integer.parseInt(uid);
