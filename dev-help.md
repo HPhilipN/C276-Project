@@ -14,6 +14,3 @@ The first time you are running Vite + React frontend you will need to do the fol
         - `isBasic`, `isChef`, and `isModerator`
     - these boolean values should be changed according to role
     - generally, avoid giving a single user multiple roles
-- For the user controller:
-    - `mod/...` mappings indicate mappings that only moderators utilize
-    - `user/...` mappings indicate mappings that user & moderators can utilize
