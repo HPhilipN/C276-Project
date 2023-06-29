@@ -1,4 +1,4 @@
 .prettierignore
 .env
 
-Replicake-db-Info.txt
+*.txt
