@@ -9,9 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-@PropertySource("/etc/secrets/.env")
+@PropertySource("file:${user.dir}/replicake/.env")
 public class AppConfig {
-    // @PropertySource("file:${user.dir}/.env") // for localhost use
     
     @Value("${spring.datasource.url}")
     private String datasourceUrl;
