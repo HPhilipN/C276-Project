@@ -1,9 +1,0 @@
-Database: replicake_db
-Username: z
-Password: NFPrii4awZXQYf9c6TcXfKzpKXSoYq5A
-Port: 5432
-
-Internal URL: postgres://replicake_db_user:NFPrii4awZXQYf9c6TcXfKzpKXSoYq5A@dpg-ciet20lph6etu3oh7470-a/replicake_db
-External URL: postgres://replicake_db_user:NFPrii4awZXQYf9c6TcXfKzpKXSoYq5A@dpg-ciet20lph6etu3oh7470-a.oregon-postgres.render.com/replicake_db
-
-PSQL Command: PGPASSWORD=NFPrii4awZXQYf9c6TcXfKzpKXSoYq5A psql -h dpg-ciet20lph6etu3oh7470-a.oregon-postgres.render.com -U replicake_db_user replicake_db
