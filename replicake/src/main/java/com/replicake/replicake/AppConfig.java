@@ -9,8 +9,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-@PropertySource("file:${user.dir}/.env")
+@PropertySource("/etc/secrets/.env")
 public class AppConfig {
+    // @PropertySource("file:${user.dir}/.env") // for localhost use
     
     @Value("${spring.datasource.url}")
     private String datasourceUrl;
