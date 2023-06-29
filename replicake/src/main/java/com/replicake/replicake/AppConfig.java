@@ -30,7 +30,4 @@ public class AppConfig {
         // Additional configuration for your data source if needed
         return dataSource;
     }
-
-    // Other configuration beans or application-specific configurations...
-
 }
