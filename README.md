@@ -1,5 +1,7 @@
 # RepliCake - Recipe App
 
+Access on [Replicake](https://replicake.onrender.com/)
+
 Group Members:
 * Jai Malhi
 * Chau Pham
