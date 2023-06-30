@@ -19,7 +19,7 @@ public class SecurityConfig {
         return http
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/users/**").permitAll();
-                auth.anyRequest().authenticated();
+                // auth.anyRequest().authenticated();
             })
             .csrf(csrf -> csrf.disable()) //! this allows anyone use of any POST, PUT, DELETE requests -> NOT GOOD
             .build();
