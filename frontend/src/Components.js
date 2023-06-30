@@ -57,6 +57,7 @@
  `;
  
  export const Input = styled.input`
+ border-radius: 10px;
  background-color: #eee;
  border: none;
  padding: 12px 15px;
