@@ -14,7 +14,9 @@ public class ReplicakeApplication {
     }
 
     private static void loadEnvVariables() {
-        Dotenv dotenv = Dotenv.configure().load();
+        Dotenv dotenv = Dotenv.configure()
+            .directory("replicake")
+            .load();
         System.setProperty("DATABASE_URL", dotenv.get("DATABASE_URL"));
         System.setProperty("DATABASE_USERNAME", dotenv.get("DATABASE_USERNAME"));
         System.setProperty("DATABASE_PASSWORD", dotenv.get("DATABASE_PASSWORD"));
