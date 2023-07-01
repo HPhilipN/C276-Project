@@ -1,9 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif !important;
 }
+
+:root {
+  font-family: "Roboto", "sans-serif";
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -426,8 +433,6 @@ nav {
     display: none;
   }
 }
-
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 
 
 .work-section-info {
