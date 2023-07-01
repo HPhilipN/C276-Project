@@ -15,13 +15,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // allow anyone to access /users/* get endpoints
-        // TODOs: this needs to be changed so only authorized users can use certain endpoints
         return http
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/users/**").permitAll();
                 auth.anyRequest().permitAll();
             })
-            .csrf(csrf -> csrf.disable()) //! this allows anyone use of any POST, PUT, DELETE requests -> NOT GOOD
+            .csrf(csrf -> csrf.disable()) //! this allows anyone use of any POST, PUT, DELETE requests
             .build();
     }
 
