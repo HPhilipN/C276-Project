@@ -1,18 +1,14 @@
 import "./App.css";
-import Home from "./Home.jsx";
-import Login from "./Login.jsx"
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-
+import Home from "./Home";
+import Work from "./Work";
+import Footer from "./Footer";
 
 function App() {
   return (
-    <div>
-    <Router>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-    </Router>
+    <div className="App">
+      <Home />
+      <Work />
+      <Footer /> 
     </div>
   );
 }
