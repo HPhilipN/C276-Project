@@ -26,10 +26,6 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  background-color: #f6f6f6;
-}
-
 nav {
   display: flex;
   align-items: center;
@@ -434,11 +430,9 @@ nav {
   }
 }
 
-
 .work-section-info {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-

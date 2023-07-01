@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.replicake.replicake.models.User;
 import com.replicake.replicake.models.UserRepository;
@@ -24,11 +25,13 @@ import jakarta.servlet.http.HttpServletResponse;
  *               directly to the HTTP response body.
  *               The list of students will be converted to a JSON array.
  */
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/view")
     @ResponseBody
@@ -53,8 +56,10 @@ public class UserController {
             String loginEmail = loginUser.getEmail();
             String loginPassword = loginUser.getPassword();
 
-            User user = userRepo.findByEmail(loginEmail);
-            if(user.getPassword().equals(loginPassword)){
+            // get & compare passwords
+            String storedPassword = userRepo.findByEmail(loginEmail).getPassword();
+            boolean passwordMatches = passwordEncoder.matches(loginPassword, storedPassword);
+            if(passwordMatches){
                 System.out.println("Successfully logged in " + loginEmail);
                 return true;
             } else {
@@ -77,23 +82,27 @@ public class UserController {
                 System.out.println("User with this email exists");
                 return false;
             }
+
+            String newPassword = newUser.getPassword();
+            // hash & secure password before storage
+            String hashedPassword = passwordEncoder.encode(newPassword);
                 
             String newName = newUser.getName();
             newName = newName.toLowerCase(); // lowercase the entire name
             newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
-            String newPassword = newUser.getPassword();
+    
             boolean basicRole = newUser.isBasic();
             boolean chefRole = newUser.isChef();
             boolean modRole = newUser.isModerator();
 
             // add new student to student table in DB
-            User newUserCreated = new User(newName, newEmail, newPassword, basicRole, chefRole, modRole);
+            User newUserCreated = new User(newName, newEmail, hashedPassword, basicRole, chefRole, modRole);
             userRepo.save(newUserCreated);
 
             response.setStatus(201); // 201 = created new object
             return true; 
         } catch (Exception e) {
-            System.out.println("Invalid input or access failed");
+            System.out.println("Invalid data or Access denied");
             response.setStatus(401); // 401 = Unauthorized
             return false;
         }
