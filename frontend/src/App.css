@@ -1,4 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 
+.App {
+  font-family: "Roboto", "sans-serif";
+}
 
 nav {
   display: flex;
@@ -403,9 +407,6 @@ nav {
     display: none;
   }
 }
-
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
-
 
 .work-section-info {
   background-color: white;
