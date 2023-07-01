@@ -1,16 +1,13 @@
 import React from "react";
-import Work from "./Work.jsx";
-import Footer from "./Footer.jsx";
 import BannerBackground from "./assets/home-banner-background.png";
 import BannerImage from "./assets/home-banner-image.png";
-import Navbar from "./Navbar.jsx";
+import Navbar from "./Navbar";
 import { FiArrowRight } from "react-icons/fi";
-import "./App.css";
 
 const Home = () => {
   return (
-    <div className="App">
-        <Navbar />
+    <div className="home-container">
+      <Navbar />
       <div className="home-banner-container">
         <div className="home-bannerImage-container">
           <img src={BannerBackground} alt="" />
@@ -24,15 +21,13 @@ const Home = () => {
             & marinating, so you can cook a fresh food.
           </p>
           <button className="secondary-button">
-            Search Now <FiArrowRight />{" "}
+            Order Now <FiArrowRight />{" "}
           </button>
         </div>
         <div className="home-image-section">
           <img src={BannerImage} alt="" />
         </div>
       </div>
-      <Work />
-      <Footer />
     </div>
   );
 };

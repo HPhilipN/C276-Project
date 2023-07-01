@@ -21,7 +21,6 @@ const Navbar = () => {
     {
       text: "Home",
       icon: <HomeIcon />,
-      link: "/",
     },
     {
       text: "Search for Recipes",
@@ -30,7 +29,6 @@ const Navbar = () => {
     {
       text: "Sign In",
       icon: <LoginOutlinedIcon />,
-      link: "/login",
     },
     {
       text: "Sign Up",
@@ -45,10 +43,10 @@ const Navbar = () => {
       </div>
       <div className="navbar-links-container">
           <BiSolidHome />
-          <a href="/">Home</a>
-        <a href="">Search for Recipes</a>
-        <a href="/login">Sign In</a>
-        <a href="/login" className="primary-button">Sign Up</a>
+          <a>Home</a>
+        <a>Search for Recipes</a>
+        <a>Sign In</a>
+        <a className="primary-button">Sign Up</a>
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
