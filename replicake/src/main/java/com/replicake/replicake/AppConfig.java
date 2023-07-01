@@ -5,20 +5,20 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+// import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-@PropertySource("file:${user.dir}/replicake/.env")
+// @PropertySource("file:${user.dir}/replicake/.env")
 public class AppConfig {
     
-    @Value("${spring.datasource.url}")
+    @Value("${DATABASE_URL}")
     private String datasourceUrl;
 
-    @Value("${spring.datasource.username}")
+    @Value("${DATABASE_USERNAME}")
     private String datasourceUsername;
 
-    @Value("${spring.datasource.password}")
+    @Value("${DATABASE_PASSWORD}")
     private String datasourcePassword;
 
     @Bean
@@ -30,4 +30,5 @@ public class AppConfig {
         // Additional configuration for your data source if needed
         return dataSource;
     }
+
 }
