@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className = "App">
     <Navbar />
     <Components.Container>
       <Components.SignUpContainer signinIn={signIn}>
