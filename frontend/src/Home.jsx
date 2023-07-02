@@ -3,15 +3,11 @@ import BannerBackground from "./assets/home-banner-background.png";
 import BannerImage from "./assets/home-banner-image.png";
 import Navbar from "./Navbar";
 import { FiArrowRight } from "react-icons/fi";
-import "./Home.css"
-import Work from "./Work";
-import Footer from "./Footer";
 
 const Home = () => {
   return (
     <div className="home-container">
       <Navbar />
-      <div className ="home">
       <div className="home-banner-container">
         <div className="home-bannerImage-container">
           <img src={BannerBackground} alt="" />
@@ -32,9 +28,6 @@ const Home = () => {
           <img src={BannerImage} alt="" />
         </div>
       </div>
-      <Work />
-      <Footer /> 
-    </div>
     </div>
   );
 };
