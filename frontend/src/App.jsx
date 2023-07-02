@@ -1,11 +1,14 @@
 import "./App.css";
 import Home from "./Home";
-import Login from "./Login";
+import Work from "./Work";
+import Footer from "./Footer";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <Home />
+      <Work />
+      <Footer /> 
     </div>
   );
 }

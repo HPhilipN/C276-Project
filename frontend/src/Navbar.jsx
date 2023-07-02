@@ -14,7 +14,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from '@mui/icons-material/Search';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
-import "./Navbar.css";
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -38,12 +37,13 @@ const Navbar = () => {
   ];
   
   return (
-    <nav className="navbar">
-      <div className="navbar-logo-container">
+    <nav>
+      <div className="nav-logo-container">
         <img src={Logo} alt="" />
       </div>
       <div className="navbar-links-container">
-        <a>Home</a>
+          <BiSolidHome />
+          <a>Home</a>
         <a>Search for Recipes</a>
         <a>Sign In</a>
         <a className="primary-button">Sign Up</a>
