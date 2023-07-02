@@ -6,7 +6,7 @@ import { FiArrowRight } from "react-icons/fi";
 import "./Home.css"
 import Work from "./Work";
 import Footer from "./Footer";
-
+//hi
 const Home = () => {
   return (
     <div className="home-container">
