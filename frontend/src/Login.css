@@ -75,7 +75,7 @@
 .password-input {
   flex: 1;
   padding-right: 40px; /* Adjust the value as needed */
-  height: 40px; /* Adjust the value as needed */
+  height: 40px; 
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px;
