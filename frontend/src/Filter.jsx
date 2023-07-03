@@ -32,8 +32,8 @@ function Filter() {
 
   return (
     <div className="Filter">
-      <button class="filter-button" onClick={setModalOpen}>
-        <div class="filter-icon">
+      <button className="filter-button" onClick={setModalOpen}>
+        <div className="filter-icon">
             <FontAwesomeIcon icon={faFilter} />
             Filters
         </div>
@@ -49,8 +49,8 @@ function Filter() {
         </button>
         <div>
             {/*Category*/}
-            <div class="category-group">
-                <p class="label">Categories</p>
+            <div className="category-group">
+                <p className="label">Categories</p>
             </div>
         </div>
       </Modal>

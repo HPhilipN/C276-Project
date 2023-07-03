@@ -6,7 +6,7 @@ import "./Recipelist.css";
 
 const RecipeList = () => {
     return (
-        <div class="emptyrecipe">
+        <div className="emptyrecipe">
             <FontAwesomeIcon icon={faKitchenSet} size="3x" />
             <h2>No Recipes have been added.</h2>
         </div>
