@@ -11,7 +11,7 @@ const Searchbar = ({value, changeInput}) => (
         <div class="searchbar-icon">
             <FontAwesomeIcon icon={faMagnifyingGlass} size="1x"/>
         </div>
-        <input type="text" placeholder="Search Here" value={value} onChange={changeInput}/>
+        <input type="text" placeholder="Search" value={value} onChange={changeInput}/>
     </div>
 )
 
