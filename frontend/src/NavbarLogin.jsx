@@ -15,6 +15,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
+import LogoutIcon from '@mui/icons-material/Logout';
 import "./NavbarLogin.css";
 
 const Navbar = () => {
@@ -36,6 +37,11 @@ const Navbar = () => {
       text: "Settings",
       icon: <SettingsIcon />,
       profile: true,
+    },
+    {
+      text: "Logout",
+      icon: <LogoutIcon />,
+ 
     },
   ];
 

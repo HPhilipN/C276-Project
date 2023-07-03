@@ -15,6 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import LogoutIcon from '@mui/icons-material/Logout';
 import "./NavbarAdmin.css";
 
 const Navbar = () => {
@@ -40,6 +41,11 @@ const Navbar = () => {
       text: "Admin",
       icon: <AdminPanelSettingsIcon />,
       profile: true,
+    },
+    {
+      text: "Logout",
+      icon: <LogoutIcon />,
+ 
     },
   ];
 
