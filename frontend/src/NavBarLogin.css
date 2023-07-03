@@ -1,0 +1,74 @@
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+  
+  .navbar-logo-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo-container img {
+    height: 30px;
+  }
+  
+  .navbar-links-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+  
+  .navbar-links-container a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar-menu-container {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .navbar a {
+      display: none;
+    }
+  }
+  
+
+  .primary-button {
+    padding: 13px 16px; /* Adjust the padding as desired */
+    border-radius: 7px; /* Adjust the border radius as desired */
+    background: #fe9e0c;
+    color: #000000; /* Set the text color */
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .primary-button:hover {
+    background-color: #e0e0e0; /* Set the background color on hover */
+  }
+  
+
+  .navbar-logo-container img {
+    height: 40px; /* Adjust the height as needed */
+  }
+  
+  .navbar-profile {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Adjust the margin as per your preference */
+  }
+  
+  .navbar-profile-picture {
+    margin-right: 10px; /* Adjust the margin as per your preference */
+  }
+  
