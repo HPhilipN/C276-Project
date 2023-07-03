@@ -1,0 +1,20 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.recipelist-wrap{
+    display: flex;
+    flex: 1;
+    background: beige;
+    overflow-y: auto;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+}
+
+/* Only works for Chrome, Safari and Opera */
+::-webkit-scrollbar{
+    display: none;
+}
