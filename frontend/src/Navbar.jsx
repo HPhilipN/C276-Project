@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Logo from "./assets/Logo.png";
-import { BiSolidHome } from "react-icons/bi";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -13,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from '@mui/icons-material/Search';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import {Link} from 'react-router-dom';
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -22,18 +21,16 @@ const Navbar = () => {
     {
       text: "Home",
       icon: <HomeIcon />,
+
     },
     {
       text: "Search for Recipes",
       icon: <SearchIcon />,
     },
     {
-      text: "Sign In",
+      text: "Sign Up/Sign In",
       icon: <LoginOutlinedIcon />,
-    },
-    {
-      text: "Sign Up",
-      icon: <PersonAddAltRoundedIcon  />,
+      link: "/login",
     },
   ];
   
@@ -45,8 +42,7 @@ const Navbar = () => {
       <div className="navbar-links-container">
         <a href ="/">Home</a>
         <a>Search for Recipes</a>
-        <a href ="/login">Sign In</a>
-        <a href ="/login" className="primary-button">Sign Up</a>
+        <a href ="/login" className="primary-button">Sign Up/Sign In</a>
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
