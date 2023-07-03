@@ -4,9 +4,10 @@
     height: 100vh;
 }
 .recipelist-wrap{
-    display: flex;
+    display: center;
     flex: 1;
-    background: beige;
+    padding-top: 200px;
+    background: white;
     overflow-y: auto;
     /* IE and Edge */
     -ms-overflow-style: none;
