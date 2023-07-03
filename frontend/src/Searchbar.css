@@ -1,0 +1,22 @@
+.searchbar-wrap{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    padding: 1.5rem 1rem;
+}
+
+.searchbar-wrap input{
+    font-size: 20px;
+    padding-left: 40px;
+    outline: none;
+    height: 50px;
+    width: 1400px;
+}
+
+.searchbar-icon{
+    color: green;
+    margin-right: 10px;
+    position: absolute;
+    padding: 10px;
+    
+}

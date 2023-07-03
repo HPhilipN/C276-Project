@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import "./Filter.css";
 
 const customStyles = {
   overlay: {
     background: "rgba(0, 0, 0, 0.5)",
-    overflowY:"scroll"
+    overflowY:"scroll",
+    zIndex: 999,
   },
   content: {
     top: "50%",
@@ -26,7 +30,7 @@ function Filter() {
 
   return (
     <div className="Filter">
-      <button onClick={setModalOpen}>Open Modal</button>
+      <button onClick={setModalOpen}><FontAwesomeIcon icon={faFilter} /></button>
       <Modal
         isOpen={modalOpen}
         onRequestClose={() => setModalOpen(false)}
