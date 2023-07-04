@@ -1,5 +1,5 @@
 import React from "react";
-import Filter from "./filter";
+import Filter from "./Filter";
 import Searchbar from "./Searchbar";
 import Recipelist from "./Recipelist";
 import Navbar from "./Navbar";
