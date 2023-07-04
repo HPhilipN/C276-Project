@@ -7,20 +7,18 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
     return (
-        <div class="dashboard">
+        <div className="dashboard">
             {/*Search bar*/}
             <Navbar/>
             {/*Search bar*/}
             <Searchbar />
             {/*Filter Modal*/}
             <Filter/>
-            <div class= "recipelist-wrap">
+            <div className= "recipelist-wrap">
                 {/*Recipe List*/}
                 <Recipelist/>
             </div>
             
-            
-
         </div>
     )
 }
