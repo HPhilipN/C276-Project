@@ -1,0 +1,19 @@
+{
+    "Difficulty": [
+        "Easy",
+        "Medium",
+        "Hard"
+    ],
+    "Type of Food": [
+        "Chinese",
+        "Italian",
+        "French",
+        "Japanese",
+        "Mexican"
+    ],
+    "Occasion": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+    ]
+}
