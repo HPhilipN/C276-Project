@@ -40,12 +40,7 @@
 }
 
 .x-button {
-   margin: 10px;
-   width: 60px;
-   height: fit-content;
-   padding: 10px;
-   background-color: #fe9e0c;
-   border-radius: 12%;
+   background-color: transparent;
    border: none;
    float: right;
 }

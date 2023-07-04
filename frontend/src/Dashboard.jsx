@@ -10,10 +10,12 @@ const Dashboard = () => {
         <div className="dashboard">
             {/*Search bar*/}
             <Navbar/>
-            {/*Search bar*/}
-            <Searchbar />
-            {/*Filter Modal*/}
-            <Filter/>
+            <div className="filter-search-wrapper">
+                {/*Search bar*/}
+                {/*Filter Modal*/}
+                <Filter/>
+                <Searchbar />
+            </div>
             <div className= "recipelist-wrap">
                 {/*Recipe List*/}
                 <Recipelist/>
