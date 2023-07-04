@@ -18,14 +18,13 @@ const Home = () => {
                </div>
                <div className="home-text-section">
                   <h1 className="primary-heading text-left">
-                     Your Favorite Food Delivered Hot & Fresh
+                     Replicake Your Favourite Recipes
                   </h1>
                   <p className="primary-text text-left">
-                     Healthy switcher chefs do all the prep work, like peeling, chopping &
-                     marinating, so you can cook fresh food.
+                     Never run out of recipe ideas with the power of Replicake!
                   </p>
                   <button className="secondary-button">
-                     Order Now <FiArrowRight />
+                     Find Recipes Now<FiArrowRight />
                   </button>
                </div>
                <div className="home-image-section">
