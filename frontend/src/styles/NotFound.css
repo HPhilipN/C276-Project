@@ -1,7 +1,69 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+
+* {
+   box-sizing: border-box;
+   font-family: "Roboto", sans-serif;
+}
+
 .container {
-   background-color: #eeeeee;
+   background-color: #92b48c;
    height: 100vh;
    display: flex;
    justify-content: center;
-   align-items: center;
+}
+
+main {
+   position: absolute;
+   top: 40%;
+   transform: translateY(-60%);
+
+   border: 1px solid #eeeeee;
+   background-color: #fff;
+   border-radius: 15px;
+   padding: 15px;
+}
+
+.replicakeLogo {
+   border: 1px solid black;
+   margin-bottom: 2rem;
+}
+
+.title {
+   font-size: 50px;
+   font-weight: 1000;
+   margin-bottom: 1rem;
+   color: #000;
+
+   border: 1px solid black;
+}
+
+.links {
+   display: inline-flex;
+
+   border: 1px solid black;
+}
+
+.button {
+   padding: 8px 15px 8px 15px;
+   border-radius: 10px;
+   text-decoration: none;
+   font-size: 20px;
+
+   background-color: #fe9e0d;
+   color: #000000;
+
+   border: 1px solid black;
+}
+
+.button:hover,
+.button:focus {
+   transform: scale(1.05);
+}
+
+li {
+   margin: 15px;
+}
+
+ul {
+   list-style-type: none;
 }

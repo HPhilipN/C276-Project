@@ -50,25 +50,26 @@ public class UserController {
 
     @GetMapping("/login")
     @ResponseBody
-    public boolean getUserLogin(@RequestBody User loginUser, HttpServletResponse response) {
+    public User getUserLogin(@RequestBody User loginUser, HttpServletResponse response) {
         System.out.println("User logging in");
         try {
             String loginEmail = loginUser.getEmail();
             String loginPassword = loginUser.getPassword();
 
             // get & compare passwords
-            String storedPassword = userRepo.findByEmail(loginEmail).getPassword();
+            User user = userRepo.findByEmail(loginEmail);
+            String storedPassword = user.getPassword();
             boolean passwordMatches = passwordEncoder.matches(loginPassword, storedPassword);
             if(passwordMatches){
                 System.out.println("Successfully logged in " + loginEmail);
-                return true;
+                return user;
             } else {
-                return false;
+                return null;
             }
         } catch (Exception e) {
             System.out.println("Invalid Request Body");
             response.setStatus(404); // 404 = not found
-            return false;
+            return null;
         }
     }
 
