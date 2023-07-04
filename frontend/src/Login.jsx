@@ -32,7 +32,7 @@ function App() {
    };
 
    async function signUpUser(event) {
-      event.preventDefault();
+      // event.preventDefault(); // prevent page refresh on sign-up, not needed for prod
       createUserObjectFromInputs();
       console.log(newUser); //new user details
       // "https://replicake.onrender.com/users/signup"
