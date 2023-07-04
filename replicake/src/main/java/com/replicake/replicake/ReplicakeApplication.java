@@ -15,8 +15,8 @@ public class ReplicakeApplication {
 
     private static void loadEnvVariables() {
         Dotenv dotenv = Dotenv.configure()
-            .directory("replicake") // local .env location
-            // .directory("etc/secrets/") // production .env location
+            // .directory("replicake") // local .env location
+            .directory("etc/secrets/") // production .env location
             .load();
         System.setProperty("DATABASE_URL", dotenv.get("DATABASE_URL"));
         System.setProperty("DATABASE_USERNAME", dotenv.get("DATABASE_USERNAME"));

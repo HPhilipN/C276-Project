@@ -8,34 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
 
-let newUser;
-let signInStatus;
-
-async function signUpUser() {
-   console.log(newStudent); //new user details
-   // "https://replicake.onrender.com/users/signup"
-   // "/users/signup"
-   fetch("/students/add", {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-   })
-      .then((response) => {
-         signInStatus = response.data; // get boolean return value
-         console.log(`Returned value: ${signInStatus} from /users/signup`);
-      })
-      .catch((error) => {
-         console.log("===== ERROR =====");
-         console.log(error);
-      });
-}
-
-function signUpUserHelper() {
+function App() {
+   const [signIn, toggle] = React.useState(true);
+   const [showPassword, setShowPassword] = React.useState(false);
    const [nameValue, setNameValue] = useState("");
    const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
+   let newUser;
+   let signInStatus;
 
    const handleNameChange = (event) => {
       setNameValue(event.target.value);
@@ -46,15 +26,43 @@ function signUpUserHelper() {
    const handlePasswordChange = (event) => {
       setPasswordValue(event.target.value);
    };
-}
-
-function App() {
-   const [signIn, toggle] = React.useState(true);
-   const [showPassword, setShowPassword] = React.useState(false);
 
    const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
    };
+
+   async function signUpUser(event) {
+      event.preventDefault();
+      createUserObjectFromInputs();
+      console.log(newUser); //new user details
+      // "https://replicake.onrender.com/users/signup"
+      // "/users/signup"
+      fetch("/students/add", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newUser),
+      })
+         .then((response) => {
+            signInStatus = response.data; // get boolean return value
+            console.log(`Returned value: ${signInStatus} from /users/signup`);
+         })
+         .catch((error) => {
+            console.log("===== ERROR =====");
+            console.log(error);
+         });
+   }
+
+   function createUserObjectFromInputs() {
+      newUser = {
+         name: nameValue,
+         isChef: true,
+         isModerator: false,
+         email: emailValue,
+         password: passwordValue,
+      };
+   }
 
    return (
       <div>
@@ -63,12 +71,13 @@ function App() {
             <Components.SignUpContainer signinIn={signIn}>
                <Components.Form>
                   <Components.Title>Create Account</Components.Title>
-                  <Components.Input type="text" placeholder="Name" />
-                  <Components.Input type="email" placeholder="Email" />
+                  <Components.Input type="text" placeholder="Name" onChange={handleNameChange} />
+                  <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
                   <div className="password-input-wrapper">
                      <Components.Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Password"
+                        onChange={handlePasswordChange}
                      />
                      <button
                         type="button"
