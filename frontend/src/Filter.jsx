@@ -22,6 +22,7 @@ const customStyles = {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "white",
+      width: "50%",
       maxHeight: 600,
    },
 };
