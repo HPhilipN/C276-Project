@@ -92,8 +92,8 @@ public class UserController {
             newName = newName.toLowerCase(); // lowercase the entire name
             newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
     
-            boolean chefRole = newUser.isChef();
-            boolean modRole = newUser.isModerator();
+            boolean chefRole = newUser.isChefGetter();
+            boolean modRole = newUser.isModeratorGetter();
 
             // add new student to student table in DB
             User newUserCreated = new User(newName, newEmail, hashedPassword, chefRole, modRole);
@@ -119,8 +119,8 @@ public class UserController {
             user.setName(updatedUser.getName());
             user.setEmail(updatedUser.getEmail());
             user.setPassword(updatedUser.getPassword());
-            user.setChef(updatedUser.isChef());
-            user.setModerator(updatedUser.isModerator());
+            user.setChef(updatedUser.isChefGetter());
+            user.setModerator(updatedUser.isModeratorGetter());
             // add new student to student table in DB
             userRepo.save(user);
 
