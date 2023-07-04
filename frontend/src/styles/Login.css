@@ -85,3 +85,7 @@
 .forgot-password:hover {
    color: blue;
 }
+
+.btn-hover:hover {
+   transform: scale(1.05);
+}
