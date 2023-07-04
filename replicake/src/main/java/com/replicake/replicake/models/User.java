@@ -18,7 +18,6 @@ public class User {
 
     private String name;
     private String password;
-    private boolean isBasic;
     private boolean isChef;
     private boolean isModerator;
 
@@ -26,11 +25,10 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, boolean isBasic, boolean isChef, boolean isModerator) {
+    public User(String name, String email, String password, boolean isChef, boolean isModerator) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.isBasic = isBasic;
         this.isChef = isChef;
         this.isModerator = isModerator;
     }
@@ -66,14 +64,6 @@ public class User {
         this.password = password;
     }
 
-    public boolean isBasic() {
-        return isBasic;
-    }
-
-    public void setBasic(boolean isBasic) {
-        this.isBasic = isBasic;
-    }
-
     public boolean isChef() {
         return isChef;
     }
@@ -93,7 +83,8 @@ public class User {
     // toString for displaying users in terminal & debugging purposes
     @Override
     public String toString() {
-        return "User [uid=" + uid + ", name=" + name + ", email=" + email + ", password=" + password + ", isBasic="
-                + isBasic + ", isChef=" + isChef + ", isModerator=" + isModerator + "]";
+        return "User [uid=" + uid + ", email=" + email + ", name=" + name + ", password=" + password + ", isChef="
+                + isChef + ", isModerator=" + isModerator + "]";
     }
+    
 }

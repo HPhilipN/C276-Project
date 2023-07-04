@@ -3,10 +3,50 @@
 // import viteLogo from '/vite.svg'
 import "./styles/Login.css";
 import Navbar from "./Navbar.jsx";
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
+
+let newUser;
+let signInStatus;
+
+async function signUpUser() {
+   console.log(newStudent); //new user details
+   // "https://replicake.onrender.com/users/signup"
+   // "/users/signup"
+   fetch("/students/add", {
+      method: "POST",
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+   })
+      .then((response) => {
+         signInStatus = response.data; // get boolean return value
+         console.log(`Returned value: ${signInStatus} from /users/signup`);
+      })
+      .catch((error) => {
+         console.log("===== ERROR =====");
+         console.log(error);
+      });
+}
+
+function signUpUserHelper() {
+   const [nameValue, setNameValue] = useState("");
+   const [emailValue, setEmailValue] = useState("");
+   const [passwordValue, setPasswordValue] = useState("");
+
+   const handleNameChange = (event) => {
+      setNameValue(event.target.value);
+   };
+   const handleEmailChange = (event) => {
+      setEmailValue(event.target.value);
+   };
+   const handlePasswordChange = (event) => {
+      setPasswordValue(event.target.value);
+   };
+}
 
 function App() {
    const [signIn, toggle] = React.useState(true);
@@ -42,7 +82,9 @@ function App() {
                         )}
                      </button>
                   </div>
-                  <Components.Button className="sign-up-button">Sign Up</Components.Button>
+                  <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
+                     Sign Up
+                  </Components.Button>
                </Components.Form>
             </Components.SignUpContainer>
 
@@ -70,7 +112,7 @@ function App() {
                   <Components.Anchor className="forgot-password" href="#">
                      Forgot your password?
                   </Components.Anchor>
-                  <Components.Button>Sign In</Components.Button>
+                  <Components.Button className="btn-hover">Sign In</Components.Button>
                </Components.Form>
             </Components.SignInContainer>
 
@@ -81,7 +123,7 @@ function App() {
                      <Components.Paragraph>
                         To keep connected with us, please login with your personal info
                      </Components.Paragraph>
-                     <Components.GhostButton onClick={() => toggle(true)}>
+                     <Components.GhostButton className="btn-hover" onClick={() => toggle(true)}>
                         Sign In
                      </Components.GhostButton>
                   </Components.LeftOverlayPanel>
@@ -91,7 +133,7 @@ function App() {
                      <Components.Paragraph>
                         Enter your personal details and start the journey with us
                      </Components.Paragraph>
-                     <Components.GhostButton onClick={() => toggle(false)}>
+                     <Components.GhostButton className="btn-hover" onClick={() => toggle(false)}>
                         Sign Up
                      </Components.GhostButton>
                   </Components.RightOverlayPanel>

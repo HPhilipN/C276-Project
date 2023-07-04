@@ -92,12 +92,11 @@ public class UserController {
             newName = newName.toLowerCase(); // lowercase the entire name
             newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
     
-            boolean basicRole = newUser.isBasic();
             boolean chefRole = newUser.isChef();
             boolean modRole = newUser.isModerator();
 
             // add new student to student table in DB
-            User newUserCreated = new User(newName, newEmail, hashedPassword, basicRole, chefRole, modRole);
+            User newUserCreated = new User(newName, newEmail, hashedPassword, chefRole, modRole);
             userRepo.save(newUserCreated);
 
             response.setStatus(201); // 201 = created new object
@@ -120,7 +119,6 @@ public class UserController {
             user.setName(updatedUser.getName());
             user.setEmail(updatedUser.getEmail());
             user.setPassword(updatedUser.getPassword());
-            user.setBasic(updatedUser.isBasic());
             user.setChef(updatedUser.isChef());
             user.setModerator(updatedUser.isModerator());
             // add new student to student table in DB
