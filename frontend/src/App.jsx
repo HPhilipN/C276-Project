@@ -3,6 +3,7 @@ import "./styles/Login.css";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import Dashboard from "./dashboard";
+import NotFound from "./NotFound";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
                <Route path="/" element={<Home />} />
                <Route path="/login" element={<Login />} />
                <Route path="/dashboard" element={<Dashboard />} />
+               <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>
       </div>
