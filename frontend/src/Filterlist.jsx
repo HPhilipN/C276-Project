@@ -6,7 +6,7 @@ export default function Filterlist(){
     const itemList = categoryList.map((item)=> (
             <div className="row">
                 <h4>{item.category}</h4>
-                <button className="category-button">{item.difficulty}{item.type}</button>
+                <button className="category-button">{item.difficulty}{item.type}{item.occasion}</button>
             </div>
     ));
     return(

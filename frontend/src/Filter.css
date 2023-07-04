@@ -6,7 +6,7 @@
 .filter-icon{
     color: green;
     margin: 10px;
-    font-size: 22px;
+    font-size: 23px;
 }
 
 .filter-button{
@@ -16,4 +16,37 @@
 
 .category-group{
     text-align: left;
+}
+
+.control-button{
+    margin: 10px;
+    width: 100px;
+    height: fit-content;
+    padding: 10px;
+    background-color: #fe9e0c;
+    border-radius: 8px;
+    border: none;
+    float: right;
+}
+
+.save-button{
+    margin: 10px;
+    width: 100px;
+    height: fit-content;
+    padding: 10px;
+    background-color: #88b788;
+    border-radius: 8px;
+    border: none;
+    float: right;
+}
+
+.x-button{
+    margin: 10px;
+    width: 60px;
+    height: fit-content;
+    padding: 10px;
+    background-color: #fe9e0c;
+    border-radius: 12%;
+    border: none;
+    float: right;
 }

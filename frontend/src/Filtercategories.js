@@ -18,5 +18,26 @@ export const categoryList = [
 {
     type: 'Italian',
 },
+{
+    type: 'French',
+},
+{
+    type: 'Japanese',
+},
+{
+    type: 'Mexican',
+},
+{
+    occasion: 'Breakfast',
+    category: 'Occasion',
+    
+},
+{
+    occasion: 'Lunch',
+},
+{
+    occasion: 'Dinner',
+},
+
 
 ]

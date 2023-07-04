@@ -46,7 +46,7 @@ function Filter() {
         style={customStyles}
       > 
         
-        <button onClick={() => setModalOpen(false)}>
+        <button className="x-button" onClick={() => setModalOpen(false)}>
             <FontAwesomeIcon icon={faX} />
         </button>
         <div>
@@ -54,8 +54,8 @@ function Filter() {
             <div className="category-group">
                 <h1>Filters</h1>
                 <Filterlist/>
-                <button>Apply</button>
-                <button>Cancel</button>
+                <button className="control-button">Reset</button>
+                <button className="save-button">Apply</button>
             </div>
         </div>
       </Modal>
