@@ -46,7 +46,7 @@ const Navbar = () => {
             </a>
          </div>
          <div className="navbar-menu-container">
-            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+            <HiOutlineBars3 size={42} onClick={() => setOpenMenu(true)} />
          </div>
          <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
             <Box
