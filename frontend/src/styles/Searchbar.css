@@ -29,4 +29,5 @@
     border: none;
     margin-left: -50px;
     position: sticky;
+    cursor: pointer;
 }
