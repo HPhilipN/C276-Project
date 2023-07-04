@@ -58,7 +58,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isChefGetter() {
+    public boolean isChef() {
         return isChef;
     }
 
@@ -66,7 +66,7 @@ public class User {
         this.isChef = isChef;
     }
 
-    public boolean isModeratorGetter() {
+    public boolean isModerator() {
         return isModerator;
     }
 
