@@ -38,7 +38,7 @@ const Work = () => {
               <img src={data.image} alt="" />
             </div>
             <h2>{data.title}</h2>
-            <p>{data.text}</p>
+            <p className="work-section-text">{data.text}</p>
           </div>
         ))}
       </div>
