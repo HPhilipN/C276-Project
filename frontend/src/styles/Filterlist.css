@@ -1,7 +1,6 @@
 .category-button{
     display: inline-block;
     margin: 10px;
-    margin-left: 0px;
     width: 100px;
     height: fit-content;
     padding: 10px;
@@ -12,5 +11,4 @@
 }
 .row{
     display: inline-block;
-    color: #795c32;
 }
