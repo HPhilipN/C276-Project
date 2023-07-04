@@ -37,7 +37,7 @@ function App() {
       console.log(newUser); //new user details
       // "https://replicake.onrender.com/users/signup"
       // "/users/signup"
-      fetch("/students/add", {
+      fetch("https://replicake.onrender.com/users/signup", {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
