@@ -45,7 +45,7 @@ function App() {
          body: JSON.stringify(newUser),
       })
          .then((response) => {
-            signInStatus = response.data; // get boolean return value
+            signInStatus = response.data; //TODO: get boolean return value doesnt work
             console.log(`Returned value: ${signInStatus} from /users/signup`);
          })
          .catch((error) => {
