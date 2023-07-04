@@ -1,7 +1,7 @@
 import React from "react";
 import PickMeals from "./assets/pick-meals-image.png";
 import ChooseMeals from "./assets/choose-image.png";
-import DeliveryMeals from "./assets/delivery-image.png";
+import Cookbook from "./assets/cookbook-image.png";
 
 const Work = () => {
   const workInfoData = [
@@ -17,7 +17,7 @@ const Work = () => {
       text: "Can't decide what to eat? Use the handy recipe search to find simple and delicious meals just a few clicks away!",
     },
     {
-      image: DeliveryMeals,
+      image: Cookbook,
       title: "Cookbook",
       text: "Create a cookbook out of recipes you've bookmarked and cherish the memories of a good meal!",
     },
