@@ -23,9 +23,11 @@ const Home = () => {
                   <p className="primary-text text-left">
                      Never run out of recipe ideas with the power of Replicake!
                   </p>
-                  <button className="secondary-button">
-                     Find Recipes Now<FiArrowRight />
-                  </button>
+                  <a href="/dashboard">
+                     <button className="secondary-button">
+                        Find Recipes Now<FiArrowRight />
+                     </button>
+                  </a>
                </div>
                <div className="home-image-section">
                   <img src={BannerImage} alt="" />
