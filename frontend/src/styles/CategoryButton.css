@@ -9,3 +9,9 @@
     border: none;
     
 }
+.category-button.include{
+    background-color: #609966;
+}
+.category-button.exclude{
+    background-color: #FE9E0D;
+}
