@@ -1,18 +1,32 @@
 import React from "react";
+import { useState } from "react";
 import "./Searchbar.css";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass,faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const Searchbar = ({value, changeInput}) => (
+export default function Searchbar(){
 
-    
-    <div className="searchbar-wrap">
-        <div className="searchbar-icon">
+    const [value, setValue] = useState('');
+
+    const onChange = (event) =>{
+        setValue(event.target.value);
+    }
+
+    const onSearch = (searchTerm) =>{
+        console.log('search', searchTerm);
+    }
+    return(
+        <div className="searchbar-wrap">
+            <div className="searchbar-icon">
             <FontAwesomeIcon icon={faMagnifyingGlass} size="1x"/>
+            </div>
+            <input type="text" placeholder="Search" value={value} onChange={onChange}/>
+            <button className="search-icon" onClick={()=>onSearch(value)}>
+                <FontAwesomeIcon icon={faArrowRight} size='2x'/>
+            </button>
         </div>
-        <input type="text" placeholder="Search" value={value} onChange={changeInput}/>
-    </div>
-)
+    );
 
-export default Searchbar
+}
+

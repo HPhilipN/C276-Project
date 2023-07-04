@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import Filterlist from "./Filterlist";
 
 import "./Filter.css";
 
@@ -31,6 +32,7 @@ function Filter() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
+    
     <div className="Filter">
       <button className="filter-button" onClick={setModalOpen}>
         <div className="filter-icon">
@@ -50,7 +52,10 @@ function Filter() {
         <div>
             {/*Category*/}
             <div className="category-group">
-                <p className="label">Categories</p>
+                <h1>Filters</h1>
+                <Filterlist/>
+                <button>Apply</button>
+                <button>Cancel</button>
             </div>
         </div>
       </Modal>

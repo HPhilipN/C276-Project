@@ -20,3 +20,12 @@
     padding: 10px;
     
 }
+
+.search-icon{
+    color: green;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    position: absolute;
+    margin-left: 1390px;
+}

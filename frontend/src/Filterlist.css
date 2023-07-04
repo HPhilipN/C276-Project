@@ -1,0 +1,14 @@
+.category-button{
+    display: inline-block;
+    margin: 10px;
+    width: 100px;
+    height: fit-content;
+    padding: 10px;
+    background-color: beige;
+    border-radius: 8px;
+    border: none;
+    
+}
+.row{
+    display: inline-block;
+}

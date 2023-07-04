@@ -1,16 +1,22 @@
 export const categoryList = [
 {
-    id:1,
-    value: 'difficulty',
-    label: 'Difficulty',
-
+    difficulty: 'Easy',
+    category: 'Difficulty',
     
 },
 {
-    id:2,
-    value: 'type',
-    label: 'Type of Food',
-
-}
+    difficulty: 'Medium',
+},
+{
+    difficulty: 'Hard',
+},
+{
+    type: 'Chinese',
+    category: 'Type of Food',
+    
+},
+{
+    type: 'Italian',
+},
 
 ]
