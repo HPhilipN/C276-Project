@@ -3,7 +3,7 @@ import Filter from "./filter";
 import Searchbar from "./Searchbar";
 import Recipelist from "./Recipelist";
 import Navbar from "./Navbar";
-import "./Dashboard.css";
+import "./styles/Dashboard.css";
 
 const Dashboard = () => {
     return (
