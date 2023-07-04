@@ -14,87 +14,80 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import "./NavbarAdmin.css";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import "./styles/NavbarAdmin.css";
 
 const Navbar = () => {
-  const [openMenu, setOpenMenu] = useState(false);
-  const menuOptions = [
-    {
-      text: "Home",
-      icon: <HomeIcon />,
-    },
-    {
-      text: "Recipes",
-      icon: <SearchIcon />,
-    },
-    {
-      text: "Cookbook",
-      icon: <BookIcon />,
-    },
-    {
-      text: "Settings",
-      icon: <SettingsIcon />,
-    },
-    {
-      text: "Admin",
-      icon: <AdminPanelSettingsIcon />,
-      profile: true,
-    },
-    {
-      text: "Logout",
-      icon: <LogoutIcon />,
- 
-    },
-  ];
+   const [openMenu, setOpenMenu] = useState(false);
+   const menuOptions = [
+      {
+         text: "Home",
+         icon: <HomeIcon />,
+      },
+      {
+         text: "Recipes",
+         icon: <SearchIcon />,
+      },
+      {
+         text: "Cookbook",
+         icon: <BookIcon />,
+      },
+      {
+         text: "Settings",
+         icon: <SettingsIcon />,
+      },
+      {
+         text: "Admin",
+         icon: <AdminPanelSettingsIcon />,
+         profile: true,
+      },
+      {
+         text: "Logout",
+         icon: <LogoutIcon />,
+      },
+   ];
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-logo-container">
-        <img src={Logo} alt="" />
-      </div>
-      <div className="navbar-links-container">
-        <a href="/">Home</a>
-        <a>Recipes</a>
-        <a>Cookbook</a>
-        <a>Settings</a>
-        <a>Admin</a>
-        <div className="navbar-profile">
-          <Avatar className="navbar-profile-picture" alt="Profile Picture" />
-        </div>
-      </div>
-      <div className="navbar-menu-container">
-        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
-      </div>
-      <Drawer
-        open={openMenu}
-        onClose={() => setOpenMenu(false)}
-        anchor="right"
-      >
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={() => setOpenMenu(false)}
-          onKeyDown={() => setOpenMenu(false)}
-        >
-          <List>
-            {menuOptions.map((item) => (
-              <ListItem key={item.text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-        </Box>
-      </Drawer>
-    </nav>
-  );
+   return (
+      <nav className="navbar">
+         <div className="navbar-logo-container">
+            <img src={Logo} alt="" />
+         </div>
+         <div className="navbar-links-container">
+            <a href="/">Home</a>
+            <a>Recipes</a>
+            <a>Cookbook</a>
+            <a>Settings</a>
+            <a>Admin</a>
+            <div className="navbar-profile">
+               <Avatar className="navbar-profile-picture" alt="Profile Picture" />
+            </div>
+         </div>
+         <div className="navbar-menu-container">
+            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+         </div>
+         <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
+            <Box
+               sx={{ width: 250 }}
+               role="presentation"
+               onClick={() => setOpenMenu(false)}
+               onKeyDown={() => setOpenMenu(false)}
+            >
+               <List>
+                  {menuOptions.map((item) => (
+                     <ListItem key={item.text} disablePadding>
+                        <ListItemButton>
+                           <ListItemIcon>{item.icon}</ListItemIcon>
+                           <ListItemText primary={item.text} />
+                        </ListItemButton>
+                     </ListItem>
+                  ))}
+               </List>
+               <Divider />
+            </Box>
+         </Drawer>
+      </nav>
+   );
 };
 
 export default Navbar;

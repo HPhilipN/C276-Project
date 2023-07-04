@@ -1,0 +1,19 @@
+.Filter{
+    display: flex;
+    margin-left: 20px;
+}
+
+.filter-icon{
+    color: green;
+    margin: 10px;
+    font-size: 22px;
+}
+
+.filter-button{
+    border: none;
+    background-color: transparent;
+}
+
+.category-group{
+    text-align: left;
+}
