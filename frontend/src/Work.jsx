@@ -7,19 +7,19 @@ const Work = () => {
   const workInfoData = [
     {
       image: PickMeals,
-      title: "Pick Meals",
+      title: "Recipes",
       text:
-        "Lorem ipsum dolor sit amet consectetur. Maecenas orci et sagittis duis elementum interdum facilisi bibendum.",
+        "Create and upload your own tasty recipes and share them with other food enthusiasts!",
     },
     {
       image: ChooseMeals,
-      title: "Choose How Often",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et ",
+      title: "Search",
+      text: "Can't decide what to eat? Use the handy recipe search to find simple and delicious meals just a few clicks away!",
     },
     {
       image: DeliveryMeals,
-      title: "Fast Deliveries",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
+      title: "Cookbook",
+      text: "Create a cookbook out of recipes you've bookmarked and cherish the memories of a good meal!",
     },
   ];
   return (
@@ -27,8 +27,8 @@ const Work = () => {
       <div className="work-section-top">
         <h1 className="primary-heading">How It Works</h1>
         <p className="primary-text">
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          Replicake is the perfect place for cooking enthusiasts to find and upload their own meal recipes, ranging
+          anywhere from exquisite desserts to a good bowl of macaroni!
         </p>
       </div>
       <div className="work-section-bottom">
