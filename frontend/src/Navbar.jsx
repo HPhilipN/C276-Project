@@ -40,7 +40,7 @@ const Navbar = () => {
          </div>
          <div className="navbar-links-container">
             <a href="/">Home</a>
-            <a>Search for Recipes</a>
+            <a href="/dashboard">Search for Recipes</a>
             <a href="/login" className="primary-button">
                Sign Up/Sign In
             </a>
