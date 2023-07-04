@@ -48,7 +48,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public User getUserLogin(@RequestBody User loginUser, HttpServletResponse response) {
         System.out.println("User logging in");

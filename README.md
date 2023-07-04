@@ -16,7 +16,7 @@ Replicake is an online recipe aggregator allowing chefs to upload recipes for ot
 - `@GetMapping("/users/view")` 
     - view all users in users table
     - returns JSON user object to frontend
-- `@GetMapping("/users/login")` 
+- `@PostMapping("/users/login")` 
     - User login by frontend sending JSON user object to back
     - object should have *email & password*, other values ignored by backend
     - returns user object if successful, returns null otherwise
