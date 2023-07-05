@@ -32,18 +32,19 @@ function App() {
    };
 
    async function signUpUser(event) {
-      // event.preventDefault(); // prevent page refresh on sign-up, not needed for prod
+      event.preventDefault(); // prevent page refresh on sign-up, not needed for prod
       createUserObjectFromInputs();
-      console.log(newUser); //new user details
-      // "https://replicake.onrender.com/users/signup"
-      // "/users/signup"
-      fetch("https://replicake.onrender.com/users/signup", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-         },
-         body: JSON.stringify(newUser),
-      })
+      if (newUser.password.length >=6) {
+         console.log(newUser); //new user details
+         // "https://replicake.onrender.com/users/signup"
+         // "/users/signup"
+         fetch("https://replicake.onrender.com/users/signup", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+         })
          .then((response) => {
             signInStatus = response.data; //TODO: get boolean return value doesnt work
             console.log(`Returned value: ${signInStatus} from /users/signup`);
@@ -52,6 +53,7 @@ function App() {
             console.log("===== ERROR =====");
             console.log(error);
          });
+      }
    }
 
    function createUserObjectFromInputs() {
