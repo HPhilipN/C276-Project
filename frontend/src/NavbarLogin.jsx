@@ -61,7 +61,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-links-container">
         <a href="/">Home</a>
-        <a>Recipes</a>
+        <a href="/dashboard">Recipes</a>
         <a>Cookbook</a>
         <a>Settings</a>
         <a onClick={logoutUserHelper}>Log Out</a>
