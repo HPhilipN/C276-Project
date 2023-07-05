@@ -24,7 +24,7 @@ export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameVa
 }
 
 function Login() {
-   const [signIn, toggleSignInUp] = useState(true);
+   const [isSignInUpCard, toggleSignInUp] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
    const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
@@ -141,7 +141,7 @@ function Login() {
 
    const loginModal = (
       <Components.Container>
-         <Components.SignUpContainer signinIn={signIn}>
+         <Components.SignUpContainer signinIn={isSignInUpCard}>
             <Components.Form>
                <Components.Title>Create Account</Components.Title>
                <Components.Input type="text" placeholder="Name" onChange={handleNameChange} />
@@ -170,9 +170,9 @@ function Login() {
             </Components.Form>
          </Components.SignUpContainer>
 
-         <Components.SignInContainer signinIn={signIn}>
+         <Components.SignInContainer signinIn={isSignInUpCard}>
             <Components.Form>
-               <Components.Title>Sign in</Components.Title>
+               <Components.Title>Log In</Components.Title>
                <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
                <div className="password-input-wrapper">
                   <Components.Input
@@ -199,14 +199,14 @@ function Login() {
                   Forgot your password?
                </Components.Anchor>
                <Components.Button className="btn-hover" onClick={loginUser}>
-                  Sign In
+                  Log In
                </Components.Button>
             </Components.Form>
          </Components.SignInContainer>
 
-         <Components.OverlayContainer signinIn={signIn}>
-            <Components.Overlay signinIn={signIn}>
-               <Components.LeftOverlayPanel signinIn={signIn}>
+         <Components.OverlayContainer signinIn={isSignInUpCard}>
+            <Components.Overlay signinIn={isSignInUpCard}>
+               <Components.LeftOverlayPanel signinIn={isSignInUpCard}>
                   <Components.Title>Welcome Back!</Components.Title>
                   <Components.Paragraph>
                      To keep connected with us, please login with your personal info
@@ -215,11 +215,11 @@ function Login() {
                      className="btn-hover"
                      onClick={() => toggleSignInUp(true)}
                   >
-                     Sign In
+                     Log In
                   </Components.GhostButton>
                </Components.LeftOverlayPanel>
 
-               <Components.RightOverlayPanel signinIn={signIn}>
+               <Components.RightOverlayPanel signinIn={isSignInUpCard}>
                   <Components.Title>Hello, Friend!</Components.Title>
                   <Components.Paragraph>
                      Enter your personal details and start the journey with us
