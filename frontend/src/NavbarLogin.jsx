@@ -54,6 +54,7 @@ const Navbar = () => {
             <a>Recipes</a>
             <a>Cookbook</a>
             <a>Settings</a>
+            <a>Log Out</a>
             <div className="navbar-profile">
                <Avatar className="navbar-profile-picture" alt="Profile Picture" />
             </div>
