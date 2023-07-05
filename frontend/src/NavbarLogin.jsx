@@ -21,78 +21,77 @@ import { UserContext } from "./UserContext";
 import "./styles/NavbarLogin.css";
 
 const Navbar = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
-   const [openMenu, setOpenMenu] = useState(false);
-   const menuOptions = [
-      {
-         text: "Home",
-         icon: <HomeIcon />,
-      },
-      {
-         text: "Recipes",
-         icon: <SearchIcon />,
-      },
-      {
-         text: "Cookbook",
-         icon: <BookIcon />,
-      },
-      {
-         text: "Settings",
-         icon: <SettingsIcon />,
-         profile: true,
-      },
-      {
-         text: "Logout",
-         icon: <LogoutIcon />,
-      },
-   ];
+  const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuOptions = [
+    {
+      text: "Home",
+      icon: <HomeIcon />,
+    },
+    {
+      text: "Recipes",
+      icon: <SearchIcon />,
+    },
+    {
+      text: "Cookbook",
+      icon: <BookIcon />,
+    },
+    {
+      text: "Settings",
+      icon: <SettingsIcon />,
+      profile: true,
+    },
+    {
+      text: "Logout",
+      icon: <LogoutIcon />,
+      onClick: logoutUserHelper,
+    },
+  ];
 
-   function logoutUserHelper() {
-      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
-   }
+  function logoutUserHelper() {
+    logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+  }
 
-   return (
-      <nav className="navbar">
-         <div className="navbar-logo-container">
-            <img src={Logo} alt="" />
-         </div>
-         <div className="navbar-links-container">
-            <a href="/">Home</a>
-            <a>Recipes</a>
-            <a>Cookbook</a>
-            <a>Settings</a>
-            <a href="#" onClick={logoutUserHelper}>
-               Log Out
-            </a>
-            <div className="navbar-profile">
-               <Avatar className="navbar-profile-picture" alt="Profile Picture" />
-            </div>
-         </div>
-         <div className="navbar-menu-container">
-            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
-         </div>
-         <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
-            <Box
-               sx={{ width: 250 }}
-               role="presentation"
-               onClick={() => setOpenMenu(false)}
-               onKeyDown={() => setOpenMenu(false)}
-            >
-               <List>
-                  {menuOptions.map((item) => (
-                     <ListItem key={item.text} disablePadding>
-                        <ListItemButton>
-                           <ListItemIcon>{item.icon}</ListItemIcon>
-                           <ListItemText primary={item.text} />
-                        </ListItemButton>
-                     </ListItem>
-                  ))}
-               </List>
-               <Divider />
-            </Box>
-         </Drawer>
-      </nav>
-   );
+  return (
+    <nav className="navbar">
+      <div className="navbar-logo-container">
+        <img src={Logo} alt="" />
+      </div>
+      <div className="navbar-links-container">
+        <a href="/">Home</a>
+        <a>Recipes</a>
+        <a>Cookbook</a>
+        <a>Settings</a>
+        <a onClick={logoutUserHelper}>Log Out</a>
+        <div className="navbar-profile">
+          <Avatar className="navbar-profile-picture" alt="Profile Picture" />
+        </div>
+      </div>
+      <div className="navbar-menu-container">
+        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+      </div>
+      <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={() => setOpenMenu(false)}
+          onKeyDown={() => setOpenMenu(false)}
+        >
+          <List>
+            {menuOptions.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton onClick={item.onClick}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Box>
+      </Drawer>
+    </nav>
+  );
 };
 
 export default Navbar;
