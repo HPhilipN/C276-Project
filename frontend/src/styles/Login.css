@@ -71,6 +71,12 @@
    color: #999;
 }
 
+.pw-strength {
+   bottom: 2%;
+   width: 239px;
+   font-size: 20px;
+}
+
 .password-input {
    flex: 1;
    padding-right: 40px; /* Adjust the value as needed */
