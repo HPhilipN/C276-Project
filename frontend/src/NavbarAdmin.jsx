@@ -58,7 +58,7 @@ const Navbar = () => {
    return (
       <nav className="navbar">
          <div className="navbar-logo-container">
-            <img src={Logo} alt="" />
+         <a href="/"><img src={Logo} alt="" /></a>
          </div>
          <div className="navbar-links-container">
             <a href="/">Home</a>
@@ -74,7 +74,7 @@ const Navbar = () => {
             </div>
          </div>
          <div className="navbar-menu-container">
-            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+            <HiOutlineBars3 size={42} onClick={() => setOpenMenu(true)} />
          </div>
          <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
             <Box
