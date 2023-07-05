@@ -27,10 +27,12 @@ const Navbar = () => {
     {
       text: "Home",
       icon: <HomeIcon />,
+      onClick: () => (window.location.href = "/"),
     },
     {
       text: "Recipes",
       icon: <SearchIcon />,
+      onClick: () => (window.location.href = "/dashboard"),
     },
     {
       text: "Cookbook",
