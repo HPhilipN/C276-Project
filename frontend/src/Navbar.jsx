@@ -21,15 +21,17 @@ const Navbar = () => {
       {
          text: "Home",
          icon: <HomeIcon />,
+         onClick: () => (window.location.href = "/"),
       },
       {
          text: "Search for Recipes",
          icon: <SearchIcon />,
+         onClick: () => (window.location.href = "/dashboard"),
       },
       {
          text: "Sign Up/Sign In",
          icon: <LoginOutlinedIcon />,
-         link: "/login",
+         onClick: () => (window.location.href = "/login"),
       },
    ];
 
@@ -58,7 +60,7 @@ const Navbar = () => {
                <List>
                   {menuOptions.map((item) => (
                      <ListItem key={item.text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={item.onClick}>
                            <ListItemIcon>{item.icon}</ListItemIcon>
                            <ListItemText primary={item.text} />
                         </ListItemButton>
