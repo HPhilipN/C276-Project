@@ -45,26 +45,28 @@ function Login() {
    async function signUpUser(event) {
       // event.preventDefault(); // prevent page refresh on sign-up
       createUserObjectFromInputs();
-      console.log(newUser); //new user details to send to endpoint
-      // "https://replicake.onrender.com/users/signup"
-      // "/users/signup"
-      fetch("https://replicake.onrender.com/users/signup", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-         },
-         body: JSON.stringify(newUser),
-      })
-         .then((response) => response.json()) // parse JSON response
-         .then((data) => {
-            console.log(`Returned value: ${data} from /users/signup`);
-         })
-         .catch((error) => {
-            console.log("===== ERROR =====");
-            console.log(error);
-         });
+      if (newUser.password.length >= 6) {
+        console.log(newUser); //new user details to send to endpoint
+        // "https://replicake.onrender.com/users/signup"
+        // "/users/signup"
+        fetch("https://replicake.onrender.com/users/signup", {
+           method: "POST",
+           headers: {
+              "Content-Type": "application/json",
+           },
+           body: JSON.stringify(newUser),
+        })
+           .then((response) => response.json()) // parse JSON response
+           .then((data) => {
+              console.log(`Returned value: ${data} from /users/signup`);
+           })
+           .catch((error) => {
+              console.log("===== ERROR =====");
+              console.log(error);
+           });
+       }
    }
-
+  
    // user login
    async function loginUser(event) {
       event.preventDefault(); // prevent page refresh on login
@@ -87,7 +89,6 @@ function Login() {
                setIsChef(data.chef);
                setIsModerator(data.moderator);
                setNameValue(data.name);
-               //    setLocalStorageItems();
             } else {
                setSignInStatus(false);
                setIsChef(false);
@@ -102,6 +103,7 @@ function Login() {
             console.log("===== ERROR =====");
             console.log(error);
          });
+      }
    }
 
    // signup/login helper functions

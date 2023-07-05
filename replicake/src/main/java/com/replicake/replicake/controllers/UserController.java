@@ -93,7 +93,9 @@ public class UserController {
             newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
     
             boolean chefRole = newUser.isChef();
+            System.out.println("Chef role is " + chefRole);
             boolean modRole = newUser.isModerator();
+            System.out.println("Mod role is " + modRole);
 
             // add new student to student table in DB
             User newUserCreated = new User(newName, newEmail, hashedPassword, chefRole, modRole);

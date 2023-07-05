@@ -27,6 +27,7 @@
    border-radius: 8px;
    border: none;
    float: right;
+   cursor: pointer;
 }
 
 .save-button {
@@ -38,6 +39,7 @@
    border-radius: 8px;
    border: none;
    float: right;
+   cursor: pointer;
 }
 
 .x-button {
