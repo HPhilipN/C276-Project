@@ -89,3 +89,18 @@
 .btn-hover:hover {
    transform: scale(1.05);
 }
+
+.invalid-login {
+   color: #ff0000;
+   font-size: 15px;
+}
+
+.invisible {
+   display: none;
+   visibility: hidden;
+}
+
+.logout-btn {
+   margin-top: 1.5rem;
+   font-size: 20px !important;
+}

@@ -1,21 +1,23 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import "./styles/Login.css";
 import Navbar from "./Navbar.jsx";
-import React, { useState } from "react";
+import NavbarAdmin from "./NavbarAdmin";
+import NavbarLogin from "./NavbarLogin";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
 
-function App() {
-   const [signIn, toggle] = React.useState(true);
-   const [showPassword, setShowPassword] = React.useState(false);
+function Login() {
+   const [signIn, toggleSignInUp] = useState(true);
+   const [showPassword, setShowPassword] = useState(false);
    const [nameValue, setNameValue] = useState("");
    const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
+   const [signInStatus, setSignInStatus] = useState();
+   const [isChef, setIsChef] = useState(false);
+   const [isModerator, setIsModerator] = useState(false);
    let newUser;
-   let signInStatus;
+   let visibleNavbar = <Navbar />;
 
    const handleNameChange = (event) => {
       setNameValue(event.target.value);
@@ -31,10 +33,11 @@ function App() {
       setShowPassword(!showPassword);
    };
 
+   // user sign up
    async function signUpUser(event) {
-      // event.preventDefault(); // prevent page refresh on sign-up, not needed for prod
+      // event.preventDefault(); // prevent page refresh on sign-up
       createUserObjectFromInputs();
-      console.log(newUser); //new user details
+      console.log(newUser); //new user details to send to endpoint
       // "https://replicake.onrender.com/users/signup"
       // "/users/signup"
       fetch("https://replicake.onrender.com/users/signup", {
@@ -44,9 +47,9 @@ function App() {
          },
          body: JSON.stringify(newUser),
       })
-         .then((response) => {
-            signInStatus = response.data; //TODO: get boolean return value doesnt work
-            console.log(`Returned value: ${signInStatus} from /users/signup`);
+         .then((response) => response.json()) // parse JSON response
+         .then((data) => {
+            console.log(`Returned value: ${data} from /users/signup`);
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -54,103 +57,176 @@ function App() {
          });
    }
 
+   // user login
+   async function loginUser(event) {
+      event.preventDefault(); // prevent page refresh on login
+      setNameValue(""); // reset name value
+      createUserObjectFromInputs();
+      console.log(newUser); // user details to send to endpoint
+      // "https://replicake.onrender.com/users/login"
+      // "/users/login"
+      fetch("https://replicake.onrender.com/users/login", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newUser),
+      })
+         .then((response) => response.json()) // parse JSON response
+         .then((data) => {
+            if (data) {
+               setSignInStatus(true);
+               setIsChef(data.chef);
+               setIsModerator(data.moderator);
+               setNameValue(data.name);
+            } else {
+               setSignInStatus(false);
+               setIsChef(false);
+               setIsModerator(false);
+            }
+            console.log(data);
+         })
+         .catch((error) => {
+            setSignInStatus(false);
+            setIsChef(false);
+            setIsModerator(false);
+            console.log("===== ERROR =====");
+            console.log(error);
+         });
+   }
+
+   // signup/login helper function
    function createUserObjectFromInputs() {
       newUser = {
          name: nameValue,
-         isChef: true,
-         isModerator: false,
          email: emailValue,
          password: passwordValue,
+         moderator: false,
+         chef: true,
       };
    }
 
-   return (
-      <div>
-         <Navbar />
-         <Components.Container>
-            <Components.SignUpContainer signinIn={signIn}>
-               <Components.Form>
-                  <Components.Title>Create Account</Components.Title>
-                  <Components.Input type="text" placeholder="Name" onChange={handleNameChange} />
-                  <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
-                  <div className="password-input-wrapper">
-                     <Components.Input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Password"
-                        onChange={handlePasswordChange}
-                     />
-                     <button
-                        type="button"
-                        className="password-toggle-button"
-                        onClick={togglePasswordVisibility}
-                     >
-                        {showPassword ? (
-                           <FontAwesomeIcon icon={faEyeSlash} />
-                        ) : (
-                           <FontAwesomeIcon icon={faEye} />
-                        )}
-                     </button>
-                  </div>
-                  <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
+   // logout
+   function logoutUser() {}
+
+   const loginModal = (
+      <Components.Container>
+         <Components.SignUpContainer signinIn={signIn}>
+            <Components.Form>
+               <Components.Title>Create Account</Components.Title>
+               <Components.Input type="text" placeholder="Name" onChange={handleNameChange} />
+               <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
+               <div className="password-input-wrapper">
+                  <Components.Input
+                     type={showPassword ? "text" : "password"}
+                     placeholder="Password"
+                     onChange={handlePasswordChange}
+                  />
+                  <button
+                     type="button"
+                     className="password-toggle-button"
+                     onClick={togglePasswordVisibility}
+                  >
+                     {showPassword ? (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                     ) : (
+                        <FontAwesomeIcon icon={faEye} />
+                     )}
+                  </button>
+               </div>
+               <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
+                  Sign Up
+               </Components.Button>
+            </Components.Form>
+         </Components.SignUpContainer>
+
+         <Components.SignInContainer signinIn={signIn}>
+            <Components.Form>
+               <Components.Title>Sign in</Components.Title>
+               <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
+               <div className="password-input-wrapper">
+                  <Components.Input
+                     type={showPassword ? "text" : "password"}
+                     placeholder="Password"
+                     onChange={handlePasswordChange}
+                  />
+                  <button
+                     type="button"
+                     className="password-toggle-button"
+                     onClick={togglePasswordVisibility}
+                  >
+                     {showPassword ? (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                     ) : (
+                        <FontAwesomeIcon icon={faEye} />
+                     )}
+                  </button>
+               </div>
+               <p className={signInStatus ? "invisible" : "invalid-login"}>
+                  Incorrect email or password
+               </p>
+               <Components.Anchor className="forgot-password" href="#">
+                  Forgot your password?
+               </Components.Anchor>
+               <Components.Button className="btn-hover" onClick={loginUser}>
+                  Sign In
+               </Components.Button>
+            </Components.Form>
+         </Components.SignInContainer>
+
+         <Components.OverlayContainer signinIn={signIn}>
+            <Components.Overlay signinIn={signIn}>
+               <Components.LeftOverlayPanel signinIn={signIn}>
+                  <Components.Title>Welcome Back!</Components.Title>
+                  <Components.Paragraph>
+                     To keep connected with us, please login with your personal info
+                  </Components.Paragraph>
+                  <Components.GhostButton
+                     className="btn-hover"
+                     onClick={() => toggleSignInUp(true)}
+                  >
+                     Sign In
+                  </Components.GhostButton>
+               </Components.LeftOverlayPanel>
+
+               <Components.RightOverlayPanel signinIn={signIn}>
+                  <Components.Title>Hello, Friend!</Components.Title>
+                  <Components.Paragraph>
+                     Enter your personal details and start the journey with us
+                  </Components.Paragraph>
+                  <Components.GhostButton
+                     className="btn-hover"
+                     onClick={() => toggleSignInUp(false)}
+                  >
                      Sign Up
-                  </Components.Button>
-               </Components.Form>
-            </Components.SignUpContainer>
+                  </Components.GhostButton>
+               </Components.RightOverlayPanel>
+            </Components.Overlay>
+         </Components.OverlayContainer>
+      </Components.Container>
+   );
 
-            <Components.SignInContainer signinIn={signIn}>
-               <Components.Form>
-                  <Components.Title>Sign in</Components.Title>
-                  <Components.Input type="email" placeholder="Email" />
-                  <div className="password-input-wrapper">
-                     <Components.Input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Password"
-                     />
-                     <button
-                        type="button"
-                        className="password-toggle-button"
-                        onClick={togglePasswordVisibility}
-                     >
-                        {showPassword ? (
-                           <FontAwesomeIcon icon={faEyeSlash} />
-                        ) : (
-                           <FontAwesomeIcon icon={faEye} />
-                        )}
-                     </button>
-                  </div>
-                  <Components.Anchor className="forgot-password" href="#">
-                     Forgot your password?
-                  </Components.Anchor>
-                  <Components.Button className="btn-hover">Sign In</Components.Button>
-               </Components.Form>
-            </Components.SignInContainer>
+   const logoutModal = (
+      <Components.Container>
+         <Components.Form>
+            <Components.Title>Logged in as {nameValue}</Components.Title>
+            <Components.Button className="logout-btn btn-hover" onClick={logoutUser}>
+               Logout
+            </Components.Button>
+         </Components.Form>
+      </Components.Container>
+   );
 
-            <Components.OverlayContainer signinIn={signIn}>
-               <Components.Overlay signinIn={signIn}>
-                  <Components.LeftOverlayPanel signinIn={signIn}>
-                     <Components.Title>Welcome Back!</Components.Title>
-                     <Components.Paragraph>
-                        To keep connected with us, please login with your personal info
-                     </Components.Paragraph>
-                     <Components.GhostButton className="btn-hover" onClick={() => toggle(true)}>
-                        Sign In
-                     </Components.GhostButton>
-                  </Components.LeftOverlayPanel>
+   return (
+      <>
+         {signInStatus && isChef && <NavbarLogin />}
+         {signInStatus && isModerator && <NavbarAdmin />}
+         {signInStatus && logoutModal}
 
-                  <Components.RightOverlayPanel signinIn={signIn}>
-                     <Components.Title>Hello, Friend!</Components.Title>
-                     <Components.Paragraph>
-                        Enter your personal details and start the journey with us
-                     </Components.Paragraph>
-                     <Components.GhostButton className="btn-hover" onClick={() => toggle(false)}>
-                        Sign Up
-                     </Components.GhostButton>
-                  </Components.RightOverlayPanel>
-               </Components.Overlay>
-            </Components.OverlayContainer>
-         </Components.Container>
-      </div>
+         {!signInStatus && <Navbar />}
+         {!signInStatus && loginModal}
+      </>
    );
 }
 
-export default App;
+export default Login;
