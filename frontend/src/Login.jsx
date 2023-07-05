@@ -8,13 +8,13 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
 import { UserContext } from "./UserContext";
 import PasswordStrengthBar from 'react-password-strength-bar';
+import zxcvbn from "zxcvbn";
 
 function Login() {
   const [signIn, toggleSignInUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [passwordStrength, setPasswordStrength] = useState(0);
 
   // states from UserContext.jsx
   const {
@@ -38,7 +38,6 @@ function Login() {
   };
   const handlePasswordChange = (event) => {
     setPasswordValue(event.target.value);
-    setPasswordStrength(event.target.value.length);
   };
 
   const togglePasswordVisibility = () => {
@@ -156,7 +155,6 @@ function Login() {
               placeholder="Password"
               onChange={handlePasswordChange}
             />
-
             <button
               type="button"
               className="password-toggle-button"
@@ -171,8 +169,11 @@ function Login() {
           </div>
           <PasswordStrengthBar
             className="pw-strength"
-            passwordValue={passwordStrength}
-          />
+            password={passwordValue}
+            minLength={6}
+            onChangeScore={(score) => console.log(score)}
+            scoreWords={['weak', 'weak', 'fair', 'good', 'strong']}
+         />
           <Components.Button
             className="sign-up-button btn-hover"
             onClick={signUpUser}

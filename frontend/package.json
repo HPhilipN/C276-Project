@@ -23,7 +23,8 @@
     "react-modal": "^3.16.1",
     "react-password-strength-bar": "^0.4.1",
     "react-router-dom": "^6.14.1",
-    "styled-components": "^6.0.1"
+    "styled-components": "^6.0.1",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
