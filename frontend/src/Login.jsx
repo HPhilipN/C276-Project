@@ -8,6 +8,21 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
 import { UserContext } from "./UserContext";
 
+// login persistance, keep user logged in through refreshes
+export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue) {
+   // Clear the user's sign-in status and details from localStorage
+   localStorage.removeItem("signInStatus");
+   localStorage.removeItem("isChef");
+   localStorage.removeItem("isModerator");
+   localStorage.removeItem("name");
+
+   // Reset the component's state
+   setSignInStatus(false);
+   setIsChef(false);
+   setIsModerator(false);
+   setNameValue("");
+}
+
 function Login() {
    const [signIn, toggleSignInUp] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
@@ -105,6 +120,10 @@ function Login() {
          });
    }
 
+   function logoutUserHelper() {
+      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+   }
+
    // signup/login helper functions
    function createUserObjectFromInputs() {
       newUser = {
@@ -114,21 +133,6 @@ function Login() {
          moderator: false,
          chef: true,
       };
-   }
-
-   // login persistance, keep user logged in through refreshes
-   function logoutUser() {
-      // Clear the user's sign-in status and details from localStorage
-      localStorage.removeItem("signInStatus");
-      localStorage.removeItem("isChef");
-      localStorage.removeItem("isModerator");
-      localStorage.removeItem("name");
-
-      // Reset the component's state
-      setSignInStatus(false);
-      setIsChef(false);
-      setIsModerator(false);
-      setNameValue("");
    }
 
    const loginModal = (
@@ -232,7 +236,7 @@ function Login() {
       <Components.Container>
          <Components.Form>
             <Components.Title>Logged in as {nameValue}</Components.Title>
-            <Components.Button className="logout-btn btn-hover" onClick={logoutUser}>
+            <Components.Button className="logout-btn btn-hover" onClick={logoutUserHelper}>
                Logout
             </Components.Button>
          </Components.Form>

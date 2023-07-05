@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Logo from "./assets/Logo.png";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import Box from "@mui/material/Box";
@@ -16,9 +16,12 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { logoutUser } from "./Login";
+import { UserContext } from "./UserContext";
 import "./styles/NavbarLogin.css";
 
 const Navbar = () => {
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
       {
@@ -44,6 +47,10 @@ const Navbar = () => {
       },
    ];
 
+   function logoutUserHelper() {
+      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+   }
+
    return (
       <nav className="navbar">
          <div className="navbar-logo-container">
@@ -54,7 +61,9 @@ const Navbar = () => {
             <a>Recipes</a>
             <a>Cookbook</a>
             <a>Settings</a>
-            <a>Log Out</a>
+            <a href="#" onClick={logoutUserHelper}>
+               Log Out
+            </a>
             <div className="navbar-profile">
                <Avatar className="navbar-profile-picture" alt="Profile Picture" />
             </div>
