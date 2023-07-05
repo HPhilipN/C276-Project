@@ -19,7 +19,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./UserContext";
 import "./styles/NavbarLogin.css";
-
+//test
 const Navbar = () => {
   const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
   const [openMenu, setOpenMenu] = useState(false);
