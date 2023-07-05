@@ -13,6 +13,7 @@ function Login() {
    const [showPassword, setShowPassword] = useState(false);
    const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
+   const [signInError, setSignInError] = useState(false);
    // states from UserContext.jsx
    const {
       signInStatus,
@@ -89,10 +90,12 @@ function Login() {
                setIsChef(data.chef);
                setIsModerator(data.moderator);
                setNameValue(data.name);
+               setSignInError(false);
             } else {
                setSignInStatus(false);
                setIsChef(false);
                setIsModerator(false);
+               setSignInError(true);
             }
             console.log(data);
          })
@@ -100,6 +103,7 @@ function Login() {
             setSignInStatus(false);
             setIsChef(false);
             setIsModerator(false);
+            setSignInError(true);
             console.log("===== ERROR =====");
             console.log(error);
          });
@@ -184,7 +188,7 @@ function Login() {
                      )}
                   </button>
                </div>
-               <p className={signInStatus ? "invisible" : "invalid-login"}>
+               <p className={signInError ? "invalid-login" : "invisible"}>
                   Incorrect email or password
                </p>
                <Components.Anchor className="forgot-password" href="#">
