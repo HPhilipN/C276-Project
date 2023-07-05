@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import BannerBackground from "./assets/home-banner-background.png";
 import BannerImage from "./assets/home-banner-image.png";
 import Navbar from "./Navbar";
@@ -8,11 +8,16 @@ import { FiArrowRight } from "react-icons/fi";
 import "./styles/Home.css";
 import Work from "./Work";
 import Footer from "./Footer";
-//hi
+import { UserContext } from "./UserContext";
+
 const Home = () => {
+   const { signInStatus, isChef, isModerator } = useContext(UserContext);
+
    return (
       <div className="home-container">
-         <Navbar />
+         {signInStatus && isChef && <NavbarLogin />}
+         {signInStatus && isModerator && <NavbarAdmin />}
+         {!signInStatus && <Navbar />}
          <div className="home">
             <div className="home-banner-container">
                <div className="home-bannerImage-container">

@@ -2,22 +2,30 @@ import "./styles/Login.css";
 import Navbar from "./Navbar.jsx";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
+import { UserContext } from "./UserContext";
 
 function Login() {
    const [signIn, toggleSignInUp] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
-   const [nameValue, setNameValue] = useState("");
    const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
-   const [signInStatus, setSignInStatus] = useState();
-   const [isChef, setIsChef] = useState(false);
-   const [isModerator, setIsModerator] = useState(false);
+   // states from UserContext.jsx
+   const {
+      signInStatus,
+      setSignInStatus,
+      isChef,
+      setIsChef,
+      isModerator,
+      setIsModerator,
+      nameValue,
+      setNameValue,
+   } = useContext(UserContext);
+
    let newUser;
-   let visibleNavbar = <Navbar />;
 
    const handleNameChange = (event) => {
       setNameValue(event.target.value);
@@ -79,6 +87,7 @@ function Login() {
                setIsChef(data.chef);
                setIsModerator(data.moderator);
                setNameValue(data.name);
+               //    setLocalStorageItems();
             } else {
                setSignInStatus(false);
                setIsChef(false);
@@ -95,7 +104,7 @@ function Login() {
          });
    }
 
-   // signup/login helper function
+   // signup/login helper functions
    function createUserObjectFromInputs() {
       newUser = {
          name: nameValue,
@@ -106,8 +115,20 @@ function Login() {
       };
    }
 
-   // logout
-   function logoutUser() {}
+   // login persistance, keep user logged in through refreshes
+   function logoutUser() {
+      // Clear the user's sign-in status and details from localStorage
+      localStorage.removeItem("signInStatus");
+      localStorage.removeItem("isChef");
+      localStorage.removeItem("isModerator");
+      localStorage.removeItem("name");
+
+      // Reset the component's state
+      setSignInStatus(false);
+      setIsChef(false);
+      setIsModerator(false);
+      setNameValue("");
+   }
 
    const loginModal = (
       <Components.Container>
