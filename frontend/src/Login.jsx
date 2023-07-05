@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
 import { UserContext } from "./UserContext";
+import PasswordStrengthBar from 'react-password-strength-bar';
+import zxcvbn from "zxcvbn";
 
 // login persistance, keep user logged in through refreshes
 export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue) {
@@ -51,7 +53,8 @@ function Login() {
    };
    const handlePasswordChange = (event) => {
       setPasswordValue(event.target.value);
-   };
+      setPasswordStrength(event.target.value.length);
+    };
 
    const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
@@ -152,6 +155,7 @@ function Login() {
                      placeholder="Password"
                      onChange={handlePasswordChange}
                   />
+
                   <button
                      type="button"
                      className="password-toggle-button"
@@ -163,7 +167,16 @@ function Login() {
                         <FontAwesomeIcon icon={faEye} />
                      )}
                   </button>
+
+
                </div>
+               <PasswordStrengthBar
+                  className="pw-strength"
+                  password={passwordValue}
+                  minLength={6}
+                  onChangeScore={(score) => console.log(score)}
+                  scoreWords={['weak', 'weak', 'fair', 'good', 'strong']}
+         />
                <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
                   Sign Up
                </Components.Button>
