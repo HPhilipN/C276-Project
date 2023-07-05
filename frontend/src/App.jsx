@@ -5,10 +5,11 @@ import Login from "./Login.jsx";
 import Dashboard from "./Dashboard";
 import NotFound from "./NotFound";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import UserProvider from "./UserContext";
 
 function App() {
    return (
-      <div>
+      <UserProvider>
          <Router>
             <Routes>
                <Route path="/" element={<Home />} />
@@ -17,7 +18,7 @@ function App() {
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>
-      </div>
+      </UserProvider>
    );
 }
 
