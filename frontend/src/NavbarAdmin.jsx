@@ -19,7 +19,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./UserContext";
 import "./styles/NavbarAdmin.css";
-
+//test
 const Navbar = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
    const [openMenu, setOpenMenu] = useState(false);
@@ -27,10 +27,12 @@ const Navbar = () => {
       {
          text: "Home",
          icon: <HomeIcon />,
+         onClick: () => (window.location.href = "/"),
       },
       {
          text: "Recipes",
          icon: <SearchIcon />,
+         onClick: () => (window.location.href = "/dashboard"),
       },
       {
          text: "Cookbook",
@@ -48,6 +50,7 @@ const Navbar = () => {
       {
          text: "Logout",
          icon: <LogoutIcon />,
+         onClick: logoutUserHelper,
       },
    ];
 
