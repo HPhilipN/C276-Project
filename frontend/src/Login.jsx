@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./Components";
 import { UserContext } from "./UserContext";
+import PasswordStrengthBar from "react-password-strength-bar";
+import zxcvbn from "zxcvbn";
 
 // login persistance, keep user logged in through refreshes
 export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue) {
@@ -24,7 +26,7 @@ export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameVa
 }
 
 function Login() {
-   const [signIn, toggleSignInUp] = useState(true);
+   const [isSignInUpCard, toggleSignInUp] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
    const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
@@ -208,7 +210,7 @@ function Login() {
                </Components.Anchor>
                {/* Sign-in button */}
                <Components.Button className="btn-hover" onClick={loginUser}>
-                  Sign In
+                  Log In
                </Components.Button>
             </Components.Form>
          </Components.SignInContainer>
@@ -226,7 +228,7 @@ function Login() {
                      className="btn-hover"
                      onClick={() => toggleSignInUp(true)}
                   >
-                     Sign In
+                     Log In
                   </Components.GhostButton>
                </Components.LeftOverlayPanel>
                 {/* Right overlay panel */}
