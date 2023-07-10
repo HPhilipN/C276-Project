@@ -11,6 +11,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
@@ -65,7 +66,7 @@ const Navbar = () => {
          </div>
          <div className="navbar-links-container">
             <a href="/">Home</a>
-            <a href="/dashboard">Recipes</a>
+            <a href ="/dashboard">Recipes</a>
             <a>Cookbook</a>
             <a>Settings</a>
             <a>Admin</a>
@@ -89,7 +90,7 @@ const Navbar = () => {
                <List>
                   {menuOptions.map((item) => (
                      <ListItem key={item.text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton  onClick={item.onClick}>
                            <ListItemIcon>{item.icon}</ListItemIcon>
                            <ListItemText primary={item.text} />
                         </ListItemButton>
