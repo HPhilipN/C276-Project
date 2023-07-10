@@ -4,6 +4,7 @@ import ChooseMeals from "./assets/choose-image.png";
 import Cookbook from "./assets/cookbook-image.png";
 
 const Work = () => {
+  // Array containing information about how the app works
   const workInfoData = [
     {
       image: PickMeals,
@@ -32,6 +33,7 @@ const Work = () => {
         </p>
       </div>
       <div className="work-section-bottom">
+        {/* Mapping over the workInfoData array and rendering the information */}
         {workInfoData.map((data) => (
           <div className="work-section-info" key={data.title}>
             <div className="info-boxes-img-container">

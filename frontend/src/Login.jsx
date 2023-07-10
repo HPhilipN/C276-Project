@@ -143,9 +143,11 @@ function Login() {
 
    const loginModal = (
       <Components.Container>
-         <Components.SignUpContainer signinIn={isSignInUpCard}>
+         {/* Sign-up section */}
+         <Components.SignUpContainer signinIn={signIn}>
             <Components.Form>
                <Components.Title>Create Account</Components.Title>
+                {/* Input fields for name, email, and password */}
                <Components.Input type="text" placeholder="Name" onChange={handleNameChange} />
                <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
                <div className="password-input-wrapper">
@@ -154,7 +156,7 @@ function Login() {
                      placeholder="Password"
                      onChange={handlePasswordChange}
                   />
-
+                    {/* Button to toggle password visibility */}
                   <button
                      type="button"
                      className="password-toggle-button"
@@ -167,22 +169,17 @@ function Login() {
                      )}
                   </button>
                </div>
-               <PasswordStrengthBar
-                  className="pw-strength"
-                  password={passwordValue}
-                  minLength={6}
-                  onChangeScore={(score) => console.log(score)}
-                  scoreWords={["weak", "weak", "fair", "good", "strong"]}
-               />
+                {/* Sign-up button */}
                <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
                   Sign Up
                </Components.Button>
             </Components.Form>
          </Components.SignUpContainer>
-
-         <Components.SignInContainer signinIn={isSignInUpCard}>
+         {/* Sign-in section */}
+         <Components.SignInContainer signinIn={signIn}>
             <Components.Form>
-               <Components.Title>Log In</Components.Title>
+               <Components.Title>Sign in</Components.Title>
+               {/* Input fields for email and password */}
                <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
                <div className="password-input-wrapper">
                   <Components.Input
@@ -195,6 +192,7 @@ function Login() {
                      className="password-toggle-button"
                      onClick={togglePasswordVisibility}
                   >
+                      {/* Button to toggle password visibility */}
                      {showPassword ? (
                         <FontAwesomeIcon icon={faEyeSlash} />
                      ) : (
@@ -202,25 +200,30 @@ function Login() {
                      )}
                   </button>
                </div>
+               {/* Error message for incorrect login */}
                <p className={signInError ? "invalid-login" : "invisible"}>
                   Incorrect email or password
                </p>
+               {/* Anchor for forgot password, basically like the "a" tag */}
                <Components.Anchor className="forgot-password" href="#">
                   Forgot your password?
                </Components.Anchor>
+               {/* Sign-in button */}
                <Components.Button className="btn-hover" onClick={loginUser}>
                   Log In
                </Components.Button>
             </Components.Form>
          </Components.SignInContainer>
-
-         <Components.OverlayContainer signinIn={isSignInUpCard}>
-            <Components.Overlay signinIn={isSignInUpCard}>
-               <Components.LeftOverlayPanel signinIn={isSignInUpCard}>
+           {/* Overlay container */}              
+         <Components.OverlayContainer signinIn={signIn}>
+            <Components.Overlay signinIn={signIn}>
+               {/* Left overlay panel */}
+               <Components.LeftOverlayPanel signinIn={signIn}>
                   <Components.Title>Welcome Back!</Components.Title>
                   <Components.Paragraph>
                      To keep connected with us, please login with your personal info
                   </Components.Paragraph>
+                   {/* Ghost button to toggle sign-in/sign-up */}
                   <Components.GhostButton
                      className="btn-hover"
                      onClick={() => toggleSignInUp(true)}
@@ -228,12 +231,13 @@ function Login() {
                      Log In
                   </Components.GhostButton>
                </Components.LeftOverlayPanel>
-
-               <Components.RightOverlayPanel signinIn={isSignInUpCard}>
+                {/* Right overlay panel */}
+               <Components.RightOverlayPanel signinIn={signIn}>
                   <Components.Title>Hello, Friend!</Components.Title>
                   <Components.Paragraph>
                      Enter your personal details and start the journey with us
                   </Components.Paragraph>
+                   {/* Ghost button to toggle sign-in/sign-up */}
                   <Components.GhostButton
                      className="btn-hover"
                      onClick={() => toggleSignInUp(false)}
@@ -249,6 +253,7 @@ function Login() {
    const logoutModal = (
       <Components.Container>
          <Components.Form>
+            {/* logout page when once you sign in */}
             <Components.Title>Logged in as {nameValue}</Components.Title>
             <Components.Button className="logout-btn btn-hover" onClick={logoutUserHelper}>
                Logout
