@@ -16,12 +16,14 @@ import { Link } from "react-router-dom";
 import "./styles/Navbar.css";
 
 const Navbar = () => {
+   // State for controlling the menu open/close state
    const [openMenu, setOpenMenu] = useState(false);
+   // Array of menu options
    const menuOptions = [
       {
          text: "Home",
          icon: <HomeIcon />,
-         onClick: () => (window.location.href = "/"),
+         onClick: () => (window.location.href = "/"),// Action to perform when "Home" is clicked
       },
       {
          text: "Search for Recipes",
@@ -41,6 +43,7 @@ const Navbar = () => {
             <a href="/"><img src={Logo} alt="" /></a>
          </div>
          <div className="navbar-links-container">
+            {/* Links to different pages */}
             <a href="/">Home</a>
             <a href="/dashboard">Search for Recipes</a>
             <a href="/login" className="primary-button">
@@ -50,6 +53,7 @@ const Navbar = () => {
          <div className="navbar-menu-container">
             <HiOutlineBars3 size={42} onClick={() => setOpenMenu(true)} />
          </div>
+         {/* Drawer component for the menu */}
          <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
             <Box
                sx={{ width: 250 }}
@@ -58,6 +62,7 @@ const Navbar = () => {
                onKeyDown={() => setOpenMenu(false)}
             >
                <List>
+                   {/* Mapping over menuOptions array and rendering the menu items */}
                   {menuOptions.map((item) => (
                      <ListItem key={item.text} disablePadding>
                         <ListItemButton onClick={item.onClick}>

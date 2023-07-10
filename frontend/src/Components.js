@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// Container component for the login modal
+// ensures modal centered on screen and responsive 
+//with maximum width of 678px and a minimum height of 400px
 export const Container = styled.div`
   background-color: #fff;
   border-radius: 10px;
@@ -19,7 +22,11 @@ export const Container = styled.div`
 `;
 
 
-
+// Sign-up container component
+//takes up full height of  modal 
+// and transitions with 0.6s ease-in-out effect. 
+//When signinIn prop is not true, slides into view translating  
+//left by 100% and becomes visible with an opacity of 1.
 export const SignUpContainer = styled.div`
  position: absolute;
  top: 0;
@@ -37,7 +44,11 @@ export const SignUpContainer = styled.div`
  : null}
 `;
 
-
+// Sign-in container component
+//takes up full height of  modal 
+// and transitions with 0.6s ease-in-out effect. 
+//When signinIn prop is not true, slides into view translating  
+//left by 100% and becomes visible with an opacity of 1.
 export const SignInContainer = styled.div`
 position: absolute;
 top: 0;
@@ -49,6 +60,7 @@ z-index: 2;
 ${props => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
 `;
 
+// Form component for the login modal
 export const Form = styled.form`
 background-color: #ffffff;
 display: flex;
@@ -60,11 +72,13 @@ height: 100%;
 text-align: center;
 `;
 
+// Title component for the login modal
 export const Title = styled.h1`
 font-weight: bold;
 margin: 0;
 `;
 
+// Input component for the login form
 export const Input = styled.input`
 background-color: #eee;
 border: none;
@@ -73,7 +87,7 @@ margin: 8px 0;
 width: 100%;
 `;
 
-
+// Button component for the login form
 export const Button = styled.button`
    border-radius: 20px;
    border: 1px solid #FE9E0D;
@@ -92,17 +106,26 @@ export const Button = styled.button`
        outline: none;
    }
 `;
+
+// Ghost button component for the login form
+//scale transform effect when active and removes the default outline on focus.
 export const GhostButton = styled(Button)`
 background-color: transparent;
 border-color: #ffffff;
 `;
 
+// Anchor component for the login form
 export const Anchor = styled.a`
 color: #333;
 font-size: 14px;
 text-decoration: none;
 margin: 15px 0;
 `;
+
+// Overlay container component for the login modal
+//It is positioned absolutely, takes up 50% of the width, and the full height of the modal. 
+//It has hidden overflow and transitions with a 0.6s ease-in-out effect. 
+//When signinIn prop is not true, it slides into view by translating to the left by 100%.
 export const OverlayContainer = styled.div`
 position: absolute;
 top: 0;
@@ -116,6 +139,9 @@ ${props =>
  props.signinIn !== true ? `transform: translateX(-100%);` : null}
 `;
 
+// Overlay component for the login modal
+// It sets the background as a gradient, with a transition effect. 
+//When signinIn prop is not true, it slides into view by translating to the left by 50%.
 export const Overlay = styled.div`
 background: #ff416c;
 background: -webkit-linear-gradient(to right, #B3CAA2, #7DA67D);
@@ -133,6 +159,9 @@ transition: transform 0.6s ease-in-out;
 ${props => (props.signinIn !== true ? `transform: translateX(50%);` : null)}
 `;
 
+// Overlay panel component for the login modal
+//positioned absolutely and takes up 50% of the width of the overlay.
+// It uses flexbox to center its content and transitions with a 0.6s ease-in-out effect.
 export const OverlayPanel = styled.div`
     position: absolute;
     display: flex;
@@ -148,17 +177,26 @@ export const OverlayPanel = styled.div`
     transition: transform 0.6s ease-in-out;
 `;
 
+// Left overlay panel component for the login modal
+//styled component that extends the OverlayPanel component
+//Initially translates to the left by 20% 
+//when signinIn prop is not true, slides into view translating left by 0%.
 export const LeftOverlayPanel = styled(OverlayPanel)`
   transform: translateX(-20%);
   ${props => props.signinIn !== true ? `transform: translateX(0);` : null}
 `;
 
+// Right overlay panel component for the login modal
+//styled component that extends the OverlayPanel component
+//positioned on the right side  
+//when signinIn prop is not true, slides into view translating left by 20%.
 export const RightOverlayPanel = styled(OverlayPanel)`
     right: 0;
     transform: translateX(0);
     ${props => props.signinIn !== true ? `transform: translateX(20%);` : null}
 `;
 
+// Paragraph component for the login modal
 export const Paragraph = styled.p`
 font-size: 14px;
   font-weight: 100;
