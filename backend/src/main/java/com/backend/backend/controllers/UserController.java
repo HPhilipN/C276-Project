@@ -1,4 +1,4 @@
-package com.replicake.replicake.controllers;
+package com.backend.backend.controllers;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.replicake.replicake.models.User;
-import com.replicake.replicake.models.UserRepository;
+import com.backend.backend.models.User;
+import com.backend.backend.models.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
 

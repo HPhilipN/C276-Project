@@ -1,4 +1,4 @@
-package com.replicake.replicake.controllers;
+package com.backend.backend.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

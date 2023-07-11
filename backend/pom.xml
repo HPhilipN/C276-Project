@@ -8,11 +8,11 @@
 		<version>3.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.replicake</groupId>
-	<artifactId>replicake</artifactId>
+	<groupId>com.backend</groupId>
+	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>replicake</name>
-	<description>Demo project for Spring Boot</description>
+	<name>backend</name>
+	<description>Replicake WebApp</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

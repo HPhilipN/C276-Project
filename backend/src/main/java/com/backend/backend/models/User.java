@@ -1,4 +1,4 @@
-package com.replicake.replicake.models;
+package com.backend.backend.models;
 
 import jakarta.persistence.*;
 

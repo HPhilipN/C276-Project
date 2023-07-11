@@ -1,10 +1,10 @@
-package com.replicake.replicake;
+package com.backend.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ReplicakeApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {

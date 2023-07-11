@@ -1,4 +1,4 @@
-package com.replicake.replicake;
+package com.backend.backend;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
