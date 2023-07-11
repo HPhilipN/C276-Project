@@ -15,8 +15,8 @@ public class BackendApplication {
 
     private static void loadEnvVariables() {
         Dotenv dotenv = Dotenv.configure()
-            .directory("backend") // local .env location
-            // .directory("etc/secrets/") // production .env location
+            // .directory("backend") // local .env location
+            .directory("etc/secrets/") // production .env location
             .load();
         System.setProperty("DATABASE_URL", dotenv.get("DATABASE_URL"));
         System.setProperty("DATABASE_USERNAME", dotenv.get("DATABASE_USERNAME"));
