@@ -144,10 +144,10 @@ function Login() {
    const loginModal = (
       <Components.Container>
          {/* Sign-up section */}
-         <Components.SignUpContainer signinIn={signIn}>
+         <Components.SignUpContainer signinIn={isSignInUpCard}>
             <Components.Form>
                <Components.Title>Create Account</Components.Title>
-                {/* Input fields for name, email, and password */}
+               {/* Input fields for name, email, and password */}
                <Components.Input type="text" placeholder="Name" onChange={handleNameChange} />
                <Components.Input type="email" placeholder="Email" onChange={handleEmailChange} />
                <div className="password-input-wrapper">
@@ -156,7 +156,7 @@ function Login() {
                      placeholder="Password"
                      onChange={handlePasswordChange}
                   />
-                    {/* Button to toggle password visibility */}
+                  {/* Button to toggle password visibility */}
                   <button
                      type="button"
                      className="password-toggle-button"
@@ -169,14 +169,14 @@ function Login() {
                      )}
                   </button>
                </div>
-                {/* Sign-up button */}
+               {/* Sign-up button */}
                <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
                   Sign Up
                </Components.Button>
             </Components.Form>
          </Components.SignUpContainer>
          {/* Sign-in section */}
-         <Components.SignInContainer signinIn={signIn}>
+         <Components.SignInContainer signinIn={isSignInUpCard}>
             <Components.Form>
                <Components.Title>Sign in</Components.Title>
                {/* Input fields for email and password */}
@@ -192,7 +192,7 @@ function Login() {
                      className="password-toggle-button"
                      onClick={togglePasswordVisibility}
                   >
-                      {/* Button to toggle password visibility */}
+                     {/* Button to toggle password visibility */}
                      {showPassword ? (
                         <FontAwesomeIcon icon={faEyeSlash} />
                      ) : (
@@ -214,16 +214,16 @@ function Login() {
                </Components.Button>
             </Components.Form>
          </Components.SignInContainer>
-           {/* Overlay container */}              
-         <Components.OverlayContainer signinIn={signIn}>
-            <Components.Overlay signinIn={signIn}>
+         {/* Overlay container */}
+         <Components.OverlayContainer signinIn={isSignInUpCard}>
+            <Components.Overlay signinIn={isSignInUpCard}>
                {/* Left overlay panel */}
-               <Components.LeftOverlayPanel signinIn={signIn}>
+               <Components.LeftOverlayPanel signinIn={isSignInUpCard}>
                   <Components.Title>Welcome Back!</Components.Title>
                   <Components.Paragraph>
                      To keep connected with us, please login with your personal info
                   </Components.Paragraph>
-                   {/* Ghost button to toggle sign-in/sign-up */}
+                  {/* Ghost button to toggle sign-in/sign-up */}
                   <Components.GhostButton
                      className="btn-hover"
                      onClick={() => toggleSignInUp(true)}
@@ -231,13 +231,13 @@ function Login() {
                      Log In
                   </Components.GhostButton>
                </Components.LeftOverlayPanel>
-                {/* Right overlay panel */}
-               <Components.RightOverlayPanel signinIn={signIn}>
+               {/* Right overlay panel */}
+               <Components.RightOverlayPanel signinIn={isSignInUpCard}>
                   <Components.Title>Hello, Friend!</Components.Title>
                   <Components.Paragraph>
                      Enter your personal details and start the journey with us
                   </Components.Paragraph>
-                   {/* Ghost button to toggle sign-in/sign-up */}
+                  {/* Ghost button to toggle sign-in/sign-up */}
                   <Components.GhostButton
                      className="btn-hover"
                      onClick={() => toggleSignInUp(false)}
