@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.backend.models.Password;
 import com.backend.backend.models.User;
 import com.backend.backend.models.UserRepository;
 
@@ -60,7 +61,7 @@ public class UserController {
             User user = userRepo.findByEmail(loginEmail);
             String storedPassword = user.getPassword();
             boolean passwordMatches = passwordEncoder.matches(loginPassword, storedPassword);
-            if(passwordMatches){
+            if (passwordMatches) {
                 System.out.println("Successfully logged in " + loginEmail);
                 return user;
             } else {
@@ -79,7 +80,7 @@ public class UserController {
         try {
             String newEmail = newUser.getEmail();
             // if user with this email already exists
-            if(userRepo.existsByEmail(newEmail)){
+            if (userRepo.existsByEmail(newEmail)) {
                 System.out.println("User with this email exists");
                 return false;
             }
@@ -87,11 +88,11 @@ public class UserController {
             String newPassword = newUser.getPassword();
             // hash & secure password before storage
             String hashedPassword = passwordEncoder.encode(newPassword);
-                
+
             String newName = newUser.getName();
             newName = newName.toLowerCase(); // lowercase the entire name
             newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
-    
+
             boolean chefRole = newUser.isChef();
             System.out.println("Chef role is " + chefRole);
             boolean modRole = newUser.isModerator();
@@ -102,7 +103,7 @@ public class UserController {
             userRepo.save(newUserCreated);
 
             response.setStatus(201); // 201 = created new object
-            return true; 
+            return true;
         } catch (Exception e) {
             System.out.println("Invalid data or Access denied");
             response.setStatus(401); // 401 = Unauthorized
@@ -120,7 +121,6 @@ public class UserController {
             // Update the fields of the existing student with the new values
             user.setName(updatedUser.getName());
             user.setEmail(updatedUser.getEmail());
-            user.setPassword(updatedUser.getPassword());
             user.setChef(updatedUser.isChef());
             user.setModerator(updatedUser.isModerator());
             // add new student to student table in DB
@@ -128,6 +128,40 @@ public class UserController {
 
             response.setStatus(200);
             return true;
+        } catch (Exception e) {
+            System.out.println("Invalid uid");
+            response.setStatus(400); // 400 = Bad request
+            return false;
+        }
+    }
+
+    @PutMapping("/update/password/{uid}")
+    public boolean updateUserPassword(@PathVariable String uid, @RequestBody Password updateUserPassword,
+            HttpServletResponse response) {
+        System.out.println("Updating user: " + uid);
+        int userId = Integer.parseInt(uid);
+        try {
+            User user = userRepo.findByUid(userId);
+            String storedPassword = user.getPassword();
+            String oldPassword = updateUserPassword.getOldPassword();
+            String newPassword = updateUserPassword.getNewPassword();
+            String hashedPassword = passwordEncoder.encode(newPassword);
+
+            boolean passwordMatches = passwordEncoder.matches(oldPassword, storedPassword);
+            if (passwordMatches) {
+                System.out.println("Correct Password");
+                user.setPassword(hashedPassword);
+
+                // add new student to student table in DB
+                userRepo.save(user);
+                response.setStatus(200);
+
+                return true;
+            } else {
+                System.out.println("Invalid Password");
+                response.setStatus(400); // 400 = Bad request
+                return false;
+            }
         } catch (Exception e) {
             System.out.println("Invalid uid");
             response.setStatus(400); // 400 = Bad request

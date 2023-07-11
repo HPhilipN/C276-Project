@@ -26,8 +26,13 @@ Replicake is an online recipe aggregator allowing chefs to upload recipes for ot
     - returns false if user with that email exists
 - `@PutMapping("/users/update/{uid}")`
     - Update user attributes via uID
-    - For user self-updating, front should only provide access to name, email, and password; other attributes left as they were
+    - For user self-updating, front should only provide access to name & email; other attributes left as they were
     - JSON user object expected from frontend
+    - returns true for success, false otherwise
+- `@PutMapping("/users/update/password/{uid}")`
+    - update user password via uID 
+    - frontend should send JSON consisting of `newPassword` & `oldPassword` variables
+    - Mapping will compare oldPassword against the password in the DB, if correct password will be changed to newPassword
     - returns true for success, false otherwise
 - `@DeleteMapping("/users/delete/{uid}")`
     - delete any user in user table via uID
