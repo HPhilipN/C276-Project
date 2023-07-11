@@ -28,9 +28,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         // Use BCrypt password encoder
         return new BCryptPasswordEncoder();
-
-        // If multiple encoder support is required
-        // return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 }
