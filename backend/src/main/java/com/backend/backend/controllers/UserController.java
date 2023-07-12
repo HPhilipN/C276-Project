@@ -145,11 +145,11 @@ public class UserController {
             String storedPassword = user.getPassword();
             String oldPassword = updateUserPassword.getOldPassword();
             String newPassword = updateUserPassword.getNewPassword();
-            String hashedPassword = passwordEncoder.encode(newPassword);
 
             boolean passwordMatches = passwordEncoder.matches(oldPassword, storedPassword);
             if (passwordMatches) {
                 System.out.println("Correct Password");
+                String hashedPassword = passwordEncoder.encode(newPassword);
                 user.setPassword(hashedPassword);
 
                 // add new student to student table in DB
