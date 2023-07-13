@@ -39,6 +39,7 @@ const Navbar = () => {
       {
          text: "Cookbook",
          icon: <BookIcon />,
+         onClick: () => (window.location.href = "/cookbook"),
       },
       {
          text: "Settings",
@@ -64,7 +65,7 @@ const Navbar = () => {
          <div className="navbar-links-container nav-buttons">
             <a href="/">Home</a>
             <a href="/recipes">Recipes</a>
-            <a>Cookbook</a>
+            <a href="/cookbook">Cookbook</a>
             <a>Settings</a>
             <a onClick={logoutUserHelper}>Log Out</a>
             <div className="navbar-profile">

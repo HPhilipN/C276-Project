@@ -21,7 +21,8 @@ import { logoutUser } from "./Login";
 import { UserContext } from "./UserContext";
 import "./styles/NavbarAdmin.css";
 import "./styles/Navbar.css";
-//check Navbar.jsxfor comments on code
+
+//check Navbar.jsx for comments on code
 const Navbar = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
       useContext(UserContext);
@@ -40,6 +41,7 @@ const Navbar = () => {
       {
          text: "Cookbook",
          icon: <BookIcon />,
+         onClick: () => (window.location.href = "/cookbook"),
       },
       {
          text: "Settings",
@@ -69,7 +71,7 @@ const Navbar = () => {
          <div className="navbar-links-container nav-buttons">
             <a href="/">Home</a>
             <a href="/recipes">Recipes</a>
-            <a>Cookbook</a>
+            <a href="/cookbook">Cookbook</a>
             <a>Settings</a>
             <a>Admin</a>
             <a href="#" onClick={logoutUserHelper}>
