@@ -19,6 +19,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./UserContext";
 import "./styles/NavbarLogin.css";
+import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
 const Navbar = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
@@ -33,7 +34,7 @@ const Navbar = () => {
       {
          text: "Recipes",
          icon: <SearchIcon />,
-         onClick: () => (window.location.href = "/dashboard"),
+         onClick: () => (window.location.href = "/recipes"),
       },
       {
          text: "Cookbook",
@@ -60,9 +61,9 @@ const Navbar = () => {
          <div className="navbar-logo-container">
             <img src={Logo} alt="" />
          </div>
-         <div className="navbar-links-container">
+         <div className="navbar-links-container nav-buttons">
             <a href="/">Home</a>
-            <a href="/dashboard">Recipes</a>
+            <a href="/recipes">Recipes</a>
             <a>Cookbook</a>
             <a>Settings</a>
             <a onClick={logoutUserHelper}>Log Out</a>
@@ -82,7 +83,7 @@ const Navbar = () => {
             >
                <List>
                   {menuOptions.map((item) => (
-                     <ListItem key={item.text} disablePadding>
+                     <ListItem key={item.text} disablePadding className="nav-buttons">
                         <ListItemButton onClick={item.onClick}>
                            <ListItemIcon>{item.icon}</ListItemIcon>
                            <ListItemText primary={item.text} />

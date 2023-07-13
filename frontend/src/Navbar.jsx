@@ -23,12 +23,12 @@ const Navbar = () => {
       {
          text: "Home",
          icon: <HomeIcon />,
-         onClick: () => (window.location.href = "/"),// Action to perform when "Home" is clicked
+         onClick: () => (window.location.href = "/"), // Action to perform when "Home" is clicked
       },
       {
          text: "Search for Recipes",
          icon: <SearchIcon />,
-         onClick: () => (window.location.href = "/dashboard"),
+         onClick: () => (window.location.href = "/recipes"),
       },
       {
          text: "Sign Up/Sign In",
@@ -40,12 +40,18 @@ const Navbar = () => {
    return (
       <nav className="navbar">
          <div className="navbar-logo-container">
-            <a href="/"><img src={Logo} alt="" /></a>
+            <a href="/">
+               <img src={Logo} alt="" />
+            </a>
          </div>
          <div className="navbar-links-container">
             {/* Links to different pages */}
-            <a href="/">Home</a>
-            <a href="/dashboard">Search for Recipes</a>
+            <a href="/" className="nav-buttons">
+               Home
+            </a>
+            <a href="/recipes" className="nav-buttons">
+               Search for Recipes
+            </a>
             <a href="/login" className="primary-button">
                Sign Up/Sign In
             </a>
@@ -62,9 +68,9 @@ const Navbar = () => {
                onKeyDown={() => setOpenMenu(false)}
             >
                <List>
-                   {/* Mapping over menuOptions array and rendering the menu items */}
+                  {/* Mapping over menuOptions array and rendering the menu items */}
                   {menuOptions.map((item) => (
-                     <ListItem key={item.text} disablePadding>
+                     <ListItem key={item.text} disablePadding className="nav-buttons">
                         <ListItemButton onClick={item.onClick}>
                            <ListItemIcon>{item.icon}</ListItemIcon>
                            <ListItemText primary={item.text} />
