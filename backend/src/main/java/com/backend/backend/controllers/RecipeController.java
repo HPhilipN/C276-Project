@@ -1,9 +1,12 @@
 package com.backend.backend.controllers;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
+     // create user to db
     @PostMapping("/create")
     @ResponseBody
     public boolean createRecipe(@RequestBody Recipe newRecipe, HttpServletResponse response) {
@@ -44,6 +48,7 @@ public class RecipeController {
             return false;
         }
     }
+    // get delete user from db
     @DeleteMapping("/delete/{uid}")
     public boolean deleteIndividualUser(@PathVariable String uid, HttpServletResponse response) {
         System.out.println("Deleting Recipe");
@@ -58,48 +63,39 @@ public class RecipeController {
             return false;
         }
     }
-        // try {
-        //     String newEmail = newUser.getEmail();
-        //     // if user with this email already exists
-        //     if(userRepo.existsByEmail(newEmail)){
-        //         System.out.println("User with this email exists");
-        //         return false;
-        //     }
-
-        //     String newPassword = newUser.getPassword();
-        //     // hash & secure password before storage
-        //     String hashedPassword = passwordEncoder.encode(newPassword);
-                
-        //     String newName = newUser.getName();
-        //     newName = newName.toLowerCase(); // lowercase the entire name
-        //     newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
-    
-        //     boolean chefRole = newUser.isChef();
-        //     System.out.println("Chef role is " + chefRole);
-        //     boolean modRole = newUser.isModerator();
-        //     System.out.println("Mod role is " + modRole);
-
-        //     // add new student to student table in DB
-        //     User newUserCreated = new User(newName, newEmail, hashedPassword, chefRole, modRole);
-        //     userRepo.save(newUserCreated);
-
-        //     response.setStatus(201); // 201 = created new object
-        //     return true; 
-        // } catch (Exception e) {
-        //     System.out.println("Invalid data or Access denied");
-        //     response.setStatus(401); // 401 = Unauthorized
-        //     return false;
-        // }
-
-
-
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Recipe> getRecipeById(@PathVariable int id) {
-    //     Recipe recipe = recipeRepository.findById(id);
-    //     if (recipe != null) {
-    //         return new ResponseEntity<>(recipe, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
+    // get all users from db
+    @GetMapping("/getAll")
+    @ResponseBody
+    public List<Recipe> getAllRecipes(HttpServletResponse response) {
+        System.out.println("Getting all Recipies");
+        try {
+            // get all users from database
+            List<Recipe> recipeList = recipeRepository.findAll();
+            return recipeList;
+        } catch (Exception e) {
+            System.out.println("Nothing found");
+            response.setStatus(404); // 404 = not found
+            return Collections.emptyList();
+        }
+    }
+    // get user from db
+    @GetMapping("/get/{uid}")
+    public Recipe getRecipeByUid(@PathVariable String uid, HttpServletResponse response) {
+        System.out.println("Getting recipe" + uid);
+        try {
+            int recipeId = Integer.parseInt(uid);
+            Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+            if (recipeOptional.isPresent()) {
+                return recipeOptional.get();
+            } else {
+                response.setStatus(404); // 404 = not found
+                System.out.println("Recipe not found");
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Nothing found");
+            response.setStatus(404); // 404 = not found
+            return new Recipe();
+        }
+    }
 }
