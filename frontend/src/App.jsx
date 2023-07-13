@@ -2,7 +2,7 @@ import "./styles/App.css";
 import "./styles/Login.css";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
-import Dashboard from "./Dashboard";
+import UserRecipes from "./UserRecipes";
 import NotFound from "./NotFound";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserProvider from "./UserContext";
@@ -14,7 +14,7 @@ function App() {
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/login" element={<Login />} />
-               <Route path="/dashboard" element={<Dashboard />} />
+               <Route path="/dashboard" element={<UserRecipes />} />
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>

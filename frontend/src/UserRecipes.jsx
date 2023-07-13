@@ -8,7 +8,7 @@ import NavbarLogin from "./NavbarLogin";
 import "./styles/Dashboard.css";
 import { UserContext } from "./UserContext";
 
-const Dashboard = () => {
+const UserRecipes = () => {
    const { signInStatus, isChef, isModerator } = useContext(UserContext);
 
    return (
@@ -31,4 +31,4 @@ const Dashboard = () => {
    );
 };
 
-export default Dashboard;
+export default UserRecipes;

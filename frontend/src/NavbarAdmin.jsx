@@ -20,9 +20,10 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./UserContext";
 import "./styles/NavbarAdmin.css";
-//check Navbar.jsxfor comments on code 
+//check Navbar.jsxfor comments on code
 const Navbar = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
+      useContext(UserContext);
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
       {
@@ -56,7 +57,7 @@ const Navbar = () => {
    ];
 
    function logoutUserHelper() {
-      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId);
    }
 
    return (
@@ -66,7 +67,7 @@ const Navbar = () => {
          </div>
          <div className="navbar-links-container">
             <a href="/">Home</a>
-            <a href ="/dashboard">Recipes</a>
+            <a href="/dashboard">Recipes</a>
             <a>Cookbook</a>
             <a>Settings</a>
             <a>Admin</a>
@@ -90,7 +91,7 @@ const Navbar = () => {
                <List>
                   {menuOptions.map((item) => (
                      <ListItem key={item.text} disablePadding>
-                        <ListItemButton  onClick={item.onClick}>
+                        <ListItemButton onClick={item.onClick}>
                            <ListItemIcon>{item.icon}</ListItemIcon>
                            <ListItemText primary={item.text} />
                         </ListItemButton>
