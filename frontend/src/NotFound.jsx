@@ -21,8 +21,8 @@ export default function NotFound() {
                   </Link>
                </li>
                <li>
-                  <Link className="button" to="/dashboard">
-                     Dashboard
+                  <Link className="button" to="/recipes">
+                     Recipes
                   </Link>
                </li>
             </ul>

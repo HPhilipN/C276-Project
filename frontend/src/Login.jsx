@@ -11,18 +11,20 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import zxcvbn from "zxcvbn";
 
 // login persistance, keep user logged in through refreshes
-export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue) {
+export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId) {
    // Clear the user's sign-in status and details from localStorage
    localStorage.removeItem("signInStatus");
    localStorage.removeItem("isChef");
    localStorage.removeItem("isModerator");
    localStorage.removeItem("name");
+   localStorage.removeItem("userId");
 
    // Reset the component's state
    setSignInStatus(false);
    setIsChef(false);
    setIsModerator(false);
    setNameValue("");
+   setUserId(-1);
 }
 
 function Login() {
@@ -41,6 +43,8 @@ function Login() {
       setIsModerator,
       nameValue,
       setNameValue,
+      userId,
+      setUserId,
    } = useContext(UserContext);
 
    let newUser;
@@ -107,11 +111,13 @@ function Login() {
                setIsChef(data.chef);
                setIsModerator(data.moderator);
                setNameValue(data.name);
+               setUserId(data.uid);
                setSignInError(false);
             } else {
                setSignInStatus(false);
                setIsChef(false);
                setIsModerator(false);
+               setUserId(-1);
                setSignInError(true);
             }
             console.log(data);
