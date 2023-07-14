@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int uid;
+    private int rid;
 
     private int authorId;
     private String title;
@@ -39,12 +39,12 @@ public class Recipe {
     }
 
     // Getters & Setters
-    public int getUid() {
-        return uid;
+    public int getRid() {
+        return rid;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setRid(int rid) {
+        this.rid = rid;
     }
 
     public int getAuthorId() {
@@ -106,7 +106,7 @@ public class Recipe {
     // toString for debugging
     @Override
     public String toString() {
-        return "Recipe [uid=" + uid + ", authorId=" + authorId + ", title=" + title + ", recipeDifficulty="
+        return "Recipe [rid=" + rid + ", authorId=" + authorId + ", title=" + title + ", recipeDifficulty="
                 + recipeDifficulty + ", favourites=" + favourites + ", ingredients=" + ingredients + ", instructions="
                 + instructions + ", tags=" + tags + "]";
     }
