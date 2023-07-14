@@ -19,14 +19,14 @@ import com.backend.backend.models.RecipeRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-
 // 
 @RestController
 @RequestMapping("/recipes")
 public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
-     // create user to db
+
+    // create user to db
     @PostMapping("/create")
     @ResponseBody
     public boolean createRecipe(@RequestBody Recipe newRecipe, HttpServletResponse response) {
@@ -48,6 +48,7 @@ public class RecipeController {
             return false;
         }
     }
+
     // get delete user from db
     @DeleteMapping("/delete/{uid}")
     public boolean deleteIndividualUser(@PathVariable String uid, HttpServletResponse response) {
@@ -63,6 +64,7 @@ public class RecipeController {
             return false;
         }
     }
+
     // get all users from db
     @GetMapping("/getAll")
     @ResponseBody
@@ -78,6 +80,7 @@ public class RecipeController {
             return Collections.emptyList();
         }
     }
+
     // get user from db
     @GetMapping("/get/{uid}")
     public Recipe getRecipeByUid(@PathVariable String uid, HttpServletResponse response) {
