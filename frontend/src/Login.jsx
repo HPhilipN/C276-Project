@@ -175,6 +175,13 @@ function Login() {
                      )}
                   </button>
                </div>
+               <PasswordStrengthBar
+                  className="pw-strength"
+                  password={passwordValue}
+                  minLength={6}
+                  onChangeScore={(score) => console.log(score)}
+                  scoreWords={["weak", "weak", "fair", "good", "strong"]}
+               />
                {/* Sign-up button */}
                <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
                   Sign Up
