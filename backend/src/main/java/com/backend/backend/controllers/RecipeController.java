@@ -35,11 +35,16 @@ public class RecipeController {
             int authorId = newRecipe.getAuthorId();
             String title = newRecipe.getTitle();
             int recipeDifficulty = newRecipe.getRecipeDifficulty();
+            int favourites = newRecipe.getFavourites();
             List<String> ingredients = newRecipe.getIngredients();
             List<String> instructions = newRecipe.getInstructions();
             List<String> tags = newRecipe.getTags();
-            Recipe newRecipeCreated = new Recipe(authorId, title, recipeDifficulty, ingredients, instructions, tags);
+
+            // Save into DB
+            Recipe newRecipeCreated = new Recipe(authorId, title, favourites, recipeDifficulty, ingredients,
+                    instructions, tags);
             recipeRepository.save(newRecipeCreated);
+
             response.setStatus(201);
             return true;
         } catch (Exception e) {
@@ -66,7 +71,7 @@ public class RecipeController {
     }
 
     // get all users from db
-    @GetMapping("/getAll")
+    @GetMapping("/view")
     @ResponseBody
     public List<Recipe> getAllRecipes(HttpServletResponse response) {
         System.out.println("Getting all Recipies");
@@ -82,7 +87,7 @@ public class RecipeController {
     }
 
     // get user from db
-    @GetMapping("/get/{uid}")
+    @GetMapping("/view/{uid}")
     public Recipe getRecipeByUid(@PathVariable String uid, HttpServletResponse response) {
         System.out.println("Getting recipe" + uid);
         try {
