@@ -82,6 +82,7 @@ public class UserController {
             // if user with this email already exists
             if (userRepo.existsByEmail(newEmail)) {
                 System.out.println("User with this email exists");
+                response.setStatus(401); // 401 = Unauthorized
                 return false;
             }
 
@@ -121,6 +122,7 @@ public class UserController {
             // Update the fields of the existing student with the new values
             user.setName(updatedUser.getName());
             user.setEmail(updatedUser.getEmail());
+            // chef & moderator only changable by Admins
             user.setChef(updatedUser.isChef());
             user.setModerator(updatedUser.isModerator());
             // add new student to student table in DB
@@ -174,9 +176,16 @@ public class UserController {
         System.out.println("Deleting User");
         try {
             int userId = Integer.parseInt(uid);
-            userRepo.deleteById(userId);
-            response.setStatus(200); // 200 = OK
-            return true;
+
+            if (userRepo.findById(userId).isPresent()) {
+                userRepo.deleteById(userId);
+                response.setStatus(200); // 200 = OK
+                return true;
+            } else {
+                System.out.println("User with uid " + userId + " does not exist");
+                response.setStatus(400); // 400 = Bad request
+                return false;
+            }
         } catch (Exception e) {
             System.out.println("Invalid uid, cannot delete");
             response.setStatus(400); // 400 = Bad request
