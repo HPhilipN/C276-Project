@@ -79,7 +79,7 @@ const AddRecipe = () => {
             console.log(error);
          });
 
-      //   clearAllInputs();
+      clearAllInputs();
       setShowModal(!showModal); // close modal
    }
 
@@ -173,7 +173,6 @@ const AddRecipe = () => {
             Add
          </button>
          {showModal && addRecipeModal}
-         {/* {addRecipeModal} */}
       </>
    );
 };
