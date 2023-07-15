@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.backend.models.Recipe;
 import com.backend.backend.models.RecipeRepository;
+import com.backend.backend.models.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -24,6 +25,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private UserRepository userRepo;
 
     // create user to db
     @PostMapping("/create")
@@ -39,6 +42,9 @@ public class RecipeController {
             List<String> instructions = newRecipe.getInstructions();
             List<String> tags = newRecipe.getTags();
 
+            // get author name via uid
+            String authorName = userRepo.findByUid(authorId).getName();
+
             // ensure newRecipe isnt empty
             if (title.length() <= 0 || ingredients.size() <= 0 || instructions.size() <= 0 || tags.size() <= 0) {
                 System.out.println("Invalid JSON Body");
@@ -47,13 +53,14 @@ public class RecipeController {
             }
 
             // Save into DB
-            Recipe newRecipeCreated = new Recipe(authorId, title, recipeDifficulty, favourites, ingredients,
+            Recipe newRecipeCreated = new Recipe(authorId, authorName, title, recipeDifficulty, favourites, ingredients,
                     instructions, tags);
             recipeRepository.save(newRecipeCreated);
 
             response.setStatus(201);
             return true;
         } catch (Exception e) {
+            System.out.println("An Error occured, ensure user id is correct");
             e.printStackTrace();
             response.setStatus(401);
             return false;

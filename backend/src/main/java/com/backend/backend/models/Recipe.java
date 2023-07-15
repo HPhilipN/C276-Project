@@ -13,6 +13,7 @@ public class Recipe {
     private int rid;
 
     private int authorId;
+    private String authorName;
     private String title;
     private int recipeDifficulty;
     private int favourites;
@@ -27,9 +28,10 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(int authorId, String title, int recipeDifficulty, int favourites, List<String> ingredients,
-            List<String> instructions, List<String> tags) {
+    public Recipe(int authorId, String authorName, String title, int recipeDifficulty, int favourites,
+            List<String> ingredients, List<String> instructions, List<String> tags) {
         this.authorId = authorId;
+        this.authorName = authorName;
         this.title = title;
         this.recipeDifficulty = recipeDifficulty;
         this.favourites = favourites;
@@ -61,6 +63,14 @@ public class Recipe {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public int getRecipeDifficulty() {
