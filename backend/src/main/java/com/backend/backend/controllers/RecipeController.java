@@ -123,7 +123,7 @@ public class RecipeController {
             // check if the user has created any recipes
             if (hasRecipes.isEmpty()) {
                 System.out.println("User has created 0 recipes");
-                response.setStatus(404); // 404 = not found
+                response.setStatus(204); // 204 = no content
                 return false;
             } else {
                 System.out.println("User has created " + hasRecipes.size() + " recipes");
