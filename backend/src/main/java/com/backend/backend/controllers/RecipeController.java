@@ -112,4 +112,28 @@ public class RecipeController {
             return null;
         }
     }
+
+    @GetMapping("/exists/{uid}")
+    public boolean userHasRecipes(@PathVariable String uid, HttpServletResponse response) {
+        System.out.println("Checking if user with ID " + uid + " has any recipes");
+        try {
+            int authorId = Integer.parseInt(uid);
+            List<Recipe> hasRecipes = recipeRepository.findByAuthorId(authorId);
+
+            // check if the user has created any recipes
+            if (hasRecipes.isEmpty()) {
+                System.out.println("User has created 0 recipes");
+                response.setStatus(404); // 404 = not found
+                return false;
+            } else {
+                System.out.println("User has created " + hasRecipes.size() + " recipes");
+                response.setStatus(200); // 200 = ok
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred or nothing was found");
+            response.setStatus(404); // 404 = not found
+            return false;
+        }
+    }
 }
