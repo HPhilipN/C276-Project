@@ -37,7 +37,7 @@ public class RecipeController {
             int favourites = newRecipe.getFavourites();
             List<String> ingredients = newRecipe.getIngredients();
             List<String> instructions = newRecipe.getInstructions();
-            List<String> tags = newRecipe.getTags();favourites
+            List<String> tags = newRecipe.getTags();
 
             // Save into DB
             Recipe newRecipeCreated = new Recipe(authorId, title, recipeDifficulty, favourites, ingredients,
