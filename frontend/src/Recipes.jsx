@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Filter from "./Filter";
 import Searchbar from "./Searchbar";
-import Recipelist from "./Recipelist";
+import NoRecipesExist from "./NoRecipesExist";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
@@ -26,7 +26,7 @@ const Recipes = () => {
          </div>
          <div className="recipelist-wrap">
             {/*Recipe List*/}
-            <Recipelist />
+            <NoRecipesExist />
             <div>
                <h4>TEMPORARY TEXT</h4>
                <p>This is where API recipes will be displayed</p>

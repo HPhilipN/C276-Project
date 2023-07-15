@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
 import "./styles/Recipelist.css";
 
-const RecipeList = () => {
+const NoRecipesExist = () => {
    return (
       <div className="emptyrecipe">
          <FontAwesomeIcon icon={faKitchenSet} size="3x" />
@@ -13,4 +13,4 @@ const RecipeList = () => {
    );
 };
 
-export default RecipeList;
+export default NoRecipesExist;
