@@ -59,8 +59,8 @@ const AddRecipe = () => {
       createRecipeObjectFromInputs();
       console.log(newRecipe); //new user details to send to endpoint
 
-      ("https://replicake.onrender.com/recipes/create");
-      ("/recipes/create");
+      // "https://replicake.onrender.com/recipes/create"
+      // "/recipes/create"
       fetch("https://replicake.onrender.com/recipes/create", {
          method: "POST",
          headers: {
