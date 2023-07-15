@@ -57,10 +57,8 @@ const AddRecipe = () => {
    async function addRecipeToDatabase(event) {
       event.preventDefault(); // prevent page refresh on sign-up
       createRecipeObjectFromInputs();
-
       console.log(newRecipe); //new user details to send to endpoint
-      console.log("==========");
-      console.log(JSON.stringify(newRecipe));
+
       ("https://replicake.onrender.com/recipes/create");
       ("/recipes/create");
       fetch("https://replicake.onrender.com/recipes/create", {
