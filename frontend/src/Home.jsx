@@ -8,7 +8,7 @@ import { FiArrowRight } from "react-icons/fi";
 import "./styles/Home.css";
 import Work from "./Work";
 import Footer from "./Footer";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 
 const Home = () => {
    // Accessing signInStatus, isChef, and isModerator from the UserContext

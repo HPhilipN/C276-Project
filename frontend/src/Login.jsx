@@ -5,8 +5,8 @@ import NavbarLogin from "./NavbarLogin";
 import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import * as Components from "./Components";
-import { UserContext } from "./UserContext";
+import * as Components from "./utils/Components";
+import { UserContext } from "./utils/UserContext";
 import PasswordStrengthBar from "react-password-strength-bar";
 import zxcvbn from "zxcvbn";
 
@@ -68,7 +68,7 @@ function Login() {
       // event.preventDefault(); // prevent page refresh on sign-up
       createUserObjectFromInputs();
       if (newUser.password.length >= 6) {
-         console.log(newUser); //new user details to send to endpoint
+         //  console.log(newUser); //new user details to send to endpoint
          // "https://replicake.onrender.com/users/signup"
          // "/users/signup"
          fetch("https://replicake.onrender.com/users/signup", {
@@ -94,7 +94,7 @@ function Login() {
       event.preventDefault(); // prevent page refresh on login
       setNameValue(""); // reset name value
       createUserObjectFromInputs();
-      console.log(newUser); // user details to send to endpoint
+      //   console.log(newUser); // user details to send to endpoint
       // "https://replicake.onrender.com/users/login"
       // "/users/login"
       fetch("https://replicake.onrender.com/users/login", {
@@ -120,7 +120,7 @@ function Login() {
                setUserId(-1);
                setSignInError(true);
             }
-            console.log(data);
+            // console.log(data);
          })
          .catch((error) => {
             setSignInStatus(false);

@@ -39,6 +39,13 @@ public class RecipeController {
             List<String> instructions = newRecipe.getInstructions();
             List<String> tags = newRecipe.getTags();
 
+            // ensure newRecipe isnt empty
+            if (title.length() <= 0 || ingredients.size() <= 0 || instructions.size() <= 0 || tags.size() <= 0) {
+                System.out.println("Invalid JSON Body");
+                response.setStatus(401);
+                return false;
+            }
+
             // Save into DB
             Recipe newRecipeCreated = new Recipe(authorId, title, recipeDifficulty, favourites, ingredients,
                     instructions, tags);

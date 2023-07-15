@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import Filter from "./Filter";
 import Searchbar from "./Searchbar";
+import AddRecipe from "./AddRecipe";
 import Recipelist from "./Recipelist";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import "./styles/Recipes.css";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 
 // User generated recipes
 const Cookbook = () => {
@@ -19,10 +20,9 @@ const Cookbook = () => {
          {signInStatus && isModerator && <NavbarAdmin />}
          {!signInStatus && <Navbar />}
          <div className="filter-search-wrapper">
-            {/*Filter Modal*/}
             <Filter />
-            {/*Search bar*/}
             <Searchbar />
+            <AddRecipe />
          </div>
          <div className="recipelist-wrap">
             {/*Recipe List*/}
