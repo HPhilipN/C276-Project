@@ -5,8 +5,8 @@ import NavbarLogin from "./NavbarLogin";
 import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import * as Components from "./Components";
-import { UserContext } from "./UserContext";
+import * as Components from "./utils/Components";
+import { UserContext } from "./utils/UserContext";
 import PasswordStrengthBar from "react-password-strength-bar";
 import zxcvbn from "zxcvbn";
 

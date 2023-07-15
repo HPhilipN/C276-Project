@@ -4,7 +4,7 @@ import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import Cookbook from "./Cookbook";
 import NotFound from "./NotFound";
-import UserProvider from "./UserContext";
+import UserProvider from "./utils/UserContext";
 import Recipes from "./Recipes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 

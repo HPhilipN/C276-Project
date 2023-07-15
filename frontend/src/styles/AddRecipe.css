@@ -1,0 +1,48 @@
+.add-btn {
+   color: #fe9e0c;
+   margin-right: 2rem;
+   border: none;
+   background-color: #fff;
+}
+
+.add-btn-icon {
+   transition: transform 0.3s ease !important;
+}
+
+.add-btn-icon:hover {
+   transform: scale(1.15);
+}
+
+.add-recipe {
+   position: absolute;
+   top: 45%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+
+   border: 1px solid #000;
+   background-color: #fff;
+   border-radius: 15px;
+
+   box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+   min-width: 30rem;
+}
+
+.add-recipe-form {
+   margin: 2rem;
+}
+
+.inputs * {
+   border-radius: 15px;
+}
+
+.btn-hover {
+   margin-top: 1rem;
+}
+
+.btn-hover:hover {
+   transform: scale(1.05);
+}
+
+.SliderInput {
+   margin-top: 5px;
+}

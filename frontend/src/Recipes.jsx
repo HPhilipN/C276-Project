@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import "./styles/Recipes.css";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 
 // User generated recipes
 const Recipes = () => {

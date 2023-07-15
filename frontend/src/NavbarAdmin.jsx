@@ -18,7 +18,7 @@ import Avatar from "@mui/material/Avatar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarAdmin.css";
 import "./styles/Navbar.css";
 

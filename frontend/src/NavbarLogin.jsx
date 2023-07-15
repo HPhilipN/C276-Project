@@ -17,7 +17,7 @@ import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
