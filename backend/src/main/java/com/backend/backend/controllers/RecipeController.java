@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.backend.models.Recipe;
 import com.backend.backend.models.RecipeRepository;
-import com.backend.backend.models.User;
 import com.backend.backend.models.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
