@@ -27,12 +27,28 @@
    min-width: 30rem;
 }
 
+.recipe-form-title {
+   margin-top: -15px !important;
+}
+
+.close-btn {
+   position: absolute;
+   top: 0;
+   right: 0;
+   margin: 10px;
+}
+
+.close-btn-parent {
+   border: none;
+   background: transparent;
+}
+
 .add-recipe-form {
    margin: 2rem;
 }
 
 .inputs * {
-   border-radius: 15px;
+   border-radius: 5px;
 }
 
 .btn-hover {
@@ -43,6 +59,18 @@
    transform: scale(1.05);
 }
 
-.SliderInput {
-   margin-top: 5px;
+.title-input {
+   border: 1px solid rgba(0, 0, 0, 0.2) !important;
+   background-color: transparent !important;
+   margin-bottom: 1rem !important;
+}
+
+.slider-input {
+   margin-bottom: 1rem;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   padding: 10px 15px 0px 15px;
+}
+
+.multi-input div {
+   margin-bottom: 1rem;
 }

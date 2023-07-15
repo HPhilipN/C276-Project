@@ -40,7 +40,7 @@ public class RecipeController {
             List<String> tags = newRecipe.getTags();
 
             // Save into DB
-            Recipe newRecipeCreated = new Recipe(authorId, title, favourites, recipeDifficulty, ingredients,
+            Recipe newRecipeCreated = new Recipe(authorId, title, recipeDifficulty, favourites, ingredients,
                     instructions, tags);
             recipeRepository.save(newRecipeCreated);
 
