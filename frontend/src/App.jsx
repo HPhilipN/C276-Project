@@ -4,8 +4,10 @@ import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import Cookbook from "./Cookbook";
 import NotFound from "./NotFound";
+import Setting from "./Setting.jsx";
 import UserProvider from "./utils/UserContext";
 import Recipes from "./Recipes";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
             <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/login" element={<Login />} />
+               <Route path="/dashboard" element={<Dashboard />} />
+               <Route path="/setting" element={<Setting />} />
                <Route path="/recipes" element={<Recipes />} />
                <Route path="/cookbook" element={<Cookbook />} />
                <Route path="*" element={<NotFound />} />
