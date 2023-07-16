@@ -21,15 +21,18 @@
 .tags {
    display: flex;
    flex-wrap: wrap;
-   margin: 0;
+   margin: 0 -8px;
    padding: 0;
 }
 
 .tagItem {
-   border: 1px solid #000;
+   border: 1px solid #ccc;
    border-radius: 5px;
-   padding: 3px 5px;
+   padding: 3px 6px;
    margin: 5px;
+
+   background-color: #afd6a8;
+   /* color: #000; */
 }
 
 .ingredients ul {
@@ -67,4 +70,8 @@
    display: flex;
    justify-content: space-between;
    margin: 0px 10px 10px 10px;
+}
+
+.view-recipe-btn {
+   background-color: #fe9e0c;
 }

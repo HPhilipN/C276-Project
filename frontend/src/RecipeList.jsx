@@ -34,7 +34,7 @@ const RecipeList = ({ recipes }) => {
                   </div>
                </div>
                <div className="after-card-body">
-                  <a href="#" className="btn btn-primary view-recipe-btn">
+                  <a href="#" className="btn btn-light view-recipe-btn">
                      View Full Recipe
                   </a>
                   <div className="difficulty">

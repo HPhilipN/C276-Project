@@ -9,7 +9,7 @@ import { TagsInput } from "react-tag-input-component";
 import "./styles/AddRecipe.css";
 
 // User generated recipes
-const AddRecipe = ({ refreshUserRecipes }) => {
+const AddRecipe = ({ setUserRecipes }) => {
    const { userId } = useContext(UserContext);
    const [title, setTitle] = useState(""); // string
    const [recipeDifficulty, setRecipeDiff] = useState(5); // int
@@ -52,6 +52,16 @@ const AddRecipe = ({ refreshUserRecipes }) => {
    function getRecipeDiff(event) {
       setRecipeDiff(event.target.value);
    }
+   function handleAddTag(value) {
+      // limit to 6 tags
+      //   console.log("First " + tags.length);
+      //   if (tags.length > 6) {
+      //      return; // Prevent further input
+      //   }
+      //   setTags(value); // Add the tag to the list
+      //   console.log("Second " + tags.length);
+      //   console.log(tags);
+   }
 
    // send create request to endpoint
    async function addRecipeToDatabase(event) {
@@ -71,6 +81,7 @@ const AddRecipe = ({ refreshUserRecipes }) => {
          .then((response) => response.json()) // parse JSON response
          .then((data) => {
             console.log(`Returned value: ${data} from /users/signup`);
+            setUserRecipes((prevRecipes) => [...prevRecipes, newRecipe]); // Update the userRecipes state with the new recipe
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -78,7 +89,6 @@ const AddRecipe = ({ refreshUserRecipes }) => {
          });
 
       clearAllInputs();
-      refreshUserRecipes();
       setShowModal(!showModal); // close modal
    }
 
@@ -152,7 +162,14 @@ const AddRecipe = ({ refreshUserRecipes }) => {
                         value={tags}
                         onChange={setTags}
                         name="tags"
-                        placeHolder="Enter tags"
+                        placeHolder="Enter up to 6 tags"
+                        beforeAddValidate={(tag, existingTags) => {
+                           console.log(tags);
+                           if (existingTags.length >= 6) {
+                              return false;
+                           }
+                           return true;
+                        }}
                      />
                   </div>
                </div>
