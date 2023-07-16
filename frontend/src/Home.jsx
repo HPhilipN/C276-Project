@@ -6,7 +6,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import { FiArrowRight } from "react-icons/fi";
 import "./styles/Home.css";
-import Work from "./Work";
+import AboutHome from "./AboutHome";
 import Footer from "./Footer";
 import { UserContext } from "./utils/UserContext";
 
@@ -45,7 +45,7 @@ const Home = () => {
                </div>
             </div>
             {/* Work component */}
-            <Work />
+            <AboutHome />
             {/* Footer component */}
             <Footer />
          </div>

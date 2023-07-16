@@ -45,6 +45,7 @@ const NavbarLogin = () => {
          text: "Settings",
          icon: <SettingsIcon />,
          profile: true,
+         onClick: () => (window.location.href = "/setting"),
       },
       {
          text: "Logout",
