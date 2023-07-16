@@ -63,7 +63,7 @@ const Navbar = () => {
         <a href="/">Home</a>
         <a href="/dashboard">Recipes</a>
         <a>Cookbook</a>
-        <a>Settings</a>
+        <a href="/setting">Settings</a>
         <a onClick={logoutUserHelper}>Log Out</a>
         <div className="navbar-profile">
           <Avatar className="navbar-profile-picture" alt="Profile Picture" />
