@@ -18,7 +18,7 @@ import Avatar from "@mui/material/Avatar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarAdmin.css";
 import "./styles/Navbar.css";
 
@@ -46,6 +46,7 @@ const Navbar = () => {
       {
          text: "Settings",
          icon: <SettingsIcon />,
+         onClick: () => (window.location.href = "/setting"),
       },
       {
          text: "Admin",
@@ -68,13 +69,19 @@ const Navbar = () => {
          <div className="navbar-logo-container">
             <img src={Logo} alt="" />
          </div>
-         <div className="navbar-links-container nav-buttons">
-            <a href="/">Home</a>
-            <a href="/recipes">Recipes</a>
-            <a href="/cookbook">Cookbook</a>
-            <a>Settings</a>
-            <a>Admin</a>
-            <a href="#" onClick={logoutUserHelper}>
+         <div className="navbar-links-container">
+            <a href="/" className="nav-buttons">
+               Home
+            </a>
+            <a href="/recipes" className="nav-buttons">
+               Recipes
+            </a>
+            <a href="/cookbook" className="nav-buttons">
+               Cookbook
+            </a>
+            <a href="/setting" className="nav-buttons">Settings</a>
+            <a className="nav-buttons">Admin</a>
+            <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
             <div className="navbar-profile">

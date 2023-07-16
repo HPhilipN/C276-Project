@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import Filter from "./Filter";
 import Searchbar from "./Searchbar";
-import Recipelist from "./Recipelist";
+import NoRecipesExist from "./NoRecipesExist";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import "./styles/Recipes.css";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 
 // User generated recipes
 const Recipes = () => {
@@ -26,7 +26,7 @@ const Recipes = () => {
          </div>
          <div className="recipelist-wrap">
             {/*Recipe List*/}
-            <Recipelist />
+            <NoRecipesExist />
             <div>
                <h4>TEMPORARY TEXT</h4>
                <p>This is where API recipes will be displayed</p>

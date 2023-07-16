@@ -6,9 +6,9 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import { FiArrowRight } from "react-icons/fi";
 import "./styles/Home.css";
-import Work from "./Work";
+import AboutHome from "./AboutHome";
 import Footer from "./Footer";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 
 const Home = () => {
    // Accessing signInStatus, isChef, and isModerator from the UserContext
@@ -31,7 +31,7 @@ const Home = () => {
                   <p className="primary-text text-left">
                      Never run out of recipe ideas with the power of Replicake!
                   </p>
-                  {/* Button to navigate to the dashboard */}
+                  {/* Button to navigate to the recipes */}
                   <a href="/recipes">
                      <button className="secondary-button">
                         Find Recipes Now
@@ -45,7 +45,7 @@ const Home = () => {
                </div>
             </div>
             {/* Work component */}
-            <Work />
+            <AboutHome />
             {/* Footer component */}
             <Footer />
          </div>

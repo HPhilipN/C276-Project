@@ -61,8 +61,7 @@
    height: 40px; /* Adjust the height as needed */
 }
 
-.nav-buttons:hover,
-.nav-buttons a:hover {
+.nav-buttons:hover {
    color: #fe9e0c;
    cursor: pointer;
 }

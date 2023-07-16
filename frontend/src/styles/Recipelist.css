@@ -1,3 +1,77 @@
-.emptyrecipe{
-    color: #fe9e0c;
+.card {
+   margin: 0 !important;
+   padding: 0 !important;
+}
+
+.recipe-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   margin: 1rem !important;
+}
+
+.recipe-item {
+   flex-basis: calc(25% - 10px); /* Set width for each recipe item */
+   text-align: start;
+   min-width: 18rem;
+   margin-bottom: 1rem !important;
+   /* border: 1px solid #000; */
+}
+
+.tags {
+   display: flex;
+   flex-wrap: wrap;
+   margin: 0 -8px;
+   padding: 0;
+}
+
+.tagItem {
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   padding: 3px 6px;
+   margin: 5px;
+
+   background-color: #afd6a8;
+   /* color: #000; */
+}
+
+.ingredients ul {
+   list-style-type: disc;
+   padding-left: 20px;
+}
+
+.ingredients li {
+   margin: 0;
+}
+
+.favourites {
+   position: absolute;
+   top: 0;
+   right: 0;
+   margin: 10px;
+}
+
+.favourites-parent {
+   border: none;
+   background: transparent;
+}
+
+.difficulty {
+   display: flex;
+   justify-content: flex-end;
+   align-items: flex-end;
+}
+
+.card-title {
+   margin-top: -20px !important;
+}
+
+.after-card-body {
+   display: flex;
+   justify-content: space-between;
+   margin: 0px 10px 10px 10px;
+}
+
+.view-recipe-btn {
+   background-color: #fe9e0c;
 }

@@ -17,11 +17,11 @@ import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
-const Navbar = () => {
+const NavbarLogin = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
       useContext(UserContext);
    const [openMenu, setOpenMenu] = useState(false);
@@ -45,6 +45,7 @@ const Navbar = () => {
          text: "Settings",
          icon: <SettingsIcon />,
          profile: true,
+         onClick: () => (window.location.href = "/setting"),
       },
       {
          text: "Logout",
@@ -57,46 +58,45 @@ const Navbar = () => {
       logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId);
    }
 
-   return (
-      <nav className="navbar">
-         <div className="navbar-logo-container">
-            <img src={Logo} alt="" />
-         </div>
-         <div className="navbar-links-container nav-buttons">
-            <a href="/">Home</a>
-            <a href="/recipes">Recipes</a>
-            <a href="/cookbook">Cookbook</a>
-            <a>Settings</a>
-            <a onClick={logoutUserHelper}>Log Out</a>
-            <div className="navbar-profile">
-               <Avatar className="navbar-profile-picture" alt="Profile Picture" />
-            </div>
-         </div>
-         <div className="navbar-menu-container">
-            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
-         </div>
-         <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
-            <Box
-               sx={{ width: 250 }}
-               role="presentation"
-               onClick={() => setOpenMenu(false)}
-               onKeyDown={() => setOpenMenu(false)}
-            >
-               <List>
-                  {menuOptions.map((item) => (
-                     <ListItem key={item.text} disablePadding className="nav-buttons">
-                        <ListItemButton onClick={item.onClick}>
-                           <ListItemIcon>{item.icon}</ListItemIcon>
-                           <ListItemText primary={item.text} />
-                        </ListItemButton>
-                     </ListItem>
-                  ))}
-               </List>
-               <Divider />
-            </Box>
-         </Drawer>
-      </nav>
-   );
-};
-
-export default Navbar;
+  return (
+    <nav className="navbar">
+      <div className="navbar-logo-container">
+        <img src={Logo} alt="" />
+      </div>
+      <div className="navbar-links-container">
+        <a href="/">Home</a>
+        <a href="/recipes">Recipes</a>
+        <a>Cookbook</a>
+        <a href="/setting">Settings</a>
+        <a onClick={logoutUserHelper}>Log Out</a>
+        <div className="navbar-profile">
+          <Avatar className="navbar-profile-picture" alt="Profile Picture" />
+        </div>
+      </div>
+      <div className="navbar-menu-container">
+        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+      </div>
+      <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={() => setOpenMenu(false)}
+          onKeyDown={() => setOpenMenu(false)}
+        >
+          <List>
+            {menuOptions.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton onClick={item.onClick}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Box>
+      </Drawer>
+    </nav>
+  );
+}
+export default NavbarLogin;
