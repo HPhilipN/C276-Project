@@ -21,7 +21,7 @@ import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
-const Navbar = () => {
+const NavbarLogin = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
       useContext(UserContext);
    const [openMenu, setOpenMenu] = useState(false);
@@ -97,4 +97,5 @@ const Navbar = () => {
       </Drawer>
     </nav>
   );
-export default Navbar;
+}
+export default NavbarLogin;

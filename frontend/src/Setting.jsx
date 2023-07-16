@@ -3,7 +3,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import Navbar from "./Navbar";
 import "./styles/Setting.css";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
