@@ -1,24 +1,55 @@
 import React from "react";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import DifficultyCircle from "./utils/DifficultyCircle";
+import "./styles/RecipeList.css";
 
 const RecipeList = ({ recipes }) => {
    return (
       <div className="recipe-list">
          {recipes.map((recipe) => (
-            <div key={recipe.rid} className="card text-center recipe-item">
-               <h2 className="card-header">{recipe.title}</h2>
+            <div key={recipe.rid} className="card recipe-item">
+               <div className="card-header">
+                  {/* Favourites button should allow users to add this recipe to their favourites list */}
+                  <button className="favourites-parent">
+                     <div className="favourites">
+                        <StarOutlineIcon fontSize="large" />
+                        <p>{recipe.favourites}</p>
+                     </div>
+                  </button>
+                  <h4 className="card-title">
+                     <strong>{recipe.title}</strong>
+                  </h4>
+                  <h6 className="card-subtitle text-muted">{recipe.authorName}</h6>
+               </div>
                <div className="card-body">
-                  <p className="card-text">Recipe Difficulty: {recipe.recipeDifficulty}</p>
-                  <p className="card-text">Favorites: {recipe.favourites}</p>
-                  <ul className="tags">
-                     {recipe.tags.map((tag, index) => (
-                        <li key={index}>{tag}</li>
-                     ))}
-                  </ul>
-                  <a href="#" className="btn btn-primary">
+                  <div className="card-text ingredients">
+                     <h6>
+                        <strong>Ingredients:</strong>
+                     </h6>
+                     <ul>
+                        {recipe.ingredients.map((ingredient, index) => (
+                           <li key={index}>{ingredient}</li>
+                        ))}
+                     </ul>
+                  </div>
+               </div>
+               <div className="after-card-body">
+                  <a href="#" className="btn btn-primary view-recipe-btn">
                      View Full Recipe
                   </a>
+                  <div className="difficulty">
+                     <DifficultyCircle difficulty={recipe.recipeDifficulty} />
+                  </div>
                </div>
-               <div className="card-footer text-muted">Creator Name</div>
+               <div className="card-footer text-muted">
+                  <ul className="tags">
+                     {recipe.tags.map((tag, index) => (
+                        <li key={index} className="tagItem">
+                           {tag}
+                        </li>
+                     ))}
+                  </ul>
+               </div>
             </div>
          ))}
       </div>
@@ -28,27 +59,40 @@ const RecipeList = ({ recipes }) => {
 export default RecipeList;
 
 /*
-<div key={recipe.rid}>
-    <h2>{recipe.title}</h2>
-    <p>Recipe Difficulty: {recipe.recipeDifficulty}</p>
-    <p>Favorites: {recipe.favourites}</p>
-    <h3>Ingredients:</h3>
-    <ul>
-        {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>{ingredient}</li>
-        ))}
-    </ul>
-    <h3>Instructions:</h3>
-    <ol>
-        {recipe.instructions.map((step, index) => (
-            <li key={index}>{step}</li>
-        ))}
-    </ol>
-    <h3>Tags:</h3>
-    <ul>
-        {recipe.tags.map((tag, index) => (
-            <li key={index}>{tag}</li>
-        ))}
-    </ul>
-</div>
+<h3>Ingredients:</h3>
+<ul>
+    {recipe.ingredients.map((ingredient, index) => (
+        <li key={index}>{ingredient}</li>
+    ))}
+</ul>
+<h3>Instructions:</h3>
+<ol>
+    {recipe.instructions.map((step, index) => (
+        <li key={index}>{step}</li>
+    ))}
+</ol>
+*/
+
+/*
+<div key={recipe.rid} className="card recipe-item">
+               <h4 className="card-header">{recipe.title}</h4>
+               <h6 className="card-subtitle mt-1 text-muted">{recipe.authorName}</h6>
+               <div className="card-body">
+                  <p className="card-text">Recipe Difficulty: {recipe.recipeDifficulty}</p>
+                  <p className="card-text">Favorites: {recipe.favourites}</p>
+
+                  <a href="#" className="btn btn-primary">
+                     View Full Recipe
+                  </a>
+               </div>
+               <div className="card-footer text-muted">
+                  <ul className="tags">
+                     {recipe.tags.map((tag, index) => (
+                        <li key={index} className="tagItem">
+                           {tag}
+                        </li>
+                     ))}
+                  </ul>
+               </div>
+            </div>
 */

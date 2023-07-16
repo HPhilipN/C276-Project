@@ -9,7 +9,7 @@ import { TagsInput } from "react-tag-input-component";
 import "./styles/AddRecipe.css";
 
 // User generated recipes
-const AddRecipe = () => {
+const AddRecipe = ({ refreshUserRecipes }) => {
    const { userId } = useContext(UserContext);
    const [title, setTitle] = useState(""); // string
    const [recipeDifficulty, setRecipeDiff] = useState(5); // int
@@ -55,7 +55,7 @@ const AddRecipe = () => {
 
    // send create request to endpoint
    async function addRecipeToDatabase(event) {
-      event.preventDefault(); // prevent page refresh on sign-up
+      // event.preventDefault(); // prevent page refresh on sign-up
       createRecipeObjectFromInputs();
       console.log(newRecipe); //new user details to send to endpoint
 
@@ -78,6 +78,7 @@ const AddRecipe = () => {
          });
 
       clearAllInputs();
+      refreshUserRecipes();
       setShowModal(!showModal); // close modal
    }
 
@@ -130,7 +131,7 @@ const AddRecipe = () => {
                   />
                </div>
                <div className="multi-input">
-                  <div className="ingredients">
+                  <div className="ingredientsInput">
                      <TagsInput
                         value={ingredients}
                         onChange={setIngredients}
@@ -138,7 +139,7 @@ const AddRecipe = () => {
                         placeHolder="Enter ingredients"
                      />
                   </div>
-                  <div className="instructions">
+                  <div className="instructionsInput">
                      <TagsInput
                         value={instructions}
                         onChange={setInstructions}
@@ -146,7 +147,7 @@ const AddRecipe = () => {
                         placeHolder="Enter instructions"
                      />
                   </div>
-                  <div className="tags">
+                  <div className="tagsInput">
                      <TagsInput
                         value={tags}
                         onChange={setTags}

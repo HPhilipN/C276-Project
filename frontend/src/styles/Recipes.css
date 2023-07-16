@@ -31,22 +31,6 @@
    width: 100%; /* Adjust the height as needed */
 }
 
-.recipe-list {
-   display: flex; /* Set display to flex to enable side-by-side display */
-   flex-wrap: wrap; /* Wrap items to the next line when there's not enough space */
-   justify-content: space-between; /* Distribute items evenly along the main axis */
-   margin: 2rem;
-}
-
-.recipe-item {
-   flex-basis: calc(33.33% - 10px); /* Set width for each recipe item */
-   min-width: 25rem;
-   margin-bottom: 20px; /* Add some spacing between items */
-   padding: 10px; /* Add padding around each item */
-   border: 1px solid #ccc; /* Add a border for visual separation */
-   border-radius: 5px; /* Round the corners of each item */
-}
-
 /* 
 .recipelist-wrap {
     display: center; 

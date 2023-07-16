@@ -52,7 +52,7 @@ const Cookbook = () => {
       }
    }
 
-   // run checkUserRecipeCount when userId changes
+   // run when userId changes
    useEffect(() => {
       async function fetchData() {
          await checkUserRecipeCount();
@@ -72,7 +72,7 @@ const Cookbook = () => {
          <div className="filter-search-wrapper">
             <Filter />
             <Searchbar />
-            <AddRecipe />
+            <AddRecipe refreshUserRecipes={getUserRecipesFromDB} />
          </div>
          <div className="recipelist-wrap">
             {!userHasCreatedRecipes && <NoRecipesExist />}
