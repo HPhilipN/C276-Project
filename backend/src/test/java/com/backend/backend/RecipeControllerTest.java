@@ -1,5 +1,7 @@
 package com.backend.backend;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,22 +13,24 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.backend.backend.models.Recipe;
 import com.backend.backend.models.RecipeRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "file:${user.dir}/.env")
 public class RecipeControllerTest {
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private RecipeRepository recipeRepository;
     private Recipe testRecipe = new Recipe(
         123,
-        "Recipe Title",
+        "deletusTitle",
         2,
         0,
         Arrays.asList("Ingredient 1", "Ingredient 2", "Ingredient 3"),
@@ -41,12 +45,35 @@ public class RecipeControllerTest {
 
         System.out.println("Passed test for /users/view");
     }
-    // @Test
-    // public void testCreateRecipe() throws Exception {
-    //     mockMvc.perform(MockMvcRequestBuilders.get("/recipes/v"))
-    //         .andExpect(MockMvcResultMatchers.status().isOk()) // isOk = 200
-    //         .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    
+    @Test
+    @Order(1)
+    public void testCreateRecipe() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/recipes/create")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"authorId\":\"" + testRecipe.getAuthorId()
+                    + "\",\"title\":\"" + testRecipe.getTitle()
+                    + "\",\"recipeDifficulty\":" + testRecipe.getRecipeDifficulty()
+                    + ",\"favourite\":" + testRecipe.getFavourites()
+                    + ",\"ingredients\":" + objectMapper.writeValueAsString(testRecipe.getIngredients())
+                    + ",\"instructions\":" + objectMapper.writeValueAsString(testRecipe.getInstructions())
+                    + ",\"tags\":" + objectMapper.writeValueAsString(testRecipe.getTags())
+                    + "}"))
+            .andExpect(MockMvcResultMatchers.status().isCreated());
+    }
+    @Test
+    @Order(2)
+    public void testDeleteRecipe() throws Exception {
 
-    //     System.out.println("Passed test for /users/view");
-    // }
+        int testRecipeRid = recipeRepository.findByTitle("deletusTitle").getRid();
+        mockMvc.perform(MockMvcRequestBuilders.delete("/recipes/delete/{rid}", testRecipeRid))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("true"));
+
+        // Verify the user has been deleted
+        boolean userExists = recipeRepository.existsById(testRecipe.getRid());
+        Assertions.assertThat(userExists).isFalse();
+
+        System.out.println("Passed test for /recipes/delete/{rid}");
+    }
 }
