@@ -31,7 +31,7 @@ const Home = () => {
                   <p className="primary-text text-left">
                      Never run out of recipe ideas with the power of Replicake!
                   </p>
-                  {/* Button to navigate to the dashboard */}
+                  {/* Button to navigate to the recipes */}
                   <a href="/recipes">
                      <button className="secondary-button">
                         Find Recipes Now

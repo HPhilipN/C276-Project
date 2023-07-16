@@ -87,7 +87,7 @@ public class RecipeController {
     @GetMapping("/view")
     @ResponseBody
     public List<Recipe> getAllRecipes(HttpServletResponse response) {
-        System.out.println("Getting all Recipies");
+        System.out.println("Getting all Recipes");
         try {
             // get all users from database
             List<Recipe> recipeList = recipeRepository.findAll();
