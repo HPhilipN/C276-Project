@@ -16,7 +16,8 @@ const Cookbook = () => {
    const [userHasCreatedRecipes, setUserHasCreatedRecipes] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
 
-   //    let userRecipes = [];
+   //Todo: userHasCreatedRecipes is redundant as user should be able to view
+   //todo: recipes created by other users anyway, should check if recipe table is empty
 
    // check if user has created any recipes
    async function checkUserRecipeCount() {
@@ -52,7 +53,7 @@ const Cookbook = () => {
       }
    }
 
-   // run checkUserRecipeCount when userId changes
+   // run when userId changes
    useEffect(() => {
       async function fetchData() {
          await checkUserRecipeCount();
@@ -72,7 +73,7 @@ const Cookbook = () => {
          <div className="filter-search-wrapper">
             <Filter />
             <Searchbar />
-            <AddRecipe />
+            <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
             {!userHasCreatedRecipes && <NoRecipesExist />}

@@ -9,7 +9,7 @@ import { TagsInput } from "react-tag-input-component";
 import "./styles/AddRecipe.css";
 
 // User generated recipes
-const AddRecipe = () => {
+const AddRecipe = ({ setUserRecipes }) => {
    const { userId } = useContext(UserContext);
    const [title, setTitle] = useState(""); // string
    const [recipeDifficulty, setRecipeDiff] = useState(5); // int
@@ -52,10 +52,20 @@ const AddRecipe = () => {
    function getRecipeDiff(event) {
       setRecipeDiff(event.target.value);
    }
+   function handleAddTag(value) {
+      // limit to 6 tags
+      //   console.log("First " + tags.length);
+      //   if (tags.length > 6) {
+      //      return; // Prevent further input
+      //   }
+      //   setTags(value); // Add the tag to the list
+      //   console.log("Second " + tags.length);
+      //   console.log(tags);
+   }
 
    // send create request to endpoint
    async function addRecipeToDatabase(event) {
-      event.preventDefault(); // prevent page refresh on sign-up
+      // event.preventDefault(); // prevent page refresh on sign-up
       createRecipeObjectFromInputs();
       console.log(newRecipe); //new user details to send to endpoint
 
@@ -71,6 +81,7 @@ const AddRecipe = () => {
          .then((response) => response.json()) // parse JSON response
          .then((data) => {
             console.log(`Returned value: ${data} from /users/signup`);
+            setUserRecipes((prevRecipes) => [...prevRecipes, newRecipe]); // Update the userRecipes state with the new recipe
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -130,7 +141,7 @@ const AddRecipe = () => {
                   />
                </div>
                <div className="multi-input">
-                  <div className="ingredients">
+                  <div className="ingredientsInput">
                      <TagsInput
                         value={ingredients}
                         onChange={setIngredients}
@@ -138,7 +149,7 @@ const AddRecipe = () => {
                         placeHolder="Enter ingredients"
                      />
                   </div>
-                  <div className="instructions">
+                  <div className="instructionsInput">
                      <TagsInput
                         value={instructions}
                         onChange={setInstructions}
@@ -146,12 +157,19 @@ const AddRecipe = () => {
                         placeHolder="Enter instructions"
                      />
                   </div>
-                  <div className="tags">
+                  <div className="tagsInput">
                      <TagsInput
                         value={tags}
                         onChange={setTags}
                         name="tags"
-                        placeHolder="Enter tags"
+                        placeHolder="Enter up to 6 tags"
+                        beforeAddValidate={(tag, existingTags) => {
+                           console.log(tags);
+                           if (existingTags.length >= 6) {
+                              return false;
+                           }
+                           return true;
+                        }}
                      />
                   </div>
                </div>
