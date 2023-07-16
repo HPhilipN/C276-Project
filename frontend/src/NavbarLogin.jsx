@@ -17,42 +17,45 @@ import BookIcon from "@mui/icons-material/Book";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarLogin.css";
-//check Navbar.jsxfor comments on code 
+import "./styles/Navbar.css";
+//check Navbar.jsxfor comments on code
 const Navbar = () => {
-  const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
-  const [openMenu, setOpenMenu] = useState(false);
-  const menuOptions = [
-    {
-      text: "Home",
-      icon: <HomeIcon />,
-      onClick: () => (window.location.href = "/"),
-    },
-    {
-      text: "Recipes",
-      icon: <SearchIcon />,
-      onClick: () => (window.location.href = "/dashboard"),
-    },
-    {
-      text: "Cookbook",
-      icon: <BookIcon />,
-    },
-    {
-      text: "Settings",
-      icon: <SettingsIcon />,
-      profile: true,
-    },
-    {
-      text: "Logout",
-      icon: <LogoutIcon />,
-      onClick: logoutUserHelper,
-    },
-  ];
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
+      useContext(UserContext);
+   const [openMenu, setOpenMenu] = useState(false);
+   const menuOptions = [
+      {
+         text: "Home",
+         icon: <HomeIcon />,
+         onClick: () => (window.location.href = "/"),
+      },
+      {
+         text: "Recipes",
+         icon: <SearchIcon />,
+         onClick: () => (window.location.href = "/recipes"),
+      },
+      {
+         text: "Cookbook",
+         icon: <BookIcon />,
+         onClick: () => (window.location.href = "/cookbook"),
+      },
+      {
+         text: "Settings",
+         icon: <SettingsIcon />,
+         profile: true,
+      },
+      {
+         text: "Logout",
+         icon: <LogoutIcon />,
+         onClick: logoutUserHelper,
+      },
+   ];
 
-  function logoutUserHelper() {
-    logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
-  }
+   function logoutUserHelper() {
+      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId);
+   }
 
   return (
     <nav className="navbar">
@@ -94,6 +97,4 @@ const Navbar = () => {
       </Drawer>
     </nav>
   );
-};
-
 export default Navbar;

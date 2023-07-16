@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import Filter from "./Filter";
 import Searchbar from "./Searchbar";
-import Recipelist from "./Recipelist";
+import NoRecipesExist from "./NoRecipesExist";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
-import "./styles/Dashboard.css";
-import { UserContext } from "./UserContext";
+import "./styles/Recipes.css";
+import { UserContext } from "./utils/UserContext";
 
-const Dashboard = () => {
+// User generated recipes
+const Recipes = () => {
    const { signInStatus, isChef, isModerator } = useContext(UserContext);
 
    return (
@@ -18,17 +19,21 @@ const Dashboard = () => {
          {signInStatus && isModerator && <NavbarAdmin />}
          {!signInStatus && <Navbar />}
          <div className="filter-search-wrapper">
-            {/*Search bar*/}
             {/*Filter Modal*/}
             <Filter />
+            {/*Search bar*/}
             <Searchbar />
          </div>
          <div className="recipelist-wrap">
             {/*Recipe List*/}
-            <Recipelist />
+            <NoRecipesExist />
+            <div>
+               <h4>TEMPORARY TEXT</h4>
+               <p>This is where API recipes will be displayed</p>
+            </div>
          </div>
       </div>
    );
 };
 
-export default Dashboard;
+export default Recipes;

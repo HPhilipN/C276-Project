@@ -8,7 +8,7 @@ import { FiArrowRight } from "react-icons/fi";
 import "./styles/Home.css";
 import Work from "./Work";
 import Footer from "./Footer";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 
 const Home = () => {
    // Accessing signInStatus, isChef, and isModerator from the UserContext
@@ -32,7 +32,7 @@ const Home = () => {
                      Never run out of recipe ideas with the power of Replicake!
                   </p>
                   {/* Button to navigate to the dashboard */}
-                  <a href="/dashboard">
+                  <a href="/recipes">
                      <button className="secondary-button">
                         Find Recipes Now
                         <FiArrowRight />
@@ -44,7 +44,7 @@ const Home = () => {
                   <img src={BannerImage} alt="" />
                </div>
             </div>
-             {/* Work component */}
+            {/* Work component */}
             <Work />
             {/* Footer component */}
             <Footer />

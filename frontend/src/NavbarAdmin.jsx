@@ -18,11 +18,14 @@ import Avatar from "@mui/material/Avatar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./utils/UserContext";
 import "./styles/NavbarAdmin.css";
-//check Navbar.jsxfor comments on code 
+import "./styles/Navbar.css";
+
+//check Navbar.jsx for comments on code
 const Navbar = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue } = useContext(UserContext);
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
+      useContext(UserContext);
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
       {
@@ -33,11 +36,12 @@ const Navbar = () => {
       {
          text: "Recipes",
          icon: <SearchIcon />,
-         onClick: () => (window.location.href = "/dashboard"),
+         onClick: () => (window.location.href = "/recipes"),
       },
       {
          text: "Cookbook",
          icon: <BookIcon />,
+         onClick: () => (window.location.href = "/cookbook"),
       },
       {
          text: "Settings",
@@ -56,7 +60,7 @@ const Navbar = () => {
    ];
 
    function logoutUserHelper() {
-      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId);
    }
 
    return (
@@ -65,12 +69,18 @@ const Navbar = () => {
             <img src={Logo} alt="" />
          </div>
          <div className="navbar-links-container">
-            <a href="/">Home</a>
-            <a href ="/dashboard">Recipes</a>
-            <a>Cookbook</a>
-            <a>Settings</a>
-            <a>Admin</a>
-            <a href="#" onClick={logoutUserHelper}>
+            <a href="/" className="nav-buttons">
+               Home
+            </a>
+            <a href="/recipes" className="nav-buttons">
+               Recipes
+            </a>
+            <a href="/cookbook" className="nav-buttons">
+               Cookbook
+            </a>
+            <a className="nav-buttons">Settings</a>
+            <a className="nav-buttons">Admin</a>
+            <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
             <div className="navbar-profile">
@@ -89,8 +99,8 @@ const Navbar = () => {
             >
                <List>
                   {menuOptions.map((item) => (
-                     <ListItem key={item.text} disablePadding>
-                        <ListItemButton  onClick={item.onClick}>
+                     <ListItem key={item.text} disablePadding className="nav-buttons">
+                        <ListItemButton onClick={item.onClick}>
                            <ListItemIcon>{item.icon}</ListItemIcon>
                            <ListItemText primary={item.text} />
                         </ListItemButton>

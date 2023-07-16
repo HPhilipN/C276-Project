@@ -8,6 +8,7 @@ function UserProvider({ children }) {
    const [isChef, setIsChef] = useState(false);
    const [isModerator, setIsModerator] = useState(false);
    const [nameValue, setNameValue] = useState("");
+   const [userId, setUserId] = useState(-1);
 
    useEffect(() => {
       // Check if the user is already signed in on page load
@@ -15,12 +16,15 @@ function UserProvider({ children }) {
       const storedIsChef = localStorage.getItem("isChef");
       const storedIsModerator = localStorage.getItem("isModerator");
       const storedName = localStorage.getItem("name");
+      const storedUserId = localStorage.getItem("userId");
 
+      // JSON parse converts values back into bools
       if (storedSignInStatus && storedIsChef && storedIsModerator && storedName) {
          setSignInStatus(JSON.parse(storedSignInStatus));
          setIsChef(JSON.parse(storedIsChef));
          setIsModerator(JSON.parse(storedIsModerator));
          setNameValue(storedName);
+         setUserId(parseInt(storedUserId));
       }
    }, []);
 
@@ -30,7 +34,8 @@ function UserProvider({ children }) {
       localStorage.setItem("isChef", JSON.stringify(isChef));
       localStorage.setItem("isModerator", JSON.stringify(isModerator));
       localStorage.setItem("name", nameValue);
-   }, [signInStatus, isChef, isModerator, nameValue]);
+      localStorage.setItem("userId", JSON.stringify(userId));
+   }, [signInStatus, isChef, isModerator, nameValue, userId]);
 
    return (
       <UserContext.Provider
@@ -43,6 +48,8 @@ function UserProvider({ children }) {
             setIsModerator,
             nameValue,
             setNameValue,
+            userId,
+            setUserId,
          }}
       >
          {children}

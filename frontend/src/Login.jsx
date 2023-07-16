@@ -5,24 +5,26 @@ import NavbarLogin from "./NavbarLogin";
 import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import * as Components from "./Components";
-import { UserContext } from "./UserContext";
+import * as Components from "./utils/Components";
+import { UserContext } from "./utils/UserContext";
 import PasswordStrengthBar from "react-password-strength-bar";
 import zxcvbn from "zxcvbn";
 
 // login persistance, keep user logged in through refreshes
-export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue) {
+export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId) {
    // Clear the user's sign-in status and details from localStorage
    localStorage.removeItem("signInStatus");
    localStorage.removeItem("isChef");
    localStorage.removeItem("isModerator");
    localStorage.removeItem("name");
+   localStorage.removeItem("userId");
 
    // Reset the component's state
    setSignInStatus(false);
    setIsChef(false);
    setIsModerator(false);
    setNameValue("");
+   setUserId(-1);
 }
 
 function Login() {
@@ -41,6 +43,8 @@ function Login() {
       setIsModerator,
       nameValue,
       setNameValue,
+      userId,
+      setUserId,
    } = useContext(UserContext);
 
    let newUser;
@@ -64,7 +68,7 @@ function Login() {
       // event.preventDefault(); // prevent page refresh on sign-up
       createUserObjectFromInputs();
       if (newUser.password.length >= 6) {
-         console.log(newUser); //new user details to send to endpoint
+         //  console.log(newUser); //new user details to send to endpoint
          // "https://replicake.onrender.com/users/signup"
          // "/users/signup"
          fetch("https://replicake.onrender.com/users/signup", {
@@ -90,7 +94,7 @@ function Login() {
       event.preventDefault(); // prevent page refresh on login
       setNameValue(""); // reset name value
       createUserObjectFromInputs();
-      console.log(newUser); // user details to send to endpoint
+      //   console.log(newUser); // user details to send to endpoint
       // "https://replicake.onrender.com/users/login"
       // "/users/login"
       fetch("https://replicake.onrender.com/users/login", {
@@ -107,14 +111,16 @@ function Login() {
                setIsChef(data.chef);
                setIsModerator(data.moderator);
                setNameValue(data.name);
+               setUserId(data.uid);
                setSignInError(false);
             } else {
                setSignInStatus(false);
                setIsChef(false);
                setIsModerator(false);
+               setUserId(-1);
                setSignInError(true);
             }
-            console.log(data);
+            // console.log(data);
          })
          .catch((error) => {
             setSignInStatus(false);
@@ -169,6 +175,13 @@ function Login() {
                      )}
                   </button>
                </div>
+               <PasswordStrengthBar
+                  className="pw-strength"
+                  password={passwordValue}
+                  minLength={6}
+                  onChangeScore={(score) => console.log(score)}
+                  scoreWords={["weak", "weak", "fair", "good", "strong"]}
+               />
                {/* Sign-up button */}
                <Components.Button className="sign-up-button btn-hover" onClick={signUpUser}>
                   Sign Up
