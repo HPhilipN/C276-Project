@@ -45,11 +45,21 @@ public class RecipeControllerTest {
 
         System.out.println("Passed test for /users/view");
     }
-    
+    @Test
+    public void testGetOneRecipe() throws Exception {
+
+        int testRecipeRid = recipeRepository.findByTitle("Fake Cake").getRid();
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/view/{rid}", testRecipeRid))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.jsonPath("$[title]").value("Fake Cake"));
+
+        System.out.println("Passed test for /recipes/view/{rid}");
+    }
     @Test
     @Order(1)
     public void testCreateRecipe() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/recipes/create")
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/create")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"authorId\":\"" + testRecipe.getAuthorId()
                     + "\",\"title\":\"" + testRecipe.getTitle()
