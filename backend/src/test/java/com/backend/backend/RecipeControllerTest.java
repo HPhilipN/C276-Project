@@ -45,6 +45,7 @@ public class RecipeControllerTest {
 
         System.out.println("Passed test for /users/view");
     }
+    // test if pulling recipe is a thing
     @Test
     public void testGetOneRecipe() throws Exception {
 
@@ -52,14 +53,23 @@ public class RecipeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/recipes/view/{rid}", testRecipeRid))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.jsonPath("$[title]").value("Fake Cake"));
+            .andExpect(MockMvcResultMatchers.jsonPath("$.recipeDifficulty").value(9));
 
         System.out.println("Passed test for /recipes/view/{rid}");
     }
+    // test if non-existent recipe is not found
+    @Test
+    public void testGetNonexistentRecipe() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/view/{rid}", 46000))
+            .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+        System.out.println("Passed test for /recipes/view/{rid} if invalid rid");
+    }
+    // test if creating recipe works
     @Test
     @Order(1)
     public void testCreateRecipe() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/create")
+        mockMvc.perform(MockMvcRequestBuilders.post("/recipes/create")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"authorId\":\"" + testRecipe.getAuthorId()
                     + "\",\"title\":\"" + testRecipe.getTitle()
@@ -71,6 +81,7 @@ public class RecipeControllerTest {
                     + "}"))
             .andExpect(MockMvcResultMatchers.status().isCreated());
     }
+    // test delete recipe
     @Test
     @Order(2)
     public void testDeleteRecipe() throws Exception {
@@ -85,5 +96,13 @@ public class RecipeControllerTest {
         Assertions.assertThat(userExists).isFalse();
 
         System.out.println("Passed test for /recipes/delete/{rid}");
+    }
+
+    @Test
+    public void testDeleteInvalidRecipe() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/recipes/delete/{rid}", 404))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        System.out.println("Passed test for /recipes/delete/{rid} not found");
     }
 }
