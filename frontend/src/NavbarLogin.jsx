@@ -23,8 +23,7 @@ import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
 const NavbarLogin = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
-      useContext(UserContext);
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } = useContext(UserContext);
    const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
@@ -47,6 +46,7 @@ const NavbarLogin = () => {
          text: "Settings",
          icon: <SettingsIcon />,
          profile: true,
+         onClick: () => (window.location.href = "/setting"),
       },
       {
          text: "Logout",

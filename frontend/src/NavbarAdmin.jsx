@@ -48,6 +48,7 @@ const NavbarAdmin = () => {
       {
          text: "Settings",
          icon: <SettingsIcon />,
+         onClick: () => (window.location.href = "/setting"),
       },
       {
          text: "Admin",
@@ -89,7 +90,7 @@ const NavbarAdmin = () => {
             <a href="/cookbook" className="nav-buttons">
                Cookbook
             </a>
-            <a className="nav-buttons">Settings</a>
+            <a href="/setting" className="nav-buttons">Settings</a>
             <a className="nav-buttons">Admin</a>
             <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
