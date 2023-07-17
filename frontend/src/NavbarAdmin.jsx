@@ -24,7 +24,7 @@ import "./styles/NavbarAdmin.css";
 import "./styles/Navbar.css";
 
 //check Navbar.jsx for comments on code
-const Navbar = () => {
+const NavbarAdmin = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
       useContext(UserContext);
    const navigate = useNavigate();
@@ -125,4 +125,4 @@ const Navbar = () => {
    );
 };
 
-export default Navbar;
+export default NavbarAdmin;

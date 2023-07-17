@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
-const Navbar = () => {
+const NavbarLogin = () => {
    const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
       useContext(UserContext);
    const navigate = useNavigate();
@@ -117,4 +117,4 @@ const Navbar = () => {
    );
 };
 
-export default Navbar;
+export default NavbarLogin;
