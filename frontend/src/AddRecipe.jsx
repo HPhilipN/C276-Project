@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import * as Components from "./utils/Components";
 import Slider from "@mui/material/Slider";
 import CloseIcon from "@mui/icons-material/Close";
@@ -175,7 +175,7 @@ const AddRecipe = ({ setUserRecipes }) => {
    return (
       <>
          <button className="add-btn" onClick={handleAddButtonClick}>
-            <AddCircleIcon sx={{ fontSize: 40 }} className="add-btn-icon" />
+            <AddCircleOutlineIcon sx={{ fontSize: 40 }} className="add-btn-icon" />
             Add
          </button>
          {showModal && addRecipeModal}
