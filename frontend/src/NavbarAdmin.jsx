@@ -19,13 +19,15 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import "./styles/NavbarAdmin.css";
 import "./styles/Navbar.css";
 
 //check Navbar.jsx for comments on code
 const Navbar = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
       useContext(UserContext);
+   const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
       {
@@ -59,8 +61,17 @@ const Navbar = () => {
       },
    ];
 
+   // useNavigate hook to navigate to the desired URL when the button is clicked
    function logoutUserHelper() {
-      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId);
+      logoutUser(
+         setSignInStatus,
+         setIsChef,
+         setIsModerator,
+         setNameValue,
+         setUserId,
+         setEmailValue
+      );
+      navigate("/");
    }
 
    return (

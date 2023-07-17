@@ -18,12 +18,14 @@ import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
 const Navbar = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId } =
+   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
       useContext(UserContext);
+   const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
       {
@@ -54,7 +56,15 @@ const Navbar = () => {
    ];
 
    function logoutUserHelper() {
-      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId);
+      logoutUser(
+         setSignInStatus,
+         setIsChef,
+         setIsModerator,
+         setNameValue,
+         setUserId,
+         setEmailValue
+      );
+      navigate("/");
    }
 
    return (
