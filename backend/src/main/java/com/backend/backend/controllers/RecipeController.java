@@ -91,6 +91,7 @@ public class RecipeController {
         try {
             // get all users from database
             List<Recipe> recipeList = recipeRepository.findAll();
+            response.setStatus(200); // 200 = ok
             return recipeList;
         } catch (Exception e) {
             System.out.println("Nothing found");
@@ -107,6 +108,7 @@ public class RecipeController {
             int recipeId = Integer.parseInt(rid);
             Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
             if (recipeOptional.isPresent()) {
+                response.setStatus(200); // 200 = ok
                 return recipeOptional.get();
             } else {
                 response.setStatus(404); // 404 = not found
