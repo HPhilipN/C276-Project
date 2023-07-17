@@ -15,7 +15,7 @@
 
 .add-recipe {
    position: absolute;
-   top: 45%;
+   top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
 
@@ -25,7 +25,7 @@
 
    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
    min-width: 30rem;
-   z-index: 5;
+   z-index: 105;
 }
 
 .recipe-form-title {

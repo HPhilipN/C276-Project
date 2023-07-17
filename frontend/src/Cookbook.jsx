@@ -13,23 +13,23 @@ import { UserContext } from "./utils/UserContext";
 // User generated recipes
 const Cookbook = () => {
    const { signInStatus, isChef, isModerator, userId } = useContext(UserContext);
-   const [userHasCreatedRecipes, setUserHasCreatedRecipes] = useState(false);
+   const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
 
-   //Todo: userHasCreatedRecipes is redundant as user should be able to view
-   //todo: recipes created by other users anyway, should check if recipe table is empty
-
-   // check if user has created any recipes
+   // check if DB has recipes
    async function checkUserRecipeCount() {
-      // `https://replicake.onrender.com/recipes/exists/${userId}`
-      // "/recipes/exists/{uid}"
-      fetch(`https://replicake.onrender.com/recipes/exists/${userId}`, {
+      // "https://replicake.onrender.com/recipes/view""
+      // /recipes/view
+      fetch("https://replicake.onrender.com/recipes/view", {
          method: "GET",
       })
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(`Returned value: ${data} from /users/signup`);
-            setUserHasCreatedRecipes(data); // assign retrieved data
+         .then((response) => {
+            if (response.status === 200) {
+               setRecipesExistInDatabase(true);
+            } else {
+               // no recipes exist
+               setRecipesExistInDatabase(false);
+            }
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -57,12 +57,12 @@ const Cookbook = () => {
    useEffect(() => {
       async function fetchData() {
          await checkUserRecipeCount();
-         if (userHasCreatedRecipes) {
+         if (recipesExistInDatabase) {
             await getUserRecipesFromDB();
          }
       }
       fetchData();
-   }, [userId, userHasCreatedRecipes]);
+   }, [userId, recipesExistInDatabase]);
 
    return (
       <div className="dashboard">
@@ -76,11 +76,12 @@ const Cookbook = () => {
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
-            {!userHasCreatedRecipes && <NoRecipesExist />}
+            {!recipesExistInDatabase && <NoRecipesExist />}
             {/* check if userRecipes is loaded before rendering */}
-            {userHasCreatedRecipes && userRecipes.length > 0 ? (
+            {recipesExistInDatabase && userRecipes.length > 0 ? (
                <RecipeList recipes={userRecipes} />
             ) : null}
+            {/* Info Button on Bottom Right */}
          </div>
       </div>
    );

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import * as Components from "./utils/Components";
 import Slider from "@mui/material/Slider";
 import CloseIcon from "@mui/icons-material/Close";
@@ -51,16 +51,6 @@ const AddRecipe = ({ setUserRecipes }) => {
    }
    function getRecipeDiff(event) {
       setRecipeDiff(event.target.value);
-   }
-   function handleAddTag(value) {
-      // limit to 6 tags
-      //   console.log("First " + tags.length);
-      //   if (tags.length > 6) {
-      //      return; // Prevent further input
-      //   }
-      //   setTags(value); // Add the tag to the list
-      //   console.log("Second " + tags.length);
-      //   console.log(tags);
    }
 
    // send create request to endpoint
@@ -185,7 +175,7 @@ const AddRecipe = ({ setUserRecipes }) => {
    return (
       <>
          <button className="add-btn" onClick={handleAddButtonClick}>
-            <AddCircleIcon sx={{ fontSize: 40 }} className="add-btn-icon" />
+            <AddCircleOutlineIcon sx={{ fontSize: 40 }} className="add-btn-icon" />
             Add
          </button>
          {showModal && addRecipeModal}

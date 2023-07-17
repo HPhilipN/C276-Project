@@ -5,7 +5,9 @@ import Login from "./Login.jsx";
 import Cookbook from "./Cookbook";
 import NotFound from "./NotFound";
 import Setting from "./Setting.jsx";
+import AdminUserlist from "./AdminUserslist";
 import UserProvider from "./utils/UserContext";
+import RecipeDisplay from "./RecipeDisplay";
 import Recipes from "./Recipes";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -21,6 +23,7 @@ function App() {
                <Route path="/setting" element={<Setting />} />
                <Route path="/recipes" element={<Recipes />} />
                <Route path="/cookbook" element={<Cookbook />} />
+               <Route path="/cookbook/view/:rid" element={<RecipeDisplay />} />
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>
