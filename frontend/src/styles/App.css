@@ -341,3 +341,7 @@ nav {
 body {
   overflow-x: hidden;
 }
+
+.pw-strength {
+	width: 100%; /* Adjust the width as a percentage */
+  }
