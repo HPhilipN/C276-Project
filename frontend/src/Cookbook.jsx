@@ -16,9 +16,6 @@ const Cookbook = () => {
    const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
 
-   //Todo: userHasCreatedRecipes is redundant as user should be able to view
-   //todo: recipes created by other users anyway, should check if recipe table is empty
-
    // check if DB has recipes
    async function checkUserRecipeCount() {
       // "https://replicake.onrender.com/recipes/view""
