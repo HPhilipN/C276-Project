@@ -7,11 +7,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as Components from "./utils/Components";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import PasswordStrengthBar from "react-password-strength-bar";
 import zxcvbn from "zxcvbn";
 
 // login persistance, keep user logged in through refreshes
-export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId) {
+export function logoutUser(
+   setSignInStatus,
+   setIsChef,
+   setIsModerator,
+   setNameValue,
+   setUserId,
+   setEmailValue
+) {
    // Clear the user's sign-in status and details from localStorage
    localStorage.removeItem("signInStatus");
    localStorage.removeItem("isChef");
@@ -25,12 +33,12 @@ export function logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameVa
    setIsModerator(false);
    setNameValue("");
    setUserId(-1);
+   setEmailValue("");
 }
 
 function Login() {
    const [isSignInUpCard, toggleSignInUp] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
-   const [emailValue, setEmailValue] = useState("");
    const [passwordValue, setPasswordValue] = useState("");
    const [signInError, setSignInError] = useState(false);
    // states from UserContext.jsx
@@ -45,8 +53,11 @@ function Login() {
       setNameValue,
       userId,
       setUserId,
+      emailValue,
+      setEmailValue,
    } = useContext(UserContext);
 
+   const navigate = useNavigate();
    let newUser;
 
    const handleNameChange = (event) => {
@@ -112,7 +123,10 @@ function Login() {
                setIsModerator(data.moderator);
                setNameValue(data.name);
                setUserId(data.uid);
+               setEmailValue(data.email);
                setSignInError(false);
+               // redirect to home page
+               navigate("/");
             } else {
                setSignInStatus(false);
                setIsChef(false);
@@ -134,6 +148,7 @@ function Login() {
 
    function logoutUserHelper() {
       logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+      navigate("/");
    }
 
    // signup/login helper functions
