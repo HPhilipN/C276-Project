@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import Navbar from "./Navbar";
@@ -18,7 +18,91 @@ const Setting = () => {
   }); // State to toggle password visibility
 
   // Accessing signInStatus, isChef, and isModerator from the UserContext
-  const { signInStatus, isChef, isModerator } = useContext(UserContext);
+  const { signInStatus, isChef, isModerator, emailValue } = useContext(UserContext);
+
+  const { nameValue } = useContext(UserContext);
+  
+  // State to hold the user's account settings
+  const [userAccount, setUserAccount] = useState({
+    name: "",
+    email: "",
+  });
+
+  // State to hold the password fields
+  const [passwordFields, setPasswordFields] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+
+  // Effect to set the initial user account values when the component mounts
+  useEffect(() => {
+    if (signInStatus) {
+      // Populate the local state with the context values when signed in
+      setUserAccount({
+        name: nameValue,
+        email: emailValue,
+      });
+
+      // Initialize the password fields with empty values when signed in
+      setPasswordFields({
+        oldPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
+    }
+  }, [signInStatus, nameValue, emailValue]); // Run this effect whenever signInStatus, nameValue, or email changes
+
+  // Function to handle input changes for account settings
+  const handleAccountInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserAccount((prevAccount) => ({
+      ...prevAccount,
+      [name]: value,
+    }));
+  };
+
+  // Function to handle the "Update" button click for account settings
+  const handleAccountUpdate = () => {
+    // Logic to update the account settings in the backend
+    // ...
+    // After successful update, you may choose to update the context values if needed
+    setNameValue(userAccount.name);
+    setEmail(userAccount.email);
+  };
+  
+  // Function to handle the "Update" button click for password settings
+  const handlePasswordUpdate = () => {
+    // Logic to update the password settings in the backend
+    // ...
+    // After successful update, you may choose to clear the password fields or update the context values if needed
+    setPasswordFields({
+      oldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+    });
+  };
+
+  // Function to handle the "Cancel" button click for account settings
+  const handleAccountCancel = () => {
+    // Reset the local state to the initial values (from the context)
+    setUserAccount({
+      name: nameValue,
+      email: emailValue,
+    });
+  };
+
+
+
+   // Function to handle the "Cancel" button click for password settings
+   const handlePasswordCancel = () => {
+    // Reset the password fields to empty values
+    setPasswordFields({
+      oldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+    });
+  };
 
   // Function to handle tab click and update the active tab
   const handleTabClick = (tab) => {
@@ -46,7 +130,7 @@ const Setting = () => {
               <div className="img-circle text-center mb-3">
                 <Avatar alt="Avatar" className="shadow " />
               </div>
-              <h4 className="text-center">Kiran Acharya</h4>
+              <h4 className="text-center">{nameValue}</h4>
             </div>
             <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
               <a
@@ -84,49 +168,68 @@ const Setting = () => {
               <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
-                    <label>First Name</label>
-                    <input type="text" className="form-control" defaultValue="Kiran" />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" className="form-control" defaultValue="Acharya" />
+                    <label>Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      value={userAccount.name}
+                      onChange={handleAccountInputChange}
+                    />
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
                     <label>Email</label>
-                    <input type="text" className="form-control" defaultValue="" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="email"
+                      value={userAccount.email}
+                      onChange={handleAccountInputChange}
+                    />
                   </div>
                 </div>
                 {/* More form groups for other fields */}
               </div>
               <div>
-                <button className="btn btn-primary">Update</button>
-                <button className="btn btn-light">Cancel</button>
+                <button className="btn btn-primary" onClick={handleAccountUpdate}>
+                  Update
+                </button>
+                <button className="btn btn-light" onClick={handleAccountCancel}>
+                  Cancel
+                </button>
               </div>
             </div>
             <div className={`tab-pane fade ${activeTab === "password" ? "show active" : ""}`} id="password" role="tabpanel" aria-labelledby="password-tab">
-              <h3 className="mb-4">Password Settings</h3>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label>Old Password</label>
-                    <div className="password-input-container">
-                      <input type={showPassword.oldPassword ? "text" : "password"} className="form-control" />
-                      <IconButton onClick={() => togglePasswordVisibility("oldPassword")}
-                        >
-                        {showPassword.oldPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </div>
-                  </div>
+          <h3 className="mb-4">Password Settings</h3>
+          <div className="row">
+            <div className="col-md-6">
+              <div className="form-group">
+                <label>Old Password</label>
+                <div className="password-input-container">
+                  <input
+                    type={showPassword.oldPassword ? "text" : "password"}
+                    className="form-control"
+                    value={passwordFields.oldPassword}
+                    onChange={(e) => setPasswordFields({ ...passwordFields, oldPassword: e.target.value })}
+                  />
+                  <IconButton onClick={() => togglePasswordVisibility("oldPassword")}>
+                    {showPassword.oldPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
                 </div>
+              </div>
+            </div>
                 <div className="col-md-6">
                   <div className="form-group">
                     <label>New Password</label>
                     <div className="password-input-container">
-                      <input type={showPassword.newPassword ? "text" : "password"} className="form-control" />
+                    <input
+                    type={showPassword.newPassword ? "text" : "password"}
+                    className="form-control"
+                    value={passwordFields.newPassword}
+                    onChange={(e) => setPasswordFields({ ...passwordFields, newPassword: e.target.value })}
+                  />
                       <IconButton onClick={() => togglePasswordVisibility("newPassword")}
                        >
                         {showPassword.newPassword ? <VisibilityOff /> : <Visibility />}
@@ -138,7 +241,12 @@ const Setting = () => {
                   <div className="form-group">
                     <label>Confirm Password</label>
                     <div className="password-input-container">
-                      <input type={showPassword.confirmNewPassword ? "text" : "password"} className="form-control" />
+                    <input
+                    type={showPassword.confirmNewPassword ? "text" : "password"}
+                    className="form-control"
+                    value={passwordFields.confirmNewPassword}
+                    onChange={(e) => setPasswordFields({ ...passwordFields, confirmNewPassword: e.target.value })}
+                  />
                       <IconButton onClick={() => togglePasswordVisibility("confirmNewPassword")}
                        >
                         {showPassword.confirmNewPassword ? <VisibilityOff /> : <Visibility />}
@@ -149,8 +257,8 @@ const Setting = () => {
                 {/* More form groups for other fields */}
               </div>
               <div>
-                <button className="btn btn-primary">Update</button>
-                <button className="btn btn-light">Cancel</button>
+                <button className="btn btn-primary" onClick={handlePasswordUpdate}>Update</button>
+                <button className="btn btn-light"  onClick={handlePasswordCancel}>Cancel</button>
               </div>
               {/* Password settings form */}
             </div>
