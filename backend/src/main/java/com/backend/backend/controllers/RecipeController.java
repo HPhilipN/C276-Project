@@ -73,6 +73,9 @@ public class RecipeController {
         System.out.println("Deleting Recipe");
         try {
             int recipeId = Integer.parseInt(rid);
+            if (!recipeRepository.existsByRid(recipeId)) {
+                throw new Exception("Recipe Id non-existent");
+            }
             recipeRepository.deleteById(recipeId);
             response.setStatus(200); // 200 = OK
             return true;
@@ -89,6 +92,7 @@ public class RecipeController {
     public List<Recipe> getAllRecipes(HttpServletResponse response) {
         System.out.println("Getting all Recipes");
         try {
+            response.setStatus(200);
             // get all users from database
             List<Recipe> recipeList = recipeRepository.findAll();
             response.setStatus(200); // 200 = ok
