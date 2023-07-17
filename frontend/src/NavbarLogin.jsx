@@ -82,7 +82,7 @@ const NavbarLogin = () => {
             <a href="/cookbook" className="nav-buttons">
                Cookbook
             </a>
-            <a className="nav-buttons">Settings</a>
+            <a href="/setting" className="nav-buttons">Settings</a>
             <a onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
