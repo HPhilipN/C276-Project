@@ -137,7 +137,6 @@ const Setting = () => {
                 className={`nav-link ${activeTab === "account" ? "active" : ""}`}
                 id="account-tab"
                 data-toggle="pill"
-                href="#account"
                 role="tab"
                 aria-controls="account"
                 aria-selected={activeTab === "account"}
@@ -150,7 +149,6 @@ const Setting = () => {
                 className={`nav-link ${activeTab === "password" ? "active" : ""}`}
                 id="password-tab"
                 data-toggle="pill"
-                href="#password"
                 role="tab"
                 aria-controls="password"
                 aria-selected={activeTab === "password"}

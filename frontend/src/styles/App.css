@@ -337,3 +337,7 @@ nav {
   font-weight: normal;
   font-size: 18px;
 }
+
+body {
+  overflow-x: hidden;
+}
