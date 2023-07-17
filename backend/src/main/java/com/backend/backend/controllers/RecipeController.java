@@ -73,6 +73,9 @@ public class RecipeController {
         System.out.println("Deleting Recipe");
         try {
             int recipeId = Integer.parseInt(rid);
+            if (!recipeRepository.existsByRid(recipeId)) {
+                throw new Exception("Recipe Id non-existent");
+            }
             recipeRepository.deleteById(recipeId);
             response.setStatus(200); // 200 = OK
             return true;
@@ -89,8 +92,10 @@ public class RecipeController {
     public List<Recipe> getAllRecipes(HttpServletResponse response) {
         System.out.println("Getting all Recipes");
         try {
+            response.setStatus(200);
             // get all users from database
             List<Recipe> recipeList = recipeRepository.findAll();
+            response.setStatus(200); // 200 = ok
             return recipeList;
         } catch (Exception e) {
             System.out.println("Nothing found");
@@ -107,6 +112,7 @@ public class RecipeController {
             int recipeId = Integer.parseInt(rid);
             Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
             if (recipeOptional.isPresent()) {
+                response.setStatus(200); // 200 = ok
                 return recipeOptional.get();
             } else {
                 response.setStatus(404); // 404 = not found
@@ -120,27 +126,27 @@ public class RecipeController {
         }
     }
 
-    @GetMapping("/exists/{uid}")
-    public boolean userHasRecipes(@PathVariable String uid, HttpServletResponse response) {
+    @GetMapping("/find/{uid}")
+    public List<Recipe> getUserRecipes(@PathVariable String uid, HttpServletResponse response) {
         System.out.println("Checking if user with ID " + uid + " has any recipes");
         try {
             int authorId = Integer.parseInt(uid);
-            List<Recipe> hasRecipes = recipeRepository.findByAuthorId(authorId);
+            List<Recipe> userRecipes = recipeRepository.findByAuthorId(authorId);
 
             // check if the user has created any recipes
-            if (hasRecipes.isEmpty()) {
+            if (userRecipes.isEmpty()) {
                 System.out.println("User has created 0 recipes");
-                response.setStatus(204); // 204 = no content
-                return false;
+                response.setStatus(404); // 404 = not found
+                return null;
             } else {
-                System.out.println("User has created " + hasRecipes.size() + " recipes");
+                System.out.println("User has created recipes");
                 response.setStatus(200); // 200 = ok
-                return true;
+                return userRecipes;
             }
         } catch (Exception e) {
             System.out.println("An error occurred or nothing was found");
             response.setStatus(404); // 404 = not found
-            return false;
+            return null;
         }
     }
 }

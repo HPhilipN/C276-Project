@@ -52,9 +52,9 @@ Replicake is an online recipe aggregator allowing chefs to upload recipes for ot
 - `@DeleteMapping("/recipes/delete/{rid}")`
     - delete any user in user table via recipe ID (rid)
     - returns true for success, false otherwise
-- `@GetMapping("/recipes/exists/{uid}")`
-    - check if user with uid has created any recipes
-    - returns true if they have created recipes, false otherwise
+- `@GetMapping("/recipes/find/{uid}")`
+    - get all recipes created by user with uid
+    - returns recipe list if they have created recipes, null otherwise
 
 ### Development Information:
 - Refer to `dev-help.md` for start up and other information

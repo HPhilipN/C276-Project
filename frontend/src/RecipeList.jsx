@@ -2,8 +2,15 @@ import React from "react";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import DifficultyCircle from "./utils/DifficultyCircle";
 import "./styles/RecipeList.css";
+import { useNavigate } from "react-router-dom";
 
 const RecipeList = ({ recipes }) => {
+   const navigate = useNavigate();
+   // useNavigate hook to navigate to the desired URL when the button is clicked
+   function handleViewRecipe(currRecipe) {
+      navigate(`/cookbook/view/${currRecipe.rid}`);
+   }
+
    return (
       <div className="recipe-list">
          {recipes.map((recipe) => (
@@ -34,9 +41,12 @@ const RecipeList = ({ recipes }) => {
                   </div>
                </div>
                <div className="after-card-body">
-                  <a href="#" className="btn btn-light view-recipe-btn">
+                  <button
+                     className="btn btn-light view-recipe-btn"
+                     onClick={() => handleViewRecipe(recipe)}
+                  >
                      View Full Recipe
-                  </a>
+                  </button>
                   <div className="difficulty">
                      <DifficultyCircle difficulty={recipe.recipeDifficulty} />
                   </div>
