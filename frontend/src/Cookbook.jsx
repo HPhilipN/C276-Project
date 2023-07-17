@@ -81,6 +81,7 @@ const Cookbook = () => {
             {recipesExistInDatabase && userRecipes.length > 0 ? (
                <RecipeList recipes={userRecipes} />
             ) : null}
+            {/* Info Button on Bottom Right */}
          </div>
       </div>
    );
