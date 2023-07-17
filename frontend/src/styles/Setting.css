@@ -10,7 +10,7 @@ body {
 
 .profile-tab-nav {
 	min-width: 250px;
-	max-width: 250px;
+	max-width: 2500px;
 }
 
 .tab-content {
@@ -52,4 +52,8 @@ body {
 /* Add a new CSS class for the password input container */
 .password-input-container {
 	display: flex;
+  }
+
+.pw-strengths {
+	width: 220px; /* Adjust the width as a percentage */
   }
