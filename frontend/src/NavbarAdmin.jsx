@@ -80,7 +80,7 @@ const Navbar = () => {
                Cookbook
             </a>
             <a href="/setting" className="nav-buttons">Settings</a>
-            <a className="nav-buttons">Admin</a>
+            <a href= "/viewall" className="nav-buttons">Admin</a>
             <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>

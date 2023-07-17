@@ -5,6 +5,7 @@ import Login from "./Login.jsx";
 import Cookbook from "./Cookbook";
 import NotFound from "./NotFound";
 import Setting from "./Setting.jsx";
+import AdminUserlist from "./AdminUserslist";
 import UserProvider from "./utils/UserContext";
 import Recipes from "./Recipes";
 
@@ -21,6 +22,7 @@ function App() {
                <Route path="/setting" element={<Setting />} />
                <Route path="/recipes" element={<Recipes />} />
                <Route path="/cookbook" element={<Cookbook />} />
+               <Route path ="/viewall" element={<AdminUserlist/>} />
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>
