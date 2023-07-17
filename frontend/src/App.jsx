@@ -24,6 +24,7 @@ function App() {
                <Route path="/recipes" element={<Recipes />} />
                <Route path="/cookbook" element={<Cookbook />} />
                <Route path="/cookbook/view/:rid" element={<RecipeDisplay />} />
+               <Route path="/adminpanel" element={<AdminUserlist/>}/>
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>
