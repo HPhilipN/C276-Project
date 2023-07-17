@@ -3,7 +3,7 @@ import PickMeals from "./assets/pick-meals-image.png";
 import ChooseMeals from "./assets/choose-image.png";
 import Cookbook from "./assets/cookbook-image.png";
 
-const Work = () => {
+const AboutHome = () => {
   // Array containing information about how the app works
   const workInfoData = [
     {
@@ -48,4 +48,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default AboutHome;
