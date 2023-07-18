@@ -168,17 +168,39 @@ const Setting = () => {
     return;
   }
 
-  // Logic to update the password settings in the backend
-  // ...
+  // Call the backend API to verify the old password
+  try {
+    const response = await fetch("https://replicake.onrender.com/users/update/password/{${2}", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        // Include any necessary authentication headers
+      },
+      body: JSON.stringify({
+        oldPassword: passwordFields.oldPassword,
+      }),
+    });
 
-  // After successful update, you may choose to clear the password fields or update the context values if needed
-  setPasswordFields({
-    oldPassword: "",
-    newPassword: "",
-    confirmNewPassword: "",
-  });
-  setPasswordError(""); // Clear password error message
-  setEmptyFieldErrors({}); // Clear empty field errors
+    if (!response.ok) {
+      // If the response status is not 200-299, handle the error
+      throw new Error("Failed to verify old password.");
+    }
+
+    // Proceed with updating the password settings
+    // ... Logic to update the password settings in the backend ...
+
+    // After successful update, you may choose to clear the password fields or update the context values if needed
+    setPasswordFields({
+      oldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+    });
+    setPasswordError(""); // Clear password error message
+    setEmptyFieldErrors({}); // Clear empty field errors
+  } catch (error) {
+    console.error(error);
+    setPasswordError("Failed to verify old password. Please try again.");
+  }
 };
 
 
