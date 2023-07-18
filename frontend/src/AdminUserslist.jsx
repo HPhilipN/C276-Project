@@ -29,6 +29,8 @@ const customStyles = {
 export default function AdminUserlist() {
    const { isChef, userId } = useContext(UserContext);
    const [category, setCategory] = useState([]);
+   const [errormodalOpen, seterrormodalOpen] = useState(false);
+   const [deleteuser, setDeleteuser] = useState(null);
    const [modalOpen, setModalOpen] = useState(false);
    const navigate = useNavigate();
    if (isChef) {
