@@ -78,7 +78,9 @@ const NavbarAdmin = () => {
    return (
       <nav className="navbar">
          <div className="navbar-logo-container">
-            <img src={Logo} alt="" />
+            <a href="/">
+               <img src={Logo} alt="" />
+            </a>
          </div>
          <div className="navbar-links-container">
             <a href="/" className="nav-buttons">
