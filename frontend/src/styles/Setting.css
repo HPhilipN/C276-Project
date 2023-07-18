@@ -53,9 +53,12 @@ body {
 /* Add a new CSS class for the password input container */
 .password-input-container {
 	display: flex;
+	margin-left: 35px;
   }
 
+  
 .pw-strengths {
+	margin-left: 35px;
 	width: 220px; /* Adjust the width as a percentage */
   }
 
