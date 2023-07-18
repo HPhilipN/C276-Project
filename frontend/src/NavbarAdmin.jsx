@@ -46,11 +46,6 @@ const NavbarAdmin = () => {
          onClick: () => (window.location.href = "/cookbook"),
       },
       {
-         text: "Settings",
-         icon: <SettingsIcon />,
-         onClick: () => (window.location.href = "/setting"),
-      },
-      {
          text: "Admin",
          icon: <AdminPanelSettingsIcon />,
          profile: true,
@@ -84,9 +79,6 @@ const NavbarAdmin = () => {
             </a>
             <a href="/cookbook" className="nav-buttons">
                Cookbook
-            </a>
-            <a href="/setting" className="nav-buttons">
-               Settings
             </a>
             <a href="/adminhome" className="nav-buttons">
                Admin

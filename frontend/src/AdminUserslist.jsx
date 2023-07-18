@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { UserContext } from "./utils/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 import "./styles/AdminRecipelist.css";
 
 const customStyles = {
@@ -26,20 +27,14 @@ const customStyles = {
 };
 
 export default function AdminUserlist() {
+   const { isChef, userId } = useContext(UserContext);
    const [category, setCategory] = useState([]);
    const [message, setMessage] = useState("");
    const [modalOpen, setModalOpen] = useState(false);
-
-   const {
-      isChef,
-      setIsChef,
-      isModerator,
-      setIsModerator,
-      nameValue,
-      setNameValue,
-      userId,
-      setUserId,
-   } = useContext(UserContext);
+   const navigate = useNavigate();
+   if (isChef) {
+      navigate("/");
+   }
 
    //Display all users present in the database
    useEffect(() => {
@@ -48,7 +43,7 @@ export default function AdminUserlist() {
          const getData = await res.json();
          //need to allow moderators/admin not to be shown (use isModerator?)
          setCategory(getData);
-         console.log(getData);
+         //  console.log(getData);
       };
       getcategory();
    });
