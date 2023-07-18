@@ -34,9 +34,10 @@ const RecipeList = ({ recipes }) => {
                         <strong>Ingredients:</strong>
                      </h6>
                      <ul>
-                        {recipe.ingredients.map((ingredient, index) => (
+                        {recipe.ingredients.slice(0, 5).map((ingredient, index) => (
                            <li key={index}>{ingredient}</li>
                         ))}
+                        {recipe.ingredients.length > 5 && <li>...</li>}
                      </ul>
                   </div>
                </div>

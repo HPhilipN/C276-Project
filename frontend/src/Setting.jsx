@@ -23,7 +23,6 @@ const Setting = () => {
 
    const { nameValue } = useContext(UserContext);
    const { setNameValue, setEmailValue } = useContext(UserContext);
-   const { setPasswordValue } = useContext(UserContext);
    const [passwordError, setPasswordError] = useState(""); // State to hold password error message
    const [emailError, setEmailError] = useState("");
    const [nameError, setNameError] = useState("");
@@ -197,10 +196,6 @@ const Setting = () => {
          .then((response) => response.json()) // parse JSON response
          .then((data) => {
             console.log(`Returned value: ${data} from /users/`);
-            if (data) {
-               // Update the context values with the new data
-               setPasswordValue(passwordFields.confirmNewPassword);
-            }
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -324,7 +319,7 @@ const Setting = () => {
                      aria-orientation="vertical"
                   >
                      <a
-                        className={`nav-link ${activeTab === "account" ? "active" : ""}`}
+                        className={`nav-link ${activeTab === "account" ? "active" : ""} unselectable`}
                         id="account-tab"
                         data-toggle="pill"
                         role="tab"
@@ -336,7 +331,7 @@ const Setting = () => {
                         Account
                      </a>
                      <a
-                        className={`nav-link ${activeTab === "password" ? "active" : ""}`}
+                        className={`nav-link ${activeTab === "password" ? "active" : ""} unselectable`}
                         id="password-tab"
                         data-toggle="pill"
                         role="tab"
