@@ -6,6 +6,7 @@
 .recipelist-wrap {
    background: white;
    overflow-y: auto;
+   height: inherit;
    /* IE and Edge */
    -ms-overflow-style: none;
    /* Firefox */
