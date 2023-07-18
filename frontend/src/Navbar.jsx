@@ -52,7 +52,7 @@ const Navbar = () => {
             <a href="/recipes" className="nav-buttons">
                Search for Recipes
             </a>
-            <a href="/login" className="primary-button">
+            <a href="/login" className="signin-btn">
                Sign Up/Sign In
             </a>
          </div>

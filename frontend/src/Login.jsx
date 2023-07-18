@@ -12,23 +12,14 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import zxcvbn from "zxcvbn";
 
 // login persistance, keep user logged in through refreshes
-export function logoutUser(
-   setSignInStatus,
-   setIsChef,
-   setIsModerator,
-   setNameValue,
-   setUserId,
-   setEmailValue
-) {
+export function logoutUser(setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue) {
    // Clear the user's sign-in status and details from localStorage
-   localStorage.removeItem("signInStatus");
    localStorage.removeItem("isChef");
    localStorage.removeItem("isModerator");
    localStorage.removeItem("name");
    localStorage.removeItem("userId");
 
    // Reset the component's state
-   setSignInStatus(false);
    setIsChef(false);
    setIsModerator(false);
    setNameValue("");
@@ -43,8 +34,6 @@ function Login() {
    const [signInError, setSignInError] = useState(false);
    // states from UserContext.jsx
    const {
-      signInStatus,
-      setSignInStatus,
       isChef,
       setIsChef,
       isModerator,
@@ -118,7 +107,6 @@ function Login() {
          .then((response) => response.json()) // parse JSON response
          .then((data) => {
             if (data) {
-               setSignInStatus(true);
                setIsChef(data.chef);
                setIsModerator(data.moderator);
                setNameValue(data.name);
@@ -128,7 +116,6 @@ function Login() {
                // redirect to home page
                navigate("/");
             } else {
-               setSignInStatus(false);
                setIsChef(false);
                setIsModerator(false);
                setUserId(-1);
@@ -137,7 +124,6 @@ function Login() {
             // console.log(data);
          })
          .catch((error) => {
-            setSignInStatus(false);
             setIsChef(false);
             setIsModerator(false);
             setSignInError(true);
@@ -147,7 +133,7 @@ function Login() {
    }
 
    function logoutUserHelper() {
-      logoutUser(setSignInStatus, setIsChef, setIsModerator, setNameValue);
+      logoutUser(setIsChef, setIsModerator, setNameValue, setEmailValue);
       navigate("/");
    }
 
@@ -292,12 +278,12 @@ function Login() {
 
    return (
       <>
-         {signInStatus && isChef && <NavbarLogin />}
-         {signInStatus && isModerator && <NavbarAdmin />}
-         {signInStatus && logoutModal}
+         {isChef && <NavbarLogin />}
+         {isModerator && <NavbarAdmin />}
+         {!isChef && !isModerator && logoutModal}
 
-         {!signInStatus && <Navbar />}
-         {!signInStatus && loginModal}
+         {!isChef && !isModerator && <Navbar />}
+         {!isChef && !isModerator && loginModal}
       </>
    );
 }

@@ -23,7 +23,8 @@ import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
 //check Navbar.jsxfor comments on code
 const NavbarLogin = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } = useContext(UserContext);
+   const { setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
+      useContext(UserContext);
    const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
    const menuOptions = [
@@ -56,14 +57,7 @@ const NavbarLogin = () => {
    ];
 
    function logoutUserHelper() {
-      logoutUser(
-         setSignInStatus,
-         setIsChef,
-         setIsModerator,
-         setNameValue,
-         setUserId,
-         setEmailValue
-      );
+      logoutUser(setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue);
       navigate("/");
    }
 
@@ -84,7 +78,9 @@ const NavbarLogin = () => {
             <a href="/cookbook" className="nav-buttons">
                Cookbook
             </a>
-            <a href="/setting" className="nav-buttons">Settings</a>
+            <a href="/setting" className="nav-buttons">
+               Settings
+            </a>
             <a onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>

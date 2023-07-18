@@ -4,7 +4,6 @@ import React, { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 function UserProvider({ children }) {
-   const [signInStatus, setSignInStatus] = useState(false);
    const [isChef, setIsChef] = useState(false);
    const [isModerator, setIsModerator] = useState(false);
    const [nameValue, setNameValue] = useState("");
@@ -13,7 +12,6 @@ function UserProvider({ children }) {
 
    useEffect(() => {
       // Check if the user is already signed in on page load
-      const storedSignInStatus = localStorage.getItem("signInStatus");
       const storedIsChef = localStorage.getItem("isChef");
       const storedIsModerator = localStorage.getItem("isModerator");
       const storedName = localStorage.getItem("name");
@@ -21,8 +19,7 @@ function UserProvider({ children }) {
       const storedEmail = localStorage.getItem("email");
 
       // JSON parse converts values back into bools
-      if (storedSignInStatus && storedIsChef && storedIsModerator && storedName) {
-         setSignInStatus(JSON.parse(storedSignInStatus));
+      if (storedIsChef && storedIsModerator && storedName) {
          setIsChef(JSON.parse(storedIsChef));
          setIsModerator(JSON.parse(storedIsModerator));
          setNameValue(storedName);
@@ -33,19 +30,16 @@ function UserProvider({ children }) {
 
    useEffect(() => {
       // Save the user's sign-in status and other details in local storage whenever they change
-      localStorage.setItem("signInStatus", JSON.stringify(signInStatus));
       localStorage.setItem("isChef", JSON.stringify(isChef));
       localStorage.setItem("isModerator", JSON.stringify(isModerator));
       localStorage.setItem("name", nameValue);
       localStorage.setItem("userId", JSON.stringify(userId));
       localStorage.setItem("email", emailValue);
-   }, [signInStatus, isChef, isModerator, nameValue, userId, emailValue]);
+   }, [isChef, isModerator, userId, nameValue, emailValue]);
 
    return (
       <UserContext.Provider
          value={{
-            signInStatus,
-            setSignInStatus,
             isChef,
             setIsChef,
             isModerator,
