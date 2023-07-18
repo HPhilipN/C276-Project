@@ -1,0 +1,51 @@
+.info-btn {
+   color: #ccc;
+   margin-right: 2rem;
+   border: none;
+   background-color: transparent;
+
+   position: fixed;
+   bottom: 20px;
+   right: 0px;
+}
+
+.info-btn-icon {
+   transition: transform 0.3s ease !important;
+}
+
+.info-btn-icon:hover {
+   transform: scale(1.15);
+}
+
+.info-modal {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+
+   border: 1px solid #ccc;
+   background-color: #fff;
+   border-radius: 15px;
+
+   box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+   padding: 1.5rem;
+   min-width: 30rem;
+   z-index: 105;
+}
+
+.close-btn {
+   position: absolute;
+   top: 0;
+   right: 0;
+   margin: 10px;
+}
+
+.close-btn-parent {
+   border: none;
+   background: transparent;
+}
+
+.recipe-example {
+   margin: 1.5rem 3rem 3rem 3rem !important;
+   text-align: start;
+}
