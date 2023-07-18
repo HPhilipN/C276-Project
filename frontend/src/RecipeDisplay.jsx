@@ -4,8 +4,6 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import DifficultyCircle from "./utils/DifficultyCircle";
 import { UserContext } from "./utils/UserContext";
 import "./styles/RecipeDisplay.css";
 
@@ -48,36 +46,44 @@ const RecipeDisplay = () => {
    }
 
    return (
-      <>
+      <div className="recipe-display-fullpage">
          {signInStatus && isChef && <NavbarLogin />}
          {signInStatus && isModerator && <NavbarAdmin />}
          {!signInStatus && <Navbar />}
          <div className="recipe-display">
-            <h1>{recipe.title}</h1>
-            <h4>{recipe.recipeDifficulty}</h4>
-            <p>Favourites {recipe.favourites}</p>
-            <h3>Ingredients:</h3>
-            <ul>
-               {recipe.ingredients.map((ingredient, index) => (
-                  <li key={index}>{ingredient}</li>
-               ))}
-            </ul>
-            <h3>Instructions:</h3>
-            <ol>
-               {recipe.instructions.map((step, index) => (
-                  <li key={index}>{step}</li>
-               ))}
-            </ol>
-            <h3>tags:</h3>
-            <ul className="tags">
-               {recipe.tags.map((tag, index) => (
-                  <li key={index} className="tagItem">
-                     {tag}
-                  </li>
-               ))}
-            </ul>
+            <header className="header">
+               <h1 className="title">{recipe.title}</h1>
+               <div className="author">Author: {recipe.authorName}</div>
+               <div className="diff">Difficulty: {recipe.recipeDifficulty}</div>
+               <div className="favs">Favourites: {recipe.favourites}</div>
+            </header>
+            <div className="ingredients-display" id="boxing">
+               <h3>Ingredients:</h3>
+               <ul>
+                  {recipe.ingredients.map((ingredient, index) => (
+                     <li key={index}>{ingredient}</li>
+                  ))}
+               </ul>
+            </div>
+            <div className="instructions-display" id="boxing">
+               <h3>Instructions:</h3>
+               <ol>
+                  {recipe.instructions.map((step, index) => (
+                     <li key={index}>{step}</li>
+                  ))}
+               </ol>
+            </div>
+            <div className="tags-display" id="boxing">
+               <ul>
+                  {recipe.tags.map((tag, index) => (
+                     <li key={index} className="tagItem">
+                        {tag}
+                     </li>
+                  ))}
+               </ul>
+            </div>
          </div>
-      </>
+      </div>
    );
 };
 

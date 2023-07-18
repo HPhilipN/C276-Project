@@ -1,11 +1,108 @@
+.recipe-display-fullpage {
+   height: 100vh;
+}
+
 .recipe-display {
-   background-color: #ccc;
+   display: grid;
+   grid-template-areas:
+      "header header"
+      "ingredients ingredients"
+      "instructions instructions"
+      "tags tags";
+
+   justify-content: start;
+   text-align: start;
+   grid-auto-rows: min-content;
+   margin-top: 2rem;
+
+   border: 2px dotted #ff0101;
+}
+
+.recipe-display * {
+   margin: 0 2rem;
 }
 
 .loader {
    height: 80vh;
-
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+.header {
+   grid-area: header;
+   display: grid;
+   grid-template-areas:
+      "title title title"
+      "author favs diff";
+   border: 2px solid #000;
+   border-radius: 10px;
+   margin-bottom: 1rem;
+}
+
+.header * {
+   padding: 5px 1rem;
+   margin: 0;
+}
+
+/* Grid Settings */
+.title {
+   grid-area: title;
+   margin-bottom: 0;
+   border-bottom: 1px solid #000;
+}
+
+.author {
+   grid-area: author;
+}
+
+.diff {
+   grid-area: diff;
+   display: flex;
+}
+
+.favs {
+   grid-area: favs;
+}
+
+.ingredients-display {
+   grid-area: ingredients;
+   margin-bottom: 1rem;
+}
+
+.instructions-display {
+   grid-area: instructions;
+   margin-bottom: 1rem;
+}
+
+.tags-display {
+   grid-area: tags;
+   padding-left: 10px;
+   margin-bottom: 1rem;
+}
+
+/* Small Changes */
+.tags-display ul {
+   list-style-type: none; /* Remove default list styles */
+   padding: 0;
+   margin: 0;
+}
+
+.tags-display li {
+   display: inline-block; /* Change display property */
+   margin: 5px;
+}
+
+.instructions-display li {
+   margin: 0;
+}
+
+.ingredients-display ul {
+   list-style-type: disc;
+   padding-left: 0px;
+}
+
+/* Development Use */
+#boxing {
+   border: 1px solid green;
 }
