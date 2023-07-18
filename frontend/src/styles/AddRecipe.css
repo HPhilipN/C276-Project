@@ -60,6 +60,11 @@
    transform: scale(1.05);
 }
 
+.btn-disabled {
+   background-color: #ccc !important;
+   border: #ccc !important;
+}
+
 .title-input {
    border: 1px solid rgba(0, 0, 0, 0.2) !important;
    background-color: transparent !important;
