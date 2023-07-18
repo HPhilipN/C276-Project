@@ -28,6 +28,8 @@ const Setting = () => {
    const [emailError, setEmailError] = useState("");
    const [nameError, setNameError] = useState("");
    const { userId } = useContext(UserContext);
+   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
 
    // mods should not be able to access this
    const navigate = useNavigate();
@@ -137,6 +139,11 @@ const Setting = () => {
                // Update the context values with the new data
                setNameValue(userAccount.name);
                setEmailValue(userAccount.email);
+               // Show the "Successfully Updated" message
+               setShowSuccessMessage(true);
+               // Hide the message after 5 seconds
+               setTimeout(() => setShowSuccessMessage(false), 5000);
+
             }
          })
          .catch((error) => {
@@ -203,6 +210,11 @@ const Setting = () => {
          .then((response) => response.json()) // parse JSON response
          .then((data) => {
             console.log(`Returned value: ${data} from /users/`);
+            // Show the "Successfully Updated" message
+            setShowSuccessMessage(true);
+            // Hide the message after 5 seconds
+            setTimeout(() => setShowSuccessMessage(false), 500);
+            
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -406,6 +418,9 @@ const Setting = () => {
                      ))}
                      {emailError && <div className="text-danger mt-2">{emailError}</div>}
                      {nameError && <div className="text-danger mt-2">{nameError}</div>}
+                     {showSuccessMessage && (
+                        <div className="alert alert-success mt-2">Successfully Updated!</div>
+                     )}
                   </div>
                   <div
                      className={`tab-pane fade ${activeTab === "password" ? "show active" : ""}`}
@@ -521,6 +536,9 @@ const Setting = () => {
                         </div>
                      ))}
                      {passwordError && <div className="text-danger mt-2">{passwordError}</div>}
+                     {showSuccessMessage && (
+                        <div className="alert alert-success mt-2">Successfully Updated!</div>
+                     )}
                   </div>
                   {/* Add more tab panes for other sections */}
                </div>
