@@ -53,6 +53,10 @@ const Cookbook = () => {
          console.log(error);
       }
    }
+   //implement filter functionality
+
+
+
 
    // run when userId changes
    useEffect(() => {
@@ -83,7 +87,6 @@ const Cookbook = () => {
                <RecipeList recipes={userRecipes} />
             ) : null}
             {/* Info Button on Bottom Right */}
-            <InfoButton />
          </div>
       </div>
    );

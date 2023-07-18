@@ -26,4 +26,6 @@ export default function Searchbar() {
          </button>
       </div>
    );
+
+   //maybe implment search filter here?
 }
