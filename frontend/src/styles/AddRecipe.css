@@ -2,7 +2,8 @@
    color: #fe9e0c;
    margin-right: 2rem;
    border: none;
-   background-color: #fff;
+   background-color: transparent; /* Set the background color to transparent */
+
 }
 
 .add-btn-icon {
