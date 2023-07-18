@@ -55,9 +55,7 @@ const Cookbook = () => {
    }
    //implement filter functionality
 
-
-
-
+   // TODO figure out how to implement the filter functionality so that we can also use it for other pages
    // run when userId changes
    useEffect(() => {
       async function fetchData() {
