@@ -8,7 +8,7 @@ import "./styles/AdminRecipelist.css";
 
 const customStyles = {
    overlay: {
-      background: "rgba(0, 0, 0, 0.5)",
+      background: "rgba(0, 0, 0, 0.1)",
       overflowY: "scroll",
       zIndex: 999,
    },
@@ -27,8 +27,9 @@ const customStyles = {
 
 export default function AdminUserlist() {
    const [category, setCategory] = useState([]);
-   const [message, setMessage] = useState("");
    const [modalOpen, setModalOpen] = useState(false);
+   const [deleteuser, setDeleteuser] = useState(null);
+   const [errormodalOpen, seterrormodalOpen] = useState(false);
 
    const {
       isChef,
@@ -65,11 +66,19 @@ export default function AdminUserlist() {
    }
    */
 
+    //confirm delete via popup modal and pass uid to modal 
+    async function confirmDelete(deleteuser) {
+        setDeleteuser(deleteuser)
+        setModalOpen(true);
+   }
+   
+
    async function deleteUser(uid) {
       console.log(uid);
       if (uid == userId) {
          //Inform the admin that they cannot delete themselves
-         setModalOpen(true);
+         console.log("You cannot delete yourself.")
+         seterrormodalOpen(true);
       } else {
          fetch(`https://replicake.onrender.com/users/delete/${uid}`, {
             method: "DELETE",
@@ -88,8 +97,8 @@ export default function AdminUserlist() {
    return (
       <div>
          <Navbar />
-         <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
-            <button className="x-button" onClick={() => setModalOpen(false)}>
+         <Modal isOpen={errormodalOpen} onRequestClose={() => seterrormodalOpen(false)} style={customStyles}>
+            <button className="x-button" onClick={() => seterrormodalOpen(false)}>
                <FontAwesomeIcon icon={faX} />
             </button>
             <div>
@@ -119,10 +128,21 @@ export default function AdminUserlist() {
                         </td>
                         <td>
                            {" "}
-                           <button className="deletebtn" onClick={() => deleteUser(getcate.uid)}>
+                           <button className="deletebtn" onClick={() => confirmDelete(getcate.uid)}>
                               Delete
                            </button>{" "}
                         </td>
+                        <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
+                            <button className="x-button" onClick={() => setModalOpen(false)}>
+                            <FontAwesomeIcon icon={faX} />
+                            </button>
+                            <div className="confirmdelbox">
+                                <p>Are you sure you want to delete this user?</p><br />
+                                <button className="confirmbtn" onClick={() => {deleteUser(deleteuser); setModalOpen(false)}}>Yes</button>
+                                <button className="cancelbtn" onClick={() => setModalOpen(false)}>Cancel</button>
+                                
+                            </div>
+                        </Modal>
                      </tr>
                   ))}
                </tbody>
