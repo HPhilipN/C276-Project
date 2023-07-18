@@ -8,7 +8,7 @@ import { UserContext } from "./utils/UserContext";
 import "./styles/RecipeDisplay.css";
 
 const RecipeDisplay = () => {
-   const { signInStatus, isChef, isModerator, userId } = useContext(UserContext);
+   const { isChef, isModerator, userId } = useContext(UserContext);
    // useParams grabs rid from url
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
@@ -35,9 +35,9 @@ const RecipeDisplay = () => {
    if (!recipe) {
       return (
          <>
-            {signInStatus && isChef && <NavbarLogin />}
-            {signInStatus && isModerator && <NavbarAdmin />}
-            {!signInStatus && <Navbar />}
+            {isChef && <NavbarLogin />}
+            {isModerator && <NavbarAdmin />}
+            {!isChef && !isModerator && <Navbar />}
             <div className="loader">
                <CircularProgress color="success" size={70} />
             </div>
@@ -47,9 +47,9 @@ const RecipeDisplay = () => {
 
    return (
       <>
-         {signInStatus && isChef && <NavbarLogin />}
-         {signInStatus && isModerator && <NavbarAdmin />}
-         {!signInStatus && <Navbar />}
+         {isChef && <NavbarLogin />}
+         {isModerator && <NavbarAdmin />}
+         {!isChef && !isModerator && <Navbar />}
          <div className="recipe-display-fullpage">
             <div className="recipe-display">
                <header className="header">
