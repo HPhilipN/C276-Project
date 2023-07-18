@@ -44,3 +44,33 @@
     width: 100px;
     padding: 5px;
 }
+.confirmdelbox{
+    font-size: large;
+    margin-top: 2%;
+    text-align: center;
+
+}
+
+.confirmbtn{
+   margin-right: 20px;
+   float: center;
+   width: 120px;
+   height: fit-content;
+   padding: 5px;
+   background-color: #88b788;
+   border-radius: 8px;
+   border: none;
+   cursor: pointer;
+}
+
+.cancelbtn{
+    margin-right: 20px;
+    float: center;
+    width: 120px;
+    height: fit-content;
+    padding: 5px;
+    background-color: #fe9e0c;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+ }
