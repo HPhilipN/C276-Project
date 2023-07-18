@@ -126,7 +126,7 @@ export default function AdminUserlist (){
                             <tr className="reciperow" key = {getcate.uid}>
                             <td> {getcate.name} #{getcate.uid} </td>
                             <td> {getcate.email} </td>
-                            <td> <button className ="viewbtn" onClick={setModalOpen}>View</button> </td>
+                            <td> <button className ="viewbtn">View</button> </td>
                             <td> <button className = "deletebtn" onClick={ () => deleteUser(getcate.uid)}>Delete</button> </td>
                             </tr>
                         ))
