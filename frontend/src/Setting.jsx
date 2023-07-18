@@ -23,11 +23,12 @@ const Setting = () => {
 
    const { nameValue } = useContext(UserContext);
    const { setNameValue, setEmailValue } = useContext(UserContext);
-   const { setPasswordValue } = useContext(UserContext);
    const [passwordError, setPasswordError] = useState(""); // State to hold password error message
    const [emailError, setEmailError] = useState("");
    const [nameError, setNameError] = useState("");
    const { userId } = useContext(UserContext);
+   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
 
    // State to hold the user's account settings
    const [userAccount, setUserAccount] = useState({
@@ -131,6 +132,11 @@ const Setting = () => {
                // Update the context values with the new data
                setNameValue(userAccount.name);
                setEmailValue(userAccount.email);
+               // Show the "Successfully Updated" message
+               setShowSuccessMessage(true);
+               // Hide the message after 5 seconds
+               setTimeout(() => setShowSuccessMessage(false), 5000);
+
             }
          })
          .catch((error) => {
@@ -197,10 +203,11 @@ const Setting = () => {
          .then((response) => response.json()) // parse JSON response
          .then((data) => {
             console.log(`Returned value: ${data} from /users/`);
-            if (data) {
-               // Update the context values with the new data
-               setPasswordValue(passwordFields.confirmNewPassword);
-            }
+            // Show the "Successfully Updated" message
+            setShowSuccessMessage(true);
+            // Hide the message after 5 seconds
+            setTimeout(() => setShowSuccessMessage(false), 500);
+            
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -324,7 +331,7 @@ const Setting = () => {
                      aria-orientation="vertical"
                   >
                      <a
-                        className={`nav-link ${activeTab === "account" ? "active" : ""}`}
+                        className={`nav-link ${activeTab === "account" ? "active" : ""} unselectable`}
                         id="account-tab"
                         data-toggle="pill"
                         role="tab"
@@ -336,7 +343,7 @@ const Setting = () => {
                         Account
                      </a>
                      <a
-                        className={`nav-link ${activeTab === "password" ? "active" : ""}`}
+                        className={`nav-link ${activeTab === "password" ? "active" : ""} unselectable`}
                         id="password-tab"
                         data-toggle="pill"
                         role="tab"
@@ -400,6 +407,9 @@ const Setting = () => {
                      ))}
                      {emailError && <div className="text-danger mt-2">{emailError}</div>}
                      {nameError && <div className="text-danger mt-2">{nameError}</div>}
+                     {showSuccessMessage && (
+                        <div className="alert alert-success mt-2">Successfully Updated!</div>
+                     )}
                   </div>
                   <div
                      className={`tab-pane fade ${activeTab === "password" ? "show active" : ""}`}
@@ -515,6 +525,9 @@ const Setting = () => {
                         </div>
                      ))}
                      {passwordError && <div className="text-danger mt-2">{passwordError}</div>}
+                     {showSuccessMessage && (
+                        <div className="alert alert-success mt-2">Successfully Updated!</div>
+                     )}
                   </div>
                   {/* Add more tab panes for other sections */}
                </div>

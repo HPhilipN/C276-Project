@@ -24,7 +24,7 @@ body {
 
 .nav-pills a.nav-link {
 	padding: 15px 20px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 3px solid #ddd;
 	border-radius: 0;
 	color: #333;
 }
@@ -91,3 +91,8 @@ body {
   .btn-light:hover {
 	background-color: #e48f0f; /* Similar color to the light button */
   }
+
+  .unselectable {
+	user-select: none;
+  }
+  
