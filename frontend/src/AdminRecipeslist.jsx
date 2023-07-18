@@ -9,7 +9,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { redirect } from "react-router-dom";
-import RecipeDisplay from "./RecipeDisplay";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
    overlay: {
@@ -31,21 +31,16 @@ const customStyles = {
 };
 
 export default function AdminRecipelist() {
+   const { isChef, userId } = useContext(UserContext);
    const [category, setCategory] = useState([]);
    const [message, setMessage] = useState("");
    const [recipeId, setRecipeId] = useState(null);
    const [modalOpen, setModalOpen] = useState(false);
 
-   const {
-      isChef,
-      setIsChef,
-      isModerator,
-      setIsModerator,
-      nameValue,
-      setNameValue,
-      userId,
-      setUserId,
-   } = useContext(UserContext);
+   const navigate = useNavigate();
+   if (isChef) {
+      navigate("/");
+   }
 
    //Display all recipes present in the database
    useEffect(() => {
@@ -54,7 +49,7 @@ export default function AdminRecipelist() {
          const getData = await res.json();
          //need to allow moderators/admin not to be shown (use isModerator?)
          setCategory(getData);
-         console.log(getData);
+         //  console.log(getData);
       };
       getcategory();
    });

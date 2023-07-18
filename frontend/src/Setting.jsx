@@ -4,6 +4,7 @@ import NavbarLogin from "./NavbarLogin";
 import Navbar from "./Navbar";
 import "./styles/Setting.css";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
@@ -29,6 +30,12 @@ const Setting = () => {
    const { userId } = useContext(UserContext);
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
+
+   // mods should not be able to access this
+   const navigate = useNavigate();
+   if (isModerator) {
+      navigate("/adminhome");
+   }
 
    // State to hold the user's account settings
    const [userAccount, setUserAccount] = useState({
@@ -331,7 +338,9 @@ const Setting = () => {
                      aria-orientation="vertical"
                   >
                      <a
-                        className={`nav-link ${activeTab === "account" ? "active" : ""} unselectable`}
+                        className={`nav-link ${
+                           activeTab === "account" ? "active" : ""
+                        } unselectable`}
                         id="account-tab"
                         data-toggle="pill"
                         role="tab"
@@ -343,7 +352,9 @@ const Setting = () => {
                         Account
                      </a>
                      <a
-                        className={`nav-link ${activeTab === "password" ? "active" : ""} unselectable`}
+                        className={`nav-link ${
+                           activeTab === "password" ? "active" : ""
+                        } unselectable`}
                         id="password-tab"
                         data-toggle="pill"
                         role="tab"
