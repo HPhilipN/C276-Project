@@ -2,9 +2,14 @@ import React, {Component, useEffect, useState, useContext} from "react";
 import Navbar from "./NavbarAdmin";
 import Modal from "react-modal";
 import { UserContext } from "./utils/UserContext";
+import RecipeDisplay from "./RecipeDisplay";
+import "./styles/AdminRecipelist.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const customStyles = {
     overlay: {
@@ -25,7 +30,7 @@ const customStyles = {
     },
  };
 
-export default function AdminUserlist (){
+export default function AdminRecipelist (){
     const [category, setCategory] = useState([]);
     const [message, setMessage] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -43,10 +48,10 @@ export default function AdminUserlist (){
         setUserId,
      } = useContext(UserContext);
 
-    //Display all users present in the database 
+    //Display all recipes present in the database 
     useEffect(()=>{
         const getcategory = async ()=>{
-            const res = await fetch("https://replicake.onrender.com/users/view");
+            const res = await fetch("https://replicake.onrender.com/recipes/view");
             const getData = await res.json();
             //need to allow moderators/admin not to be shown (use isModerator?)
             setCategory(getData);
@@ -54,44 +59,28 @@ export default function AdminUserlist (){
         }
         getcategory();
     }); 
+    
+    async function displayRecipe(rid) {
+        RecipeDisplay;
+    }
 
 
-
-
-    //Delete user from database with UID passed in
-    /*
-   const deleteUser= async (uid) => {
-        console.log(uid);
-        setUserId(uid);
-        console.log(userId);
-        const  requestDelete= await fetch(`https://replicake.onrender.com/users/delete/${uid}`);
-        const deleteResponse = requestDelete.json();
-        setMessage(deleteResponse);
-   }
-   */
    
-   
-  async function deleteUser(uid){
-    console.log(uid);
-        if(uid == userId){
-            //Inform the admin that they cannot delete themselves
-            setModalOpen(true);
-        }
-        else{
-
-            fetch(`https://replicake.onrender.com/users/delete/${uid}`, {
+  async function deleteRecipe(rid){
+    console.log(rid);
+        fetch(`https://replicake.onrender.com/recipes/delete/${rid}`, {
             method: "DELETE",
-            })
+        })
         
-            .then((response) => response.json()) // parse JSON response
-            .then((data) => {
+        .then((response) => response.json()) // parse JSON response
+        .then((data) => {
                 console.log(`Returned value: ${data} from /users/`);
-            })
-            .catch((error) => {
+        })
+        .catch((error) => {
                 console.log("===== ERROR =====");
                 console.log(error);
-            });
-        }
+        });
+    
 
   }
   
@@ -104,30 +93,34 @@ export default function AdminUserlist (){
                <FontAwesomeIcon icon={faX} />
             </button>
             <div>
-               {/*Error when user tries to delete themselves*/}
-               ERROR: You cannot delete yourself from the database.
+               {/*Category*/}
+               Hello this is the view recipe modal
             </div>
             </Modal>
-            <div>
-                <table>
+            <div className="recipebox">
+                <table className="recipedisplay">
                     <thead>
                         
                     </thead>
                     <tbody>
                         <tr>
-                            <th>Username ID</th>
-                            <th>Email</th>
+                            <th>Author ID</th>
+                            <th>Recipe</th>
+                            <th>Favourites</th>
                             <th>Manage</th>
-
                         </tr>
                         {
 
                         category.map((getcate)=>(
-                            <tr key = {getcate.uid}>
-                            <td> {getcate.name} #{getcate.uid} </td>
-                            <td> {getcate.email} </td>
-                            <td> <a className ="btn btn-success" onClick={setModalOpen}>View</a> </td>
-                            <td> <a className = "btn btn-danger" onClick={ () => deleteUser(getcate.uid)}>Delete</a> </td>
+                            
+                            <tr className="reciperow" key = {getcate.rid}>
+                                
+                            <td> <FontAwesomeIcon icon={faUser} /> {getcate.authorName} </td>
+                            <td> <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} </td>
+                            
+                            <td> <FontAwesomeIcon icon={faStar} /> {getcate.favourites} </td>
+                            <td> <button class="viewbtn" onClick={ () => displayRecipe(getcate.rid)}>View</button></td>
+                            <td> <button class="deletebtn" onClick={ () => deleteRecipe(getcate.rid)}>Delete</button> </td>
                             </tr>
                         ))
                         }
