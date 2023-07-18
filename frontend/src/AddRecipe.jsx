@@ -16,7 +16,7 @@ const AddRecipe = ({ setUserRecipes }) => {
    const [ingredients, setIngredients] = useState([]); // array
    const [instructions, setInstructions] = useState([]); // array
    const [tags, setTags] = useState([]); // array
-
+   const [submitDisabled, setSubmitDisabled] = useState(false);
    let newRecipe;
 
    // handle modal visibility
@@ -102,6 +102,20 @@ const AddRecipe = ({ setUserRecipes }) => {
       setTags([]);
    }
 
+   // disable submit if all inputs arent filled
+   useEffect(() => {
+      if (
+         title.length <= 0 ||
+         ingredients.length <= 0 ||
+         instructions.length <= 0 ||
+         tags.length <= 0
+      ) {
+         setSubmitDisabled(true);
+      } else {
+         setSubmitDisabled(false);
+      }
+   }, [title, ingredients, instructions, tags]);
+
    const addRecipeModal = (
       <div ref={modalRef} className="add-recipe">
          <button className="close-btn-parent">
@@ -165,7 +179,11 @@ const AddRecipe = ({ setUserRecipes }) => {
                </div>
             </div>
 
-            <Components.Button className="btn-hover" onClick={addRecipeToDatabase}>
+            <Components.Button
+               className={submitDisabled ? "btn-disabled" : "btn-hover"}
+               disabled={submitDisabled}
+               onClick={addRecipeToDatabase}
+            >
                Add to Cookbook
             </Components.Button>
          </form>
