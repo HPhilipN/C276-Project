@@ -351,7 +351,7 @@ const Setting = () => {
             <div className={`tab-pane fade ${activeTab === "password" ? "show active" : ""}`} id="password" role="tabpanel" aria-labelledby="password-tab">
           <h3 className="mb-4">Password Settings</h3>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-8">
               <div className="form-group">
                 <label>Old Password</label>
                 <div className="password-input-container">
@@ -367,7 +367,7 @@ const Setting = () => {
                 </div>
               </div>
             </div>
-                <div className="col-md-6">
+                <div className="col-md-8">
                   <div className="form-group">
                     <label>New Password</label>
                     <div className="password-input-container">
@@ -392,7 +392,7 @@ const Setting = () => {
                       />
                   </div>
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-9">
                   <div className="form-group">
                     <label>Confirm Password</label>
                     <div className="password-input-container">
