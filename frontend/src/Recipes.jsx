@@ -10,14 +10,14 @@ import { UserContext } from "./utils/UserContext";
 
 // User generated recipes
 const Recipes = () => {
-   const { signInStatus, isChef, isModerator } = useContext(UserContext);
+   const { isChef, isModerator } = useContext(UserContext);
 
    return (
       <div className="dashboard">
          {/*Search bar*/}
-         {signInStatus && isChef && <NavbarLogin />}
-         {signInStatus && isModerator && <NavbarAdmin />}
-         {!signInStatus && <Navbar />}
+         {isChef && <NavbarLogin />}
+         {isModerator && <NavbarAdmin />}
+         {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
             {/*Filter Modal*/}
             <Filter />

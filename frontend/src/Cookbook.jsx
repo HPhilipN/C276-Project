@@ -13,7 +13,7 @@ import InfoButton from "./utils/InfoButton";
 
 // User generated recipes
 const Cookbook = () => {
-   const { signInStatus, isChef, isModerator, userId } = useContext(UserContext);
+   const { isChef, isModerator, userId } = useContext(UserContext);
    const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
 
@@ -68,9 +68,9 @@ const Cookbook = () => {
    return (
       <div className="dashboard">
          {/*Search bar*/}
-         {signInStatus && isChef && <NavbarLogin />}
-         {signInStatus && isModerator && <NavbarAdmin />}
-         {!signInStatus && <Navbar />}
+         {isChef && <NavbarLogin />}
+         {isModerator && <NavbarAdmin />}
+         {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
             <Filter />
             <Searchbar />

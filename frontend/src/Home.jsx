@@ -11,15 +11,15 @@ import Footer from "./Footer";
 import { UserContext } from "./utils/UserContext";
 
 const Home = () => {
-   // Accessing signInStatus, isChef, and isModerator from the UserContext
-   const { signInStatus, isChef, isModerator } = useContext(UserContext);
+   // Accessing isChef, and isModerator from the UserContext
+   const { isChef, isModerator } = useContext(UserContext);
 
    return (
       <div className="home-container">
          {/* Conditionally rendering the appropriate navbar based on the user status */}
-         {signInStatus && isChef && <NavbarLogin />}
-         {signInStatus && isModerator && <NavbarAdmin />}
-         {!signInStatus && <Navbar />}
+         {isChef && <NavbarLogin />}
+         {isModerator && <NavbarAdmin />}
+         {!isChef && !isModerator && <Navbar />}
          <div className="home">
             <div className="home-banner-container">
                <div className="home-bannerImage-container">
