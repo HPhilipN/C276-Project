@@ -79,7 +79,7 @@ export default function AdminRecipelist() {
    }
 
    return (
-      <div>
+      <>
          <Navbar />
          <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
             <button className="x-button" onClick={() => setModalOpen(false)}>
@@ -130,6 +130,6 @@ export default function AdminRecipelist() {
                </tbody>
             </table>
          </div>
-      </div>
+      </>
    );
 }

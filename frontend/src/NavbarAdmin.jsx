@@ -14,8 +14,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import BookIcon from "@mui/icons-material/Book";
-import Avatar from "@mui/material/Avatar";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./utils/UserContext";
@@ -49,6 +49,7 @@ const NavbarAdmin = () => {
          text: "Admin",
          icon: <AdminPanelSettingsIcon />,
          profile: true,
+         onClick: () => (window.location.href = "/adminhome"),
       },
       {
          text: "Logout",
@@ -86,9 +87,13 @@ const NavbarAdmin = () => {
             <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
-            <div className="navbar-profile">
-               <Avatar className="navbar-profile-picture" alt="Profile Picture" />
-            </div>
+            <a href="/adminhome" className="navbar-profile" style={{ marginRight: 5 }}>
+               <AssignmentIndOutlinedIcon
+                  className="navbar-profile-picture"
+                  alt="Profile Picture"
+                  fontSize="large"
+               />
+            </a>
          </div>
          <div className="navbar-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
