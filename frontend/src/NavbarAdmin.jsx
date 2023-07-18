@@ -25,7 +25,7 @@ import "./styles/Navbar.css";
 
 //check Navbar.jsx for comments on code
 const NavbarAdmin = () => {
-   const { setSignInStatus, setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
+   const { setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue } =
       useContext(UserContext);
    const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
@@ -64,14 +64,7 @@ const NavbarAdmin = () => {
 
    // useNavigate hook to navigate to the desired URL when the button is clicked
    function logoutUserHelper() {
-      logoutUser(
-         setSignInStatus,
-         setIsChef,
-         setIsModerator,
-         setNameValue,
-         setUserId,
-         setEmailValue
-      );
+      logoutUser(setIsChef, setIsModerator, setNameValue, setUserId, setEmailValue);
       navigate("/");
    }
 
@@ -92,8 +85,12 @@ const NavbarAdmin = () => {
             <a href="/cookbook" className="nav-buttons">
                Cookbook
             </a>
-            <a href="/setting" className="nav-buttons">Settings</a>
-            <a href= "/adminhome" className="nav-buttons">Admin</a>
+            <a href="/setting" className="nav-buttons">
+               Settings
+            </a>
+            <a href="/adminhome" className="nav-buttons">
+               Admin
+            </a>
             <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>

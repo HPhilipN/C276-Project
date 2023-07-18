@@ -122,12 +122,16 @@ public class UserController {
             // Update the fields of the existing student with the new values
             user.setName(updatedUser.getName());
             // if user with this email already exists
-            if (userRepo.existsByEmail(updatedUser.getEmail())) {
+            if (user.getEmail().equals(updatedUser.getEmail())) {
+                // if the user didnt change email
+                user.setEmail(updatedUser.getEmail());
+            } else if (userRepo.existsByEmail(updatedUser.getEmail())) {
                 System.out.println("User with this email exists");
                 response.setStatus(401); // 401 = Unauthorized
                 return false;
+            } else {
+                user.setEmail(updatedUser.getEmail());
             }
-            user.setEmail(updatedUser.getEmail());
             // chef & moderator only changable by Admins
             user.setChef(updatedUser.isChef());
             user.setModerator(updatedUser.isModerator());
