@@ -2,14 +2,13 @@ import React, {Component, useEffect, useState, useContext} from "react";
 import Navbar from "./NavbarAdmin";
 import Modal from "react-modal";
 import { UserContext } from "./utils/UserContext";
-import RecipeDisplay from "./RecipeDisplay";
 import "./styles/AdminRecipelist.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { redirect } from "react-router-dom";
 
 const customStyles = {
     overlay: {
@@ -60,12 +59,19 @@ export default function AdminRecipelist (){
         getcategory();
     }); 
     
+    //doesn't work at the moment - should redirect to full recipe view cookbook/view/rid
     async function displayRecipe(rid) {
-        RecipeDisplay;
+       console.log("in progress");
+       const redirect = () => {
+        window.location.href = '/cookbook/view/' + rid;
+     }
+     return (
+        <button onClick={redirect}>go to another page</button>
+     )
+     
     }
 
-
-   
+//deletes recipe from the cookbook based on passed rid
   async function deleteRecipe(rid){
     console.log(rid);
         fetch(`https://replicake.onrender.com/recipes/delete/${rid}`, {
@@ -104,8 +110,8 @@ export default function AdminRecipelist (){
                     </thead>
                     <tbody>
                         <tr>
-                            <th>Author ID</th>
                             <th>Recipe</th>
+                            <th>Author</th>
                             <th>Favourites</th>
                             <th>Manage</th>
                         </tr>
@@ -115,12 +121,11 @@ export default function AdminRecipelist (){
                             
                             <tr className="reciperow" key = {getcate.rid}>
                                 
-                            <td> <FontAwesomeIcon icon={faUser} /> {getcate.authorName} </td>
                             <td> <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} </td>
-                            
+                            <td> <FontAwesomeIcon icon={faUser} /> {getcate.authorName} </td>
                             <td> <FontAwesomeIcon icon={faStar} /> {getcate.favourites} </td>
-                            <td> <button class="viewbtn" onClick={ () => displayRecipe(getcate.rid)}>View</button></td>
-                            <td> <button class="deletebtn" onClick={ () => deleteRecipe(getcate.rid)}>Delete</button> </td>
+                            <td><button className="viewbtn" onClick={ () => displayRecipe(getcate.rid)}>View</button></td>
+                            <td> <button className="deletebtn" onClick={ () => deleteRecipe(getcate.rid)}>Delete</button> </td>
                             </tr>
                         ))
                         }

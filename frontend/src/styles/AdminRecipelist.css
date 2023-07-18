@@ -13,6 +13,7 @@
 .recipebox{
     display: flex;
     justify-content: center;
+    overflow: scroll;
  
 }
 .reciperow {
