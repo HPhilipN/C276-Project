@@ -26,7 +26,7 @@ const customStyles = {
       maxHeight: 600,
    },
 };
-
+//handles the modal functionality for the filters
 function Filter() {
    const [modalOpen, setModalOpen] = useState(false);
 
@@ -46,7 +46,7 @@ function Filter() {
                {/*Category*/}
                <div className="category-group">
                   <h1>Filters</h1>
-                  <Filterlist />
+                  <Filterlist /> 
                   <button className="control-button">Reset</button>
                   <button className="save-button">Apply</button>
                </div>

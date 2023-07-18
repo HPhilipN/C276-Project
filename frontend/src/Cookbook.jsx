@@ -9,6 +9,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
+import InfoButton from "./utils/InfoButton";
 
 // User generated recipes
 const Cookbook = () => {
@@ -52,7 +53,7 @@ const Cookbook = () => {
          console.log(error);
       }
    }
-
+   // TODO figure out how to implement the filter functionality so that we can also use it for other pages
    // run when userId changes
    useEffect(() => {
       async function fetchData() {
@@ -82,6 +83,7 @@ const Cookbook = () => {
                <RecipeList recipes={userRecipes} />
             ) : null}
             {/* Info Button on Bottom Right */}
+            <InfoButton />
          </div>
       </div>
    );

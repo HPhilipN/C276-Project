@@ -2,7 +2,7 @@
    color: #fe9e0c;
    margin-right: 2rem;
    border: none;
-   background-color: #fff;
+   background-color: transparent;
 }
 
 .add-btn-icon {
@@ -58,6 +58,11 @@
 
 .btn-hover:hover {
    transform: scale(1.05);
+}
+
+.btn-disabled {
+   background-color: #ccc !important;
+   border: #ccc !important;
 }
 
 .title-input {
