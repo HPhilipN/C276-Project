@@ -2,9 +2,9 @@ import React, {Component, useEffect, useState, useContext} from "react";
 import Navbar from "./NavbarAdmin";
 import Modal from "react-modal";
 import { UserContext } from "./utils/UserContext";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import "./styles/AdminRecipelist.css";
 
 const customStyles = {
     overlay: {
@@ -108,8 +108,8 @@ export default function AdminUserlist (){
                ERROR: You cannot delete yourself from the database.
             </div>
             </Modal>
-            <div>
-                <table>
+            <div className="recipebox">
+                <table className="recipedisplay">
                     <thead>
                         
                     </thead>
@@ -123,11 +123,11 @@ export default function AdminUserlist (){
                         {
 
                         category.map((getcate)=>(
-                            <tr key = {getcate.uid}>
+                            <tr className="reciperow" key = {getcate.uid}>
                             <td> {getcate.name} #{getcate.uid} </td>
                             <td> {getcate.email} </td>
-                            <td> <a className ="btn btn-success" onClick={setModalOpen}>View</a> </td>
-                            <td> <a className = "btn btn-danger" onClick={ () => deleteUser(getcate.uid)}>Delete</a> </td>
+                            <td> <button className ="viewbtn" onClick={setModalOpen}>View</button> </td>
+                            <td> <button className = "deletebtn" onClick={ () => deleteUser(getcate.uid)}>Delete</button> </td>
                             </tr>
                         ))
                         }
