@@ -1,0 +1,45 @@
+.recipedisplay{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    margin-top: 30px;
+    border-spacing: 0 15px;
+    border-collapse: separate;
+    background-color: transparent;
+    text-align: left;
+    
+}
+
+.recipebox{
+    display: flex;
+    justify-content: center;
+ 
+}
+.reciperow {
+    color: #332211;
+    background-color: #eeeeee;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: 0 0 4px #ccc;
+    height: 60px;
+    white-space: nowrap;
+      
+}
+
+.deletebtn{
+    border-radius: 8px;
+    border-color: transparent;
+    font-size: 20px;
+    padding: 5px;
+    background-color: #fe9e0c;
+    width: 100px;
+}
+.viewbtn{
+    background-color: #92b48c;
+    color: #ffffff;
+    border-radius: 8px;
+    border-color: transparent;
+    font-size: 20px;
+    width: 100px;
+    padding: 5px;
+}
