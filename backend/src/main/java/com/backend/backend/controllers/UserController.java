@@ -121,6 +121,12 @@ public class UserController {
             User user = userRepo.findByUid(userId);
             // Update the fields of the existing student with the new values
             user.setName(updatedUser.getName());
+            // if user with this email already exists
+            if (userRepo.existsByEmail(updatedUser.getEmail())) {
+                System.out.println("User with this email exists");
+                response.setStatus(401); // 401 = Unauthorized
+                return false;
+            }
             user.setEmail(updatedUser.getEmail());
             // chef & moderator only changable by Admins
             user.setChef(updatedUser.isChef());

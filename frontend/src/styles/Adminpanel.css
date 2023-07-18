@@ -1,0 +1,24 @@
+.secondary-button{
+    margin: 30px;
+    margin-top: 50px;
+    display: inline-block;
+    height: 80px;
+    width: fit-content;
+    background-color: #92b48c;
+}
+
+.primary-button{
+    margin: 30px;
+    margin-top: 50px;
+    display: inline-block;
+    border-radius: 36px;
+    padding: 20px;
+    height: 80px;
+    width: fit-content;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.innercontent{
+    margin-top: 50px;
+}
