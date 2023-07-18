@@ -20,14 +20,15 @@ const Setting = () => {
   }); // State to toggle password visibility
 
   // Accessing signInStatus, isChef, and isModerator from the UserContext
-  const { signInStatus, isChef, isModerator, emailValue } = useContext(UserContext);
+  const { signInStatus, isChef, isModerator, emailValue} = useContext(UserContext);
 
   const { nameValue } = useContext(UserContext);
   const { setNameValue, setEmailValue} = useContext(UserContext);
+  const { setPasswordValue} = useContext(UserContext);
   const [passwordError, setPasswordError] = useState(""); // State to hold password error message
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
-
+  const { userId } = useContext(UserContext);
   
   // State to hold the user's account settings
   const [userAccount, setUserAccount] = useState({
@@ -90,54 +91,77 @@ const Setting = () => {
   };
   
 
-  const handleAccountUpdate = async () => {
-    // Validate empty fields for account settings
-    const accountEmptyFieldErrors = {};
-    if (userAccount.name.trim() === "") {
-      accountEmptyFieldErrors.name = "Name cannot be empty.";
-    }
-    if (userAccount.email.trim() === "") {
-      accountEmptyFieldErrors.email = "Email cannot be empty.";
-    }
-  
+  // const handleAccountUpdate = async () => {
+
+  async function handleAccountUpdate(){
+        // Validate empty fields for account settings
+        const accountEmptyFieldErrors = {};
+        if (userAccount.name.trim() === "") {
+          accountEmptyFieldErrors.name = "Name cannot be empty.";
+        }
+        if (userAccount.email.trim() === "") {
+          accountEmptyFieldErrors.email = "Email cannot be empty.";
+        }
+      
+        
+        // If there are empty field errors, set the state and return
+        if (Object.keys(accountEmptyFieldErrors).length > 0) {
+          setEmptyFieldErrors(accountEmptyFieldErrors);
+          return;
+        }
+          // Validate the email format
+      const emailError = isEmailValid(userAccount.email) ? "" : "Invalid email address.";
     
-    // If there are empty field errors, set the state and return
-    if (Object.keys(accountEmptyFieldErrors).length > 0) {
-      setEmptyFieldErrors(accountEmptyFieldErrors);
-      return;
-    }
-      // Validate the email format
-  const emailError = isEmailValid(userAccount.email) ? "" : "Invalid email address.";
+      // Set the email error message immediately if the email is invalid
+      if (emailError) {
+        setEmailError(emailError);
+        return;
+      }
+    
+        // Logic to update the account settings in the backend
+        // ...
+        console.log(userId);
+            fetch(`https://replicake.onrender.com/users/update/${userId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+           },
+           body: JSON.stringify({
+              name: userAccount.name,
+              email: userAccount.email,
+           }),
+            })
+        
+            .then((response) => response.json()) // parse JSON response
+            .then((data) => {
+                console.log(`Returned value: ${data} from /users/`);
+                if(data){
+                  // Update the context values with the new data
+                  setNameValue(userAccount.name);
+                  setEmailValue(userAccount.email);
+               }
+            })
+            .catch((error) => {
+                console.log("===== ERROR =====");
+                console.log(error);
+            });
 
-  // Set the email error message immediately if the email is invalid
-  if (emailError) {
-    setEmailError(emailError);
-    return;
+    
+        // Clear the password fields if needed
+        setPasswordFields({
+          oldPassword: "",
+          newPassword: "",
+          confirmNewPassword: "",
+        });
+    
+        // Clear name, email, password errors, and empty field errors
+        setNameError("");
+        setEmailError("");
+        setPasswordError("");
+        setEmptyFieldErrors({});
+        
+
   }
-
-    // Logic to update the account settings in the backend
-    // ...
-  
-    // Clear the name and email fields
-    setUserAccount({
-      name: "",
-      email: "",
-    });
-
-    // Clear the password fields if needed
-    setPasswordFields({
-      oldPassword: "",
-      newPassword: "",
-      confirmNewPassword: "",
-    });
-
-    // Clear name, email, password errors, and empty field errors
-    setNameError("");
-    setEmailError("");
-    setPasswordError("");
-    setEmptyFieldErrors({});
-  };
-  
  // Function to handle the "Update" button click for password settings
  const handlePasswordUpdate = async () => {
 
@@ -169,22 +193,32 @@ const Setting = () => {
   }
 
   // Call the backend API to verify the old password
-  try {
-    const response = await fetch("https://replicake.onrender.com/users/update/password/{${2}", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        // Include any necessary authentication headers
-      },
-      body: JSON.stringify({
-        oldPassword: passwordFields.oldPassword,
-      }),
-    });
+  console.log(userId);
+      
+  fetch(`https://replicake.onrender.com/users/update/password/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+   },
+   body: JSON.stringify({
+      oldPassword: passwordFields.oldPassword,
+      newPassword: passwordFields.newPassword,
+      confirmNewPassword: passwordFields.confirmNewPassword,
+   }),
+    })
 
-    if (!response.ok) {
-      // If the response status is not 200-299, handle the error
-      throw new Error("Failed to verify old password.");
-    }
+    .then((response) => response.json()) // parse JSON response
+    .then((data) => {
+        console.log(`Returned value: ${data} from /users/`);
+        if(data){
+          // Update the context values with the new data
+          setPasswordValue(passwordFields.confirmNewPassword);
+       }
+    })
+    .catch((error) => {
+        console.log("===== ERROR =====");
+        console.log(error);
+    });
 
     // Proceed with updating the password settings
     // ... Logic to update the password settings in the backend ...
@@ -197,10 +231,7 @@ const Setting = () => {
     });
     setPasswordError(""); // Clear password error message
     setEmptyFieldErrors({}); // Clear empty field errors
-  } catch (error) {
-    console.error(error);
-    setPasswordError("Failed to verify old password. Please try again.");
-  }
+
 };
 
 
