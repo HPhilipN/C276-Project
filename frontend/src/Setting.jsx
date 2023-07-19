@@ -2,9 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import Navbar from "./Navbar";
+import Loader from "./utils/Loader";
 import "./styles/Setting.css";
 import { UserContext } from "./utils/UserContext";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
@@ -13,6 +14,9 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import MyRecipes from "./MyRecipes";
 
 const Setting = () => {
+   // Accessing isChef, and isModerator from the UserContext
+   const { isChef, isModerator, emailValue, userId } = useContext(UserContext);
+
    const [activeTab, setActiveTab] = useState("account"); // State to track the active tab
    const [showPassword, setShowPassword] = useState({
       oldPassword: false,
@@ -20,25 +24,22 @@ const Setting = () => {
       confirmNewPassword: false,
    }); // State to toggle password visibility
 
-   // Accessing isChef, and isModerator from the UserContext
-   const { isChef, isModerator, emailValue } = useContext(UserContext);
-
    const { nameValue } = useContext(UserContext);
    const { setNameValue, setEmailValue } = useContext(UserContext);
    const [passwordError, setPasswordError] = useState(""); // State to hold password error message
    const [emailError, setEmailError] = useState("");
    const [nameError, setNameError] = useState("");
-   const { userId } = useContext(UserContext);
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
    const firstLetter = nameValue.charAt(0).toUpperCase();
    const [showInvalidOldPassword, setShowInvalidOldPassword] = useState(false);
 
-   // mods should not be able to access this
+   // If not logged in or moderator, no access
    const navigate = useNavigate();
-   if (isModerator) {
-      navigate("/adminhome");
-   } else if (!isChef) {
+   if (!isChef && !isModerator) {
+      console.log("Not Logged In");
       navigate("/");
+   } else if (isModerator) {
+      navigate("/adminhome");
    }
 
    // State to hold the user's account settings

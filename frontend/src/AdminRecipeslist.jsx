@@ -31,14 +31,15 @@ const customStyles = {
 };
 
 export default function AdminRecipelist() {
-   const { isChef, userId } = useContext(UserContext);
+   const { isModerator, userId } = useContext(UserContext);
    const [category, setCategory] = useState([]);
    const [message, setMessage] = useState("");
    const [recipeId, setRecipeId] = useState(null);
    const [modalOpen, setModalOpen] = useState(false);
 
+   // redirect to home if chef or logged out
    const navigate = useNavigate();
-   if (isChef) {
+   if (!isModerator) {
       navigate("/");
    }
 

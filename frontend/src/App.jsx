@@ -11,6 +11,7 @@ import AdminRecipelist from "./AdminRecipeslist";
 import UserProvider from "./utils/UserContext";
 import RecipeDisplay from "./RecipeDisplay";
 import Recipes from "./Recipes";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -22,13 +23,13 @@ function App() {
                <Route path="/" element={<Home />} />
                <Route path="/login" element={<Login />} />
                {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-               <Route path="/setting" element={<Setting />} />
+               <Route path="/settings" element={<Setting />} />
                <Route path="/recipes" element={<Recipes />} />
                <Route path="/cookbook" element={<Cookbook />} />
                <Route path="/cookbook/view/:rid" element={<RecipeDisplay />} />
-               <Route path="/adminhome" element={<Adminhome />} />
-               <Route path="/adminusers" element={<AdminUserlist />} />
-               <Route path="/adminrecipes" element={<AdminRecipelist />} />
+               <Route path="/admin/home" element={<Adminhome />} />
+               <Route path="/admin/users" element={<AdminUserlist />} />
+               <Route path="/admin/recipes" element={<AdminRecipelist />} />
                <Route path="*" element={<NotFound />} />
             </Routes>
          </Router>
@@ -37,3 +38,11 @@ function App() {
 }
 
 export default App;
+
+{
+   /* 
+<ProtectedRoute path="/admin/home" element={<Adminhome />} />
+<ProtectedRoute path="/admin/users" element={<AdminUserlist />} />
+<ProtectedRoute path="/admin/recipes" element={<AdminRecipelist />} />
+*/
+}

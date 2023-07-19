@@ -50,7 +50,7 @@ const NavbarLogin = () => {
          text: "Settings",
          icon: <SettingsIcon />,
          profile: true,
-         onClick: () => (window.location.href = "/setting"),
+         onClick: () => (window.location.href = "/settings"),
       },
       {
          text: "Logout",
@@ -81,14 +81,16 @@ const NavbarLogin = () => {
             <a href="/cookbook" className="nav-buttons">
                Cookbook
             </a>
-            <a href="/setting" className="nav-buttons">
+            <a href="/settings" className="nav-buttons">
                Settings
             </a>
             <a onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
             <a href="/setting" className="navbar-profile" style={{ marginRight: 5 }}>
-               <Avatar className="navbar-profile-picture" alt="Profile Picture">{firstLetter}</Avatar>
+               <Avatar className="navbar-profile-picture" alt="Profile Picture">
+                  {firstLetter}
+               </Avatar>
             </a>
          </div>
          <div className="navbar-menu-container">

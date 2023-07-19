@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
+import Loader from "./utils/Loader";
 import { useParams } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import "./styles/RecipeDisplay.css";
 
 const RecipeDisplay = () => {
@@ -12,6 +13,12 @@ const RecipeDisplay = () => {
    // useParams grabs rid from url
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
+
+   // redirect to home if logged out
+   const navigate = useNavigate();
+   if (!isChef && !isModerator) {
+      navigate("/");
+   }
 
    // fetch the desired recipe object
    useEffect(() => {
@@ -33,16 +40,7 @@ const RecipeDisplay = () => {
 
    // if recipe data isnt populated
    if (!recipe) {
-      return (
-         <>
-            {isChef && <NavbarLogin />}
-            {isModerator && <NavbarAdmin />}
-            {!isChef && !isModerator && <Navbar />}
-            <div className="loader">
-               <CircularProgress color="success" size={70} />
-            </div>
-         </>
-      );
+      return <Loader />;
    }
 
    return (

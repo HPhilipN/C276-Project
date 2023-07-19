@@ -7,6 +7,7 @@ import RecipeList from "./Recipelist";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
+import Loader from "./utils/Loader";
 import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +19,9 @@ const Cookbook = () => {
    const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
 
-   // mods should not be able to access this
+   // redirect to home if logged out
    const navigate = useNavigate();
-   if (!isChef || !isModerator) {
+   if (!isChef && !isModerator) {
       navigate("/");
    }
 

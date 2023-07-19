@@ -51,7 +51,7 @@ const NavbarAdmin = () => {
          text: "Admin",
          icon: <AdminPanelSettingsIcon />,
          profile: true,
-         onClick: () => (window.location.href = "/adminhome"),
+         onClick: () => (window.location.href = "/admin/home"),
       },
       {
          text: "Logout",
@@ -83,13 +83,13 @@ const NavbarAdmin = () => {
             <a href="/cookbook" className="nav-buttons">
                Cookbook
             </a>
-            <a href="/adminhome" className="nav-buttons">
+            <a href="/admin/home" className="nav-buttons">
                Admin
             </a>
             <a href="#" onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
-            <a href="/adminhome" className="navbar-profile" style={{ marginRight: 5 }}>
+            <a href="/admin/home" className="navbar-profile" style={{ marginRight: 5 }}>
                <AssignmentIndOutlinedIcon
                   className="navbar-profile-picture"
                   alt="Profile Picture"
