@@ -6,16 +6,16 @@
 .recipe-list {
    display: flex;
    flex-wrap: wrap;
-   justify-content: space-between;
+   justify-content: center;
    margin: 1rem !important;
+   /* border: 1px solid #000; */
 }
 
 .recipe-item {
    flex-basis: calc(25% - 10px); /* Set width for each recipe item */
    text-align: start;
    min-width: 18rem;
-   margin-bottom: 1rem !important;
-   /* border: 1px solid #000; */
+   margin: 0.5rem !important;
 }
 
 .tags {
