@@ -9,6 +9,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import InfoButton from "./utils/InfoButton";
 
 // User generated recipes
@@ -16,6 +17,12 @@ const Cookbook = () => {
    const { isChef, isModerator, userId } = useContext(UserContext);
    const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
+
+   // mods should not be able to access this
+   const navigate = useNavigate();
+   if (!isChef || !isModerator) {
+      navigate("/home");
+   }
 
    // check if DB has recipes
    async function checkUserRecipeCount() {
