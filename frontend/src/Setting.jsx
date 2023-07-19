@@ -30,6 +30,9 @@ const Setting = () => {
    const [nameError, setNameError] = useState("");
    const { userId } = useContext(UserContext);
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+   const firstLetter = nameValue.charAt(0).toUpperCase();
+   const [showInvalidOldPassword, setShowInvalidOldPassword] = useState(false);
+
 
    // mods should not be able to access this
    const navigate = useNavigate();
@@ -141,8 +144,8 @@ const Setting = () => {
                setEmailValue(userAccount.email);
                // Show the "Successfully Updated" message
                setShowSuccessMessage(true);
-               // Hide the message after 5 seconds
-               setTimeout(() => setShowSuccessMessage(false), 5000);
+               // Hide the message after 2.5 seconds
+               setTimeout(() => setShowSuccessMessage(false), 2500);
             }
          })
          .catch((error) => {
@@ -182,6 +185,11 @@ const Setting = () => {
          setEmptyFieldErrors(passwordEmptyFieldErrors);
          return;
       }
+      // Check if old password is the same as new password to disallow it 
+      if (passwordFields.newPassword == passwordFields.confirmNewPassword && passwordFields.oldPassword == passwordFields.confirmNewPassword) {
+         setPasswordError("Old password cannot be the same as new password.");
+         return;
+      }
 
       // Validate the new passwords
       if (passwordFields.newPassword !== passwordFields.confirmNewPassword) {
@@ -210,10 +218,13 @@ const Setting = () => {
          .then((data) => {
             console.log(`Returned value: ${data} from /users/`);
             // Show the "Successfully Updated" message
-            if (data) {
+            if (data){
                setShowSuccessMessage(true);
-               // Hide the message after 0.5 seconds
-               setTimeout(() => setShowSuccessMessage(false), 500);
+               // Hide the message after 2.5 seconds
+               setTimeout(() => setShowSuccessMessage(false), 2500);
+            } else{
+               setShowInvalidOldPassword(true);
+               setTimeout(() => setShowInvalidOldPassword(false), 3000); // Set timeout for 3 seconds
             }
          })
          .catch((error) => {
@@ -288,6 +299,11 @@ const Setting = () => {
          name: nameValue,
          email: emailValue,
       });
+            // Clear name, email, password errors, and empty field errors
+            setNameError("");
+            setEmailError("");
+            setPasswordError("");
+            setEmptyFieldErrors({});
    };
 
    // Function to handle the "Cancel" button click for password settings
@@ -298,6 +314,11 @@ const Setting = () => {
          newPassword: "",
          confirmNewPassword: "",
       });
+            // Clear name, email, password errors, and empty field errors
+            setNameError("");
+            setEmailError("");
+            setPasswordError("");
+            setEmptyFieldErrors({});
    };
 
    // Function to handle tab click and update the active tab
@@ -486,7 +507,7 @@ const Setting = () => {
                <div className="profile-tab-nav border-right">
                   <div className="p-4 d-flex flex-column align-items-center">
                      <div className="img-circle text-center mb-3">
-                        <Avatar alt="Avatar" className="shadow " />
+                        <Avatar alt="Avatar" className="shadow ">{firstLetter}</Avatar>
                      </div>
                      <h4 className="text-center">{nameValue}</h4>
                   </div>

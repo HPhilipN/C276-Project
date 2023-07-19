@@ -120,7 +120,7 @@ nav {
    font-size: 1.5rem;
 }
 .secondary-button:hover {
-   background-color: #e48f0f;
+   background-color: #749768; /* Similar color to the primary button */
 }
 .primary-subheading {
    font-weight: 700;

@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const customStyles = {
    overlay: {
-      background: "rgba(0, 0, 0, 0.5)",
+      background: "rgba(0, 0, 0, 0.1)",
       overflowY: "scroll",
       zIndex: 999,
    },
@@ -34,6 +34,7 @@ export default function AdminRecipelist() {
    const { isChef, userId } = useContext(UserContext);
    const [category, setCategory] = useState([]);
    const [message, setMessage] = useState("");
+   const [recipeId, setRecipeId] = useState(null);
    const [modalOpen, setModalOpen] = useState(false);
 
    const navigate = useNavigate();
@@ -57,8 +58,13 @@ export default function AdminRecipelist() {
    function displayRecipe(rid) {
       console.log("in progress");
       navigate(`/cookbook/view/${rid}`);
-   }
 
+   //confirm delete via popup modal and pass rid to modal 
+   function confirmDelete(recipeId) {
+        setRecipeId(recipeId)
+        setModalOpen(true);
+   }
+   
    //deletes recipe from the cookbook based on passed rid
    async function deleteRecipe(rid) {
       console.log(rid);
@@ -80,13 +86,14 @@ export default function AdminRecipelist() {
          <Navbar />
          <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
             <button className="x-button" onClick={() => setModalOpen(false)}>
-               <FontAwesomeIcon icon={faX} />
+            <FontAwesomeIcon icon={faX} />
             </button>
-            <div>
-               {/*Category*/}
-               Hello this is the view recipe modal
+            <div className="confirmdelbox">
+                <p>Are you sure you want to delete this recipe?</p><br />
+                <button className="confirmbtn" onClick={() => {deleteRecipe(recipeId); setModalOpen(false)}}>Yes</button>
+                <button className="cancelbtn" onClick={() => setModalOpen(false)}>Cancel</button>             
             </div>
-         </Modal>
+        </Modal>
          <div className="recipebox">
             <table className="recipedisplay">
                <thead></thead>
@@ -100,16 +107,13 @@ export default function AdminRecipelist() {
                   {category.map((getcate) => (
                      <tr className="reciperow" key={getcate.rid}>
                         <td>
-                           {" "}
-                           <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title}{" "}
+                           <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} #{getcate.rid}
                         </td>
                         <td>
-                           {" "}
-                           <FontAwesomeIcon icon={faUser} /> {getcate.authorName}{" "}
+                           <FontAwesomeIcon icon={faUser} /> {getcate.authorName}
                         </td>
                         <td>
-                           {" "}
-                           <FontAwesomeIcon icon={faStar} /> {getcate.favourites}{" "}
+                           <FontAwesomeIcon icon={faStar} /> {getcate.favourites}
                         </td>
                         <td>
                            <button
@@ -120,13 +124,12 @@ export default function AdminRecipelist() {
                            </button>
                         </td>
                         <td>
-                           {" "}
                            <button
                               className="deletebtn btn-hover"
-                              onClick={() => deleteRecipe(getcate.rid)}
+                              onClick={() => confirmDelete(getcate.rid)}
                            >
                               Delete
-                           </button>{" "}
+                           </button>
                         </td>
                      </tr>
                   ))}
