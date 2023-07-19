@@ -47,20 +47,23 @@ const Cookbook = () => {
    }
 
    // get all recipes from DB
-   async function getUserRecipesFromDB() {
+   async function getUserRecipesFromDB(searchTerm) {
       try {
-         // "https://replicake.onrender.com/recipes/view"
-         // "/recipes/view"
          const response = await fetch("https://replicake.onrender.com/recipes/view", {
             method: "GET",
          });
          const data = await response.json();
-         setUserRecipes(data);
+         const filteredRecipes = data.filter(recipe => {
+            return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+         });
+         setUserRecipes(filteredRecipes);
       } catch (error) {
          console.log("===== ERROR =====");
          console.log(error);
       }
    }
+   //implement filter functionality
+
    // TODO figure out how to implement the filter functionality so that we can also use it for other pages
    // run when userId changes
    useEffect(() => {
@@ -80,8 +83,8 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter />
-            <Searchbar />
+            <Filter filteredItems={getUserRecipesFromDB}/>
+            <Searchbar onSearch={getUserRecipesFromDB} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
@@ -91,7 +94,6 @@ const Cookbook = () => {
                <RecipeList recipes={userRecipes} />
             ) : null}
             {/* Info Button on Bottom Right */}
-            <InfoButton />
          </div>
       </div>
    );
