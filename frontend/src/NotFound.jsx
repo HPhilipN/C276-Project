@@ -5,8 +5,8 @@ import "./styles/NotFound.css";
 
 export default function NotFound() {
    return (
-      <div className="container">
-         <main>
+      <div className="background-green">
+         <div className="notfound-main">
             <img className="replicakeLogo" src={Logo} alt="Replicake Logo" width={450}></img>
             <header className="title">The page you're looking for does not exist</header>
             <ul className="links">
@@ -16,17 +16,12 @@ export default function NotFound() {
                   </Link>
                </li>
                <li>
-                  <Link className="button" to="/login">
-                     Login
-                  </Link>
-               </li>
-               <li>
                   <Link className="button" to="/recipes">
                      Recipes
                   </Link>
                </li>
             </ul>
-         </main>
+         </div>
       </div>
    );
 }

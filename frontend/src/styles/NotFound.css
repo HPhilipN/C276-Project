@@ -5,14 +5,14 @@
    font-family: "Roboto", sans-serif;
 }
 
-.container {
+.background-green {
    background-color: #92b48c;
    height: 100vh;
    display: flex;
    justify-content: center;
 }
 
-main {
+.notfound-main {
    position: absolute;
    top: 40%;
    transform: translateY(-60%);

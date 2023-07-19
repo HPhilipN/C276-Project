@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import PasswordStrengthBar from "react-password-strength-bar";
+import MyRecipes from "./MyRecipes";
 
 const Setting = () => {
    const [activeTab, setActiveTab] = useState("account"); // State to track the active tab
@@ -209,9 +210,11 @@ const Setting = () => {
          .then((data) => {
             console.log(`Returned value: ${data} from /users/`);
             // Show the "Successfully Updated" message
-            setShowSuccessMessage(true);
-            // Hide the message after 5 seconds
-            setTimeout(() => setShowSuccessMessage(false), 500);
+            if (data) {
+               setShowSuccessMessage(true);
+               // Hide the message after 0.5 seconds
+               setTimeout(() => setShowSuccessMessage(false), 500);
+            }
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -561,7 +564,7 @@ const Setting = () => {
                      role="tabpanel"
                      aria-labelledby="my-recipes-tab"
                   >
-                     {passwordTab}
+                     <MyRecipes />
                   </div>
                   {/* Add more tab panes for other sections */}
                </div>

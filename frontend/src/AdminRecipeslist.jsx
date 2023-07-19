@@ -53,13 +53,10 @@ export default function AdminRecipelist() {
       getcategory();
    });
 
-   //doesn't work at the moment - should redirect to full recipe view cookbook/view/rid
-   async function displayRecipe(rid) {
+   // should redirect to full recipe view cookbook/view/rid
+   function displayRecipe(rid) {
       console.log("in progress");
-      const redirect = () => {
-         window.location.href = "/cookbook/view/" + rid;
-      };
-      return <button onClick={redirect}>go to another page</button>;
+      navigate(`/cookbook/view/${rid}`);
    }
 
    //deletes recipe from the cookbook based on passed rid
