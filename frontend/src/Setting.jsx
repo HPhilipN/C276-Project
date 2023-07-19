@@ -183,6 +183,11 @@ const Setting = () => {
          setEmptyFieldErrors(passwordEmptyFieldErrors);
          return;
       }
+      // Check if old password is the same as new password to disallow it 
+      if (passwordFields.newPassword == passwordFields.confirmNewPassword && passwordFields.oldPassword == passwordFields.confirmNewPassword) {
+         setPasswordError("Old password cannot be the same as new password.");
+         return;
+      }
 
       // Validate the new passwords
       if (passwordFields.newPassword !== passwordFields.confirmNewPassword) {
