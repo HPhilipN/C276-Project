@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
@@ -28,16 +28,36 @@ const customStyles = {
 };
 //handles the modal functionality for the filters
 function Filter({recipeData}) {
+
    const [modalOpen, setModalOpen] = useState(false);
+   //t
    const [selectedFilters, setSelectedFilters] = useState([]);
    const [filteredItems, setFilteredItems] = useState(recipeData);
 
+   //not sure if this works, just going off the guide atm
    const handleFilterlogic = (categoryList) => {
       if(selectedFilters.includes(categoryList)){
          let filters = selectedFilters.filter((el) => el !== categoryList);
          setSelectedFilters(filters);
       }
    };
+
+   useEffect(() => {
+      setFilteredItems(recipeData);
+   }, [recipeData]);
+
+   const items = [
+      // Array of items
+   ];
+   
+   function App() {
+      return (
+         <div>
+            {/* Other components */}
+            <Filter recipeData={items} />
+         </div>
+      );
+   }
 
    return (
       <div className="Filter">
