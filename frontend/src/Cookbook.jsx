@@ -39,15 +39,16 @@ const Cookbook = () => {
    }
 
    // get all recipes from DB
-   async function getUserRecipesFromDB() {
+   async function getUserRecipesFromDB(searchTerm) {
       try {
-         // "https://replicake.onrender.com/recipes/view"
-         // "/recipes/view"
          const response = await fetch("https://replicake.onrender.com/recipes/view", {
             method: "GET",
          });
          const data = await response.json();
-         setUserRecipes(data);
+         const filteredRecipes = data.filter(recipe => {
+            return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+         });
+         setUserRecipes(filteredRecipes);
       } catch (error) {
          console.log("===== ERROR =====");
          console.log(error);
@@ -75,7 +76,7 @@ const Cookbook = () => {
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
             <Filter filteredItems={userRecipes}/>
-            <Searchbar />
+            <Searchbar onSearch={getUserRecipesFromDB} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
