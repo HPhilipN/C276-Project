@@ -29,6 +29,8 @@ const NavbarAdmin = () => {
       useContext(UserContext);
    const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
+   const { nameValue } = useContext(UserContext);
+   const firstLetter = nameValue.charAt(0).toUpperCase();
    const menuOptions = [
       {
          text: "Home",
@@ -48,6 +50,7 @@ const NavbarAdmin = () => {
       {
          text: "Admin",
          icon: <AdminPanelSettingsIcon />,
+         onClick: () => (window.location.href = "/adminhome"),
          profile: true,
       },
       {
@@ -87,7 +90,7 @@ const NavbarAdmin = () => {
                Log Out
             </a>
             <div className="navbar-profile">
-               <Avatar className="navbar-profile-picture" alt="Profile Picture" />
+               <Avatar className="navbar-profile-picture" alt="Profile Picture">{firstLetter}</Avatar>
             </div>
          </div>
          <div className="navbar-menu-container">

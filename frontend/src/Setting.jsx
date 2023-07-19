@@ -29,6 +29,8 @@ const Setting = () => {
    const [nameError, setNameError] = useState("");
    const { userId } = useContext(UserContext);
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+   const firstLetter = nameValue.charAt(0).toUpperCase();
+
 
 
    // mods should not be able to access this
@@ -142,7 +144,7 @@ const Setting = () => {
                // Show the "Successfully Updated" message
                setShowSuccessMessage(true);
                // Hide the message after 5 seconds
-               setTimeout(() => setShowSuccessMessage(false), 800);
+               setTimeout(() => setShowSuccessMessage(false), 2500);
 
             }
          })
@@ -219,7 +221,7 @@ const Setting = () => {
             if (data){
                setShowSuccessMessage(true);
                // Hide the message after 5 seconds
-               setTimeout(() => setShowSuccessMessage(false), 800);
+               setTimeout(() => setShowSuccessMessage(false), 2500);
             } else{
                setPasswordError("Invalid Old Password.");
             }
@@ -346,7 +348,7 @@ const Setting = () => {
                <div className="profile-tab-nav border-right">
                   <div className="p-4 d-flex flex-column align-items-center">
                      <div className="img-circle text-center mb-3">
-                        <Avatar alt="Avatar" className="shadow " />
+                        <Avatar alt="Avatar" className="shadow ">{firstLetter}</Avatar>
                      </div>
                      <h4 className="text-center">{nameValue}</h4>
                   </div>

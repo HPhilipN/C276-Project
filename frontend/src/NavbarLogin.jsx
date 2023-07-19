@@ -27,6 +27,9 @@ const NavbarLogin = () => {
       useContext(UserContext);
    const navigate = useNavigate();
    const [openMenu, setOpenMenu] = useState(false);
+   const { nameValue } = useContext(UserContext);
+   const firstLetter = nameValue.charAt(0).toUpperCase();
+
    const menuOptions = [
       {
          text: "Home",
@@ -85,7 +88,7 @@ const NavbarLogin = () => {
                Log Out
             </a>
             <div className="navbar-profile">
-               <Avatar className="navbar-profile-picture" alt="Profile Picture" />
+               <Avatar className="navbar-profile-picture" alt="Profile Picture">{firstLetter}</Avatar>
             </div>
          </div>
          <div className="navbar-menu-container">
