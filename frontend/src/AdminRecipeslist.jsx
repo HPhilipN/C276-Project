@@ -112,13 +112,19 @@ export default function AdminRecipelist() {
                            <FontAwesomeIcon icon={faStar} /> {getcate.favourites}{" "}
                         </td>
                         <td>
-                           <button className="viewbtn" onClick={() => displayRecipe(getcate.rid)}>
+                           <button
+                              className="viewbtn btn-hover"
+                              onClick={() => displayRecipe(getcate.rid)}
+                           >
                               View
                            </button>
                         </td>
                         <td>
                            {" "}
-                           <button className="deletebtn" onClick={() => deleteRecipe(getcate.rid)}>
+                           <button
+                              className="deletebtn btn-hover"
+                              onClick={() => deleteRecipe(getcate.rid)}
+                           >
                               Delete
                            </button>{" "}
                         </td>

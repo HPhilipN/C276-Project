@@ -48,18 +48,6 @@ export default function AdminUserlist() {
       getcategory();
    });
 
-   //Delete user from database with UID passed in
-   /*
-   const deleteUser= async (uid) => {
-        console.log(uid);
-        setUserId(uid);
-        console.log(userId);
-        const  requestDelete= await fetch(`https://replicake.onrender.com/users/delete/${uid}`);
-        const deleteResponse = requestDelete.json();
-        setMessage(deleteResponse);
-   }
-   */
-
    async function deleteUser(uid) {
       console.log(uid);
       if (uid == userId) {
@@ -104,19 +92,16 @@ export default function AdminUserlist() {
                   {category.map((getcate) => (
                      <tr className="reciperow" key={getcate.uid}>
                         <td>
-                           {" "}
-                           {getcate.name} #{getcate.uid}{" "}
+                           {getcate.name} #{getcate.uid}
                         </td>
                         <td> {getcate.email} </td>
                         <td>
-                           {" "}
-                           <button className="viewbtn">View</button>{" "}
-                        </td>
-                        <td>
-                           {" "}
-                           <button className="deletebtn" onClick={() => deleteUser(getcate.uid)}>
+                           <button
+                              className="deletebtn btn-hover"
+                              onClick={() => deleteUser(getcate.uid)}
+                           >
                               Delete
-                           </button>{" "}
+                           </button>
                         </td>
                      </tr>
                   ))}
