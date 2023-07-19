@@ -27,9 +27,9 @@ const Cookbook = () => {
 
    // check if DB has recipes
    async function checkUserRecipeCount() {
-      // "https://replicake.onrender.com/recipes/view""
+      // "https://replicake.onrender.com/recipes/view"
       // /recipes/view
-      fetch("https://replicake.onrender.com/recipes/view", {
+      fetch("/recipes/view", {
          method: "GET",
       })
          .then((response) => {
@@ -47,23 +47,20 @@ const Cookbook = () => {
    }
 
    // get all recipes from DB
-   async function getUserRecipesFromDB(searchTerm) {
+   async function getUserRecipesFromDB() {
       try {
-         const response = await fetch("https://replicake.onrender.com/recipes/view", {
+         // "https://replicake.onrender.com/recipes/view"
+         // "/recipes/view"
+         const response = await fetch("/recipes/view", {
             method: "GET",
          });
          const data = await response.json();
-         const filteredRecipes = data.filter(recipe => {
-            return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
-         });
-         setUserRecipes(filteredRecipes);
+         setUserRecipes(data);
       } catch (error) {
          console.log("===== ERROR =====");
          console.log(error);
       }
    }
-   //implement filter functionality
-
    // TODO figure out how to implement the filter functionality so that we can also use it for other pages
    // run when userId changes
    useEffect(() => {
@@ -83,8 +80,8 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={getUserRecipesFromDB}/>
-            <Searchbar onSearch={getUserRecipesFromDB} />
+            <Filter />
+            <Searchbar />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
@@ -94,6 +91,7 @@ const Cookbook = () => {
                <RecipeList recipes={userRecipes} />
             ) : null}
             {/* Info Button on Bottom Right */}
+            <InfoButton />
          </div>
       </div>
    );

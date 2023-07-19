@@ -39,7 +39,7 @@ const Setting = () => {
       console.log("Not Logged In");
       navigate("/");
    } else if (isModerator) {
-      navigate("/adminhome");
+      navigate("/admin/home");
    }
 
    // State to hold the user's account settings
