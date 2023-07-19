@@ -142,7 +142,7 @@ const Setting = () => {
                // Show the "Successfully Updated" message
                setShowSuccessMessage(true);
                // Hide the message after 5 seconds
-               setTimeout(() => setShowSuccessMessage(false), 5000);
+               setTimeout(() => setShowSuccessMessage(false), 800);
 
             }
          })
@@ -211,9 +211,13 @@ const Setting = () => {
          .then((data) => {
             console.log(`Returned value: ${data} from /users/`);
             // Show the "Successfully Updated" message
-            setShowSuccessMessage(true);
-            // Hide the message after 5 seconds
-            setTimeout(() => setShowSuccessMessage(false), 2000);
+            if (data){
+               setShowSuccessMessage(true);
+               // Hide the message after 5 seconds
+               setTimeout(() => setShowSuccessMessage(false), 800);
+            } else{
+               setPasswordError("Invalid Old Password.");
+            }
             
          })
          .catch((error) => {
