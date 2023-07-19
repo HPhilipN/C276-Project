@@ -50,7 +50,6 @@ const NavbarAdmin = () => {
       {
          text: "Admin",
          icon: <AdminPanelSettingsIcon />,
-         onClick: () => (window.location.href = "/adminhome"),
          profile: true,
          onClick: () => (window.location.href = "/adminhome"),
       },
