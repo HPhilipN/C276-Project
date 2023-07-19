@@ -110,4 +110,20 @@ public class RecipeControllerTest {
 
         System.out.println("Passed test for /recipes/delete/{rid} not found");
     }
+    @Test
+    public void testFindRecipeUid() throws Exception {
+         mockMvc.perform(MockMvcRequestBuilders.get("/recipes/find/{uid}", 2))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").value("Fake Cake"));
+
+        System.out.println("Passed test for /recipes/find/{uid}");
+    }
+    @Test
+    public void testFindEmptyRecipeUid() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/find/{uid}", 204))
+            .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+        System.out.println("Passed test for /recipes/find/{uid} no content");
+    }
 }
