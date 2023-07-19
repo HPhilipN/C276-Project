@@ -120,7 +120,10 @@ public class UserController {
         try {
             User user = userRepo.findByUid(userId);
             // Update the fields of the existing student with the new values
-            user.setName(updatedUser.getName());
+            String newName = updatedUser.getName();
+            newName = newName.toLowerCase(); // lowercase the entire name
+            newName = newName.substring(0, 1).toUpperCase() + newName.substring(1); // Capitalize first letter of name
+            user.setName(newName);
             // if user with this email already exists
             if (user.getEmail().equals(updatedUser.getEmail())) {
                 // if the user didnt change email
