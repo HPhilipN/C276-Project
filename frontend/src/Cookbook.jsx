@@ -21,7 +21,7 @@ const Cookbook = () => {
    // mods should not be able to access this
    const navigate = useNavigate();
    if (!isChef || !isModerator) {
-      navigate("/home");
+      navigate("/");
    }
 
    // check if DB has recipes

@@ -38,7 +38,7 @@ const Setting = () => {
    if (isModerator) {
       navigate("/adminhome");
    } else if (!isChef) {
-      navigate("/home");
+      navigate("/");
    }
 
    // State to hold the user's account settings
