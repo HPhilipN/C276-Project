@@ -58,13 +58,14 @@ export default function AdminRecipelist() {
    function displayRecipe(rid) {
       console.log("in progress");
       navigate(`/cookbook/view/${rid}`);
-
-   //confirm delete via popup modal and pass rid to modal 
-   function confirmDelete(recipeId) {
-        setRecipeId(recipeId)
-        setModalOpen(true);
    }
-   
+
+   //confirm delete via popup modal and pass rid to modal
+   function confirmDelete(recipeId) {
+      setRecipeId(recipeId);
+      setModalOpen(true);
+   }
+
    //deletes recipe from the cookbook based on passed rid
    async function deleteRecipe(rid) {
       console.log(rid);
@@ -86,14 +87,25 @@ export default function AdminRecipelist() {
          <Navbar />
          <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
             <button className="x-button" onClick={() => setModalOpen(false)}>
-            <FontAwesomeIcon icon={faX} />
+               <FontAwesomeIcon icon={faX} />
             </button>
             <div className="confirmdelbox">
-                <p>Are you sure you want to delete this recipe?</p><br />
-                <button className="confirmbtn" onClick={() => {deleteRecipe(recipeId); setModalOpen(false)}}>Yes</button>
-                <button className="cancelbtn" onClick={() => setModalOpen(false)}>Cancel</button>             
+               <p>Are you sure you want to delete this recipe?</p>
+               <br />
+               <button
+                  className="confirmbtn"
+                  onClick={() => {
+                     deleteRecipe(recipeId);
+                     setModalOpen(false);
+                  }}
+               >
+                  Yes
+               </button>
+               <button className="cancelbtn" onClick={() => setModalOpen(false)}>
+                  Cancel
+               </button>
             </div>
-        </Modal>
+         </Modal>
          <div className="recipebox">
             <table className="recipedisplay">
                <thead></thead>
