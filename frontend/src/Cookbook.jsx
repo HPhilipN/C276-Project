@@ -21,7 +21,7 @@ const Cookbook = () => {
    async function checkUserRecipeCount() {
       // "https://replicake.onrender.com/recipes/view""
       // /recipes/view
-      fetch("https://replicake.onrender.com/recipes/view", {
+      fetch("/recipes/view", {
          method: "GET",
       })
          .then((response) => {
@@ -41,22 +41,25 @@ const Cookbook = () => {
    // get all recipes from DB
    async function getUserRecipesFromDB(searchTerm) {
       try {
-         const response = await fetch("https://replicake.onrender.com/recipes/view", {
+         const response = await fetch("/recipes/view", {
             method: "GET",
          });
-   
+
          if (!response.ok) {
             throw new Error("Failed to fetch user recipes");
          }
-   
+
          const data = await response.json();
          console.log("Fetched data:", data);
-   
+
          if (Array.isArray(data)) {
             const filteredRecipes = searchTerm
-               ? data.filter((recipe) => recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase()))
+               ? data.filter(
+                    (recipe) =>
+                       recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+                 )
                : data;
-   
+
             setUserRecipes(filteredRecipes);
          } else {
             console.log("Data is not an array:", data);
@@ -88,7 +91,7 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={getUserRecipesFromDB}/>
+            <Filter filteredItems={getUserRecipesFromDB} />
             <Searchbar onSearch={getUserRecipesFromDB} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
