@@ -74,7 +74,7 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter />
+            <Filter filteredItems={userRecipes}/>
             <Searchbar />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>

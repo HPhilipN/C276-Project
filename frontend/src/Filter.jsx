@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import Filterlist from "./Filterlist";
 
 import "./styles/Filter.css";
+import CategoryButton from "./CategoryButton";
 
 const customStyles = {
    overlay: {
@@ -22,13 +22,22 @@ const customStyles = {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       backgroundColor: "white",
-      width: "50%",
+      width: "50%", 
       maxHeight: 600,
    },
 };
 //handles the modal functionality for the filters
-function Filter() {
+function Filter({recipeData}) {
    const [modalOpen, setModalOpen] = useState(false);
+   const [selectedFilters, setSelectedFilters] = useState([]);
+   const [filteredItems, setFilteredItems] = useState(recipeData);
+
+   const handleFilterlogic = (categoryList) => {
+      if(selectedFilters.includes(categoryList)){
+         let filters = selectedFilters.filter((el) => el !== categoryList);
+         setSelectedFilters(filters);
+      }
+   };
 
    return (
       <div className="Filter">
@@ -54,6 +63,7 @@ function Filter() {
          </Modal>
       </div>
    );
+
 }
 
 export default Filter;
