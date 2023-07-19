@@ -9,81 +9,85 @@ import "./styles/Filter.css";
 import CategoryButton from "./CategoryButton";
 
 const customStyles = {
-   overlay: {
-      background: "rgba(0, 0, 0, 0.5)",
-      overflowY: "scroll",
-      zIndex: 999,
-   },
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "white",
-      width: "50%", 
-      maxHeight: 600,
-   },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.5)",
+    overflowY: "scroll",
+    zIndex: 999,
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    width: "50%",
+    maxHeight: 600,
+  },
 };
-//handles the modal functionality for the filters
-function Filter({recipeData}) {
 
-   const [modalOpen, setModalOpen] = useState(false);
-   //t
-   const [selectedFilters, setSelectedFilters] = useState([]);
-   const [filteredItems, setFilteredItems] = useState(recipeData);
+function Filter({userRecipes}) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
-   //not sure if this works, just going off the guide atm
-   const handleFilterlogic = (categoryList) => {
-      if(selectedFilters.includes(categoryList)){
-         let filters = selectedFilters.filter((el) => el !== categoryList);
-         setSelectedFilters(filters);
-      }
-   };
+  const handleFilterLogic = (categoryList) => {
+    if (selectedFilters.includes(categoryList)) {
+      let filters = selectedFilters.filter((el) => el !== categoryList);
+      setSelectedFilters(filters);
+    } else {
+      setSelectedFilters([...selectedFilters, categoryList]);
+    }
+  };
 
-   useEffect(() => {
-      setFilteredItems(recipeData);
-   }, [recipeData]);
-
-   const items = [
-      // Array of items
-   ];
-   
-   function App() {
-      return (
-         <div>
-            {/* Other components */}
-            <Filter recipeData={items} />
-         </div>
+  useEffect(() => {
+    if (selectedFilters.length === 0) {
+      setFilteredItems(userRecipes); // No filters selected, show all recipes
+    } else {
+      const filtered = userRecipes.filter((recipe) =>
+        recipe.tags.some((tag) => selectedFilters.includes(tag))
       );
-   }
+      setFilteredItems(filtered);
+    }
+  }, [selectedFilters, userRecipes]);
 
-   return (
-      <div className="Filter">
-         <button className="filter-button" onClick={setModalOpen}>
-            <div className="filter-icon">
-               <FontAwesomeIcon icon={faFilter} />
-               Filters
-            </div>
-         </button>
-         <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
-            <button className="x-button" onClick={() => setModalOpen(false)}>
-               <FontAwesomeIcon icon={faX} />
+  const handleApplyBtn = () => {
+    setModalOpen(false);
+  };
+
+//   useEffect(() => {
+//     const filtered = filteredItems.filter((recipe) =>
+//       recipe.tags.some((tag) => selectedFilters.includes(tag))
+//     );
+//     setFilteredItems(filtered);
+//   }, [modalOpen]);
+
+  return (
+    <div className="Filter">
+      <button className="filter-button" onClick={() => setModalOpen(true)}>
+        <div className="filter-icon">
+          <FontAwesomeIcon icon={faFilter} />
+          Filters
+        </div>
+      </button>
+      <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
+        <button className="x-button" onClick={() => setModalOpen(false)}>
+          <FontAwesomeIcon icon={faX} />
+        </button>
+        <div>
+          <div className="category-group">
+            <h1>Filters</h1>
+            <Filterlist handleFilter={handleFilterLogic} />
+            <button className="control-button">Reset</button>
+            <button className="save-button" onClick={handleApplyBtn}>
+              Apply
             </button>
-            <div>
-               {/*Category*/}
-               <div className="category-group">
-                  <h1>Filters</h1>
-                  <Filterlist /> 
-                  <button className="control-button">Reset</button>
-                  <button className="save-button">Apply</button>
-               </div>
-            </div>
-         </Modal>
-      </div>
-   );
-
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
 }
 
 export default Filter;

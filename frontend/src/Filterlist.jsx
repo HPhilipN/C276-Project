@@ -3,13 +3,16 @@ import categoryListJson from "./Filtercategories.json";
 import "./styles/Filterlist.css";
 import CategoryButton from "./CategoryButton";
 //this thing renders the filterlist
-export default function Filterlist() {
+export default function Filterlist({handleFilter}) {
    const categoryList = Object.keys(categoryListJson)
    const itemList = categoryList.map((category) => (
     <div key={category}>
       <h4>{category}</h4>
       {categoryListJson[category].map((categoryItem) => (
-        <CategoryButton text={categoryItem}/>
+        <CategoryButton
+          text={categoryItem}
+          handleFilter={handleFilter}
+        />
       ))}
     </div>
   ));
