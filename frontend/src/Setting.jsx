@@ -213,7 +213,7 @@ const Setting = () => {
             // Show the "Successfully Updated" message
             setShowSuccessMessage(true);
             // Hide the message after 5 seconds
-            setTimeout(() => setShowSuccessMessage(false), 500);
+            setTimeout(() => setShowSuccessMessage(false), 2000);
             
          })
          .catch((error) => {
@@ -288,6 +288,11 @@ const Setting = () => {
          name: nameValue,
          email: emailValue,
       });
+            // Clear name, email, password errors, and empty field errors
+            setNameError("");
+            setEmailError("");
+            setPasswordError("");
+            setEmptyFieldErrors({});
    };
 
    // Function to handle the "Cancel" button click for password settings
@@ -298,6 +303,11 @@ const Setting = () => {
          newPassword: "",
          confirmNewPassword: "",
       });
+            // Clear name, email, password errors, and empty field errors
+            setNameError("");
+            setEmailError("");
+            setPasswordError("");
+            setEmptyFieldErrors({});
    };
 
    // Function to handle tab click and update the active tab
