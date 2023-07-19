@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import PasswordStrengthBar from "react-password-strength-bar";
+import MyRecipes from "./MyRecipes";
 
 const Setting = () => {
    const [activeTab, setActiveTab] = useState("account"); // State to track the active tab
@@ -31,7 +32,6 @@ const Setting = () => {
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
    const firstLetter = nameValue.charAt(0).toUpperCase();
    const [showInvalidOldPassword, setShowInvalidOldPassword] = useState(false);
-
 
 
    // mods should not be able to access this
@@ -144,9 +144,8 @@ const Setting = () => {
                setEmailValue(userAccount.email);
                // Show the "Successfully Updated" message
                setShowSuccessMessage(true);
-               // Hide the message after 5 seconds
+               // Hide the message after 2.5 seconds
                setTimeout(() => setShowSuccessMessage(false), 2500);
-
             }
          })
          .catch((error) => {
@@ -221,13 +220,12 @@ const Setting = () => {
             // Show the "Successfully Updated" message
             if (data){
                setShowSuccessMessage(true);
-               // Hide the message after 5 seconds
+               // Hide the message after 2.5 seconds
                setTimeout(() => setShowSuccessMessage(false), 2500);
             } else{
                setShowInvalidOldPassword(true);
                setTimeout(() => setShowInvalidOldPassword(false), 3000); // Set timeout for 3 seconds
             }
-            
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -336,6 +334,165 @@ const Setting = () => {
       }));
    };
 
+   // account tab
+   const accountTab = (
+      <>
+         <h3 className="mb-4">Account Settings</h3>
+         <div className="row">
+            <div className="col-md-4">
+               <div className="form-group">
+                  <label>Name</label>
+                  <input
+                     type="text"
+                     className="form-control"
+                     name="name"
+                     value={userAccount.name}
+                     onChange={handleAccountInputChange}
+                  />
+               </div>
+            </div>
+            <div className="col-md-4">
+               <div className="form-group">
+                  <label>Email</label>
+                  <input
+                     type="text"
+                     className="form-control"
+                     name="email"
+                     value={userAccount.email}
+                     onChange={handleAccountInputChange}
+                  />
+               </div>
+            </div>
+            {/* More form groups for other fields */}
+         </div>
+         <div>
+            <button className="btn btn-primary" onClick={handleAccountUpdate}>
+               Update
+            </button>
+            <button className="btn btn-light" onClick={handleAccountCancel}>
+               Cancel
+            </button>
+         </div>
+         {Object.values(emptyFieldErrors).map((error, index) => (
+            <div key={index} className="text-danger mt-2">
+               {error}
+            </div>
+         ))}
+         {emailError && <div className="text-danger mt-2">{emailError}</div>}
+         {nameError && <div className="text-danger mt-2">{nameError}</div>}
+         {showSuccessMessage && (
+            <div className="alert alert-success mt-2">Successfully Updated!</div>
+         )}
+      </>
+   );
+
+   // password tab
+   const passwordTab = (
+      <>
+         <h3 className="mb-4">Password Settings</h3>
+         <div className="row">
+            <div className="col-md-8">
+               <div className="form-group">
+                  <label>Old Password</label>
+                  <div className="password-input-container">
+                     <input
+                        type={showPassword.oldPassword ? "text" : "password"}
+                        className="form-control"
+                        value={passwordFields.oldPassword}
+                        onChange={(e) =>
+                           setPasswordFields({
+                              ...passwordFields,
+                              oldPassword: e.target.value,
+                           })
+                        }
+                     />
+                     <IconButton onClick={() => togglePasswordVisibility("oldPassword")}>
+                        {showPassword.oldPassword ? <VisibilityOff /> : <Visibility />}
+                     </IconButton>
+                  </div>
+               </div>
+            </div>
+            <div className="col-md-8">
+               <div className="form-group">
+                  <label>New Password</label>
+                  <div className="password-input-container">
+                     <input
+                        type={showPassword.newPassword ? "text" : "password"}
+                        className="form-control"
+                        value={passwordFields.newPassword}
+                        onChange={(e) =>
+                           setPasswordFields({
+                              ...passwordFields,
+                              newPassword: e.target.value,
+                           })
+                        }
+                     />
+                     <IconButton onClick={() => togglePasswordVisibility("newPassword")}>
+                        {showPassword.newPassword ? <VisibilityOff /> : <Visibility />}
+                     </IconButton>
+                  </div>
+                  {/* Password strength bar */}
+                  <PasswordStrengthBar
+                     className="pw-strengths"
+                     password={passwordFields.newPassword}
+                     minLength={6}
+                     onChangeScore={(score) => console.log(score)}
+                     scoreWords={["weak", "weak", "fair", "good", "strong"]}
+                  />
+               </div>
+            </div>
+            <div className="col-md-9">
+               <div className="form-group">
+                  <label>Confirm Password</label>
+                  <div className="password-input-container">
+                     <input
+                        type={showPassword.confirmNewPassword ? "text" : "password"}
+                        className="form-control"
+                        value={passwordFields.confirmNewPassword}
+                        onChange={(e) =>
+                           setPasswordFields({
+                              ...passwordFields,
+                              confirmNewPassword: e.target.value,
+                           })
+                        }
+                     />
+                     <IconButton onClick={() => togglePasswordVisibility("confirmNewPassword")}>
+                        {showPassword.confirmNewPassword ? <VisibilityOff /> : <Visibility />}
+                     </IconButton>
+                  </div>
+                  {/* Password strength bar */}
+                  <PasswordStrengthBar
+                     className="pw-strengths"
+                     password={passwordFields.confirmNewPassword}
+                     minLength={6}
+                     onChangeScore={(score) => console.log(score)}
+                     scoreWords={["weak", "weak", "fair", "good", "strong"]}
+                  />
+               </div>
+            </div>
+            {/* More form groups for other fields */}
+         </div>
+         <div>
+            <button className="btn btn-primary" onClick={handlePasswordUpdate}>
+               Update
+            </button>
+            <button className="btn btn-light" onClick={handlePasswordCancel}>
+               Cancel
+            </button>
+         </div>
+         {/* Password settings form */}
+         {Object.values(emptyFieldErrors).map((error, index) => (
+            <div key={index} className="text-danger mt-2">
+               {error}
+            </div>
+         ))}
+         {passwordError && <div className="text-danger mt-2">{passwordError}</div>}
+         {showSuccessMessage && (
+            <div className="alert alert-success mt-2">Successfully Updated!</div>
+         )}
+      </>
+   );
+
    return (
       <section className="">
          {/* Conditionally rendering the appropriate navbar based on the user status */}
@@ -388,6 +545,20 @@ const Setting = () => {
                         <i className="fa fa-key text-center mr-1"></i>
                         Password
                      </a>
+                     <a
+                        className={`nav-link ${
+                           activeTab === "my-recipes" ? "active" : ""
+                        } unselectable`}
+                        id="my-recipes-tab"
+                        data-toggle="pill"
+                        role="tab"
+                        aria-controls="my-recipes"
+                        aria-selected={activeTab === "my-recipes"}
+                        onClick={() => handleTabClick("my-recipes")}
+                     >
+                        <i className="fa fa-key text-center mr-1"></i>
+                        My Recipes
+                     </a>
                      {/* Add more tab links for other sections */}
                   </div>
                </div>
@@ -398,52 +569,7 @@ const Setting = () => {
                      role="tabpanel"
                      aria-labelledby="account-tab"
                   >
-                     <h3 className="mb-4">Account Settings</h3>
-                     <div className="row">
-                        <div className="col-md-4">
-                           <div className="form-group">
-                              <label>Name</label>
-                              <input
-                                 type="text"
-                                 className="form-control"
-                                 name="name"
-                                 value={userAccount.name}
-                                 onChange={handleAccountInputChange}
-                              />
-                           </div>
-                        </div>
-                        <div className="col-md-4">
-                           <div className="form-group">
-                              <label>Email</label>
-                              <input
-                                 type="text"
-                                 className="form-control"
-                                 name="email"
-                                 value={userAccount.email}
-                                 onChange={handleAccountInputChange}
-                              />
-                           </div>
-                        </div>
-                        {/* More form groups for other fields */}
-                     </div>
-                     <div>
-                        <button className="btn btn-primary" onClick={handleAccountUpdate}>
-                           Update
-                        </button>
-                        <button className="btn btn-light" onClick={handleAccountCancel}>
-                           Cancel
-                        </button>
-                     </div>
-                     {Object.values(emptyFieldErrors).map((error, index) => (
-                        <div key={index} className="text-danger mt-2">
-                           {error}
-                        </div>
-                     ))}
-                     {emailError && <div className="text-danger mt-2">{emailError}</div>}
-                     {nameError && <div className="text-danger mt-2">{nameError}</div>}
-                     {showSuccessMessage && (
-                        <div className="alert alert-success mt-2">Successfully Updated!</div>
-                     )}
+                     {accountTab}
                   </div>
                   <div
                      className={`tab-pane fade ${activeTab === "password" ? "show active" : ""}`}
@@ -451,120 +577,15 @@ const Setting = () => {
                      role="tabpanel"
                      aria-labelledby="password-tab"
                   >
-                     <h3 className="mb-4">Password Settings</h3>
-                     <div className="row">
-                        <div className="col-md-8">
-                           <div className="form-group">
-                              <label>Old Password</label>
-                              <div className="password-input-container">
-                                 <input
-                                    type={showPassword.oldPassword ? "text" : "password"}
-                                    className="form-control"
-                                    value={passwordFields.oldPassword}
-                                    onChange={(e) =>
-                                       setPasswordFields({
-                                          ...passwordFields,
-                                          oldPassword: e.target.value,
-                                       })
-                                    }
-                                 />
-                                 <IconButton
-                                    onClick={() => togglePasswordVisibility("oldPassword")}
-                                 >
-                                    {showPassword.oldPassword ? <VisibilityOff /> : <Visibility />}
-                                 </IconButton>
-                              </div>
-                           </div>
-                        </div>
-                        <div className="col-md-8">
-                           <div className="form-group">
-                              <label>New Password</label>
-                              <div className="password-input-container">
-                                 <input
-                                    type={showPassword.newPassword ? "text" : "password"}
-                                    className="form-control"
-                                    value={passwordFields.newPassword}
-                                    onChange={(e) =>
-                                       setPasswordFields({
-                                          ...passwordFields,
-                                          newPassword: e.target.value,
-                                       })
-                                    }
-                                 />
-                                 <IconButton
-                                    onClick={() => togglePasswordVisibility("newPassword")}
-                                 >
-                                    {showPassword.newPassword ? <VisibilityOff /> : <Visibility />}
-                                 </IconButton>
-                              </div>
-                              {/* Password strength bar */}
-                              <PasswordStrengthBar
-                                 className="pw-strengths"
-                                 password={passwordFields.newPassword}
-                                 minLength={6}
-                                 onChangeScore={(score) => console.log(score)}
-                                 scoreWords={["weak", "weak", "fair", "good", "strong"]}
-                              />
-                           </div>
-                        </div>
-                        <div className="col-md-9">
-                           <div className="form-group">
-                              <label>Confirm Password</label>
-                              <div className="password-input-container">
-                                 <input
-                                    type={showPassword.confirmNewPassword ? "text" : "password"}
-                                    className="form-control"
-                                    value={passwordFields.confirmNewPassword}
-                                    onChange={(e) =>
-                                       setPasswordFields({
-                                          ...passwordFields,
-                                          confirmNewPassword: e.target.value,
-                                       })
-                                    }
-                                 />
-                                 <IconButton
-                                    onClick={() => togglePasswordVisibility("confirmNewPassword")}
-                                 >
-                                    {showPassword.confirmNewPassword ? (
-                                       <VisibilityOff />
-                                    ) : (
-                                       <Visibility />
-                                    )}
-                                 </IconButton>
-                              </div>
-                              {/* Password strength bar */}
-                              <PasswordStrengthBar
-                                 className="pw-strengths"
-                                 password={passwordFields.confirmNewPassword}
-                                 minLength={6}
-                                 onChangeScore={(score) => console.log(score)}
-                                 scoreWords={["weak", "weak", "fair", "good", "strong"]}
-                              />
-                           </div>
-                        </div>
-                        {/* More form groups for other fields */}
-                     </div>
-                     <div>
-                        <button className="btn btn-primary" onClick={handlePasswordUpdate}>
-                           Update
-                        </button>
-                        <button className="btn btn-light" onClick={handlePasswordCancel}>
-                           Cancel
-                        </button>
-                     </div>
-                     {/* Password settings form */}
-                     {Object.values(emptyFieldErrors).map((error, index) => (
-                        <div key={index} className="text-danger mt-2">
-                           {error}
-                        </div>
-                     ))}
-                     {passwordError && <div className="text-danger mt-2">{passwordError}</div>}
-                     {showInvalidOldPassword && (
-                        <div className="text-danger mt-2">Invalid Old Password.</div>
-                     )}
-                     {showSuccessMessage && (
-                        <div className="alert alert-success mt-2">Successfully Updated!</div>
-                     )}
+                     {passwordTab}
+                  </div>
+                  <div
+                     className={`tab-pane fade ${activeTab === "my-recipes" ? "show active" : ""}`}
+                     id="my-recipes"
+                     role="tabpanel"
+                     aria-labelledby="my-recipes-tab"
+                  >
+                     <MyRecipes />
                   </div>
                   {/* Add more tab panes for other sections */}
                </div>

@@ -54,8 +54,13 @@ export default function AdminRecipelist() {
       getcategory();
    });
 
+   // should redirect to full recipe view cookbook/view/rid
+   function displayRecipe(rid) {
+      console.log("in progress");
+      navigate(`/cookbook/view/${rid}`);
+
    //confirm delete via popup modal and pass rid to modal 
-   async function confirmDelete(recipeId) {
+   function confirmDelete(recipeId) {
         setRecipeId(recipeId)
         setModalOpen(true);
    }
@@ -77,7 +82,7 @@ export default function AdminRecipelist() {
    }
 
    return (
-      <div>
+      <>
          <Navbar />
          <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
             <button className="x-button" onClick={() => setModalOpen(false)}>
@@ -102,34 +107,35 @@ export default function AdminRecipelist() {
                   {category.map((getcate) => (
                      <tr className="reciperow" key={getcate.rid}>
                         <td>
-                           {" "}
-                           <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} #{getcate.rid}{" "}
+                           <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} #{getcate.rid}
                         </td>
                         <td>
-                           {" "}
-                           <FontAwesomeIcon icon={faUser} /> {getcate.authorName}{" "}
+                           <FontAwesomeIcon icon={faUser} /> {getcate.authorName}
                         </td>
                         <td>
-                           {" "}
-                           <FontAwesomeIcon icon={faStar} /> {getcate.favourites}{" "}
+                           <FontAwesomeIcon icon={faStar} /> {getcate.favourites}
                         </td>
                         <td>
-                           <button className="viewbtn" onClick={() => displayRecipe(getcate.rid)}>
+                           <button
+                              className="viewbtn btn-hover"
+                              onClick={() => displayRecipe(getcate.rid)}
+                           >
                               View
                            </button>
                         </td>
                         <td>
-                           {" "}
-                           <button className="deletebtn" onClick={() => confirmDelete(getcate.rid)}>
+                           <button
+                              className="deletebtn btn-hover"
+                              onClick={() => confirmDelete(getcate.rid)}
+                           >
                               Delete
-                           </button>{" "}
+                           </button>
                         </td>
                      </tr>
-                     
                   ))}
                </tbody>
             </table>
          </div>
-      </div>
+      </>
    );
 }

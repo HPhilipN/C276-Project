@@ -87,9 +87,9 @@ const NavbarLogin = () => {
             <a onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
-            <div className="navbar-profile">
+            <a href="/setting" className="navbar-profile" style={{ marginRight: 5 }}>
                <Avatar className="navbar-profile-picture" alt="Profile Picture">{firstLetter}</Avatar>
-            </div>
+            </a>
          </div>
          <div className="navbar-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
