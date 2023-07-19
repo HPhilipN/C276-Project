@@ -87,7 +87,7 @@ const NavbarLogin = () => {
             <a onClick={logoutUserHelper} className="nav-buttons">
                Log Out
             </a>
-            <a href="/setting" className="navbar-profile" style={{ marginRight: 5 }}>
+            <a href="/settings" className="navbar-profile" style={{ marginRight: 5 }}>
                <Avatar className="navbar-profile-picture" alt="Profile Picture">
                   {firstLetter}
                </Avatar>
