@@ -5,16 +5,17 @@ import "./styles/Searchbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-export default function Searchbar() {
+export default function Searchbar({ onSearch}) {
    const [value, setValue] = useState("");
 
    const onChange = (event) => {
-      setValue(event.target.value);
-   };
-
-   const onSearch = (searchTerm) => {
+      const searchTerm = event.target.value;
+      setValue(searchTerm);
+      onSearch(searchTerm); // Call the onSearch prop with the search term
       console.log("search", searchTerm);
    };
+
+
    return (
       <div className="searchbar-wrap">
          <div className="searchbar-icon">
@@ -26,4 +27,6 @@ export default function Searchbar() {
          </button>
       </div>
    );
+
+   
 }
