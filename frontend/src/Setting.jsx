@@ -30,6 +30,7 @@ const Setting = () => {
    const { userId } = useContext(UserContext);
    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
    const firstLetter = nameValue.charAt(0).toUpperCase();
+   const [showInvalidOldPassword, setShowInvalidOldPassword] = useState(false);
 
 
 
@@ -223,7 +224,8 @@ const Setting = () => {
                // Hide the message after 5 seconds
                setTimeout(() => setShowSuccessMessage(false), 2500);
             } else{
-               setPasswordError("Invalid Old Password.");
+               setShowInvalidOldPassword(true);
+               setTimeout(() => setShowInvalidOldPassword(false), 3000); // Set timeout for 3 seconds
             }
             
          })
@@ -557,6 +559,9 @@ const Setting = () => {
                         </div>
                      ))}
                      {passwordError && <div className="text-danger mt-2">{passwordError}</div>}
+                     {showInvalidOldPassword && (
+                        <div className="text-danger mt-2">Invalid Old Password.</div>
+                     )}
                      {showSuccessMessage && (
                         <div className="alert alert-success mt-2">Successfully Updated!</div>
                      )}
