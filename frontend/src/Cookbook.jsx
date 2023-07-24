@@ -9,6 +9,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
 import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
+import { useNavigate } from "react-router-dom";
 import InfoButton from "./utils/InfoButton";
 
 // User generated recipes
@@ -49,7 +50,7 @@ const Cookbook = () => {
       try {
          // "https://replicake.onrender.com/recipes/view"
          // "/recipes/view"
-         const response = await fetch("/recipes/view", {
+         const response = await fetch("https://replicake.onrender.com/recipes/view", {
             method: "GET",
          });
 
