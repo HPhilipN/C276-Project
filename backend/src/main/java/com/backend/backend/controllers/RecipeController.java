@@ -125,7 +125,7 @@ public class RecipeController {
             return null;
         }
     }
-
+    // find recipes from user from db
     @GetMapping("/find/{uid}")
     public List<Recipe> getUserRecipes(@PathVariable String uid, HttpServletResponse response) {
         System.out.println("Checking if user with ID " + uid + " has any recipes");

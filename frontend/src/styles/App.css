@@ -338,10 +338,6 @@ nav {
    font-size: 18px;
 }
 
-body {
+body, html {
   overflow-x: hidden;
 }
-
-.pw-strength {
-	width: 100%; /* Adjust the width as a percentage */
-  }

@@ -17,9 +17,15 @@ const Cookbook = () => {
    const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
    const [userRecipes, setUserRecipes] = useState([]);
 
+   // redirect to home if logged out
+   const navigate = useNavigate();
+   if (!isChef && !isModerator) {
+      navigate("/");
+   }
+
    // check if DB has recipes
    async function checkUserRecipeCount() {
-      // "https://replicake.onrender.com/recipes/view""
+      // "https://replicake.onrender.com/recipes/view"
       // /recipes/view
       fetch("https://replicake.onrender.com/recipes/view", {
          method: "GET",
@@ -41,14 +47,18 @@ const Cookbook = () => {
    // get all recipes from DB
    async function getUserRecipesFromDB(searchTerm) {
       try {
-         const response = await fetch("https://replicake.onrender.com/recipes/view", {
+         // "https://replicake.onrender.com/recipes/view"
+         // "/recipes/view"
+         const response = await fetch("/recipes/view", {
             method: "GET",
          });
+
+         if (!response.ok) {
+            throw new Error("Failed to fetch user recipes");
+         }
+
          const data = await response.json();
-         const filteredRecipes = data.filter((recipe) => {
-            return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
-         });
-         setUserRecipes(filteredRecipes);
+         setUserRecipes(data);
       } catch (error) {
          console.log("===== ERROR =====");
          console.log(error);
