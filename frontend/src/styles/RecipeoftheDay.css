@@ -1,0 +1,30 @@
+.testimonial-section-bottom {
+    margin-top: 2rem;
+    background-color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 750px;
+    border-radius: 2rem;
+    flex-direction: column;
+    text-align: center;
+    margin: 2rem auto;
+    margin-top: 40px;
+  }
+  /* .testimonial-section-bottom p {
+    font-weight: 700;
+    color: #515151;
+    max-width: 500px;
+    font-size: 1.1rem;
+    margin: 2rem 0rem;
+  } */
+
+  .about-section-text-container {
+    margin-top: 20px;
+  }
+  
+  .about-buttons-container{
+    margin-top: -30px;
+  }
+
