@@ -12,9 +12,10 @@
 }
 
 .recipe-item {
-   flex-basis: calc(25% - 10px); /* Set width for each recipe item */
+   flex-basis: calc(20% - 10px); /* Set width for each recipe item */
    text-align: start;
-   min-width: 18rem;
+   /* max-width: 20rem; */
+   min-width: 15rem;
    margin: 0.5rem !important;
 }
 
