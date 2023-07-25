@@ -19,10 +19,7 @@ img {
    height: auto;
 }
 .App {
-   min-height: 100vh;
-   width: 85vw;
-   max-width: 1900px;
-   margin: 0rem auto;
+   min-width: 20rem;
 }
 body {
    max-width: 100%;
@@ -338,6 +335,7 @@ nav {
    font-size: 18px;
 }
 
-body, html {
-  overflow-x: hidden;
+body,
+html {
+   overflow-x: hidden;
 }

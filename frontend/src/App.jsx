@@ -16,23 +16,25 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
    return (
-      <UserProvider>
-         <Router>
-            <Routes>
-               <Route path="/" element={<Home />} />
-               <Route path="/login" element={<Login />} />
-               {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-               <Route path="/settings" element={<Setting />} />
-               <Route path="/recipes" element={<Recipes />} />
-               <Route path="/cookbook" element={<Cookbook />} />
-               <Route path="/cookbook/view/:rid" element={<RecipeDisplay />} />
-               <Route path="/admin/home" element={<Adminhome />} />
-               <Route path="/admin/users" element={<AdminUserlist />} />
-               <Route path="/admin/recipes" element={<AdminRecipelist />} />
-               <Route path="*" element={<NotFound />} />
-            </Routes>
-         </Router>
-      </UserProvider>
+      <div className="App">
+         <UserProvider>
+            <Router>
+               <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                  <Route path="/settings" element={<Setting />} />
+                  <Route path="/recipes" element={<Recipes />} />
+                  <Route path="/cookbook" element={<Cookbook />} />
+                  <Route path="/cookbook/view/:rid" element={<RecipeDisplay />} />
+                  <Route path="/admin/home" element={<Adminhome />} />
+                  <Route path="/admin/users" element={<AdminUserlist />} />
+                  <Route path="/admin/recipes" element={<AdminRecipelist />} />
+                  <Route path="*" element={<NotFound />} />
+               </Routes>
+            </Router>
+         </UserProvider>
+      </div>
    );
 }
 
