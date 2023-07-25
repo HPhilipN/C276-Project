@@ -72,3 +72,6 @@
     margin-right: 10px; /* Adjust the margin as per your preference */
   }
   
+  body, html {
+    overflow-x: hidden;
+  }

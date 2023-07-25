@@ -65,3 +65,7 @@
    color: #fe9e0c;
    cursor: pointer;
 }
+
+body, html {
+   overflow-x: hidden;
+ }

@@ -9,6 +9,7 @@ import "./styles/Home.css";
 import AboutHome from "./AboutHome";
 import Footer from "./Footer";
 import { UserContext } from "./utils/UserContext";
+import RecipeoftheDay from "./RecipeoftheDay";
 
 const Home = () => {
    // Accessing isChef, and isModerator from the UserContext
@@ -44,6 +45,8 @@ const Home = () => {
                   <img src={BannerImage} alt="" />
                </div>
             </div>
+            {/* Recipe of the day component */}
+            <RecipeoftheDay />
             {/* Work component */}
             <AboutHome />
             {/* Footer component */}
