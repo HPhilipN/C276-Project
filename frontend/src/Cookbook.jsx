@@ -12,94 +12,131 @@ import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
 import InfoButton from "./utils/InfoButton";
 
-// User generated recipes
 const Cookbook = () => {
-   const { isChef, isModerator, userId } = useContext(UserContext);
-   const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
-   const [userRecipes, setUserRecipes] = useState([]);
+  const { isChef, isModerator, userId } = useContext(UserContext);
+  const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
+  const [userRecipes, setUserRecipes] = useState([]);
 
-   // redirect to home if logged out
-   const navigate = useNavigate();
-   if (!isChef && !isModerator) {
-      navigate("/");
-   }
+  // State to manage pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const recipesPerPage = 2; // Number of recipes to display per page
 
-   // check if DB has recipes
-   async function checkUserRecipeCount() {
-      // "https://replicake.onrender.com/recipes/view"
-      // /recipes/view
-      fetch("https://replicake.onrender.com/recipes/view", {
-         method: "GET",
+  // redirect to home if logged out
+  const navigate = useNavigate();
+  if (!isChef && !isModerator) {
+    navigate("/");
+  }
+
+  // check if DB has recipes
+  async function checkUserRecipeCount() {
+    fetch("https://replicake.onrender.com/recipes/view", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setRecipesExistInDatabase(true);
+        } else {
+          // no recipes exist
+          setRecipesExistInDatabase(false);
+        }
       })
-         .then((response) => {
-            if (response.status === 200) {
-               setRecipesExistInDatabase(true);
-            } else {
-               // no recipes exist
-               setRecipesExistInDatabase(false);
-            }
-         })
-         .catch((error) => {
-            console.log("===== ERROR =====");
-            console.log(error);
-         });
-   }
+      .catch((error) => {
+        console.log("===== ERROR =====");
+        console.log(error);
+      });
+  }
 
-   // get all recipes from DB
-   async function getUserRecipesFromDB(searchTerm) {
-      try {
-         // "https://replicake.onrender.com/recipes/view"
-         // "/recipes/view"
-         const response = await fetch("https://replicake.onrender.com/recipes/view", {
-            method: "GET",
-         });
+  // get all recipes from DB with pagination
+  async function getUserRecipesFromDB(searchTerm) {
+    try {
+      const response = await fetch(
+        `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`,
+        {
+          method: "GET",
+        }
+      );
 
-         if (!response.ok) {
-            throw new Error("Failed to fetch user recipes");
-         }
-
-         const data = await response.json();
-         setUserRecipes(data);
-      } catch (error) {
-         console.log("===== ERROR =====");
-         console.log(error);
+      if (!response.ok) {
+        throw new Error("Failed to fetch user recipes");
       }
-   }
-   //implement filter functionality
 
-   // TODO figure out how to implement the filter functionality so that we can also use it for other pages
-   // run when userId changes
-   useEffect(() => {
-      async function fetchData() {
-         await checkUserRecipeCount();
-         if (recipesExistInDatabase) {
-            await getUserRecipesFromDB();
-         }
+      const data = await response.json();
+      setUserRecipes(data);
+    } catch (error) {
+      console.log("===== ERROR =====");
+      console.log(error);
+    }
+  }
+
+  // Handler for page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Go to the previous page
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  // Go to the next page
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(userRecipes.length / recipesPerPage)) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  // Fetch data when the page state or recipesPerPage changes
+  useEffect(() => {
+    async function fetchData() {
+      await checkUserRecipeCount();
+      if (recipesExistInDatabase) {
+        await getUserRecipesFromDB();
       }
-      fetchData();
-   }, [userId, recipesExistInDatabase]);
+    }
+    fetchData();
+  }, [userId, recipesExistInDatabase, currentPage, recipesPerPage]);
 
-   return (
-      <div className="dashboard">
-         {/*Search bar*/}
-         {isChef && <NavbarLogin />}
-         {isModerator && <NavbarAdmin />}
-         {!isChef && !isModerator && <Navbar />}
-         <div className="filter-search-wrapper">
-            <Filter filteredItems={getUserRecipesFromDB} />
-            <Searchbar onSearch={getUserRecipesFromDB} />
-            <AddRecipe setUserRecipes={setUserRecipes} />
-         </div>
-         <div className="recipelist-wrap">
-            {!recipesExistInDatabase && <NoRecipesExist />}
-            {/* check if userRecipes is loaded before rendering */}
-            {recipesExistInDatabase && userRecipes.length > 0 ? (
-               <RecipeList recipes={userRecipes} />
-            ) : null}
-            {/* Info Button on Bottom Right */}
-         </div>
+  return (
+    <div className="dashboard">
+      {/*Search bar*/}
+      {isChef && <NavbarLogin />}
+      {isModerator && <NavbarAdmin />}
+      {!isChef && !isModerator && <Navbar />}
+      <div className="filter-search-wrapper">
+        <Filter filteredItems={getUserRecipesFromDB} />
+        <Searchbar onSearch={getUserRecipesFromDB} />
+        <AddRecipe setUserRecipes={setUserRecipes} />
       </div>
-   );
+      <div className="recipelist-wrap">
+        {!recipesExistInDatabase && <NoRecipesExist />}
+        {/* check if userRecipes is loaded before rendering */}
+        {recipesExistInDatabase && userRecipes.length > 0 ? (
+          <>
+            <RecipeList recipes={userRecipes} />
+            {/* Basic paginator */}
+            {userRecipes.length > recipesPerPage && (
+              <div className="pagination">
+                <button onClick={handlePreviousPage}>Prev</button>
+                {[...Array(Math.ceil(userRecipes.length / recipesPerPage))].map((_, index) => (
+                  <button
+                    key={index + 1}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={currentPage === index + 1 ? "active" : ""}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+                <button onClick={handleNextPage}>Next</button>
+              </div>
+            )}
+          </>
+        ) : null}
+        {/* Info Button on Bottom Right */}
+      </div>
+    </div>
+  );
 };
 
 export default Cookbook;
