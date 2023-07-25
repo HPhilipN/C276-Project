@@ -15,7 +15,7 @@
    flex-basis: calc(20% - 10px); /* Set width for each recipe item */
    text-align: start;
    /* max-width: 20rem; */
-   min-width: 15rem;
+   min-width: 16rem;
    margin: 0.5rem !important;
 }
 

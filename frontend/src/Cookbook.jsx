@@ -15,7 +15,8 @@ import InfoButton from "./utils/InfoButton";
 const Cookbook = () => {
    const { isChef, isModerator, userId } = useContext(UserContext);
    const [recipesExistInDatabase, setRecipesExistInDatabase] = useState(false);
-   const [userRecipes, setUserRecipes] = useState([]);
+   const [userRecipes, setUserRecipes] = useState([]); // all recipes
+   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
    // State to manage pagination
    const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +48,8 @@ const Cookbook = () => {
    }
 
    // get all recipes from DB with pagination
-   async function getUserRecipesFromDB(searchTerm) {
+   async function getUserRecipesFromDB() {
+      console.log("== getUserRecipesFromDB ==");
       try {
          const response = await fetch(
             `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`,
@@ -60,14 +62,8 @@ const Cookbook = () => {
          }
          const data = await response.json();
          if (Array.isArray(data)) {
-            const filteredRecipes = searchTerm
-               ? data.filter(
-                    (recipe) =>
-                       recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-                 )
-               : data;
-
-            setUserRecipes(filteredRecipes);
+            setUserRecipes(data);
+            setFilteredRecipes(data); // copy of recipes to API reduce calls
          } else {
             console.log("Data is not an array:", data);
             setUserRecipes([]);
@@ -75,6 +71,23 @@ const Cookbook = () => {
       } catch (error) {
          console.log("===== ERROR =====");
          console.log(error);
+      }
+   }
+
+   // search bar functionality
+   function filterSearchRecipes(searchTerm) {
+      if (Array.isArray(userRecipes)) {
+         const filter = searchTerm
+            ? userRecipes.filter(
+                 (recipe) =>
+                    recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+            : userRecipes;
+
+         setFilteredRecipes(filter);
+      } else {
+         console.log("Data is not an array:", data);
+         setFilteredRecipes([]);
       }
    }
 
@@ -115,16 +128,16 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={getUserRecipesFromDB} />
-            <Searchbar onSearch={getUserRecipesFromDB} />
+            <Filter filteredItems={filterSearchRecipes} />
+            <Searchbar onSearch={filterSearchRecipes} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
             {!recipesExistInDatabase && <NoRecipesExist />}
             {/* check if userRecipes is loaded before rendering */}
-            {recipesExistInDatabase && userRecipes.length > 0 ? (
+            {recipesExistInDatabase && filteredRecipes.length > 0 ? (
                <>
-                  <RecipeList recipes={userRecipes} />
+                  <RecipeList recipes={filteredRecipes} />
                   {/* Basic paginator */}
                   {userRecipes.length > recipesPerPage && (
                      <div className="pagination">
