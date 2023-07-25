@@ -11,7 +11,6 @@ import AdminRecipelist from "./AdminRecipeslist";
 import UserProvider from "./utils/UserContext";
 import RecipeDisplay from "./RecipeDisplay";
 import Recipes from "./Recipes";
-import ProtectedRoute from "./utils/ProtectedRoute";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -38,11 +37,3 @@ function App() {
 }
 
 export default App;
-
-{
-   /* 
-<ProtectedRoute path="/admin/home" element={<Adminhome />} />
-<ProtectedRoute path="/admin/users" element={<AdminUserlist />} />
-<ProtectedRoute path="/admin/recipes" element={<AdminRecipelist />} />
-*/
-}
