@@ -43,3 +43,32 @@
     scrollbar-width: none;
 }
 */
+
+.pagination {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 1rem;
+}
+
+.pagination button {
+   width: 40px;
+   height: 40px;
+   font-family: inherit;
+   font-weight: 400;
+   font-size: 16px;
+   margin: 0 10px;
+   border-radius: 6px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: transparent;
+   color: #0F1B2B;
+   border-color: #eee;
+}
+
+.pagination button.active {
+   font-weight: 900;
+   border-color: #d0b4b4;
+   background: #ff9e0d;
+   color: #101010;
+}
