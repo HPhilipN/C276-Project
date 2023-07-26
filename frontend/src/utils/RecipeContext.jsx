@@ -14,8 +14,7 @@ function RecipeProvider({ children }) {
 
       // JSON parse converts values
       if (storedCalledAPI && storedAPIRecipes) {
-         //  setCalledAPI(JSON.parse(storedCalledAPI));
-         setCalledAPI(true); // Set to true if it was already true
+         setCalledAPI(JSON.parse(storedCalledAPI));
          setApiRecipes(JSON.parse(storedAPIRecipes));
       }
    }, []);

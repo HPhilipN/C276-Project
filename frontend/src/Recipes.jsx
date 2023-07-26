@@ -75,6 +75,7 @@ const Recipes = () => {
    // Fetch data from Spoonacular
    useEffect(() => {
       console.log("== UseEffect ==");
+      console.log(filteredRecipes.length);
       if (filteredRecipes.length <= 0) {
          setFilteredRecipes(apiRecipes);
       }
