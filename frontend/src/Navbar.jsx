@@ -23,17 +23,17 @@ const Navbar = () => {
       {
          text: "Home",
          icon: <HomeIcon />,
-         onClick: () => (window.location.href = "/"), // Action to perform when "Home" is clicked
+         onClick: () => <Link className="button" to="/"></Link>, // Action to perform when "Home" is clicked
       },
       {
          text: "Search for Recipes",
          icon: <SearchIcon />,
-         onClick: () => (window.location.href = "/recipes"),
+         onClick: () => <Link className="button" to="/recipes"></Link>,
       },
       {
          text: "Sign Up/Sign In",
          icon: <LoginOutlinedIcon />,
-         onClick: () => (window.location.href = "/login"),
+         onClick: () => <Link className="button" to="/ogin"></Link>,
       },
    ];
 
@@ -46,15 +46,15 @@ const Navbar = () => {
          </div>
          <div className="navbar-links-container">
             {/* Links to different pages */}
-            <a href="/" className="nav-buttons">
+            <Link className="nav-buttons" to="/">
                Home
-            </a>
-            <a href="/recipes" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/recipes">
                Search for Recipes
-            </a>
-            <a href="/login" className="signin-btn">
+            </Link>
+            <Link className="signin-btn" to="/login">
                Sign Up/Sign In
-            </a>
+            </Link>
          </div>
          <div className="navbar-menu-container">
             <HiOutlineBars3 size={42} onClick={() => setOpenMenu(true)} />
