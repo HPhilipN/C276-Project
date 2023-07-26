@@ -59,6 +59,8 @@ Replicake is an online recipe aggregator allowing chefs to upload recipes for ot
 ### Development Information:
 - Refer to `dev-help.md` for start up and other information
 - Anything that uses uID within endpoint is to only be used for a logged in user
+- To avoid reaching API request limit, avoid page refreshing & restarting the vite dev build
+  
 ### Technologies Utilized:
 - Java Spring (backend)
 - ReactJS (frontend)
