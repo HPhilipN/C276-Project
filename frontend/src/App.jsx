@@ -11,6 +11,7 @@ import AdminRecipelist from "./AdminRecipeslist";
 import UserProvider from "./utils/UserContext";
 import RecipeProvider from "./utils/RecipeContext";
 import RecipeDisplay from "./RecipeDisplay";
+import ApiRecipeDisplay from "./ApiRecipeDisplay";
 import Recipes from "./Recipes";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -27,6 +28,7 @@ function App() {
                      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                      <Route path="/settings" element={<Setting />} />
                      <Route path="/recipes" element={<Recipes />} />
+                     <Route path="/recipes/view/:rid" element={<ApiRecipeDisplay />} />
                      <Route path="/cookbook" element={<Cookbook />} />
                      <Route path="/cookbook/view/:rid" element={<RecipeDisplay />} />
                      <Route path="/admin/home" element={<Adminhome />} />

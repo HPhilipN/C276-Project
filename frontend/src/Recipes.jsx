@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Filter from "./Filter";
 import Searchbar from "./Searchbar";
 import NoRecipesExist from "./NoRecipesExist";
-import RecipeList from "./Recipelist";
+import ApiRecipeList from "./ApiRecipeList";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
@@ -17,7 +17,9 @@ const Recipes = () => {
    const { calledAPI, setCalledAPI, apiRecipes, setApiRecipes } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-   const numOfRecipesToFetch = 20;
+   const numOfRecipesToFetch = 1;
+   //    const apiKey = process.env.VITE_APP_API_KEY; // prod key
+   const apiKey = import.meta.env.VITE_APP_API_KEY; // dev key
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
@@ -28,11 +30,14 @@ const Recipes = () => {
             setCalledAPI(true);
             setFilteredRecipes(apiRecipes);
          } else {
-            // "https://replicake.onrender.com/recipes/view"
-            // `https://api.spoonacular.com/recipes/random?number=${numOfRecipesToFetch}`
-            const response = await fetch("https://replicake.onrender.com/recipes/view", {
-               method: "GET",
-            });
+            // "https://replicake.onrender.com/recipes/view" //for testing
+            // `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`
+            const response = await fetch(
+               `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`,
+               {
+                  method: "GET",
+               }
+            );
             if (!response.ok) {
                console.log("===== ERROR =====");
                console.log(response);
@@ -74,8 +79,6 @@ const Recipes = () => {
 
    // Fetch data from Spoonacular
    useEffect(() => {
-      console.log("== UseEffect ==");
-      console.log(filteredRecipes.length);
       if (filteredRecipes.length <= 0) {
          setFilteredRecipes(apiRecipes);
       }
@@ -98,7 +101,7 @@ const Recipes = () => {
             {/* check if apiRecipes is loaded before rendering */}
             {filteredRecipes.length > 0 ? (
                <>
-                  <RecipeList recipes={filteredRecipes} />
+                  <ApiRecipeList recipes={filteredRecipes} apiKey={apiKey} />
                </>
             ) : (
                <NoRecipesExist />
