@@ -1,6 +1,6 @@
 import React from "react";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import DifficultyCircle from "./utils/DifficultyCircle";
+import TimerIcon from "@mui/icons-material/Timer";
 import "./styles/RecipeList.css";
 import { useNavigate } from "react-router-dom";
 
@@ -19,8 +19,8 @@ const RecipeList = ({ recipes }) => {
                   {/* Favourites button should allow users to add this recipe to their favourites list */}
                   <button className="favourites-parent">
                      <div className="favourites">
-                        <StarOutlineIcon fontSize="large" />
-                        <p>{recipe.favourites}</p>
+                        <TimerIcon fontSize="large" />
+                        <p>{recipe.prepTime}</p>
                      </div>
                   </button>
                   <h4 className="card-title">

@@ -65,6 +65,11 @@
    border: #ccc !important;
 }
 
+.instructionsInput {
+   max-height: 15rem;
+   overflow-y: auto;
+}
+
 .title-input {
    border: 1px solid rgba(0, 0, 0, 0.2) !important;
    background-color: transparent !important;
