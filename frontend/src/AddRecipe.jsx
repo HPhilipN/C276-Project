@@ -16,6 +16,7 @@ const AddRecipe = ({ setUserRecipes }) => {
    const [ingredients, setIngredients] = useState([]); // array
    const [instructions, setInstructions] = useState([]); // array
    const [tags, setTags] = useState([]); // array
+   const [prepTime, setPrepTime] = useState();
    const [submitDisabled, setSubmitDisabled] = useState(false);
    let newRecipe;
 
@@ -51,6 +52,9 @@ const AddRecipe = ({ setUserRecipes }) => {
    }
    function getRecipeDiff(event) {
       setRecipeDiff(event.target.value);
+   }
+   function getPrepTime(event) {
+      setPrepTime(event.target.value);
    }
 
    // send create request to endpoint
@@ -88,7 +92,7 @@ const AddRecipe = ({ setUserRecipes }) => {
          authorId: userId,
          title: title,
          recipeDifficulty: recipeDifficulty,
-         favourites: 0, // favourited 0 times by default
+         prepTime: prepTime,
          ingredients: ingredients,
          instructions: instructions,
          tags: tags,
@@ -130,6 +134,13 @@ const AddRecipe = ({ setUserRecipes }) => {
                   placeholder="Title"
                   value={title}
                   onChange={getTitle}
+                  className="title-input"
+               />
+               <Components.Input
+                  type="number"
+                  placeholder="Preparation Time in Minutes"
+                  value={prepTime}
+                  onChange={getPrepTime}
                   className="title-input"
                />
                <div className="slider-input">
