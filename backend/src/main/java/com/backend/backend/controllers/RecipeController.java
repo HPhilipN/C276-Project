@@ -37,7 +37,7 @@ public class RecipeController {
             int authorId = newRecipe.getAuthorId();
             String title = newRecipe.getTitle();
             int recipeDifficulty = newRecipe.getRecipeDifficulty();
-            int favourites = newRecipe.getFavourites();
+            int prepTime = newRecipe.getPrepTime();
             List<String> ingredients = newRecipe.getIngredients();
             List<String> instructions = newRecipe.getInstructions();
             List<String> tags = newRecipe.getTags();
@@ -53,7 +53,7 @@ public class RecipeController {
             }
 
             // Save into DB
-            Recipe newRecipeCreated = new Recipe(authorId, authorName, title, recipeDifficulty, favourites, ingredients,
+            Recipe newRecipeCreated = new Recipe(authorId, authorName, title, recipeDifficulty, prepTime, ingredients,
                     instructions, tags);
             recipeRepository.save(newRecipeCreated);
 
@@ -125,6 +125,7 @@ public class RecipeController {
             return null;
         }
     }
+
     // find recipes from user from db
     @GetMapping("/find/{uid}")
     public List<Recipe> getUserRecipes(@PathVariable String uid, HttpServletResponse response) {
