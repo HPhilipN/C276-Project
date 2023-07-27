@@ -25,7 +25,6 @@ function App() {
                   <Routes>
                      <Route path="/" element={<Home />} />
                      <Route path="/login" element={<Login />} />
-                     {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                      <Route path="/settings" element={<Setting />} />
                      <Route path="/recipes" element={<Recipes />} />
                      <Route path="/recipes/view/:rid" element={<ApiRecipeDisplay />} />

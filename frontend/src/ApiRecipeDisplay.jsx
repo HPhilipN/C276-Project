@@ -7,10 +7,12 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
 import "./styles/RecipeDisplay.css";
+import { RecipeContext } from "./utils/RecipeContext";
 
 // TODO
 const ApiRecipeDisplay = () => {
-   const { isChef, isModerator, userId } = useContext(UserContext);
+   const { isChef, isModerator } = useContext(UserContext);
+   const { apiKey } = useContext(RecipeContext);
    // useParams grabs rid from url
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
@@ -24,7 +26,7 @@ const ApiRecipeDisplay = () => {
    // fetch the desired recipe object
    useEffect(() => {
       // `https://replicake.onrender.com/recipes/view/${rid}`
-      // /recipes/view/${rid}
+      // `https://api.spoonacular.com/recipes/${rid}/information?apiKey=${apiKey}`
       fetch(`https://replicake.onrender.com/recipes/view/${rid}`, {
          method: "GET",
       })
@@ -50,7 +52,7 @@ const ApiRecipeDisplay = () => {
    };
 
    return (
-      <>
+      <div className="display-fullpage">
          {isChef && <NavbarLogin />}
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
@@ -60,7 +62,7 @@ const ApiRecipeDisplay = () => {
                   <h1 className="title">{recipe.title}</h1>
                   <div className="author">Author: {recipe.authorName}</div>
                   <div className="diff">Difficulty: {recipe.recipeDifficulty}</div>
-                  <div className="favs">Favourites: {recipe.favourites}</div>
+                  <div className="favs">Preparation Time: {recipe.prepTime}min</div>
                </header>
                <div className="ingredients-display">
                   <h3>Ingredients:</h3>
@@ -95,7 +97,7 @@ const ApiRecipeDisplay = () => {
                </div>
             </div>
          </div>
-      </>
+      </div>
    );
 };
 

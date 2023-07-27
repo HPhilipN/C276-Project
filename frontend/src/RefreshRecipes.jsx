@@ -5,16 +5,11 @@ import { RecipeContext } from "./utils/RecipeContext";
 
 // User generated recipes
 const RefreshRecipes = () => {
-   const { setCalledAPI, setApiRecipes } = useContext(RecipeContext);
+   const { setApiRecipes } = useContext(RecipeContext);
 
    function handleAddButtonClick() {
-      // Clear the user's sign-in status and details from localStorage
-      localStorage.removeItem("calledAPI");
-      localStorage.removeItem("apiRecipes");
       // Reset the component's state
-      setCalledAPI(false);
       setApiRecipes([]);
-
       console.log("Refresh Button Clicked");
    }
 

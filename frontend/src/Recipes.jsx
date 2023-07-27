@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Filter from "./Filter";
 import Searchbar from "./Searchbar";
 import NoRecipesExist from "./NoRecipesExist";
@@ -14,47 +14,42 @@ import RefreshRecipes from "./RefreshRecipes";
 
 // API generated recipes
 const Recipes = () => {
-   const { isChef, isModerator, userId } = useContext(UserContext);
-   const { calledAPI, setCalledAPI, apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
+   const { isChef, isModerator } = useContext(UserContext);
+   const { apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
+
+   // Use a ref to track if the API has been called
+   const apiCalledRef = useRef(false);
 
    const numOfRecipesToFetch = 1;
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
       console.log("== getRecipesFromAPI ==");
-      try {
-         if (apiRecipes.length > 0) {
-            // Data is already available, no need to fetch again
-            console.log("TEST");
-            setCalledAPI(true);
-            setFilteredRecipes(apiRecipes);
-         } else {
-            // "https://replicake.onrender.com/recipes/view" //for testing
-            // `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`
-            const response = await fetch("https://replicake.onrender.com/recipes/view", {
-               method: "GET",
-            });
+      // "https://replicake.onrender.com/recipes/view" //for testing
+      // `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`
+      fetch("https://replicake.onrender.com/recipes/view")
+         .then((response) => {
             if (!response.ok) {
-               console.log("===== ERROR =====");
+               console.log("== !response.ok ==");
                console.log(response);
                throw new Error("Failed to fetch user recipes");
             }
-
-            const data = await response.json();
+            return response.json();
+         })
+         .then((data) => {
             if (Array.isArray(data)) {
                setApiRecipes(data);
                setFilteredRecipes(data); // copy of recipes to API reduce calls
-               setCalledAPI(true); // true after successful API call
             } else {
                console.log("Data is not an array:", data);
                setApiRecipes([]);
             }
-         }
-      } catch (error) {
-         console.log("===== ERROR =====");
-         console.log(error);
-      }
+         })
+         .catch((error) => {
+            console.log("===== ERROR =====");
+            console.log(error);
+         });
    }
 
    // search bar functionality
@@ -75,14 +70,15 @@ const Recipes = () => {
    }
 
    // Fetch data from Spoonacular
+   // TODO; getRecipesFromAPI gets called twice
    useEffect(() => {
       if (filteredRecipes.length <= 0) {
          setFilteredRecipes(apiRecipes);
       }
-      if (!calledAPI) {
+      if (apiRecipes.length === 0) {
          getRecipesFromAPI();
       }
-   }, [calledAPI]);
+   }, [setApiRecipes]);
 
    return (
       <div className="dashboard">
