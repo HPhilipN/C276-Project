@@ -10,16 +10,15 @@ import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
 import { RecipeContext } from "./utils/RecipeContext";
 import InfoButton from "./utils/InfoButton";
+import RefreshRecipes from "./RefreshRecipes";
 
 // API generated recipes
 const Recipes = () => {
    const { isChef, isModerator, userId } = useContext(UserContext);
-   const { calledAPI, setCalledAPI, apiRecipes, setApiRecipes } = useContext(RecipeContext);
+   const { calledAPI, setCalledAPI, apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
    const numOfRecipesToFetch = 1;
-   //    const apiKey = process.env.VITE_APP_API_KEY; // prod key
-   const apiKey = import.meta.env.VITE_APP_API_KEY; // dev key
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
@@ -27,17 +26,15 @@ const Recipes = () => {
       try {
          if (apiRecipes.length > 0) {
             // Data is already available, no need to fetch again
+            console.log("TEST");
             setCalledAPI(true);
             setFilteredRecipes(apiRecipes);
          } else {
             // "https://replicake.onrender.com/recipes/view" //for testing
             // `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`
-            const response = await fetch(
-               `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`,
-               {
-                  method: "GET",
-               }
-            );
+            const response = await fetch("https://replicake.onrender.com/recipes/view", {
+               method: "GET",
+            });
             if (!response.ok) {
                console.log("===== ERROR =====");
                console.log(response);
@@ -96,12 +93,13 @@ const Recipes = () => {
          <div className="filter-search-wrapper">
             <Filter filteredItems={filterSearchRecipes} />
             <Searchbar onSearch={filterSearchRecipes} />
+            <RefreshRecipes />
          </div>
          <div className="recipelist-wrap">
             {/* check if apiRecipes is loaded before rendering */}
             {filteredRecipes.length > 0 ? (
                <>
-                  <ApiRecipeList recipes={filteredRecipes} apiKey={apiKey} />
+                  <ApiRecipeList recipes={filteredRecipes} />
                </>
             ) : (
                <NoRecipesExist />

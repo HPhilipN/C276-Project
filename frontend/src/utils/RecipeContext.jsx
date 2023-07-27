@@ -6,6 +6,8 @@ export const RecipeContext = createContext();
 function RecipeProvider({ children }) {
    const [calledAPI, setCalledAPI] = useState(false);
    const [apiRecipes, setApiRecipes] = useState([]); //all recipes
+   //    const apiKey = process.env.VITE_APP_API_KEY; // prod key
+   const apiKey = import.meta.env.VITE_APP_API_KEY; // dev key
 
    useEffect(() => {
       // Check if the recipes already loaded
@@ -13,8 +15,10 @@ function RecipeProvider({ children }) {
       const storedAPIRecipes = localStorage.getItem("apiRecipes");
 
       // JSON parse converts values
-      if (storedCalledAPI && storedAPIRecipes) {
+      if (storedCalledAPI !== null) {
          setCalledAPI(JSON.parse(storedCalledAPI));
+      }
+      if (storedAPIRecipes !== null) {
          setApiRecipes(JSON.parse(storedAPIRecipes));
       }
    }, []);
@@ -32,6 +36,7 @@ function RecipeProvider({ children }) {
             setCalledAPI,
             apiRecipes,
             setApiRecipes,
+            apiKey,
          }}
       >
          {children}
