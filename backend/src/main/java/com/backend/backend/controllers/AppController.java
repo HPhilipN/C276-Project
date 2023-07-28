@@ -11,7 +11,7 @@ public class AppController {
         return "forward:/index.html";
     }
 
-    @GetMapping({ "/", "/login", "/settings", "/recipes", "/cookbook/**", "/admin/**" })
+    @GetMapping({ "/", "/login", "/settings", "/recipes/**", "/cookbook/**", "/admin/**" })
     public String forward() {
         return "forward:/index.html";
     }
