@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import TimerIcon from "@mui/icons-material/Timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -74,6 +74,7 @@ const MyRecipes = () => {
             <thead>
                <tr>
                   <th>Recipe</th>
+                  <th>Prep Time</th>
                   <th className="manage-th">Manage</th>
                </tr>
             </thead>
@@ -84,6 +85,10 @@ const MyRecipes = () => {
                         <FontAwesomeIcon icon={faKitchenSet} /> {recipe.title}
                      </td>
                      <td>
+                        <TimerIcon /> {recipe.prepTime}
+                     </td>
+                     <td>
+
                         <button
                            className="view-btn btn-hover"
                            onClick={() => displayRecipe(recipe.rid)}

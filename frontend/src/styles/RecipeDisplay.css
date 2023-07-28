@@ -1,10 +1,13 @@
+.display-fullpage {
+   height: 100vh;
+}
+
 .recipe-display-fullpage {
    display: flex;
    justify-content: center;
 }
 
 .recipe-display {
-   /* height: 100vh; */
    display: grid;
    grid-template-areas:
       "header header"
@@ -108,8 +111,8 @@
 
 /* Back button styles */
 .back-button {
-   background-color: #ff9e0D;
-   color: #0F1B2B;
+   background-color: #ff9e0d;
+   color: #0f1b2b;
    border: none;
    border-radius: 10px;
    padding: 10px 20px;
@@ -117,13 +120,13 @@
    cursor: pointer;
    margin-top: 20px; /* Add some top margin to separate from the content */
 }
- 
- .back-button:hover {
-   background-color: #e48f0f;
- }
 
- /* Center the back button */
+.back-button:hover {
+   background-color: #e48f0f;
+}
+
+/* Center the back button */
 .back-button-container {
    display: flex;
    justify-content: center;
- }
+}

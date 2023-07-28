@@ -1,5 +1,6 @@
 import React from "react";
 import DifficultyCircle from "./utils/DifficultyCircle";
+import TimerIcon from "@mui/icons-material/Timer";
 import "./styles/RecipeList.css";
 import { useNavigate } from "react-router-dom";
 
@@ -18,6 +19,8 @@ const RecipeList = ({ recipes }) => {
                   {/* Favourites button should allow users to add this recipe to their favourites list */}
                   <button className="favourites-parent">
                      <div className="favourites">
+                        <TimerIcon fontSize="large" />
+                        <p>{recipe.prepTime}</p>
                      </div>
                   </button>
                   <h4 className="card-title">

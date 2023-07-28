@@ -16,7 +16,7 @@ public class Recipe {
     private String authorName;
     private String title;
     private int recipeDifficulty;
-    private int favourites;
+    private int prepTime;
     @ElementCollection
     private List<String> ingredients = new ArrayList<String>();
     @ElementCollection
@@ -28,13 +28,13 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(int authorId, String authorName, String title, int recipeDifficulty, int favourites,
+    public Recipe(int authorId, String authorName, String title, int recipeDifficulty, int prepTime,
             List<String> ingredients, List<String> instructions, List<String> tags) {
         this.authorId = authorId;
         this.authorName = authorName;
         this.title = title;
         this.recipeDifficulty = recipeDifficulty;
-        this.favourites = favourites;
+        this.prepTime = prepTime;
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.tags = tags;
@@ -81,12 +81,12 @@ public class Recipe {
         this.recipeDifficulty = recipeDifficulty;
     }
 
-    public int getFavourites() {
-        return favourites;
+    public int getPrepTime() {
+        return prepTime;
     }
 
-    public void setFavourites(int favourites) {
-        this.favourites = favourites;
+    public void setPrepTime(int prepTime) {
+        this.prepTime = prepTime;
     }
 
     public List<String> getIngredients() {
@@ -117,7 +117,7 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe [rid=" + rid + ", authorId=" + authorId + ", title=" + title + ", recipeDifficulty="
-                + recipeDifficulty + ", favourites=" + favourites + ", ingredients=" + ingredients + ", instructions="
+                + recipeDifficulty + ", prepTime=" + prepTime + ", ingredients=" + ingredients + ", instructions="
                 + instructions + ", tags=" + tags + "]";
     }
 
