@@ -19,9 +19,6 @@ const Recipes = () => {
    const { apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-   // Use a ref to track if the API has been called
-   const apiCalledRef = useRef(false);
-
    const numOfRecipesToFetch = 1;
 
    // get all recipes from Spoonacular
@@ -102,7 +99,7 @@ const Recipes = () => {
                <NoRecipesExist />
             )}
             {/* Info Button on Bottom Right */}
-            <InfoButton />
+            <InfoButton InfoImg={recipeInfoImg} />
          </div>
       </div>
    );
