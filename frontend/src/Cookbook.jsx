@@ -7,6 +7,7 @@ import RecipeList from "./Recipelist";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
+import cookbookInfoImg from "./assets/cookbook-display.png";
 import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -145,9 +146,9 @@ const Cookbook = () => {
                   )}
                </>
             ) : null}
+            {/* Info Button on Bottom Right */}
+            <InfoButton InfoImg={cookbookInfoImg} />
          </div>
-                     {/* Info Button on Bottom Right */}
-                     <InfoButton />
       </div>
    );
 };
