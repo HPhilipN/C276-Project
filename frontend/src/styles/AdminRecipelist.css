@@ -73,3 +73,15 @@
     border: none;
     cursor: pointer;
  }
+
+ .back-btn {
+   position: absolute;
+   left: 5%;
+   transform: translateX(7%);
+   background-color: #92B48C;
+   color: white;
+   padding: 10px 20px;
+   border-radius: 7px;
+   cursor: pointer;
+ }
+ 

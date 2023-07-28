@@ -88,6 +88,7 @@ const MyRecipes = () => {
                         <TimerIcon /> {recipe.prepTime}
                      </td>
                      <td>
+
                         <button
                            className="view-btn btn-hover"
                            onClick={() => displayRecipe(recipe.rid)}

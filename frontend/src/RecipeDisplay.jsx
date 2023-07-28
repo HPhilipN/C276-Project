@@ -94,6 +94,7 @@ const RecipeDisplay = () => {
                </div>
             </div>
          </div>
+
       </div>
    );
 };
