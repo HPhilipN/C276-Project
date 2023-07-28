@@ -3,6 +3,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import * as Components from "./utils/Components";
 import Slider from "@mui/material/Slider";
 import CloseIcon from "@mui/icons-material/Close";
+import DropdownSelect from "./utils/DropdownSelect";
 import { UserContext } from "./utils/UserContext";
 import { capitalizeEveryWord } from "./utils/utils";
 import { TagsInput } from "react-tag-input-component";
@@ -16,6 +17,7 @@ const AddRecipe = ({ setUserRecipes }) => {
    const [ingredients, setIngredients] = useState([]); // array
    const [instructions, setInstructions] = useState([]); // array
    const [tags, setTags] = useState([]); // array
+   const [cuisineType, setCuisineType] = useState("");
    const [prepTime, setPrepTime] = useState();
    const [submitDisabled, setSubmitDisabled] = useState(false);
    let newRecipe;
@@ -56,11 +58,17 @@ const AddRecipe = ({ setUserRecipes }) => {
    function getPrepTime(event) {
       setPrepTime(event.target.value);
    }
+   function getCusineType(event) {
+      setCuisineType(event.target.value);
+   }
 
    // send create request to endpoint
    async function addRecipeToDatabase(event) {
       // event.preventDefault(); // prevent page refresh on sign-up
-      createRecipeObjectFromInputs();
+
+      // Create a new array with cuisineType added
+      const updatedTags = [...tags, cuisineType];
+      createRecipeObjectFromInputs(updatedTags);
       console.log(newRecipe); //new user details to send to endpoint
 
       // "https://replicake.onrender.com/recipes/create"
@@ -87,7 +95,7 @@ const AddRecipe = ({ setUserRecipes }) => {
    }
 
    // create recipe helper functions
-   function createRecipeObjectFromInputs() {
+   function createRecipeObjectFromInputs(updatedTags) {
       newRecipe = {
          authorId: userId,
          title: title,
@@ -95,7 +103,7 @@ const AddRecipe = ({ setUserRecipes }) => {
          prepTime: prepTime,
          ingredients: ingredients,
          instructions: instructions,
-         tags: tags,
+         tags: updatedTags,
       };
    }
 
@@ -104,6 +112,7 @@ const AddRecipe = ({ setUserRecipes }) => {
       setIngredients([]);
       setInstructions([]);
       setTags([]);
+      setPrepTime();
    }
 
    // disable submit if all inputs arent filled
@@ -141,7 +150,7 @@ const AddRecipe = ({ setUserRecipes }) => {
                   placeholder="Preparation Time in Minutes"
                   value={prepTime}
                   onChange={getPrepTime}
-                  className="title-input"
+                  className="preptime-input"
                />
                <div className="slider-input">
                   <h6 className="text-muted">Difficulty</h6>
@@ -155,6 +164,9 @@ const AddRecipe = ({ setUserRecipes }) => {
                      onChange={getRecipeDiff}
                   />
                </div>
+               <div className="cusine-dropdown">
+                  <DropdownSelect setCuisineType={setCuisineType} />
+               </div>
                <div className="multi-input">
                   <div className="ingredientsInput">
                      <TagsInput
@@ -164,7 +176,7 @@ const AddRecipe = ({ setUserRecipes }) => {
                         placeHolder="Enter ingredients"
                      />
                   </div>
-                  <div className="instructionsInput">
+                  <div className="instructionsInputs">
                      <TagsInput
                         value={instructions}
                         onChange={setInstructions}
@@ -180,7 +192,7 @@ const AddRecipe = ({ setUserRecipes }) => {
                         placeHolder="Enter up to 6 tags"
                         beforeAddValidate={(tag, existingTags) => {
                            console.log(tags);
-                           if (existingTags.length >= 6) {
+                           if (existingTags.length >= 5) {
                               return false;
                            }
                            return true;
