@@ -74,7 +74,6 @@ const MyRecipes = () => {
             <thead>
                <tr>
                   <th>Recipe</th>
-                  <th>Favourites</th>
                   <th className="manage-th">Manage</th>
                </tr>
             </thead>
@@ -83,9 +82,6 @@ const MyRecipes = () => {
                   <tr className="user-recipe-row" key={recipe.rid}>
                      <td>
                         <FontAwesomeIcon icon={faKitchenSet} /> {recipe.title}
-                     </td>
-                     <td>
-                        <FontAwesomeIcon icon={faStar} /> {recipe.favourites}
                      </td>
                      <td>
                         <button

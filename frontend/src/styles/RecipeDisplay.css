@@ -64,13 +64,10 @@
 }
 
 .diff {
-   grid-area: diff;
+   grid-area: favs;
    display: flex;
 }
 
-.favs {
-   grid-area: favs;
-}
 
 .ingredients-display {
    grid-area: ingredients;

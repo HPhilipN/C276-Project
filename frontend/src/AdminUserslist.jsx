@@ -77,6 +77,11 @@ export default function AdminUserlist() {
             });
       }
    }
+   // Function to handle back button click
+  const handleBack = () => {
+   // Navigate back to the Adminhome page
+   navigate("/admin/home");
+ };
 
    return (
       <div>
@@ -146,6 +151,10 @@ export default function AdminUserlist() {
                   ))}
                </tbody>
             </table>
+                    {/* Back button */}
+        <button className="back-btn" onClick={handleBack}>
+          Back
+        </button>
          </div>
       </div>
    );

@@ -59,7 +59,6 @@ const RecipeDisplay = () => {
             <h1 className="title">{recipe.title}</h1>
             <div className="author">Author: {recipe.authorName}</div>
             <div className="diff">Difficulty: {recipe.recipeDifficulty}</div>
-            <div className="favs">Favourites: {recipe.favourites}</div>
           </header>
           <div className="ingredients-display">
             <h3>Ingredients:</h3>

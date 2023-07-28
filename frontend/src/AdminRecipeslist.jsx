@@ -82,6 +82,11 @@ export default function AdminRecipelist() {
             console.log(error);
          });
    }
+     // Function to handle back button click
+  const handleBack = () => {
+   // Navigate back to the Adminhome page
+   navigate("/admin/home");
+ };
 
    return (
       <>
@@ -114,7 +119,7 @@ export default function AdminRecipelist() {
                   <tr>
                      <th>Recipe</th>
                      <th>Author</th>
-                     <th>Favourites</th>
+
                      <th>Manage</th>
                   </tr>
                   {category.map((getcate) => (
@@ -124,9 +129,6 @@ export default function AdminRecipelist() {
                         </td>
                         <td>
                            <FontAwesomeIcon icon={faUser} /> {getcate.authorName}
-                        </td>
-                        <td>
-                           <FontAwesomeIcon icon={faStar} /> {getcate.favourites}
                         </td>
                         <td>
                            <button
@@ -148,6 +150,10 @@ export default function AdminRecipelist() {
                   ))}
                </tbody>
             </table>
+                           {/* Back button */}
+      <button className="back-btn" onClick={handleBack}>
+        Back
+      </button>
          </div>
       </>
    );
