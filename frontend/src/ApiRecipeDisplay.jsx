@@ -17,6 +17,8 @@ const ApiRecipeDisplay = () => {
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
 
+   let tags, ingredientNames, instructionSteps;
+
    // redirect to home if logged out
    const navigate = useNavigate();
    if (!isChef && !isModerator) {
@@ -35,6 +37,24 @@ const ApiRecipeDisplay = () => {
             setRecipe(data); // assign retrieved JSON data
             // console.log(recipe);
          })
+         .then(() => {
+            // Extract the first 2 values from dishTypes and diets
+            const dishTypesTags = recipe.dishTypes.slice(0, 2);
+            const dietsTags = recipe.diets.slice(0, 2);
+
+            // Extract the first item from occasions and cuisines
+            const occasionsTag = recipe.occasions[0];
+            const cuisinesTag = recipe.cuisines[0];
+
+            // Create an array of tags with non-empty values
+            tags = [...dishTypesTags, ...dietsTags, occasionsTag, cuisinesTag].filter((tag) => tag);
+
+            // Extract ingredient names
+            ingredientNames = extendedIngredients.map((ingredient) => ingredient.name);
+
+            // Extract instruction steps
+            instructionSteps = analyzedInstructions[0].steps.map((s) => s.step);
+         })
          .catch((error) => {
             console.log("===== ERROR =====");
             console.log(error);
@@ -48,7 +68,7 @@ const ApiRecipeDisplay = () => {
 
    // Handle back button click
    const handleBackButtonClick = () => {
-      navigate("/cookbook"); // Navigate to "/cookbooks" page
+      navigate("/recipes"); // Navigate to "/recipes" page
    };
 
    return (
@@ -67,7 +87,7 @@ const ApiRecipeDisplay = () => {
                <div className="ingredients-display">
                   <h3>Ingredients:</h3>
                   <ul>
-                     {recipe.ingredients.map((ingredient, index) => (
+                     {ingredientNames.map((ingredient, index) => (
                         <li key={index}>{ingredient}</li>
                      ))}
                   </ul>
@@ -75,14 +95,14 @@ const ApiRecipeDisplay = () => {
                <div className="instructions-display">
                   <h3>Instructions:</h3>
                   <ol>
-                     {recipe.instructions.map((step, index) => (
+                     {instructionSteps.map((step, index) => (
                         <li key={index}>{step}</li>
                      ))}
                   </ol>
                </div>
                <div className="tags-display">
                   <ul>
-                     {recipe.tags.map((tag, index) => (
+                     {tags.map((tag, index) => (
                         <li key={index} className="tagItem">
                            {tag}
                         </li>
