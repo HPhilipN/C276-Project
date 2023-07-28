@@ -11,6 +11,7 @@ import { UserContext } from "./utils/UserContext";
 import { RecipeContext } from "./utils/RecipeContext";
 import InfoButton from "./utils/InfoButton";
 import RefreshRecipes from "./RefreshRecipes";
+import recipeInfoImg from "./assets/recipe-display.png";
 
 // API generated recipes
 const Recipes = () => {

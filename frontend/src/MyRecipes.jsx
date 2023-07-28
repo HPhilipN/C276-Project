@@ -44,7 +44,7 @@ const MyRecipes = () => {
             console.log("===== ERROR =====");
             console.log(error);
          });
-   });
+   }, [userId]);
 
    // should redirect to full recipe view cookbook/view/rid
    function displayRecipe(rid) {
@@ -88,6 +88,7 @@ const MyRecipes = () => {
                         <TimerIcon /> {recipe.prepTime}
                      </td>
                      <td>
+
                         <button
                            className="view-btn btn-hover"
                            onClick={() => displayRecipe(recipe.rid)}

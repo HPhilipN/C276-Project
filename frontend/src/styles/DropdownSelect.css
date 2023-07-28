@@ -1,0 +1,17 @@
+.dropdown-display {
+   display: flex;
+   justify-content: start;
+   align-items: end;
+
+   margin-bottom: 1rem;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   padding: 10px;
+}
+
+.dropdown-title {
+   margin-right: 1rem;
+}
+
+.dropdown-main {
+   padding: 5px;
+}
