@@ -2,11 +2,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import InfoIcon from "@mui/icons-material/Info";
-import recipeModalImg from "../assets/recipe-display.png";
 import "../styles/InfoButton.css";
 
 // User generated recipes
-const InfoButton = () => {
+const InfoButton = ({ InfoImg }) => {
    const [showModal, setShowModal] = useState(false);
    const modalRef = useRef(null);
    // if click outside modal, close modal
@@ -33,7 +32,7 @@ const InfoButton = () => {
          <button className="close-btn-parent">
             <CloseIcon className="close-btn" onClick={handleInfoButtonClick} fontSize="large" />
          </button>
-         <img src={recipeModalImg} />
+         <img src={InfoImg} />
       </div>
    );
 
