@@ -145,9 +145,9 @@ const Cookbook = () => {
                   )}
                </>
             ) : null}
-            {/* Info Button on Bottom Right */}
-            <InfoButton />
          </div>
+                     {/* Info Button on Bottom Right */}
+                     <InfoButton />
       </div>
    );
 };
