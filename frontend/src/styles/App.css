@@ -271,14 +271,6 @@ nav {
    .primary-subheading {
       text-align: center;
    }
-   .watch-video-button {
-      margin-left: 0rem !important;
-      margin-top: 1rem;
-      font-size: 1rem !important;
-   }
-   .watch-video-button svg {
-      margin-right: 0.5rem !important;
-   }
    .about-section-image-container {
       margin-right: 0rem !important;
    }
@@ -312,9 +304,7 @@ nav {
    .footer-section-columns {
       margin: 1rem 0rem;
    }
-   .App {
-      max-width: 95vw;
-   }
+
 }
 @media (max-width: 400px) {
    .home-bannerImage-container,
