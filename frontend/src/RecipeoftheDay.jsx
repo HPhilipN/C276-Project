@@ -4,28 +4,52 @@ import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner comp
 
 const RecipeoftheDay = () => {
   const [recipeOfTheDay, setRecipeOfTheDay] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the "Recipe of the Day" data from the API
-    fetch(
-      "https://api.spoonacular.com/recipes/random?apiKey=a96db59e319b4f0386a4d0748670cc2e&number=1"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the state with the received data
-        setRecipeOfTheDay(data.recipes[0]);
-      })
-      .catch((error) => {
-        console.log("===== ERROR =====");
-        console.log(error);
-      });
-  }, []);
+    // Fetch the "Recipe of the Day" data from the API only if it hasn't been fetched yet
+    if (!recipeOfTheDay) {
+      fetch(
+        "https://api.spoonacular.com/recipes/random?apiKey=a96db59e319b4f0386a4d0748670cc2e&number=1"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // Update the state with the received data
+          setRecipeOfTheDay(data.recipes[0]);
+          setIsLoading(false); // Set loading to false when data is received
+        })
+        .catch((error) => {
+          console.log("===== ERROR =====");
+          console.log(error);
+          setIsLoading(false); // Set loading to false if there's an error
+        });
+    }
+  }, [recipeOfTheDay]);
 
-  if (!recipeOfTheDay) {
-        // Show the loading spinner while data is being fetched
-        return <LoadingSpinner />;
+  if (isLoading) {
+    // Show the loading spinner while data is being fetched
+    return <LoadingSpinner />;
   }
 
+  if (!recipeOfTheDay) {
+    // If data is not received and loading is complete, show an error message or fallback UI
+    return <div className="work-section-wrapper">
+      <div className="work-section-top">
+        <h1 className="primary-heading">Featured Recipe</h1>
+      </div>
+      <div className="testimonial-section-bottom">
+      <p>Failed to load the featured recipe. Please try again later.</p>
+        <div className="recipe-image">
+       
+        </div>
+   
+        <div className="ingredients-list">
+        </div>
+        <div className="about-buttons-container">
+        </div>
+      </div>
+    </div>
+  }
   return (
     <div className="work-section-wrapper">
       <div className="work-section-top">
