@@ -18,6 +18,7 @@ import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./utils/UserContext";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./styles/NavbarLogin.css";
 import "./styles/Navbar.css";
@@ -34,23 +35,23 @@ const NavbarLogin = () => {
       {
          text: "Home",
          icon: <HomeIcon />,
-         onClick: () => (window.location.href = "/"),
+         onClick: () => <Link className="button" to="/"></Link>,
       },
       {
          text: "Recipes",
          icon: <SearchIcon />,
-         onClick: () => (window.location.href = "/recipes"),
+         onClick: () => <Link className="button" to="/recipes"></Link>,
       },
       {
          text: "Cookbook",
          icon: <BookIcon />,
-         onClick: () => (window.location.href = "/cookbook"),
+         onClick: () => <Link className="button" to="/cookbook"></Link>,
       },
       {
          text: "Settings",
          icon: <SettingsIcon />,
          profile: true,
-         onClick: () => (window.location.href = "/settings"),
+         onClick: () => <Link className="button" to="/settings"></Link>,
       },
       {
          text: "Logout",
@@ -72,26 +73,26 @@ const NavbarLogin = () => {
             </a>
          </div>
          <div className="navbar-links-container">
-            <a href="/" className="nav-buttons">
+            <Link className="nav-buttons" to="/">
                Home
-            </a>
-            <a href="/recipes" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/recipes">
                Recipes
-            </a>
-            <a href="/cookbook" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/cookbook">
                Cookbook
-            </a>
-            <a href="/settings" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/settings">
                Settings
-            </a>
-            <a onClick={logoutUserHelper} className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/" onClick={logoutUserHelper}>
                Log Out
-            </a>
-            <a href="/settings" className="navbar-profile" style={{ marginRight: 5 }}>
+            </Link>
+            <Link className="navbar-profile" to="/settings" style={{ marginRight: 5 }}>
                <Avatar className="navbar-profile-picture" alt="Profile Picture">
                   {firstLetter}
                </Avatar>
-            </a>
+            </Link>
          </div>
          <div className="navbar-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />

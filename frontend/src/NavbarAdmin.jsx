@@ -20,6 +20,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { logoutUser } from "./Login";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./styles/NavbarAdmin.css";
 import "./styles/Navbar.css";
 
@@ -35,23 +36,23 @@ const NavbarAdmin = () => {
       {
          text: "Home",
          icon: <HomeIcon />,
-         onClick: () => (window.location.href = "/"),
+         onClick: () => <Link className="button" to="/"></Link>,
       },
       {
          text: "Recipes",
          icon: <SearchIcon />,
-         onClick: () => (window.location.href = "/recipes"),
+         onClick: () => <Link className="button" to="/recipes"></Link>,
       },
       {
          text: "Cookbook",
          icon: <BookIcon />,
-         onClick: () => (window.location.href = "/cookbook"),
+         onClick: () => <Link className="button" to="/cookbook"></Link>,
       },
       {
          text: "Admin",
          icon: <AdminPanelSettingsIcon />,
          profile: true,
-         onClick: () => (window.location.href = "/admin/home"),
+         onClick: () => <Link className="button" to="/admin/home"></Link>,
       },
       {
          text: "Logout",
@@ -74,28 +75,28 @@ const NavbarAdmin = () => {
             </a>
          </div>
          <div className="navbar-links-container">
-            <a href="/" className="nav-buttons">
+            <Link className="nav-buttons" to="/">
                Home
-            </a>
-            <a href="/recipes" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/recipes">
                Recipes
-            </a>
-            <a href="/cookbook" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/cookbook">
                Cookbook
-            </a>
-            <a href="/admin/home" className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/admin/home">
                Admin
-            </a>
-            <a href="#" onClick={logoutUserHelper} className="nav-buttons">
+            </Link>
+            <Link className="nav-buttons" to="/" onClick={logoutUserHelper}>
                Log Out
-            </a>
-            <a href="/admin/home" className="navbar-profile" style={{ marginRight: 5 }}>
+            </Link>
+            <Link className="nav-profile" to="/admin/home" style={{ marginRight: 5 }}>
                <AssignmentIndOutlinedIcon
                   className="navbar-profile-picture"
                   alt="Profile Picture"
                   fontSize="large"
                />
-            </a>
+            </Link>
          </div>
          <div className="navbar-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
