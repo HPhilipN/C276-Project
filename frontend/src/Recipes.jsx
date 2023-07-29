@@ -19,14 +19,16 @@ const Recipes = () => {
    const { apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-   const numOfRecipesToFetch = 1;
+   const numOfRecipesToFetch = 2;
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
       console.log("== getRecipesFromAPI ==");
       // "https://replicake.onrender.com/recipes/view" //for testing
       // `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`
-      fetch("https://replicake.onrender.com/recipes/view")
+      fetch(
+         `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=${numOfRecipesToFetch}`
+      )
          .then((response) => {
             if (!response.ok) {
                console.log("== !response.ok ==");
@@ -36,12 +38,9 @@ const Recipes = () => {
             return response.json();
          })
          .then((data) => {
-            if (Array.isArray(data)) {
-               setApiRecipes(data);
-               setFilteredRecipes(data); // copy of recipes to API reduce calls
-            } else {
-               console.log("Data is not an array:", data);
-               setApiRecipes([]);
+            if (Array.isArray(data.recipes)) {
+               setApiRecipes(data.recipes);
+               setFilteredRecipes(data.recipes); // copy of recipes to API reduce calls
             }
          })
          .catch((error) => {
@@ -70,13 +69,16 @@ const Recipes = () => {
    // Fetch data from Spoonacular
    // TODO; getRecipesFromAPI gets called twice
    useEffect(() => {
-      if (filteredRecipes.length <= 0) {
-         setFilteredRecipes(apiRecipes);
-      }
       if (apiRecipes.length === 0) {
          getRecipesFromAPI();
       }
-   }, [setApiRecipes]);
+   }, [apiRecipes, setApiRecipes]);
+
+   // Set filtered recipe to stored apiRecipes
+   useEffect(() => {
+      setFilteredRecipes(apiRecipes);
+      console.log(apiRecipes);
+   }, []);
 
    return (
       <div className="dashboard">
@@ -91,7 +93,7 @@ const Recipes = () => {
          </div>
          <div className="recipelist-wrap">
             {/* check if apiRecipes is loaded before rendering */}
-            {filteredRecipes.length > 0 ? (
+            {filteredRecipes.length >= 0 ? (
                <>
                   <ApiRecipeList recipes={filteredRecipes} />
                </>

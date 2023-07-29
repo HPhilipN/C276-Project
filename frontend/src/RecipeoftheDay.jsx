@@ -5,8 +5,8 @@ import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner comp
 
 const RecipeoftheDay = () => {
    const { recipeOfTheDay, setRecipeOfTheDay, apiKey } = useContext(RecipeContext);
-   const [isLoading, setIsLoading] = useState(true);
 
+   // TODO; getRecipesFromAPI gets called twice
    useEffect(() => {
       // Fetch the "Recipe of the Day" data from the API only if it hasn't been fetched yet
       if (!recipeOfTheDay) {
@@ -16,17 +16,15 @@ const RecipeoftheDay = () => {
             .then((data) => {
                // Update the state with the received data
                setRecipeOfTheDay(data.recipes[0]);
-               setIsLoading(false); // Set loading to false when data is received
             })
             .catch((error) => {
                console.log("===== ERROR =====");
                console.log(error);
-               setIsLoading(false); // Set loading to false if there's an error
             });
       }
    }, [recipeOfTheDay]);
 
-   if (isLoading) {
+   if (recipeOfTheDay === null) {
       // Show the loading spinner while data is being fetched
       return <LoadingSpinner />;
    }
