@@ -77,7 +77,7 @@ const Recipes = () => {
    // Set filtered recipe to stored apiRecipes
    useEffect(() => {
       setFilteredRecipes(apiRecipes);
-      console.log(apiRecipes);
+      //   console.log(apiRecipes);
    }, []);
 
    return (

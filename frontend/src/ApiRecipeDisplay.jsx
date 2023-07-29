@@ -25,6 +25,7 @@ const ApiRecipeDisplay = () => {
 
    // fetch the desired recipe object
    useEffect(() => {
+      console.log("== API Recipe Display ==");
       // `https://replicake.onrender.com/recipes/view/${rid}`
       // `https://api.spoonacular.com/recipes/${rid}/information?apiKey=${apiKey}`
       fetch(`https://api.spoonacular.com/recipes/${rid}/information?apiKey=${apiKey}`, {
@@ -40,10 +41,14 @@ const ApiRecipeDisplay = () => {
             const occasionsTag = data.occasions;
             const cuisinesTag = data.cuisines;
             // Create an array of tags with non-empty values
-            const newTags = [...dishTypesTags, ...dietsTags, occasionsTag, cuisinesTag].filter(
-               (tag) => tag
+            const newTags = [...dishTypesTags, ...dietsTags, ...occasionsTag, ...cuisinesTag];
+            // Remove empty strings and empty values from newTags array
+            const filteredTags = newTags.filter(
+               (tag) => tag !== "" && tag !== null && tag !== undefined
             );
-            setTags(newTags);
+            console.log(filteredTags);
+
+            setTags(filteredTags);
          })
          .catch((error) => {
             console.log("===== ERROR =====");
