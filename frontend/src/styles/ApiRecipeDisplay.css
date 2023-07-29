@@ -1,0 +1,131 @@
+.display-fullpage {
+   height: 100vh;
+}
+
+.recipe-display-fullpage {
+   display: flex;
+   justify-content: center;
+}
+
+.recipe-display {
+   display: grid;
+   grid-template-areas:
+      "header header"
+      "ingredients ingredients"
+      "instructions instructions"
+      "tags tags";
+
+   justify-content: center;
+   text-align: start;
+   grid-auto-rows: min-content;
+
+   background-color: #eee;
+   box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 20px;
+
+   padding: 2rem;
+   width: 60vw;
+   max-width: 60rem;
+   min-width: 25rem;
+}
+
+.recipe-display * {
+   margin: 0 2rem;
+}
+
+.loader {
+   height: 80vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.header {
+   grid-area: header;
+   display: grid;
+   grid-template-areas:
+      "title title title"
+      "author favs diff";
+   border: 2px solid #000;
+   border-radius: 10px;
+   margin-bottom: 1rem;
+}
+
+.header * {
+   padding: 5px 1rem;
+   margin: 0;
+}
+
+/* Grid Settings */
+.title {
+   grid-area: title;
+   margin-bottom: 0;
+   border-bottom: 1px solid #000;
+}
+
+.author {
+   grid-area: author;
+}
+
+.diff {
+   grid-area: favs;
+   display: flex;
+}
+
+.ingredients-display {
+   grid-area: ingredients;
+   margin-bottom: 1rem;
+}
+
+.api-instructions-display {
+   grid-area: instructions;
+   margin-bottom: 1rem;
+}
+
+.tags-display {
+   grid-area: tags;
+   padding-left: 25px;
+   margin-bottom: 1rem;
+}
+
+/* Small Changes */
+.tags-display ul {
+   list-style-type: none; /* Remove default list styles */
+   padding: 0;
+   margin: 0;
+}
+
+.tags-display li {
+   display: inline-block; /* Change display property */
+   margin: 5px;
+}
+
+.api-instructions-display li {
+   margin: 3px 0px;
+}
+
+.ingredients-display ul {
+   list-style-type: disc;
+   padding-left: 0px;
+}
+
+/* Back button styles */
+.back-button {
+   background-color: #ff9e0d;
+   color: #0f1b2b;
+   border: none;
+   border-radius: 10px;
+   padding: 10px 20px;
+   font-size: 16px;
+   cursor: pointer;
+   margin-top: 20px; /* Add some top margin to separate from the content */
+}
+
+.back-button:hover {
+   background-color: #e48f0f;
+}
+
+/* Center the back button */
+.back-button-container {
+   display: flex;
+   justify-content: center;
+}

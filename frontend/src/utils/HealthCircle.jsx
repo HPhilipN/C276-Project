@@ -19,6 +19,7 @@ const HealthCircle = ({ healthScore }) => {
       justifyContent: "center",
       alignItems: "center",
       color: "#000",
+      padding: "1.1rem",
    };
 
    return (

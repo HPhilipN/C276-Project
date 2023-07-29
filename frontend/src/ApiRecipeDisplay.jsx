@@ -5,19 +5,17 @@ import NavbarLogin from "./NavbarLogin";
 import Loader from "./utils/Loader";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
-import { useNavigate } from "react-router-dom";
-import "./styles/RecipeDisplay.css";
 import { RecipeContext } from "./utils/RecipeContext";
+import { useNavigate } from "react-router-dom";
+import "./styles/ApiRecipeDisplay.css";
 
-// TODO
 const ApiRecipeDisplay = () => {
    const { isChef, isModerator } = useContext(UserContext);
    const { apiKey } = useContext(RecipeContext);
    // useParams grabs rid from url
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
-
-   let tags, ingredientNames, instructionSteps;
+   const [tags, setTags] = useState([]);
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -27,33 +25,30 @@ const ApiRecipeDisplay = () => {
 
    // fetch the desired recipe object
    useEffect(() => {
+      console.log("== API Recipe Display ==");
       // `https://replicake.onrender.com/recipes/view/${rid}`
       // `https://api.spoonacular.com/recipes/${rid}/information?apiKey=${apiKey}`
-      fetch(`https://replicake.onrender.com/recipes/view/${rid}`, {
+      fetch(`https://api.spoonacular.com/recipes/${rid}/information?apiKey=${apiKey}`, {
          method: "GET",
       })
          .then((response) => response.json())
          .then((data) => {
             setRecipe(data); // assign retrieved JSON data
-            // console.log(recipe);
-         })
-         .then(() => {
-            // Extract the first 2 values from dishTypes and diets
-            const dishTypesTags = recipe.dishTypes.slice(0, 2);
-            const dietsTags = recipe.diets.slice(0, 2);
+            // console.log(data);
 
-            // Extract the first item from occasions and cuisines
-            const occasionsTag = recipe.occasions[0];
-            const cuisinesTag = recipe.cuisines[0];
-
+            const dishTypesTags = data.dishTypes;
+            const dietsTags = data.diets;
+            const occasionsTag = data.occasions;
+            const cuisinesTag = data.cuisines;
             // Create an array of tags with non-empty values
-            tags = [...dishTypesTags, ...dietsTags, occasionsTag, cuisinesTag].filter((tag) => tag);
+            const newTags = [...dishTypesTags, ...dietsTags, ...occasionsTag, ...cuisinesTag];
+            // Remove empty strings and empty values from newTags array
+            const filteredTags = newTags.filter(
+               (tag) => tag !== "" && tag !== null && tag !== undefined
+            );
+            console.log(filteredTags);
 
-            // Extract ingredient names
-            ingredientNames = extendedIngredients.map((ingredient) => ingredient.name);
-
-            // Extract instruction steps
-            instructionSteps = analyzedInstructions[0].steps.map((s) => s.step);
+            setTags(filteredTags);
          })
          .catch((error) => {
             console.log("===== ERROR =====");
@@ -80,34 +75,38 @@ const ApiRecipeDisplay = () => {
             <div className="recipe-display">
                <header className="header">
                   <h1 className="title">{recipe.title}</h1>
-                  <div className="author">Author: {recipe.authorName}</div>
-                  <div className="diff">Difficulty: {recipe.recipeDifficulty}</div>
-                  <div className="favs">Preparation Time: {recipe.prepTime}min</div>
+                  <div className="author">Source: {recipe.sourceName}</div>
+                  <div className="diff">Health Score: {recipe.healthScore}</div>
+                  <div className="favs">Preparation Time: {recipe.readyInMinutes}min</div>
                </header>
                <div className="ingredients-display">
                   <h3>Ingredients:</h3>
                   <ul>
-                     {ingredientNames.map((ingredient, index) => (
-                        <li key={index}>{ingredient}</li>
+                     {recipe.extendedIngredients.map((ingredient) => (
+                        <li key={ingredient.id}>{ingredient.original}</li>
                      ))}
                   </ul>
                </div>
-               <div className="instructions-display">
+               <div className="api-instructions-display">
                   <h3>Instructions:</h3>
                   <ol>
-                     {instructionSteps.map((step, index) => (
-                        <li key={index}>{step}</li>
+                     {recipe.analyzedInstructions[0].steps.map((instruction) => (
+                        <li key={instruction.number}>{instruction.step}</li>
                      ))}
                   </ol>
                </div>
                <div className="tags-display">
-                  <ul>
-                     {tags.map((tag, index) => (
-                        <li key={index} className="tagItem">
-                           {tag}
-                        </li>
-                     ))}
-                  </ul>
+                  {tags.length > 0 ? (
+                     <ul>
+                        {tags.map((tag, index) => (
+                           <li key={index} className="tagItem">
+                              {tag}
+                           </li>
+                        ))}
+                     </ul>
+                  ) : (
+                     <p>No tags available</p>
+                  )}
                </div>
                <div className="back-button-container">
                   {/* Back button */}
