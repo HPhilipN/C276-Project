@@ -95,6 +95,9 @@ const NavbarLogin = () => {
             </Link>
          </div>
          <div className="navbar-menu-container">
+            <div className="navbar-logo-containers">
+               <img size={100} src={Logo} alt="" />
+            </div>
             <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
          </div>
          <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">

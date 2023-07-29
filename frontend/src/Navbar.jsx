@@ -57,6 +57,9 @@ const Navbar = () => {
             </Link>
          </div>
          <div className="navbar-menu-container">
+            <div className="navbar-logo-containers">
+                  <img size={100} src={Logo} alt="" />
+            </div>
             <HiOutlineBars3 size={42} onClick={() => setOpenMenu(true)} />
          </div>
          {/* Drawer component for the menu */}
