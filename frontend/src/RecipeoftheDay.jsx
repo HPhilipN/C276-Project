@@ -2,9 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import "./styles/RecipeoftheDay.css"; // Import the CSS file
 import { RecipeContext } from "./utils/RecipeContext";
 import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner component
+import { useNavigate } from "react-router-dom";
 
 const RecipeoftheDay = () => {
    const { recipeOfTheDay, setRecipeOfTheDay, apiKey } = useContext(RecipeContext);
+
+
 
    // TODO; getRecipesFromAPI gets called twice
    useEffect(() => {
@@ -46,6 +49,11 @@ const RecipeoftheDay = () => {
          </div>
       );
    }
+   const navigate = useNavigate();
+   // useNavigate hook to navigate to the desired URL when the button is clicked
+   function handleViewRecipe(recipeOfTheDay) {
+      navigate(`/recipes/view/${recipeOfTheDay.id}`);
+   }
    return (
       <div className="work-section-wrapper">
          <div className="work-section-top">
@@ -67,7 +75,7 @@ const RecipeoftheDay = () => {
                </ul>
             </div>
             <div className="about-buttons-container">
-               <button className="secondary-button">Learn More</button>
+               <button className="secondary-button"  onClick={() => handleViewRecipe(recipeOfTheDay)}>Learn More</button>
             </div>
          </div>
       </div>
