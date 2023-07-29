@@ -19,10 +19,6 @@ const ApiRecipeDisplay = () => {
 
    // redirect to home if logged out
    const navigate = useNavigate();
-   if (!isChef && !isModerator) {
-      navigate("/");
-   }
-
    // fetch the desired recipe object
    useEffect(() => {
       console.log("== API Recipe Display ==");
