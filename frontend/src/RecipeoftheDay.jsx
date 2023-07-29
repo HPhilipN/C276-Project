@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./styles/RecipeoftheDay.css"; // Import the CSS file
 import { RecipeContext } from "./utils/RecipeContext";
-import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner component
 import { useNavigate } from "react-router-dom";
 
 const RecipeoftheDay = () => {
@@ -28,11 +27,6 @@ const RecipeoftheDay = () => {
    }, [recipeOfTheDay]);
 
    if (recipeOfTheDay === null) {
-      // Show the loading spinner while data is being fetched
-      return <LoadingSpinner />;
-   }
-
-   if (!recipeOfTheDay) {
       // If data is not received and loading is complete, show an error message or fallback UI
       return (
          <div className="work-section-wrapper">
