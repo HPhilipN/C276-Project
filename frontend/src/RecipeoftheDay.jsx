@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./styles/RecipeoftheDay.css"; // Import the CSS file
 import { RecipeContext } from "./utils/RecipeContext";
-import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner component
+import ErrorMesageHome from "./ErrorMessageHome"; // Import the LoadingSpinner component
 
 const RecipeoftheDay = () => {
    const { recipeOfTheDay, setRecipeOfTheDay, apiKey } = useContext(RecipeContext);
@@ -26,26 +26,9 @@ const RecipeoftheDay = () => {
 
    if (recipeOfTheDay === null) {
       // Show the loading spinner while data is being fetched
-      return <LoadingSpinner />;
+      return <ErrorMesageHome/>;
    }
 
-   if (!recipeOfTheDay) {
-      // If data is not received and loading is complete, show an error message or fallback UI
-      return (
-         <div className="work-section-wrapper">
-            <div className="work-section-top">
-               <h1 className="primary-heading">Featured Recipe</h1>
-            </div>
-            <div className="testimonial-section-bottom">
-               <p>Failed to load the featured recipe. Please try again later.</p>
-               <div className="recipe-image"></div>
-
-               <div className="ingredients-list"></div>
-               <div className="about-buttons-container"></div>
-            </div>
-         </div>
-      );
-   }
    return (
       <div className="work-section-wrapper">
          <div className="work-section-top">
