@@ -72,7 +72,7 @@ const Recipes = () => {
       if (apiRecipes.length === 0) {
          getRecipesFromAPI();
       }
-   }, []);
+   }, [apiRecipes, setApiRecipes]);
 
    // Set filtered recipe to stored apiRecipes
    useEffect(() => {
