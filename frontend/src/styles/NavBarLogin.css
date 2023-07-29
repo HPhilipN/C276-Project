@@ -20,6 +20,20 @@
     height: 30px;
   }
   
+  .navbar-logo-containers {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: absolute; /* Add position absolute */
+    top: 0; /* Position the logo div at the top */
+    left: -10px; /* Position the logo div at the left */
+    padding: 23px; /* Add padding to adjust position as needed */
+ }
+ 
+ .navbar-logo-containers img {
+    height: 45px;
+ }
+ 
   .navbar-links-container {
     display: flex;
     align-items: center;

@@ -3,7 +3,7 @@ import Filter from "./Filter";
 import Searchbar from "./Searchbar";
 import AddRecipe from "./AddRecipe";
 import NoRecipesExist from "./NoRecipesExist";
-import RecipeList from "./Recipelist";
+import RecipeList from "./RecipeList";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
