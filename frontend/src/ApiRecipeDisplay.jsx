@@ -54,7 +54,7 @@ const ApiRecipeDisplay = () => {
             console.log("===== ERROR =====");
             console.log(error);
          });
-   }, [rid]);
+   }, []);
 
    // if recipe data isn't populated
    if (!recipe) {
