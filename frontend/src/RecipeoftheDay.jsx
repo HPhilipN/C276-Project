@@ -24,7 +24,7 @@ const RecipeoftheDay = () => {
                console.log(error);
             });
       }
-   }, [recipeOfTheDay]);
+   }, []);
 
    if (recipeOfTheDay === null) {
       // If data is not received and loading is complete, show an error message or fallback UI
