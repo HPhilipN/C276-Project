@@ -54,7 +54,7 @@ const RecipeDisplay = () => {
       css: null, // You can pass CSS file URLs if needed
       style: null, // You can pass custom styles here
       scanStyles: true, // Set to false if you don't want to process styles
-      targetStyles: [], // Process all styles
+      targetStyles: ["*"], // Process all styles
       ignoreElements: ["back-button", "print-button","tag-display"], // Array of HTML ids to ignore when printing
       documentTitle: "Recipe", // Document title when printing
     });
@@ -66,7 +66,7 @@ const RecipeDisplay = () => {
       {isModerator && <NavbarAdmin />}
       {!isChef && !isModerator && <Navbar />}
       <div className="recipe-display-fullpage" id="printable-content">
-        <div className="recipe-display">
+        <div id="recipe-display" className="recipe-display">
           <header className="header">
             <h1 className="title">{recipe.title}</h1>
             <div className="author">Author: {recipe.authorName}</div>
