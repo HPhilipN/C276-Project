@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Navbar from "./Navbar";
 import NavbarAdmin from "./NavbarAdmin";
 import NavbarLogin from "./NavbarLogin";
@@ -6,6 +6,8 @@ import Loader from "./utils/Loader";
 import { useParams } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
+//not working rn
+import { useReactToPrint } from "react-to-print";
 import "./styles/RecipeDisplay.css";
 
 const RecipeDisplay = () => {
@@ -13,6 +15,8 @@ const RecipeDisplay = () => {
    // useParams grabs rid from url
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
+   // npm install react-to-print
+   const recipePDF = useRef();
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -48,11 +52,19 @@ const RecipeDisplay = () => {
       navigate("/cookbook"); // Navigate to "/cookbooks" page
    };
 
+   //generates PDF of recipe page
+   const generatePDF = useReactToPrint({
+      content: ()=> recipePDF.current,
+      documentTitle:"RecipeData",
+      onAfterPrint:()=> alert("Recipe Saved in PDF"),
+   });
+
    return (
       <div className="display-fullpage">
          {isChef && <NavbarLogin />}
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
+         
          <div className="recipe-display-fullpage">
             <div className="recipe-display">
                <header className="header">
@@ -89,6 +101,12 @@ const RecipeDisplay = () => {
                <div className="back-button-container">
                   {/* Back button */}
                   <button onClick={handleBackButtonClick} className="back-button">
+                     Back to Cookbook
+                  </button>
+               </div>
+               <div className="pdf-button">
+                  {/* Generate Recipe PDF button */}
+                  <button onClick={generatePDF} className="btn= btn-success">
                      Back to Cookbook
                   </button>
                </div>

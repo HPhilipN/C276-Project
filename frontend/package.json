@@ -24,6 +24,7 @@
       "react-password-strength-bar": "^0.4.1",
       "react-router-dom": "^6.14.1",
       "react-tag-input-component": "^2.0.2",
+      "react-to-print": "^2.14.13",
       "styled-components": "^6.0.1",
       "zxcvbn": "^4.4.2"
    },
