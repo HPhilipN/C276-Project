@@ -8,7 +8,6 @@ import { UserContext } from "./utils/UserContext";
 import { RecipeContext } from "./utils/RecipeContext";
 import { useNavigate } from "react-router-dom";
 import "./styles/ApiRecipeDisplay.css";
-// generate API PDF
 import printJS from "print-js";
 
 const ApiRecipeDisplay = () => {
@@ -64,27 +63,28 @@ const ApiRecipeDisplay = () => {
       navigate("/recipes"); // Navigate to "/recipes" page
    };
 
-   // Function to handle the print action
-  const handlePrint = () => {
-      printJS({
+   const handlePrint = () => {
+   printJS({
       printable: "printable-content",
       type: "html",
-      css: null, // You can pass CSS file URLs if needed
-      style: null, // You can pass custom styles here
-      scanStyles: true, // Set to false if you don't want to process styles
-      targetStyles: ["*"], // Process all styles
-      ignoreElements: ["back-button", "print-button","tag-display"], // Array of HTML ids to ignore when printing
-      documentTitle: "APIRecipe", // Document title when printing
-      });
+      css: null,
+      style: null,
+      scanStyles: true,
+      targetStyles: ["*"],
+      ignoreElements: ["back-button", "print-button", "tag-display"],
+      documentTitle: "Recipe",
+   });
    };
+
+
 
    return (
       <div className="display-fullpage">
          {isChef && <NavbarLogin />}
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
-         <div className="recipe-display-fullpage" id="printable-content">
-            <div className="recipe-display">
+         <div className="recipe-display-fullpage"  id="printable-content">
+            <div id="recipe-display" className="recipe-display">
                <header className="header">
                   <h1 className="title">{recipe.title}</h1>
                   <div className="author">Source: {recipe.sourceName}</div>
@@ -107,7 +107,7 @@ const ApiRecipeDisplay = () => {
                      ))}
                   </ol>
                </div>
-               <div className="tags-display">
+               <div id="tags-display" className="tags-display">
                   {tags.length > 0 ? (
                      <ul>
                         {tags.map((tag, index) => (
@@ -120,9 +120,9 @@ const ApiRecipeDisplay = () => {
                      <p>No tags available</p>
                   )}
                </div>
-               <div className="back-button-container">
+               <div className="button-container">
                   {/* Back button */}
-                  <button onClick={handleBackButtonClick} className="back-button">
+                  <button id="back-button" onClick={handleBackButtonClick} className="back-button">
                      Back to Cookbook
                   </button>
                   {/* Print button */}

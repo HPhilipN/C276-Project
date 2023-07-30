@@ -124,11 +124,7 @@
    background-color: #e48f0f;
 }
 
-/* Center the back button */
-.back-button-container {
-   display: flex;
-   justify-content: center;
-}
+
 .print-button{
    background-color: #92B48C;
    color: #0f1b2b;
