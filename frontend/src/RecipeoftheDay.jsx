@@ -3,7 +3,6 @@ import "./styles/RecipeoftheDay.css"; // Import the CSS file
 import { RecipeContext } from "./utils/RecipeContext";
 import ErrorMesageHome from "./ErrorMessageHome"; // Import the LoadingSpinner component
 
-
 const RecipeoftheDay = () => {
    const { recipeOfTheDay, setRecipeOfTheDay, apiKey } = useContext(RecipeContext);
 
@@ -29,6 +28,7 @@ const RecipeoftheDay = () => {
       // Show the loading spinner while data is being fetched
       return <ErrorMesageHome/>;
    }
+ 
 
    return (
       <div className="work-section-wrapper">
@@ -51,7 +51,8 @@ const RecipeoftheDay = () => {
                </ul>
             </div>
             <div className="about-buttons-container">
-               <button className="secondary-button" >Learn More</button>
+               <a href={`/recipes/view/${recipeOfTheDay.id}`}><button className="secondary-button">Learn More</button></a>
+
             </div>
          </div>
       </div>
