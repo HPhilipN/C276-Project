@@ -3,7 +3,8 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import Filterlist from "./Filterlist";
+// import Filterlist from "./Filterlist";
+import Slider from '@mui/material/Slider';
 
 import "./styles/Filter.css";
 import CategoryButton from "./CategoryButton";
@@ -77,8 +78,17 @@ function Filter({userRecipes}) {
         </button>
         <div>
           <div className="category-group">
-            <h1>Filters</h1>
-            <Filterlist handleFilter={handleFilterLogic} />
+            <h1>Difficulty</h1>
+            <Slider 
+               aria-label="Difficulty"
+               defaultValue={5}
+               min={1}
+               max={10}
+               valueLabelDisplay="on"
+            />
+            
+            {/* <h1>Filters</h1> */}
+            {/* <Filterlist handleFilter={handleFilterLogic} /> */}
             <button className="control-button">Reset</button>
             <button className="save-button" onClick={handleApplyBtn}>
               Apply
