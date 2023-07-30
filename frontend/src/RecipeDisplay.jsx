@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
 //not working rn
-import { useReactToPrint } from "react-to-print";
+// import { useReactToPrint } from "react-to-print";
 import "./styles/RecipeDisplay.css";
 
 const RecipeDisplay = () => {
@@ -15,8 +15,8 @@ const RecipeDisplay = () => {
    // useParams grabs rid from url
    const { rid } = useParams();
    const [recipe, setRecipe] = useState(null);
-   // npm install react-to-print
-   const recipePDF = useRef();
+   // npm install react-to-print - old code
+   // const recipePDF = useRef();
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -53,11 +53,13 @@ const RecipeDisplay = () => {
    };
 
    //generates PDF of recipe page
+   /*
    const generatePDF = useReactToPrint({
       content: ()=> recipePDF.current,
       documentTitle:"RecipeData",
       onAfterPrint:()=> alert("Recipe Saved in PDF"),
    });
+   */
 
    return (
       <div className="display-fullpage">
