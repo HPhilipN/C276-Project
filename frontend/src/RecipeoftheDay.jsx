@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./styles/RecipeoftheDay.css"; // Import the CSS file
 import { RecipeContext } from "./utils/RecipeContext";
 import ErrorMesageHome from "./ErrorMessageHome"; // Import the LoadingSpinner component
-import { useNavigate } from "react-router-dom";
+
 
 const RecipeoftheDay = () => {
    const { recipeOfTheDay, setRecipeOfTheDay, apiKey } = useContext(RecipeContext);
@@ -29,11 +29,6 @@ const RecipeoftheDay = () => {
       // Show the loading spinner while data is being fetched
       return <ErrorMesageHome/>;
    }
-   const navigate = useNavigate();
-   // useNavigate hook to navigate to the desired URL when the button is clicked
-   function handleViewRecipe(recipeOfTheDay) {
-      navigate(`/recipes/view/${recipeOfTheDay.id}`);
-   }
 
    return (
       <div className="work-section-wrapper">
@@ -56,7 +51,7 @@ const RecipeoftheDay = () => {
                </ul>
             </div>
             <div className="about-buttons-container">
-               <button className="secondary-button" onClick={() => handleViewRecipe(recipeOfTheDay)}>Learn More</button>
+               <button className="secondary-button" >Learn More</button>
             </div>
          </div>
       </div>
