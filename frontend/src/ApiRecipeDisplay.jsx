@@ -8,6 +8,8 @@ import { UserContext } from "./utils/UserContext";
 import { RecipeContext } from "./utils/RecipeContext";
 import { useNavigate } from "react-router-dom";
 import "./styles/ApiRecipeDisplay.css";
+// generate API PDF
+import printJS from "print-js";
 
 const ApiRecipeDisplay = () => {
    const { isChef, isModerator } = useContext(UserContext);
@@ -62,12 +64,26 @@ const ApiRecipeDisplay = () => {
       navigate("/recipes"); // Navigate to "/recipes" page
    };
 
+   // Function to handle the print action
+  const handlePrint = () => {
+      printJS({
+      printable: "printable-content",
+      type: "html",
+      css: null, // You can pass CSS file URLs if needed
+      style: null, // You can pass custom styles here
+      scanStyles: true, // Set to false if you don't want to process styles
+      targetStyles: ["*"], // Process all styles
+      ignoreElements: ["back-button", "print-button","tag-display"], // Array of HTML ids to ignore when printing
+      documentTitle: "APIRecipe", // Document title when printing
+      });
+   };
+
    return (
       <div className="display-fullpage">
          {isChef && <NavbarLogin />}
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
-         <div className="recipe-display-fullpage">
+         <div className="recipe-display-fullpage" id="printable-content">
             <div className="recipe-display">
                <header className="header">
                   <h1 className="title">{recipe.title}</h1>
@@ -108,6 +124,10 @@ const ApiRecipeDisplay = () => {
                   {/* Back button */}
                   <button onClick={handleBackButtonClick} className="back-button">
                      Back to Cookbook
+                  </button>
+                  {/* Print button */}
+                  <button id="print-button" onClick={handlePrint} className="print-button">
+                     Print Recipe
                   </button>
                </div>
             </div>
