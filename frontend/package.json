@@ -17,6 +17,8 @@
       "@fortawesome/react-fontawesome": "^0.2.0",
       "@mui/icons-material": "^5.11.16",
       "@mui/material": "^5.13.6",
+      "@react-pdf/renderer": "^3.1.12",
+      "print-js": "^1.6.0",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
       "react-icons": "^4.10.1",
@@ -24,6 +26,7 @@
       "react-password-strength-bar": "^0.4.1",
       "react-router-dom": "^6.14.1",
       "react-tag-input-component": "^2.0.2",
+      "react-to-print": "^2.14.13",
       "styled-components": "^6.0.1",
       "zxcvbn": "^4.4.2"
    },

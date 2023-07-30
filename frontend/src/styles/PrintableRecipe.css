@@ -1,0 +1,42 @@
+/* PrintableRecipe.css */
+.printable-recipe {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .printable-recipe h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .printable-recipe h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .printable-recipe ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .printable-recipe li {
+    margin-bottom: 5px;
+  }
+  
+  .printable-recipe button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .printable-recipe button:hover {
+    background-color: #0056b3;
+  }
+  
