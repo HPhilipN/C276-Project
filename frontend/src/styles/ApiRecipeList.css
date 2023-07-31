@@ -132,6 +132,7 @@
    padding-left: 40px;
    outline: none;
    height: 100%;
+   
    width: 110%;
    border-radius: 25px;
    border: 1px solid #ccc;
@@ -139,9 +140,10 @@
 
 .searchbar-icon {
    color: green;
-   margin-right: 10px;
-   position: absolute;
+   margin-right: -40px;
+   position: sticky;
    padding: 10px;
+   
 }
 
 .search-icon {
@@ -156,5 +158,13 @@
 
 .back-btn-containers {
    margin-top: -75px; /* Adjust the value as needed */
+   margin-left: -90%; /* Adjust the value as needed */
+   position: sticky;
+   z-index: 2; /* Make sure the button appears above the recipe boxes container */
 }
 
+.back-btn-container {
+   margin-left: -90%; /* Adjust the value as needed */
+   position: sticky;
+   z-index: 2; /* Make sure the button appears above the recipe boxes container */
+}
