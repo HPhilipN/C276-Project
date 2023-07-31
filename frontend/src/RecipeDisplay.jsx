@@ -118,10 +118,13 @@ const RecipeDisplay = () => {
           </div>
         </div>
       </div>
-      <Disqus.DiscussionEmbed
-         shortname={disqusShortname}
-         config={disqusConfig}
-      />
+      {/* Gray box container for Disqus commenting system */}
+      <div className="disqus-container">
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        />
+      </div>
     </div>
   );
 };
