@@ -90,7 +90,6 @@ export default function AdminRecipelist() {
   // Filter the recipes based on the search term
   const filteredRecipes = category.filter(
     (recipe) =>
-      recipe.title.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
       recipe.authorName.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
@@ -130,7 +129,7 @@ export default function AdminRecipelist() {
             <div className="search-bar">
               <input
                 type="text"
-                placeholder="Search by recipe title or author"
+                placeholder="Search by author"
                 value={searchTerm}
                 onChange={handleSearchInputChange}
               />
