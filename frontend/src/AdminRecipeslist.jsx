@@ -132,7 +132,7 @@ export default function AdminRecipelist() {
                   <div className="search-bar">
                      <input
                         type="text"
-                        placeholder="Search by author"
+                        placeholder="Search by author/recipe name"
                         value={searchTerm}
                         onChange={handleSearchInputChange}
                      />
