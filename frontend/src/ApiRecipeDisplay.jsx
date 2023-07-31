@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import "./styles/ApiRecipeDisplay.css";
 import printJS from "print-js";
 
-
 const ApiRecipeDisplay = () => {
    const { isChef, isModerator } = useContext(UserContext);
    const { apiKey } = useContext(RecipeContext);
@@ -64,7 +63,6 @@ const ApiRecipeDisplay = () => {
       navigate("/recipes"); // Navigate to "/recipes" page
    };
 
-   // Function to handle the print action
    const handlePrint = () => {
    printJS({
       printable: "printable-content",
@@ -77,6 +75,7 @@ const ApiRecipeDisplay = () => {
       documentTitle: "Recipe",
    });
    };
+
 
 
    return (
