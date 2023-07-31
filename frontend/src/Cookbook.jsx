@@ -24,6 +24,8 @@ const Cookbook = () => {
    const [currentPage, setCurrentPage] = useState(1);
    const [postsPerPage, setpostsPerPage] = useState(4);
    // const recipesPerPage = 2; // Number of recipes to display per page
+   //limit for showing ...
+   const [limit, setLimit] = useState(5);
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -132,6 +134,8 @@ const Cookbook = () => {
    const firstPostIndex = lastPostIndex - postsPerPage;
    //hide data that is not shown
    const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
+   //get total pages
+   const totalPage = Math.ceil(filteredRecipes.length/limit);
 
    return (
       <div className="dashboard">
@@ -156,6 +160,13 @@ const Cookbook = () => {
                    totalPosts={filteredRecipes.length} 
                    postsPerPage={postsPerPage}
                    setCurrentPage={setCurrentPage}
+                   //extra pagination
+                   /*
+                   totalPage ={totalPage}
+                   currentPage = {currentPage}
+                   limit = {limit}
+                   siblings = {1}
+                   */
 
                   />
                </>
