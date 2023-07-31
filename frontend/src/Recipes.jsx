@@ -51,7 +51,7 @@ const Recipes = () => {
 
    // filter functionality
    const filterRecipes = (filteredArray) => {
-      const newRecipes = userRecipes.filter((recipe) => {
+      const newRecipes = apiRecipes.filter((recipe) => {
          return recipe.recipeDifficulty <= filteredArray[0];
       })
       setFilteredRecipes(newRecipes);
