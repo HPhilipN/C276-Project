@@ -24,6 +24,11 @@
    align-items: center;
 }
 
+.learn-more {
+   padding: 15px 20px;
+   border-radius: 15px;
+}
+
 .recipe-image {
    padding-top: 25px; /* Add more padding to the top of the image container */
 }
