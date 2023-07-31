@@ -1,160 +1,178 @@
-import React, { Component, useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./NavbarAdmin";
 import Modal from "react-modal";
-import { UserContext } from "./utils/UserContext";
-import "./styles/AdminRecipelist.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { redirect } from "react-router-dom";
+import { faX, faKitchenSet, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import "./styles/AdminRecipelist.css";
 
 const customStyles = {
-   overlay: {
-      background: "rgba(0, 0, 0, 0.1)",
-      overflowY: "scroll",
-      zIndex: 999,
-   },
-   content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "white",
-      width: "50%",
-      maxHeight: 600,
-   },
+  overlay: {
+    background: "rgba(0, 0, 0, 0.1)",
+    overflowY: "scroll",
+    zIndex: 999,
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    width: "50%",
+    maxHeight: 600,
+  },
 };
 
 export default function AdminRecipelist() {
-   const { isModerator, userId } = useContext(UserContext);
-   const [category, setCategory] = useState([]);
-   const [message, setMessage] = useState("");
-   const [recipeId, setRecipeId] = useState(null);
-   const [modalOpen, setModalOpen] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [message, setMessage] = useState("");
+  const [recipeId, setRecipeId] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // State variable for search term
 
-   // redirect to home if chef or logged out
-   const navigate = useNavigate();
-   if (!isModerator) {
-      navigate("/");
-   }
+  // redirect to home if chef or logged out
+  const navigate = useNavigate();
 
-   //Display all recipes present in the database
-   useEffect(() => {
-      const getcategory = async () => {
-         const res = await fetch("https://replicake.onrender.com/recipes/view");
-         const getData = await res.json();
-         //need to allow moderators/admin not to be shown (use isModerator?)
-         setCategory(getData);
-         //  console.log(getData);
-      };
-      getcategory();
-   });
+  //Display all recipes present in the database
+  useEffect(() => {
+    const getcategory = async () => {
+      const res = await fetch("https://replicake.onrender.com/recipes/view");
+      const getData = await res.json();
+      //need to allow moderators/admin not to be shown (use isModerator?)
+      setCategory(getData);
+      //  console.log(getData);
+    };
+    getcategory();
+  }, []);
 
-   // should redirect to full recipe view cookbook/view/rid
-   function displayRecipe(rid) {
-      console.log("in progress");
-      navigate(`/cookbook/view/${rid}`);
-   }
+  // should redirect to full recipe view cookbook/view/rid
+  function displayRecipe(rid) {
+    console.log("in progress");
+    navigate(`/cookbook/view/${rid}`);
+  }
 
-   //confirm delete via popup modal and pass rid to modal
-   function confirmDelete(recipeId) {
-      setRecipeId(recipeId);
-      setModalOpen(true);
-   }
+  //confirm delete via popup modal and pass rid to modal
+  function confirmDelete(recipeId) {
+    setRecipeId(recipeId);
+    setModalOpen(true);
+  }
 
-   //deletes recipe from the cookbook based on passed rid
-   async function deleteRecipe(rid) {
-      console.log(rid);
-      fetch(`https://replicake.onrender.com/recipes/delete/${rid}`, {
-         method: "DELETE",
+  //deletes recipe from the cookbook based on passed rid
+  async function deleteRecipe(rid) {
+    console.log(rid);
+    fetch(`https://replicake.onrender.com/recipes/delete/${rid}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json()) // parse JSON response
+      .then((data) => {
+        console.log(`Returned value: ${data} from /users/`);
       })
-         .then((response) => response.json()) // parse JSON response
-         .then((data) => {
-            console.log(`Returned value: ${data} from /users/`);
-         })
-         .catch((error) => {
-            console.log("===== ERROR =====");
-            console.log(error);
-         });
-   }
-     // Function to handle back button click
+      .catch((error) => {
+        console.log("===== ERROR =====");
+        console.log(error);
+      });
+  }
+
+  // Function to handle back button click
   const handleBack = () => {
-   // Navigate back to the Adminhome page
-   navigate("/admin/home");
- };
+    // Navigate back to the Adminhome page
+    navigate("/admin/home");
+  };
 
-   return (
-      <>
-         <Navbar />
-         <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
-            <button className="x-button" onClick={() => setModalOpen(false)}>
-               <FontAwesomeIcon icon={faX} />
-            </button>
-            <div className="confirmdelbox">
-               <p>Are you sure you want to delete this recipe?</p>
-               <br />
-               <button
-                  className="confirmbtn"
-                  onClick={() => {
-                     deleteRecipe(recipeId);
-                     setModalOpen(false);
-                  }}
-               >
-                  Yes
-               </button>
-               <button className="cancelbtn" onClick={() => setModalOpen(false)}>
-                  Cancel
-               </button>
+  // Create a function to handle search bar input change
+  const handleSearchInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter the recipes based on the search term
+  const filteredRecipes = category.filter(
+    (recipe) =>
+      recipe.title.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+      recipe.authorName.toLowerCase().startsWith(searchTerm.toLowerCase())
+  );
+
+  return (
+    <>
+      <Navbar />
+      <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
+        <button className="x-button" onClick={() => setModalOpen(false)}>
+          <FontAwesomeIcon icon={faX} />
+        </button>
+        <div className="confirmdelbox">
+          <p>Are you sure you want to delete this recipe?</p>
+          <br />
+          <button
+            className="confirmbtn"
+            onClick={() => {
+              deleteRecipe(recipeId);
+              setModalOpen(false);
+            }}
+          >
+            Yes
+          </button>
+          <button className="cancelbtn" onClick={() => setModalOpen(false)}>
+            Cancel
+          </button>
+        </div>
+      </Modal>
+      <div className="recipeboxes">
+        {/* Center the search bar */}
+        <div className="search-bar-container">
+          <div className="searchbar-wrap">
+            <span className="searchbar-icon">
+              {/* You can add a search icon here if needed */}
+              <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
+            </span>
+            {/* Add the search bar */}
+            <div className="search-bar">
+              <input
+                type="text"
+                placeholder="Search by recipe title or author"
+                value={searchTerm}
+                onChange={handleSearchInputChange}
+              />
             </div>
-         </Modal>
-         <div className="recipebox">
-            <table className="recipedisplay">
-               <thead></thead>
-               <tbody>
-                  <tr>
-                     <th>Recipe</th>
-                     <th>Author</th>
-
-                     <th>Manage</th>
-                  </tr>
-                  {category.map((getcate) => (
-                     <tr className="reciperow" key={getcate.rid}>
-                        <td>
-                           <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} #{getcate.rid}
-                        </td>
-                        <td>
-                           <FontAwesomeIcon icon={faUser} /> {getcate.authorName}
-                        </td>
-                        <td>
-                           <button
-                              className="viewbtn btn-hover"
-                              onClick={() => displayRecipe(getcate.rid)}
-                           >
-                              View
-                           </button>
-                        </td>
-                        <td>
-                           <button
-                              className="deletebtn btn-hover"
-                              onClick={() => confirmDelete(getcate.rid)}
-                           >
-                              Delete
-                           </button>
-                        </td>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
-                           {/* Back button */}
-      <button className="back-btn" onClick={handleBack}>
-        Back
-      </button>
+          </div>
+        </div>
+        <table className="recipedisplay">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <th>Recipe</th>
+              <th>Author</th>
+              <th>Manage</th>
+            </tr>
+            {filteredRecipes.map((recipe) => (
+              <tr className="reciperow" key={recipe.rid}>
+                <td>
+                  <FontAwesomeIcon icon={faKitchenSet} /> {recipe.title} #{recipe.rid}
+                </td>
+                <td>
+                  <FontAwesomeIcon icon={faUser} /> {recipe.authorName}
+                </td>
+                <td>
+                  <button className="viewbtn btn-hover" onClick={() => displayRecipe(recipe.rid)}>
+                    View
+                  </button>
+                </td>
+                <td>
+                  <button className="deletebtn btn-hover" onClick={() => confirmDelete(recipe.rid)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="back-btn-containers">
+        {/* Back button */}
+          <button className="back-btn" onClick={handleBack}>
+            Back
+          </button>
          </div>
-      </>
-   );
+      </div>
+    </>
+  );
 }
