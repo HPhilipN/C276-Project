@@ -123,8 +123,26 @@
    background-color: #e48f0f;
 }
 
-/* Center the back button */
-.back-button-container {
-   display: flex;
-   justify-content: center;
+.print-button{
+   background-color: #92B48C;
+   color: #0f1b2b;
+   border: none;
+   border-radius: 10px;
+   padding: 10px 20px;
+   font-size: 16px;
+   cursor: pointer;
 }
+
+.print-button:hover {
+   background-color: #749768;
+}
+
+@media print {
+   .normal-recipe {
+     display: none; /* Hide the normal display when printing */
+   }
+ 
+   .printable-recipe {
+     display: block; /* Show the printable recipe when printing */
+   }
+ }
