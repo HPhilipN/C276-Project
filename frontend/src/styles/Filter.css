@@ -18,18 +18,6 @@
    text-align: left;
 }
 
-.control-button {
-   margin: 10px;
-   width: 100px;
-   height: fit-content;
-   padding: 10px;
-   background-color: #fe9e0c;
-   border-radius: 8px;
-   border: none;
-   float: right;
-   cursor: pointer;
-}
-
 .save-button {
    margin: 10px;
    width: 100px;

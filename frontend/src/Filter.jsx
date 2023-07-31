@@ -3,10 +3,10 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import Filterlist from "./Filterlist";
+import SliderTen from "./utils/SliderTen"
+import DropdownSelect from "./utils/DropdownSelect";
 
 import "./styles/Filter.css";
-import CategoryButton from "./CategoryButton";
 
 const customStyles = {
    overlay: {
@@ -45,19 +45,13 @@ function Filter({recipeData}) {
    useEffect(() => {
       setFilteredItems(recipeData);
    }, [recipeData]);
-
+   
+   const apply = () => {
+      setModalOpen(false);
+   }
    const items = [
       // Array of items
    ];
-   
-   function App() {
-      return (
-         <div>
-            {/* Other components */}
-            <Filter recipeData={items} />
-         </div>
-      );
-   }
 
    return (
       <div className="Filter">
@@ -75,9 +69,9 @@ function Filter({recipeData}) {
                {/*Category*/}
                <div className="category-group">
                   <h1>Filters</h1>
-                  <Filterlist /> 
-                  <button className="control-button">Reset</button>
-                  <button className="save-button">Apply</button>
+                  <SliderTen/>
+                  <DropdownSelect/>
+                  <button className="save-button" onClick={() => apply()}>Apply</button>
                </div>
             </div>
          </Modal>
