@@ -61,7 +61,9 @@ function Filter({filteredItems}) {
                      value={difficultyValue}
                      onChange={setDifficultyValue}
                   />
-                  <DropdownSelect/>
+                  <DropdownSelect
+                     cuisineType={setCuisine}
+                  />
                   <button className="save-button" onClick={() => apply()}>Apply</button>
                </div>
             </div>

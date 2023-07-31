@@ -78,7 +78,9 @@ const Cookbook = () => {
    // filter functionality
    const filterRecipes = (filteredArray) => {
       const newRecipes = userRecipes.filter((recipe) => {
-         return recipe.recipeDifficulty <= filteredArray[0];
+         console.log(recipe.tags)
+         return recipe.recipeDifficulty <= filteredArray[0] && 
+         (recipe.tags.includes(filteredArray[1]) || !filteredArray[1])
       })
       setFilteredRecipes(newRecipes);
    }
