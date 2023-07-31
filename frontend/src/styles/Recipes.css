@@ -72,3 +72,51 @@
    background: #ff9e0d;
    color: #101010;
 }
+
+.page-items{
+   background-color: #92B48C;
+    color: #ffffff;
+    border: 2px solid #92B48C;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    height: fit-content;
+}
+.page-items:hover {
+   /* Set the background color on hover */
+   background-color: transparent;
+   color: #0f1b2b;
+}
+.extra-items{
+   background-color: transparent;
+   color: #101010;
+   border-radius: 10px;
+   padding: 10px 20px;
+   margin: 10px;
+   font-size: 24px;
+   cursor: pointer; 
+   height: fit-content;
+}
+.extra-items:hover {
+   /* Set the background color on hover */
+   border: 2px solid #92B48C;
+   color: #0f1b2b;
+}
+
+.break-items{
+   background-color: transparent;
+   color: #101010;
+   border-radius: 10px;
+   padding: 10px 20px;
+   margin: 10px;
+   font-size: 36px;
+   cursor: pointer; 
+}
+.activePage{
+   background-color: #ff9e0d;
+    color: #0F1B2B;
+    border: 2px solid #ff9e0d;
+    cursor: pointer;
+    height: fit-content;
+}

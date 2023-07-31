@@ -26,6 +26,7 @@ const Cookbook = () => {
    // const recipesPerPage = 2; // Number of recipes to display per page
    //limit for showing ...
    const [limit, setLimit] = useState(5);
+   const [items, setItems] = useState([]);
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -96,27 +97,6 @@ const Cookbook = () => {
          setFilteredRecipes([]);
       }
    }
-
-   /* 
-   // Handler for page change
-   const handlePageChange = (pageNumber) => {
-      setCurrentPage(pageNumber);
-   };
-
-   // Go to the previous page
-   const handlePreviousPage = () => {
-      if (currentPage > 1) {
-         setCurrentPage((prevPage) => prevPage - 1);
-      }
-   };
-
-   // Go to the next page
-   const handleNextPage = () => {
-      if (currentPage < Math.ceil(userRecipes.length / recipesPerPage)) {
-         setCurrentPage((prevPage) => prevPage + 1);
-      }
-   };
-   */
 
    // Fetch data when the page state or recipesPerPage changes
    useEffect(() => {
