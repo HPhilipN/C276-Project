@@ -75,8 +75,13 @@ const Cookbook = () => {
       }
    }
 
+   // filter functionality
+   const filterRecipes = () => {
+      
+   }
+
    // search bar functionality
-   function filterSearchRecipes(searchTerm) {
+   function searchRecipes(searchTerm) {
       if (Array.isArray(userRecipes)) {
          const filter = searchTerm
             ? userRecipes.filter(
@@ -129,8 +134,8 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={filterSearchRecipes} />
-            <Searchbar onSearch={filterSearchRecipes} />
+            <Filter filteredItems={filterRecipes} />
+            <Searchbar onSearch={searchRecipes} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">

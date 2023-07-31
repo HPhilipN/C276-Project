@@ -6,6 +6,7 @@ const DropdownSelect = ({ setCuisineType }) => {
 
    // Define Cuisine types
    const options = [
+      "",
       "Chicken",
       "Vegetarian",
       "Sandwiches & Subs",

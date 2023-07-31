@@ -27,19 +27,17 @@ const customStyles = {
    },
 };
 //handles the modal functionality for the filters
-function Filter({recipeData}) {
+function Filter({filteredItems}) {
 
    const [modalOpen, setModalOpen] = useState(false);
    const [difficultyValue, setDifficultyValue] = useState(5);
    
    const apply = () => {
       setModalOpen(false);
-      setDifficultyValue(difficultyValue)
-      console.log(difficultyValue)
+      console.log(difficultyValue);
+      filteredItems("fake");
    }
-   const items = [
-      // Array of items
-   ];
+   
 
    return (
       <div className="Filter">
