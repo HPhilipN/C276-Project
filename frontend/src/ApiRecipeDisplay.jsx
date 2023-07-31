@@ -71,7 +71,7 @@ const ApiRecipeDisplay = () => {
       style: null,
       scanStyles: true,
       targetStyles: ["*"],
-      ignoreElements: ["back-button", "print-button", "tag-display"],
+      ignoreElements: ["back-button", "print-button", "tags-display"],
       documentTitle: "Recipe",
    });
    };
@@ -79,35 +79,38 @@ const ApiRecipeDisplay = () => {
 
 
    return (
-      <div className="display-fullpage">
+      <div className="display-fullpage" >
          {isChef && <NavbarLogin />}
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
-         <div className="recipe-display-fullpage"  id="printable-content">
+         <div id="printable-content" className="recipe-display-fullpage" >
             <div id="recipe-display" className="recipe-display">
+            <div className="printable">
                <header className="header">
                   <h1 className="title">{recipe.title}</h1>
                   <div className="author">Source: {recipe.sourceName}</div>
                   <div className="diff">Health Score: {recipe.healthScore}</div>
                   <div className="favs">Preparation Time: {recipe.readyInMinutes}min</div>
                </header>
-               <div className="ingredients-display">
-                  <h3>Ingredients:</h3>
-                  <ul>
-                     {recipe.extendedIngredients.map((ingredient) => (
-                        <li key={ingredient.id}>{ingredient.original}</li>
-                     ))}
-                  </ul>
-               </div>
-               <div className="api-instructions-display">
-                  <h3>Instructions:</h3>
-                  <ol>
-                     {recipe.analyzedInstructions[0].steps.map((instruction) => (
-                        <li key={instruction.number}>{instruction.step}</li>
-                     ))}
-                  </ol>
-               </div>
-               <div id="tags-display" className="tags-display">
+               <div className="printable-instructions-and-ingredients">
+                  <div className="ingredients-display">
+                     <h3>Ingredients:</h3>
+                     <ul>
+                        {recipe.extendedIngredients.map((ingredient) => (
+                           <li key={ingredient.id}>{ingredient.original}</li>
+                        ))}
+                     </ul>
+                  </div>
+            </div>
+                  <div className="api-instructions-display">
+                     <h3>Instructions:</h3>
+                     <ol>
+                        {recipe.analyzedInstructions[0].steps.map((instruction) => (
+                           <li key={instruction.number}>{instruction.step}</li>
+                        ))}
+                     </ol>
+                  </div>
+                  <div id="tags-display" className="tags-display">
                   {tags.length > 0 ? (
                      <ul>
                         {tags.map((tag, index) => (
@@ -120,15 +123,16 @@ const ApiRecipeDisplay = () => {
                      <p>No tags available</p>
                   )}
                </div>
-               <div className="button-container">
+                  <div className="button-container">
                   {/* Back button */}
                   <button id="back-button" onClick={handleBackButtonClick} className="back-button">
-                     Back to Cookbook
+                     Back to Recipes
                   </button>
                   {/* Print button */}
                   <button id="print-button" onClick={handlePrint} className="print-button">
                      Print Recipe
                   </button>
+               </div>
                </div>
             </div>
          </div>
