@@ -12,6 +12,7 @@ import { RecipeContext } from "./utils/RecipeContext";
 import InfoButton from "./utils/InfoButton";
 import RefreshRecipes from "./RefreshRecipes";
 import recipeInfoImg from "./assets/recipe-display.png";
+import Pagination from "./Pagination";
 
 // API generated recipes
 const Recipes = () => {
@@ -19,7 +20,11 @@ const Recipes = () => {
    const { apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-   const numOfRecipesToFetch = 2;
+   const numOfRecipesToFetch = 10;
+
+   // State to manage pagination
+   const [currentPage, setCurrentPage] = useState(1);
+   const [postsPerPage, setpostsPerPage] = useState(4);
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
@@ -80,6 +85,12 @@ const Recipes = () => {
       //   console.log(apiRecipes);
    }, []);
 
+   // calculate first and last post to be displayed on current page
+   const lastPostIndex = currentPage * postsPerPage;
+   const firstPostIndex = lastPostIndex - postsPerPage;
+   //hide data that is not shown
+   const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
+
    return (
       <div className="dashboard">
          {/*Search bar*/}
@@ -95,7 +106,15 @@ const Recipes = () => {
             {/* check if apiRecipes is loaded before rendering */}
             {filteredRecipes.length >= 0 ? (
                <>
-                  <ApiRecipeList recipes={filteredRecipes} />
+                  <ApiRecipeList recipes={currentPost} />
+                  {/* Pagination here - grab current content on page and display */}
+                  <Pagination
+
+                   totalPosts={filteredRecipes.length} 
+                   postsPerPage={postsPerPage}
+                   setCurrentPage={setCurrentPage}
+
+                  />
                </>
             ) : (
                <NoRecipesExist />
