@@ -30,24 +30,12 @@ const customStyles = {
 function Filter({recipeData}) {
 
    const [modalOpen, setModalOpen] = useState(false);
-   //t
-   const [selectedFilters, setSelectedFilters] = useState([]);
-   const [filteredItems, setFilteredItems] = useState(recipeData);
-
-   //not sure if this works, just going off the guide atm
-   const handleFilterlogic = (categoryList) => {
-      if(selectedFilters.includes(categoryList)){
-         let filters = selectedFilters.filter((el) => el !== categoryList);
-         setSelectedFilters(filters);
-      }
-   };
-
-   useEffect(() => {
-      setFilteredItems(recipeData);
-   }, [recipeData]);
+   const [difficultyValue, setDifficultyValue] = useState(5);
    
    const apply = () => {
       setModalOpen(false);
+      setDifficultyValue(difficultyValue)
+      console.log(difficultyValue)
    }
    const items = [
       // Array of items
@@ -69,7 +57,10 @@ function Filter({recipeData}) {
                {/*Category*/}
                <div className="category-group">
                   <h1>Filters</h1>
-                  <SliderTen/>
+                  <SliderTen
+                     value={difficultyValue}
+                     onChange={setDifficultyValue}
+                  />
                   <DropdownSelect/>
                   <button className="save-button" onClick={() => apply()}>Apply</button>
                </div>
