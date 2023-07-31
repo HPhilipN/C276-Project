@@ -7,6 +7,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import "./styles/AdminRecipelist.css";
+import "./styles/AdminSearchBar.css";
 import { faMagnifyingGlass, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const customStyles = {
@@ -117,8 +118,8 @@ export default function AdminUserlist() {
       <div className="recipeboxes">
              {/* Center the search bar */}
              <div className="search-bar-container">
-               <div className="searchbar-wrap">
-                  <span className="searchbar-icon">
+               <div className="searchbar-wraps">
+                  <span className="searchbar-icons">
                      {/* You can add a search icon here if needed */}
                      <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
                      </span>

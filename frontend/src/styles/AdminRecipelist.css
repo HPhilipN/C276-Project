@@ -85,3 +85,12 @@
    cursor: pointer;
  }
  
+/* Add these styles to your CSS file */
+.recipebox {
+   /* Center the content horizontally and vertically */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 40px; /* Optional: Add some top margin to push content down */
+}
+
