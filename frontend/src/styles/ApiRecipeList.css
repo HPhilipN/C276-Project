@@ -116,7 +116,7 @@
    padding: 8px 16px;
    cursor: pointer;
    margin-left:-10px;
-   position: fixed
+   position: absolute;
 }
 
 
@@ -150,6 +150,11 @@
    outline: none;
    border: none;
    margin-left: -50px;
-   position: sticky;
+   position: absolute;
    cursor: pointer;
 }
+
+.back-btn-containers {
+   margin-top: -75px; /* Adjust the value as needed */
+}
+
