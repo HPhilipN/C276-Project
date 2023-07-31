@@ -12,6 +12,7 @@ import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
 import InfoButton from "./utils/InfoButton";
+import Pagination from "./Pagination";
 
 const Cookbook = () => {
    const { isChef, isModerator, userId } = useContext(UserContext);
@@ -21,7 +22,8 @@ const Cookbook = () => {
 
    // State to manage pagination
    const [currentPage, setCurrentPage] = useState(1);
-   const recipesPerPage = 2; // Number of recipes to display per page
+   const [postsPerPage, setpostsPerPage] = useState(4);
+   // const recipesPerPage = 2; // Number of recipes to display per page
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -53,7 +55,8 @@ const Cookbook = () => {
       console.log("== getUserRecipesFromDB ==");
       try {
          const response = await fetch(
-            `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`,
+            //`https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`
+            `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${postsPerPage}`,
             {
                method: "GET",
             }
@@ -92,6 +95,7 @@ const Cookbook = () => {
       }
    }
 
+   /* 
    // Handler for page change
    const handlePageChange = (pageNumber) => {
       setCurrentPage(pageNumber);
@@ -110,6 +114,7 @@ const Cookbook = () => {
          setCurrentPage((prevPage) => prevPage + 1);
       }
    };
+   */
 
    // Fetch data when the page state or recipesPerPage changes
    useEffect(() => {
@@ -120,7 +125,13 @@ const Cookbook = () => {
          }
       }
       fetchData();
-   }, [userId, recipesExistInDatabase, currentPage, recipesPerPage]);
+   }, [userId, recipesExistInDatabase, currentPage]);
+
+// calculate first and last post to be displayed on current page
+   const lastPostIndex = currentPage * postsPerPage;
+   const firstPostIndex = lastPostIndex - postsPerPage;
+   //hide data that is not shown
+   const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
 
    return (
       <div className="dashboard">
@@ -138,25 +149,15 @@ const Cookbook = () => {
             {/* check if userRecipes is loaded before rendering */}
             {recipesExistInDatabase && filteredRecipes.length > 0 ? (
                <>
-                  <RecipeList recipes={filteredRecipes} />
-                  {/* Basic paginator */}
-                  {userRecipes.length > recipesPerPage && (
-                     <div className="pagination">
-                        <button onClick={handlePreviousPage}>Prev</button>
-                        {[...Array(Math.ceil(userRecipes.length / recipesPerPage))].map(
-                           (_, index) => (
-                              <button
-                                 key={index + 1}
-                                 onClick={() => handlePageChange(index + 1)}
-                                 className={currentPage === index + 1 ? "active" : ""}
-                              >
-                                 {index + 1}
-                              </button>
-                           )
-                        )}
-                        <button onClick={handleNextPage}>Next</button>
-                     </div>
-                  )}
+                  <RecipeList recipes={currentPost} />
+                  {/* Pagination here - grab current content on page and display */}
+                  <Pagination
+
+                   totalPosts={filteredRecipes.length} 
+                   postsPerPage={postsPerPage}
+                   setCurrentPage={setCurrentPage}
+
+                  />
                </>
             ) : null}
             {/* Info Button on Bottom Right */}
