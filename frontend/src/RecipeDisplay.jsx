@@ -8,6 +8,7 @@ import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
 import "./styles/RecipeDisplay.css";
 import printJS from "print-js";
+import Disqus from "disqus-react";
 
 const RecipeDisplay = () => {
   const { isChef, isModerator, userId } = useContext(UserContext);
@@ -60,6 +61,13 @@ const RecipeDisplay = () => {
     });
   };
 
+  const disqusShortname = "replicake";
+  const disqusConfig = {
+    url: `https://replicake.onrender.com/recipes/view/${rid}`,
+    identifier: `recipe_${rid}`,
+    title: recipe.title,
+  };
+
   return (
     <div className="display-fullpage">
       {isChef && <NavbarLogin />}
@@ -110,6 +118,10 @@ const RecipeDisplay = () => {
           </div>
         </div>
       </div>
+      <Disqus.DiscussionEmbed
+         shortname={disqusShortname}
+         config={disqusConfig}
+      />
     </div>
   );
 };
