@@ -31,11 +31,11 @@ function Filter({filteredItems}) {
 
    const [modalOpen, setModalOpen] = useState(false);
    const [difficultyValue, setDifficultyValue] = useState(5);
-   
+   const [cuisine, setCuisine] = useState("");
    const apply = () => {
       setModalOpen(false);
       console.log(difficultyValue);
-      filteredItems("fake");
+      filteredItems([difficultyValue, cuisine]);
    }
    
 

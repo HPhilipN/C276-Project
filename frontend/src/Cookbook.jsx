@@ -76,8 +76,11 @@ const Cookbook = () => {
    }
 
    // filter functionality
-   const filterRecipes = () => {
-      
+   const filterRecipes = (filteredArray) => {
+      const newRecipes = userRecipes.filter((recipe) => {
+         return recipe.recipeDifficulty <= filteredArray[0];
+      })
+      setFilteredRecipes(newRecipes);
    }
 
    // search bar functionality
