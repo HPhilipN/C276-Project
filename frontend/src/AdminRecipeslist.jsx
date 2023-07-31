@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faKitchenSet, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import "./styles/AdminSearchBar.css";
 import "./styles/AdminRecipelist.css";
 
 const customStyles = {
@@ -120,8 +121,8 @@ export default function AdminRecipelist() {
       <div className="recipeboxes">
         {/* Center the search bar */}
         <div className="search-bar-container">
-          <div className="searchbar-wrap">
-            <span className="searchbar-icon">
+          <div className="searchbar-wraps">
+            <span className="searchbar-icons">
               {/* You can add a search icon here if needed */}
               <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
             </span>
