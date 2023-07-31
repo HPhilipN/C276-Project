@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/Pagination.css";
 
 // gets totalPosts, postsPerPage and currentPage from Cookbook.jsx
 const Pagination = ({totalPosts, postsPerPage, setCurrentPage}) => {
@@ -11,9 +12,9 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage}) => {
     }
     return (
         //displays all page numbers 
-        <div>
+        <div className="page-container">
             {pages.map((page, index)=> {
-                    return <button key={index} onClick={()=> setCurrentPage(page)}>{page}</button>;
+                    return <button className="page-button" key={index} onClick={()=> setCurrentPage(page)}>{page}</button>;
             })}
         </div>
     );
