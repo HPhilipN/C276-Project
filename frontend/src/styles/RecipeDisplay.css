@@ -149,3 +149,8 @@
      display: block; /* Show the printable recipe when printing */
    }
  }
+ .disqus-container {
+   padding: 20px;
+   max-width: 100%; /* Adjust the maximum width to your preference */
+   border-top: 2px solid #ccc; /* Add a top border with a desired color */
+ }
