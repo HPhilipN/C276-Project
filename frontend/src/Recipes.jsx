@@ -49,14 +49,22 @@ const Recipes = () => {
          });
    }
 
+   // filter functionality
+   const filterRecipes = (filteredArray) => {
+      const newRecipes = userRecipes.filter((recipe) => {
+         return recipe.recipeDifficulty <= filteredArray[0];
+      })
+      setFilteredRecipes(newRecipes);
+   }
+
    // search bar functionality
-   function filterSearchRecipes(searchTerm) {
+   const searchRecipes = (searchTerm) => {
       if (Array.isArray(apiRecipes)) {
          const filter = searchTerm
             ? apiRecipes.filter(
-                 (recipe) =>
-                    recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-              )
+                  (recipe) =>
+                     recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+               )
             : apiRecipes;
 
          setFilteredRecipes(filter);
@@ -87,8 +95,8 @@ const Recipes = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={filterSearchRecipes} />
-            <Searchbar onSearch={filterSearchRecipes} />
+            <Filter filteredItems={filterRecipes} />
+            <Searchbar onSearch={searchRecipes} />
             <RefreshRecipes />
          </div>
          <div className="recipelist-wrap">

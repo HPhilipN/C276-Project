@@ -84,7 +84,7 @@ const Cookbook = () => {
    }
 
    // search bar functionality
-   function searchRecipes(searchTerm) {
+   const searchRecipes = (searchTerm) => {
       if (Array.isArray(userRecipes)) {
          const filter = searchTerm
             ? userRecipes.filter(

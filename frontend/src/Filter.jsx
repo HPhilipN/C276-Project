@@ -26,6 +26,8 @@ const customStyles = {
       maxHeight: 600,
    },
 };
+
+
 //handles the modal functionality for the filters
 function Filter({filteredItems}) {
 
