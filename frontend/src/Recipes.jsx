@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import Filter from "./Filter";
+import FilterRecipes from "./FilterRecipes";
 import Searchbar from "./Searchbar";
 import NoRecipesExist from "./NoRecipesExist";
 import ApiRecipeList from "./ApiRecipeList";
@@ -54,14 +54,29 @@ const Recipes = () => {
          });
    }
 
+   // filter functionality
+   const filterRecipes = (filteredArray) => {
+      const newRecipes = apiRecipes.filter((recipe) => {
+         // 165 prep time is just infinity
+         const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+         const healthiness = filteredArray[1]
+         const noCuisine = filteredArray[2] == "";
+         // console.log(filteredArray)
+         return recipe.readyInMinutes <= prepTime && 
+         recipe.healthScore >= healthiness &&
+         (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
+      })
+      setFilteredRecipes(newRecipes);
+   }
+
    // search bar functionality
-   function filterSearchRecipes(searchTerm) {
+   const searchRecipes = (searchTerm) => {
       if (Array.isArray(apiRecipes)) {
          const filter = searchTerm
             ? apiRecipes.filter(
-                 (recipe) =>
-                    recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-              )
+                  (recipe) =>
+                     recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+               )
             : apiRecipes;
 
          setFilteredRecipes(filter);
@@ -98,8 +113,8 @@ const Recipes = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={filterSearchRecipes} />
-            <Searchbar onSearch={filterSearchRecipes} />
+            <FilterRecipes filteredItems={filterRecipes} />
+            <Searchbar onSearch={searchRecipes} />
             <RefreshRecipes />
          </div>
          <div className="recipelist-wrap">

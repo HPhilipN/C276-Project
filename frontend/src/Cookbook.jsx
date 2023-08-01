@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import Filter from "./Filter";
+import FilterCookbook from "./FilterCookbook";
 import Searchbar from "./Searchbar";
 import AddRecipe from "./AddRecipe";
 import NoRecipesExist from "./NoRecipesExist";
@@ -80,8 +80,23 @@ const Cookbook = () => {
       }
    }
 
+   // filter functionality
+   const filterRecipes = (filteredArray) => {
+      const newRecipes = userRecipes.filter((recipe) => {
+         // 165 prep time is just infinity
+         const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+         const difficulty = filteredArray[1]
+         const noCuisine = filteredArray[2] == "";
+         // console.log(filteredArray)
+         return recipe.prepTime <= prepTime && 
+         recipe.recipeDifficulty <= difficulty &&
+         (recipe.tags.includes(filteredArray[2]) || noCuisine)
+      })
+      setFilteredRecipes(newRecipes);
+   }
+
    // search bar functionality
-   function filterSearchRecipes(searchTerm) {
+   const searchRecipes = (searchTerm) => {
       if (Array.isArray(userRecipes)) {
          const filter = searchTerm
             ? userRecipes.filter(
@@ -123,8 +138,8 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={filterSearchRecipes} />
-            <Searchbar onSearch={filterSearchRecipes} />
+            <FilterCookbook filteredItems={filterRecipes} />
+            <Searchbar onSearch={searchRecipes} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>
          <div className="recipelist-wrap">
