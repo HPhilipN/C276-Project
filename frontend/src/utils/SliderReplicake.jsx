@@ -19,7 +19,7 @@ const SliderReplicake = (props) => {
     };
 
     return <Slider
-        defaultValue={props.value}
+        value={props.value}
         step={props.gap}
         marks={sliderMarks}
         min={props.min}

@@ -58,7 +58,7 @@ const Recipes = () => {
          const noCuisine = filteredArray[2] == "";
          // console.log(filteredArray)
          return recipe.readyInMinutes <= prepTime && 
-         recipe.healthScore <= healthiness
+         recipe.healthScore >= healthiness &&
          (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
       })
       setFilteredRecipes(newRecipes);
