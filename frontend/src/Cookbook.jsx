@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import Filter from "./Filter";
+import FilterCookbook from "./FilterCookbook";
 import Searchbar from "./Searchbar";
 import AddRecipe from "./AddRecipe";
 import NoRecipesExist from "./NoRecipesExist";
@@ -144,7 +144,7 @@ const Cookbook = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={filterRecipes} />
+            <FilterCookbook filteredItems={filterRecipes} />
             <Searchbar onSearch={searchRecipes} />
             <AddRecipe setUserRecipes={setUserRecipes} />
          </div>

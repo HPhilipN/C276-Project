@@ -3,12 +3,13 @@ import Slider from "@mui/material/Slider";
 
 const SliderReplicake = (props) => {
     let sliderMarks = []
-    for (let markNumber = 1; markNumber <= props.finiteMarkCount; markNumber += 1) {
-        sliderMarks.push({ value: markNumber * props.gap, label: (markNumber * props.gap).toString() });
+    for (let markNumber = 0; markNumber < props.finiteMarkCount; markNumber += 1) {
+        let valPushed = props.min + markNumber * props.gap
+        sliderMarks.push({ value: valPushed, label: valPushed.toString() });
     }
 
     if (props.hasInfinite) {
-        sliderMarks.push({ value: props.finiteMarkCount * (props.gap + 1), label: "∞"})
+        sliderMarks.push({ value: props.min + props.finiteMarkCount * props.gap, label: "∞"})
     }
     const [sliderValue, setSliderValue] = useState(165);
 
@@ -21,8 +22,8 @@ const SliderReplicake = (props) => {
         defaultValue={props.value}
         step={props.gap}
         marks={sliderMarks}
-        min={props.gap}
-        max={props.gap * (props.hasInfinite ? props.finiteMarkCount + 1 : props.finiteMarkCount)}
+        min={props.min}
+        max={props.min + props.gap * (props.hasInfinite ? props.finiteMarkCount : props.finiteMarkCount - 1)}
         onChange={handleSliderChange}
         valueLabelDisplay="off"
         sx={{color: "#FE9E0D"}}

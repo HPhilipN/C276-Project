@@ -30,7 +30,7 @@ const customStyles = {
 
 //handles the modal functionality for the filters
 
-function Filter({ filteredItems }) {
+function FilterCookbook({ filteredItems }) {
    const [modalOpen, setModalOpen] = useState(false);
    const [localPrepValue, setLocalPrepValue] = useState(165); // Local state for prepValue
    const [localDifficulty, setLocalDifficulty] = useState(10); // Local state for prepValue
@@ -77,6 +77,7 @@ function Filter({ filteredItems }) {
                gap={15}
                hasInfinite={true}
                finiteMarkCount={10}
+               min={15}
             />
             <h6>Difficulty</h6>
             <SliderReplicake 
@@ -85,6 +86,7 @@ function Filter({ filteredItems }) {
                gap={1}
                hasInfinite={false}
                finiteMarkCount={10}
+               min={1}
             />
              <DropdownSelect cuisineValue={localCuisine} onChange={handleCuisineChange} />
              <button className="save-button" onClick={apply}>
@@ -97,4 +99,4 @@ function Filter({ filteredItems }) {
    );
  }
  
- export default Filter;
+ export default FilterCookbook;

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import Filter from "./Filter";
+import FilterRecipes from "./FilterRecipes";
 import Searchbar from "./Searchbar";
 import NoRecipesExist from "./NoRecipesExist";
 import ApiRecipeList from "./ApiRecipeList";
@@ -52,9 +52,14 @@ const Recipes = () => {
    // filter functionality
    const filterRecipes = (filteredArray) => {
       const newRecipes = apiRecipes.filter((recipe) => {
-         console.log(recipe.tags)
-         return recipe.recipeDifficulty <= filteredArray[0] && 
-         (recipe.tags.includes(filteredArray[1]) || !filteredArray[1])
+         // 165 prep time is just infinity
+         const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+         const healthiness = filteredArray[1]
+         const noCuisine = filteredArray[2] == "";
+         // console.log(filteredArray)
+         return recipe.readyInMinutes <= prepTime && 
+         recipe.healthScore <= healthiness
+         (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
       })
       setFilteredRecipes(newRecipes);
    }
@@ -97,13 +102,13 @@ const Recipes = () => {
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
          <div className="filter-search-wrapper">
-            <Filter filteredItems={filterRecipes} />
+            <FilterRecipes filteredItems={filterRecipes} />
             <Searchbar onSearch={searchRecipes} />
             <RefreshRecipes />
          </div>
          <div className="recipelist-wrap">
             {/* check if apiRecipes is loaded before rendering */}
-            {filteredRecipes.length >= 0 ? (
+            {filteredRecipes.length > 0 ? (
                <>
                   <ApiRecipeList recipes={filteredRecipes} />
                </>
