@@ -147,9 +147,7 @@ const Cookbook = () => {
                    */
                   />
                </>
-            ) : (
-               <NoRecipesExist />
-            )}
+            ) : null}
             {/* Info Button on Bottom Right */}
             <InfoButton InfoImg={cookbookInfoImg} />
          </div>
