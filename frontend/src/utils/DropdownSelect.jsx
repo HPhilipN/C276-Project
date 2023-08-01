@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/DropdownSelect.css";
 
-const DropdownSelect = ({ cuisineType }) => {
+const DropdownSelect = (props) => {
    const [selectedOption, setSelectedOption] = useState("");
 
    // Define Cuisine types
@@ -43,14 +43,14 @@ const DropdownSelect = ({ cuisineType }) => {
 
    // Event handler to update the selected value
    const handleSelectChange = (event) => {
-      cuisineType(event.target.value);
+      props.onChange(event.target.value);
       setSelectedOption(event.target.value); //for display purposes
    };
 
    return (
       <div className="dropdown-display">
          <h6 className="dropdown-title text-muted">Cuisine Type</h6>
-         <select className="dropdown-main" value={selectedOption} onChange={handleSelectChange}>
+         <select className="dropdown-main" value={props.cuisineValue} onChange={handleSelectChange}>
             {options.map((option) => (
                <option key={option} value={option}>
                   {option}
@@ -62,3 +62,4 @@ const DropdownSelect = ({ cuisineType }) => {
 };
 
 export default DropdownSelect;
+   
