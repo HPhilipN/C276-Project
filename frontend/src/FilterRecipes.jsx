@@ -79,7 +79,7 @@ function FilterRecipes({ filteredItems }) {
                finiteMarkCount={10}
                min={15}
             />
-            <h6>Healthiness</h6>
+            <h6>Minimum Healthiness</h6>
             <SliderReplicake 
                value={localHealth}
                onChange={handleHealthChange} 

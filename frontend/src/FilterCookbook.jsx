@@ -79,7 +79,7 @@ function FilterCookbook({ filteredItems }) {
                finiteMarkCount={10}
                min={15}
             />
-            <h6>Difficulty</h6>
+            <h6>Maximum Difficulty</h6>
             <SliderReplicake 
                value={localDifficulty}
                onChange={handleDifficultyChange} 
