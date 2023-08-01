@@ -60,7 +60,7 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, props}) => {
     return (
         //displays all page numbers 
         <div className="page-container">
-            <button className="page-button">First</button>
+            <button className="extra-button">First</button>
             <button className="extra-button" onClick={()=> {setCurrentPage(prevpage), handleNext(prevpage), handlePrevious(prevpage)}}>Previous</button>
             {pages.map((page, index)=> {
                     return (
@@ -71,7 +71,7 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, props}) => {
                     
             })}
             <button className="extra-button" onClick={()=> {setCurrentPage(nextpage), handleNext(nextpage), handlePrevious(nextpage)}}>Next</button>
-            <button className="page-button">Last</button>
+            <button className="extra-button">Last</button>
             
         </div>
     );
