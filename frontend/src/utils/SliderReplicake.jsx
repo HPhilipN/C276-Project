@@ -22,7 +22,7 @@ const SliderReplicake = (props) => {
         step={props.gap}
         marks={sliderMarks}
         min={props.gap}
-        max={props.gap * (props.finiteMarkCount + 1)}
+        max={props.gap * (props.hasInfinite ? props.finiteMarkCount + 1 : props.finiteMarkCount)}
         onChange={handleSliderChange}
         valueLabelDisplay="off"
         sx={{color: "#FE9E0D"}}

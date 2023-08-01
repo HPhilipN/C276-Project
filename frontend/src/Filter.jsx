@@ -33,12 +33,17 @@ const customStyles = {
 function Filter({ filteredItems }) {
    const [modalOpen, setModalOpen] = useState(false);
    const [localPrepValue, setLocalPrepValue] = useState(165); // Local state for prepValue
+   const [localDifficulty, setLocalDifficulty] = useState(10); // Local state for prepValue
    const [localCuisine, setLocalCuisine] = useState(""); // Local state for cuisine
  
-   const handleSliderChange = (newValue) => {
+   const handlePrepChange = (newValue) => {
      setLocalPrepValue(newValue); // Update the local state when the slider is interacted with
    };
- 
+
+   const handleDifficultyChange = (selectedDifficulty) => {
+      setLocalDifficulty(selectedDifficulty); // Update the local state when the dropdown is interacted with
+    };
+
    const handleCuisineChange = (selectedCuisine) => {
      setLocalCuisine(selectedCuisine); // Update the local state when the dropdown is interacted with
    };
@@ -46,7 +51,7 @@ function Filter({ filteredItems }) {
    const apply = () => {
      setModalOpen(false);
      // Pass the local states back to the parent component when the "Apply" button is clicked
-     filteredItems([localPrepValue, localCuisine]);
+     filteredItems([localPrepValue, localDifficulty,localCuisine]);
    };
 
    console.log(localPrepValue)
@@ -64,12 +69,21 @@ function Filter({ filteredItems }) {
          </button>
          <div>
            <div className="category-group">
-             <h1>Maximum prep time</h1>
+             <h1>Filters</h1>
+             <h6>Maximum prep time</h6>
              <SliderReplicake 
                value={localPrepValue}
-               onChange={handleSliderChange} 
+               onChange={handlePrepChange} 
                gap={15}
                hasInfinite={true}
+               finiteMarkCount={10}
+            />
+            <h6>Difficulty</h6>
+            <SliderReplicake 
+               value={localDifficulty}
+               onChange={handleDifficultyChange} 
+               gap={1}
+               hasInfinite={false}
                finiteMarkCount={10}
             />
              <DropdownSelect cuisineValue={localCuisine} onChange={handleCuisineChange} />
