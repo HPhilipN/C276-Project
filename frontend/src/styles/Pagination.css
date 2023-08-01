@@ -1,32 +1,45 @@
-.page-button{
-    background-color: #92B48C;
-    color: #ffffff;
-    border: 2px solid #92B48C;
-    border-radius: 10px;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 15px;
-    cursor: pointer;
- }
+.page-button {
+   background-color: #92b48c;
+   color: #ffffff;
+   border: 2px solid #92b48c;
+   border-radius: 10px;
+   padding: 10px 20px;
+   margin: 10px;
+   font-size: 15px;
+   cursor: pointer;
+}
 
- .page-button:hover {
-    /* Set the background color on hover */
-    background-color: beige;
-    color: #0f1b2b;
- }
+.active {
+   background-color: #ff9e0d;
+   border-color: #bebebe;
+}
 
- .extra-button{
-   background-color: transparent;
-    color: #0f1b2b;
-    border: 2px solid #92B48C;
-    border-radius: 10px;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 15px;
-    cursor: pointer;
- }
+.active:hover {
+   background-color: #bebebe;
+   border-color: #bebebe;
+}
 
- .extra-button:hover{
+.page-button:hover {
+   /* Set the background color on hover */
    background-color: beige;
+   color: #0f1b2b;
+}
 
- }
+.extra-button {
+   background-color: transparent;
+   color: #0f1b2b;
+   border: none;
+   margin: 10px;
+   cursor: pointer;
+}
+
+.extra-button:hover {
+   color: #92b48c;
+}
+
+.ellipsis {
+   background-color: transparent;
+   color: #0f1b2b;
+   border: none;
+   margin: 10px;
+}
