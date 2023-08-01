@@ -22,8 +22,10 @@ const Cookbook = () => {
 
    // State to manage pagination
    const [currentPage, setCurrentPage] = useState(1);
-   const [postsPerPage, setpostsPerPage] = useState(4);
+   const [postsPerPage, setpostsPerPage] = useState(8);
    // const recipesPerPage = 2; // Number of recipes to display per page
+   //limit for showing ...
+   const [limit, setLimit] = useState(5);
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -95,27 +97,6 @@ const Cookbook = () => {
       }
    }
 
-   /* 
-   // Handler for page change
-   const handlePageChange = (pageNumber) => {
-      setCurrentPage(pageNumber);
-   };
-
-   // Go to the previous page
-   const handlePreviousPage = () => {
-      if (currentPage > 1) {
-         setCurrentPage((prevPage) => prevPage - 1);
-      }
-   };
-
-   // Go to the next page
-   const handleNextPage = () => {
-      if (currentPage < Math.ceil(userRecipes.length / recipesPerPage)) {
-         setCurrentPage((prevPage) => prevPage + 1);
-      }
-   };
-   */
-
    // Fetch data when the page state or recipesPerPage changes
    useEffect(() => {
       async function fetchData() {
@@ -132,6 +113,8 @@ const Cookbook = () => {
    const firstPostIndex = lastPostIndex - postsPerPage;
    //hide data that is not shown
    const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
+   //get total pages
+   const totalPages = Math.ceil(filteredRecipes.length/limit);
 
    return (
       <div className="dashboard">
@@ -156,6 +139,13 @@ const Cookbook = () => {
                    totalPosts={filteredRecipes.length} 
                    postsPerPage={postsPerPage}
                    setCurrentPage={setCurrentPage}
+                   //extra pagination
+                   /*
+                   totalPage ={totalPage}
+                   currentPage = {currentPage}
+                   limit = {limit}
+                   siblings = {1}
+                   */
 
                   />
                </>
