@@ -114,7 +114,7 @@ const Cookbook = () => {
    //hide data that is not shown
    const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
    //get total pages
-   const totalPage = Math.ceil(filteredRecipes.length/limit);
+   const totalPages = Math.ceil(filteredRecipes.length/limit);
 
    return (
       <div className="dashboard">
