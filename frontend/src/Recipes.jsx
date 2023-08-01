@@ -20,11 +20,11 @@ const Recipes = () => {
    const { apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-   const numOfRecipesToFetch = 10;
+   const numOfRecipesToFetch = 36;
 
    // State to manage pagination
    const [currentPage, setCurrentPage] = useState(1);
-   const [postsPerPage, setpostsPerPage] = useState(4);
+   const [postsPerPage, setpostsPerPage] = useState(8);
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
