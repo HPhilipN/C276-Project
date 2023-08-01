@@ -15,6 +15,12 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) =
    function getPageRange(currentPage, totalPage) {
       const range = [];
 
+      // if 5 or less pages dont show ellipses
+      if (totalPage === 5) {
+         range.push(1, 2, 3, 4, 5);
+         return range;
+      }
+
       // Always show the first page
       range.push(1);
 

@@ -85,15 +85,17 @@ const Cookbook = () => {
       const newRecipes = userRecipes.filter((recipe) => {
          // 165 prep time is just infinity
          const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
-         const difficulty = filteredArray[1]
+         const difficulty = filteredArray[1];
          const noCuisine = filteredArray[2] == "";
          // console.log(filteredArray)
-         return recipe.prepTime <= prepTime && 
-         recipe.recipeDifficulty <= difficulty &&
-         (recipe.tags.includes(filteredArray[2]) || noCuisine)
-      })
+         return (
+            recipe.prepTime <= prepTime &&
+            recipe.recipeDifficulty <= difficulty &&
+            (recipe.tags.includes(filteredArray[2]) || noCuisine)
+         );
+      });
       setFilteredRecipes(newRecipes);
-   }
+   };
 
    // search bar functionality
    const searchRecipes = (searchTerm) => {
@@ -110,7 +112,7 @@ const Cookbook = () => {
          console.log("Data is not an array:", data);
          setFilteredRecipes([]);
       }
-   }
+   };
 
    // Fetch data when the page state or recipesPerPage changes
    useEffect(() => {
@@ -153,13 +155,7 @@ const Cookbook = () => {
                      totalPosts={filteredRecipes.length}
                      postsPerPage={postsPerPage}
                      setCurrentPage={setCurrentPage}
-                     //extra pagination
-                     /*
-                   totalPage ={totalPage}
-                   currentPage = {currentPage}
-                   limit = {limit}
-                   siblings = {1}
-                   */
+                     currentPage={currentPage}
                   />
                </>
             ) : null}
