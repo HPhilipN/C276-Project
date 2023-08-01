@@ -9,11 +9,6 @@
    text-align: left;
 }
 
-.recipebox {
-   display: flex;
-   justify-content: center;
-   overflow: scroll;
-}
 .reciperow {
    color: #332211;
    background-color: #eeeeee;
@@ -43,14 +38,13 @@
    padding: 5px;
    margin-top: 0 !important;
 }
-.confirmdelbox{
-    font-size: large;
-    margin-top: 2%;
-    text-align: center;
-
+.confirmdelbox {
+   font-size: large;
+   margin-top: 2%;
+   text-align: center;
 }
 
-.confirmbtn{
+.confirmbtn {
    margin-right: 20px;
    float: center;
    width: 120px;
@@ -62,35 +56,32 @@
    cursor: pointer;
 }
 
-.cancelbtn{
-    margin-right: 20px;
-    float: center;
-    width: 120px;
-    height: fit-content;
-    padding: 5px;
-    background-color: #fe9e0c;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
- }
+.cancelbtn {
+   margin-right: 20px;
+   float: center;
+   width: 120px;
+   height: fit-content;
+   padding: 5px;
+   background-color: #fe9e0c;
+   border-radius: 8px;
+   border: none;
+   cursor: pointer;
+}
 
- .back-btn {
-   position: absolute;
-   left: 5%;
-   transform: translateX(7%);
-   background-color: #92B48C;
+.back-btn {
+   background-color: #92b48c;
    color: white;
    padding: 10px 20px;
    border-radius: 7px;
    cursor: pointer;
- }
- 
-/* Add these styles to your CSS file */
-.recipebox {
-   /* Center the content horizontally and vertically */
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   margin-top: 40px; /* Optional: Add some top margin to push content down */
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+
+   border: #92b48c;
 }
 
+.no-recipes-found {
+   display: flex;
+   justify-content: center;
+   margin: 2rem;
+}

@@ -44,14 +44,14 @@ const RecipeoftheDay = () => {
             <div className="ingredients-list">
                <h3>Ingredients:</h3>
                <ul>
-                  {recipeOfTheDay.extendedIngredients.slice(0, 5).map((ingredient) => (
-                     <li key={ingredient.id}>{ingredient.original}</li>
+                  {recipeOfTheDay.extendedIngredients.slice(0, 5).map((ingredient, index) => (
+                     <li key={index}>{ingredient.original}</li>
                   ))}
                   {recipeOfTheDay.extendedIngredients.length > 5 && <li>...</li>}
                </ul>
             </div>
             <div className="about-buttons-container">
-               <Link className="secondary-button" to={`/recipes/view/${recipeOfTheDay.id}`}>
+               <Link className="btn-primary learn-more" to={`/recipes/view/${recipeOfTheDay.id}`}>
                   Learn More
                </Link>
             </div>

@@ -56,10 +56,15 @@ const AddRecipe = ({ setUserRecipes }) => {
       setRecipeDiff(event.target.value);
    }
    function getPrepTime(event) {
-      setPrepTime(event.target.value);
-   }
-   function getCusineType(event) {
-      setCuisineType(event.target.value);
+      let value = event.target.value;
+      if (/^[0-9]{0,3}$/.test(value) && Number(value) <= 999) {
+         // Check if the value is a positive integer from 0 to 999
+         console.log(`setPrepTime: ${value}`);
+         setPrepTime(value);
+      } else {
+         console.log("Invalid Prep Time");
+         return;
+      }
    }
 
    // send create request to endpoint
@@ -121,13 +126,15 @@ const AddRecipe = ({ setUserRecipes }) => {
          title.length <= 0 ||
          ingredients.length <= 0 ||
          instructions.length <= 0 ||
-         tags.length <= 0
+         tags.length <= 0 ||
+         prepTime <= 0 ||
+         prepTime > 999
       ) {
          setSubmitDisabled(true);
       } else {
          setSubmitDisabled(false);
       }
-   }, [title, ingredients, instructions, tags]);
+   }, [title, ingredients, instructions, tags, prepTime]);
 
    const addRecipeModal = (
       <div ref={modalRef} className="add-recipe">

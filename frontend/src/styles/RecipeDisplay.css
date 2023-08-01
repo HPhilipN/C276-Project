@@ -5,6 +5,7 @@
 .recipe-display-fullpage {
    display: flex;
    justify-content: center;
+   background-color: #eeeeee;
 }
 
 .recipe-display {
@@ -70,7 +71,6 @@
    display: flex;
 }
 
-
 .ingredients-display {
    grid-area: ingredients;
    margin-bottom: 1rem;
@@ -124,9 +124,8 @@
    background-color: #e48f0f;
 }
 
-
-.print-button{
-   background-color: #92B48C;
+.print-button {
+   background-color: #92b48c;
    color: #0f1b2b;
    border: none;
    border-radius: 10px;
@@ -139,13 +138,18 @@
    background-color: #749768;
 }
 
-
 @media print {
    .normal-recipe {
-     display: none; /* Hide the normal display when printing */
+      display: none; /* Hide the normal display when printing */
    }
- 
+
    .printable-recipe {
-     display: block; /* Show the printable recipe when printing */
+      display: block; /* Show the printable recipe when printing */
    }
- }
+}
+
+.disqus-container {
+   padding: 20px;
+   max-width: 100%; /* Adjust the maximum width to your preference */
+   border-top: 2px solid #ccc; /* Add a top border with a desired color */
+}
