@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import SliderTen from "./utils/SliderTen"
+import SliderReplicake from "./utils/SliderReplicake"
 import DropdownSelect from "./utils/DropdownSelect";
 
 import "./styles/Filter.css";
@@ -65,7 +65,13 @@ function Filter({ filteredItems }) {
          <div>
            <div className="category-group">
              <h1>Maximum prep time</h1>
-             <SliderTen value={localPrepValue} onChange={handleSliderChange} />
+             <SliderReplicake 
+               value={localPrepValue}
+               onChange={handleSliderChange} 
+               gap={15}
+               hasInfinite={true}
+               finiteMarkCount={10}
+            />
              <DropdownSelect cuisineValue={localCuisine} onChange={handleCuisineChange} />
              <button className="save-button" onClick={apply}>
                Apply
