@@ -108,13 +108,13 @@ const Cookbook = () => {
       fetchData();
    }, [userId, recipesExistInDatabase, currentPage]);
 
-// calculate first and last post to be displayed on current page
+   // calculate first and last post to be displayed on current page
    const lastPostIndex = currentPage * postsPerPage;
    const firstPostIndex = lastPostIndex - postsPerPage;
    //hide data that is not shown
    const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
    //get total pages
-   const totalPages = Math.ceil(filteredRecipes.length/limit);
+   const totalPages = Math.ceil(filteredRecipes.length / limit);
 
    return (
       <div className="dashboard">
@@ -135,18 +135,16 @@ const Cookbook = () => {
                   <RecipeList recipes={currentPost} />
                   {/* Pagination here - grab current content on page and display */}
                   <Pagination
-
-                   totalPosts={filteredRecipes.length} 
-                   postsPerPage={postsPerPage}
-                   setCurrentPage={setCurrentPage}
-                   //extra pagination
-                   /*
+                     totalPosts={filteredRecipes.length}
+                     postsPerPage={postsPerPage}
+                     setCurrentPage={setCurrentPage}
+                     //extra pagination
+                     /*
                    totalPage ={totalPage}
                    currentPage = {currentPage}
                    limit = {limit}
                    siblings = {1}
                    */
-
                   />
                </>
             ) : null}

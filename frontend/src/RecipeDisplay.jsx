@@ -61,7 +61,7 @@ const RecipeDisplay = () => {
     });
   };
 
-  const disqusShortname = "replicake";
+  const disqusShortname = "replicake-1";
   const disqusConfig = {
     url: `https://replicake.onrender.com/recipes/view/${rid}`,
     identifier: `recipe_${rid}`,

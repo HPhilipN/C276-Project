@@ -104,16 +104,14 @@ const Recipes = () => {
          </div>
          <div className="recipelist-wrap">
             {/* check if apiRecipes is loaded before rendering */}
-            {filteredRecipes.length >= 0 ? (
+            {filteredRecipes.length > 0 ? (
                <>
                   <ApiRecipeList recipes={currentPost} />
                   {/* Pagination here - grab current content on page and display */}
                   <Pagination
-
-                   totalPosts={filteredRecipes.length} 
-                   postsPerPage={postsPerPage}
-                   setCurrentPage={setCurrentPage}
-
+                     totalPosts={filteredRecipes.length}
+                     postsPerPage={postsPerPage}
+                     setCurrentPage={setCurrentPage}
                   />
                </>
             ) : (
