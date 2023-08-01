@@ -29,48 +29,52 @@ const customStyles = {
 
 
 //handles the modal functionality for the filters
-function Filter({filteredItems}) {
 
+function Filter({ filteredItems }) {
    const [modalOpen, setModalOpen] = useState(false);
-   const [difficultyValue, setDifficultyValue] = useState(5);
-   const [cuisine, setCuisine] = useState("");
+   const [localPrepValue, setLocalPrepValue] = useState(165); // Local state for prepValue
+   const [localCuisine, setLocalCuisine] = useState(""); // Local state for cuisine
+ 
+   const handleSliderChange = (newValue) => {
+     setLocalPrepValue(newValue); // Update the local state when the slider is interacted with
+   };
+ 
+   const handleCuisineChange = (selectedCuisine) => {
+     setLocalCuisine(selectedCuisine); // Update the local state when the dropdown is interacted with
+   };
+ 
    const apply = () => {
-      setModalOpen(false);
-      console.log(difficultyValue);
-      filteredItems([difficultyValue, cuisine]);
-   }
-   
+     setModalOpen(false);
+     // Pass the local states back to the parent component when the "Apply" button is clicked
+     filteredItems([localPrepValue, localCuisine]);
+   };
 
+   console.log(localPrepValue)
    return (
       <div className="Filter">
-         <button className="filter-button" onClick={setModalOpen}>
-            <div className="filter-icon">
-               <FontAwesomeIcon icon={faFilter} />
-               Filters
-            </div>
+      <button className="filter-button" onClick={setModalOpen}>
+         <div className="filter-icon">
+            <FontAwesomeIcon icon={faFilter} />
+            Filters
+         </div>
+      </button>
+      <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
+         <button className="x-button" onClick={() => setModalOpen(false)}>
+            <FontAwesomeIcon icon={faX} />
          </button>
-         <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} style={customStyles}>
-            <button className="x-button" onClick={() => setModalOpen(false)}>
-               <FontAwesomeIcon icon={faX} />
-            </button>
-            <div>
-               {/*Category*/}
-               <div className="category-group">
-                  <h1>Filters</h1>
-                  <SliderTen
-                     value={difficultyValue}
-                     onChange={setDifficultyValue}
-                  />
-                  <DropdownSelect
-                     cuisineType={setCuisine}
-                  />
-                  <button className="save-button" onClick={() => apply()}>Apply</button>
-               </div>
-            </div>
-         </Modal>
-      </div>
+         <div>
+           <div className="category-group">
+             <h1>Maximum prep time</h1>
+             <SliderTen value={localPrepValue} onChange={handleSliderChange} />
+             <DropdownSelect cuisineValue={localCuisine} onChange={handleCuisineChange} />
+             <button className="save-button" onClick={apply}>
+               Apply
+             </button>
+           </div>
+         </div>
+       </Modal>
+     </div>
    );
-
-}
-
-export default Filter;
+ }
+ 
+ export default Filter;

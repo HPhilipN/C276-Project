@@ -78,9 +78,12 @@ const Cookbook = () => {
    // filter functionality
    const filterRecipes = (filteredArray) => {
       const newRecipes = userRecipes.filter((recipe) => {
-         console.log(recipe.tags)
-         return recipe.recipeDifficulty <= filteredArray[0] && 
-         (recipe.tags.includes(filteredArray[1]) || !filteredArray[1])
+         // 165 prep time is just infinity
+         const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+         const noCuisine = filteredArray[1] == "";
+         // console.log(filteredArray)
+         return recipe.prepTime <= prepTime && 
+         (recipe.tags.includes(filteredArray[1]) || noCuisine)
       })
       setFilteredRecipes(newRecipes);
    }
