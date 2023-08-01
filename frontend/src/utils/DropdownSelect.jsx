@@ -6,7 +6,7 @@ const DropdownSelect = (props) => {
 
    // Define Cuisine types
    const options = [
-      "",
+      "Other",
       "Chicken",
       "Vegetarian",
       "Sandwiches & Subs",
@@ -38,7 +38,6 @@ const DropdownSelect = (props) => {
       "Halal",
       "Cajun & Creole",
       "French",
-      "Other",
    ];
 
    // Event handler to update the selected value
@@ -62,4 +61,3 @@ const DropdownSelect = (props) => {
 };
 
 export default DropdownSelect;
-   

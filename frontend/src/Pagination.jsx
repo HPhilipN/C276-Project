@@ -1,77 +1,88 @@
 import React from "react";
 import "./styles/Pagination.css";
-import { returnPaginationRange } from "./PaginationRange";
-import { useState } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
+const Pagination = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) => {
+   let pages = [];
+   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+      pages.push(i);
+   }
+   let totalPage = pages.length;
 
-// gets totalPosts, postsPerPage and currentPage from Cookbook.jsx
-const Pagination = ({totalPosts, postsPerPage, setCurrentPage, props}) => {
-    //pass empty array that will be filled with page numbers 
-    //let array = returnPaginationRange(props.totalPage, props.currentPage, props.limit, props.siblings);
-    let pages = [];
-    const [nextpage, setNextPage] = useState(2);
-    const [prevpage, setPrevPage] = useState(1);
-    let i;
-    //math.ceil rounds to nearest greater integer
-    for(i = 1; i<= Math.ceil(totalPosts/postsPerPage); i++) {
-        //set each page number starting from 1 
-        pages.push(i);
-    }
-    //set total number of pages available 
-    let totalPage = i-1;
+   // Function to get the range of page numbers to display
+   function getPageRange(currentPage, totalPage) {
+      const range = [];
 
-    //handles pressing next button to click to next page 
-     function handleNext (currentPage){
-        // if current page index does not exceed max 
-        if(currentPage< totalPage){
-            //set to next page 
-            setNextPage(currentPage+1)
-            console.log(totalPage);
-            console.log(nextpage);
-            console.log("Next button available");
+      // Always show the first page
+      range.push(1);
 
-        }else{
-            setNextPage(currentPage);
-            console.log("Next button unavailable - bounds exceeded");
-            console.log(totalPage);
-        }
-     }
+      // Check if there should be an ellipsis after the first page
+      if (currentPage > 3) {
+         range.push("...");
+      }
 
-     //handles pressing previous button to click to previous page 
-     function handlePrevious (currentPage){
-        // if current page index is greater than 1 (first page)
-        if(currentPage> 1){
-            //set to previous page
-            setPrevPage(currentPage-1)
-            console.log(totalPage);
-            console.log("Prev button available");
+      // Show the current page and its neighbors (2 pages before and 2 pages after)
+      for (
+         let i = Math.max(2, currentPage - 2);
+         i <= Math.min(currentPage + 2, totalPage - 1);
+         i++
+      ) {
+         range.push(i);
+      }
 
-        }else{
-            //do not switch page
-            setPrevPage(currentPage);
-            console.log("Prev button unavailable - bounds exceeded");
-            console.log(totalPage);
-        }
-     }
+      // Check if there should be an ellipsis before the last page
+      if (currentPage < totalPage - 2) {
+         range.push("...");
+      }
 
+      // Always show the last page
+      range.push(totalPage);
 
-    return (
-        //displays all page indices and next, prev, first and last page
-        <div className="page-container">
-            <button className="extra-button" onClick={()=> {setCurrentPage(1), handleNext(1), handlePrevious(1)}}>First</button>
-            <button className="extra-button" onClick={()=> {setCurrentPage(prevpage), handleNext(prevpage), handlePrevious(prevpage)}}>Previous</button>
-            {pages.map((page, index)=> {
-                    return (
-                        <span>
-                        <button className="page-button" key={index} onClick={()=> {setCurrentPage(page), handleNext(page), handlePrevious(page)}}>{page}</button>
-                        </span>
-                    );
-                    
-            })}
-            <button className="extra-button" onClick={()=> {setCurrentPage(nextpage), handleNext(nextpage), handlePrevious(nextpage)}}>Next</button>
-            <button className="extra-button" onClick={()=> {setCurrentPage(totalPage), handleNext(totalPage), handlePrevious(totalPage)}}>Last</button>
-            
-        </div>
-    );
-}
-export default Pagination
+      return range;
+   }
+
+   return (
+      <div className="page-container">
+         <button
+            className="extra-button"
+            onClick={() => {
+               setCurrentPage((prev) => Math.max(prev - 1, 1));
+            }}
+         >
+            <ArrowBackIcon sx={{ fontSize: 35 }} />
+         </button>
+         {getPageRange(currentPage, totalPage).map((page, index) => {
+            return (
+               <React.Fragment key={index}>
+                  {page === "..." ? (
+                     <span className="ellipsis">
+                        <MoreHorizIcon sx={{ fontSize: 30 }} />
+                     </span>
+                  ) : (
+                     <button
+                        className={`page-button ${page === currentPage ? "active" : ""}`}
+                        onClick={() => {
+                           setCurrentPage(page);
+                        }}
+                     >
+                        {page}
+                     </button>
+                  )}
+               </React.Fragment>
+            );
+         })}
+         <button
+            className="extra-button"
+            onClick={() => {
+               setCurrentPage((prev) => Math.min(prev + 1, totalPage));
+            }}
+         >
+            <ArrowForwardIcon sx={{ fontSize: 35 }} />
+         </button>
+      </div>
+   );
+};
+
+export default Pagination;

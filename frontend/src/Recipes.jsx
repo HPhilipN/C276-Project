@@ -59,24 +59,26 @@ const Recipes = () => {
       const newRecipes = apiRecipes.filter((recipe) => {
          // 165 prep time is just infinity
          const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
-         const healthiness = filteredArray[1]
+         const healthiness = filteredArray[1];
          const noCuisine = filteredArray[2] == "";
          // console.log(filteredArray)
-         return recipe.readyInMinutes <= prepTime && 
-         recipe.healthScore >= healthiness &&
-         (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
-      })
+         return (
+            recipe.readyInMinutes <= prepTime &&
+            recipe.healthScore >= healthiness &&
+            (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
+         );
+      });
       setFilteredRecipes(newRecipes);
-   }
+   };
 
    // search bar functionality
    const searchRecipes = (searchTerm) => {
       if (Array.isArray(apiRecipes)) {
          const filter = searchTerm
             ? apiRecipes.filter(
-                  (recipe) =>
-                     recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-               )
+                 (recipe) =>
+                    recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+              )
             : apiRecipes;
 
          setFilteredRecipes(filter);
@@ -84,10 +86,9 @@ const Recipes = () => {
          console.log("Data is not an array:", data);
          setFilteredRecipes([]);
       }
-   }
+   };
 
    // Fetch data from Spoonacular
-   // TODO; getRecipesFromAPI gets called twice
    useEffect(() => {
       if (apiRecipes.length === 0) {
          getRecipesFromAPI();
@@ -127,6 +128,7 @@ const Recipes = () => {
                      totalPosts={filteredRecipes.length}
                      postsPerPage={postsPerPage}
                      setCurrentPage={setCurrentPage}
+                     currentPage={currentPage}
                   />
                </>
             ) : (

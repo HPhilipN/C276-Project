@@ -65,49 +65,49 @@ const ApiRecipeDisplay = () => {
    };
 
    const handlePrint = () => {
-   printJS({
-      printable: "printable-content",
-      type: "html",
-      css: null,
-      style: null,
-      scanStyles: true,
-      targetStyles: ["*"],
-      ignoreElements: ["back-button", "print-button", "tags-display"],
-      documentTitle: "Recipe",
-   });
+      printJS({
+         printable: "printable-content",
+         type: "html",
+         css: null,
+         style: null,
+         scanStyles: true,
+         targetStyles: ["*"],
+         ignoreElements: ["back-button", "print-button", "tags-display"],
+         documentTitle: "Recipe",
+      });
    };
 
    const disqusShortname = "replicake";
    const disqusConfig = {
-     url: `https://replicake.onrender.com/recipes/view/${rid}`,
-     identifier: `recipe_${rid}`,
-     title: recipe.title,
+      url: `https://replicake.onrender.com/recipes/view/${rid}`,
+      identifier: `recipe_${rid}`,
+      title: recipe.title,
    };
 
    return (
-      <div className="display-fullpage" >
+      <div className="display-fullpage">
          {isChef && <NavbarLogin />}
          {isModerator && <NavbarAdmin />}
          {!isChef && !isModerator && <Navbar />}
-         <div id="printable-content" className="recipe-display-fullpage" >
+         <div id="printable-content" className="recipe-display-fullpage">
             <div id="recipe-display" className="recipe-display">
-            <div className="printable">
-               <header className="header">
-                  <h1 className="title">{recipe.title}</h1>
-                  <div className="author">Source: {recipe.sourceName}</div>
-                  <div className="diff">Health Score: {recipe.healthScore}</div>
-                  <div className="favs">Preparation Time: {recipe.readyInMinutes}min</div>
-               </header>
-               <div className="printable-instructions-and-ingredients">
-                  <div className="ingredients-display">
-                     <h3>Ingredients:</h3>
-                     <ul>
-                        {recipe.extendedIngredients.map((ingredient) => (
-                           <li key={ingredient.id}>{ingredient.original}</li>
-                        ))}
-                     </ul>
+               <div className="printable">
+                  <header className="header">
+                     <h1 className="title">{recipe.title}</h1>
+                     <div className="author">Source: {recipe.sourceName}</div>
+                     <div className="diff">Health Score: {recipe.healthScore}</div>
+                     <div className="favs">Preparation Time: {recipe.readyInMinutes}min</div>
+                  </header>
+                  <div className="printable-instructions-and-ingredients">
+                     <div className="ingredients-display">
+                        <h3>Ingredients:</h3>
+                        <ul>
+                           {recipe.extendedIngredients.map((ingredient, index) => (
+                              <li key={ingredient.id}>{ingredient.original}</li>
+                           ))}
+                        </ul>
+                     </div>
                   </div>
-            </div>
                   <div className="api-instructions-display">
                      <h3>Instructions:</h3>
                      <ol>
@@ -117,37 +117,38 @@ const ApiRecipeDisplay = () => {
                      </ol>
                   </div>
                   <div id="tags-display" className="tags-display">
-                  {tags.length > 0 ? (
-                     <ul>
-                        {tags.map((tag, index) => (
-                           <li key={index} className="tagItem">
-                              {tag}
-                           </li>
-                        ))}
-                     </ul>
-                  ) : (
-                     <p>No tags available</p>
-                  )}
-               </div>
+                     {tags.length > 0 ? (
+                        <ul>
+                           {tags.map((tag, index) => (
+                              <li key={index} className="tagItem">
+                                 {tag}
+                              </li>
+                           ))}
+                        </ul>
+                     ) : (
+                        <p>No tags available</p>
+                     )}
+                  </div>
                   <div className="button-container">
-                  {/* Back button */}
-                  <button id="back-button" onClick={handleBackButtonClick} className="back-button">
-                     Back to Recipes
-                  </button>
-                  {/* Print button */}
-                  <button id="print-button" onClick={handlePrint} className="print-button">
-                     Print Recipe
-                  </button>
-               </div>
+                     {/* Back button */}
+                     <button
+                        id="back-button"
+                        onClick={handleBackButtonClick}
+                        className="back-button"
+                     >
+                        Back to Recipes
+                     </button>
+                     {/* Print button */}
+                     <button id="print-button" onClick={handlePrint} className="print-button">
+                        Print Recipe
+                     </button>
+                  </div>
                </div>
             </div>
          </div>
          {/* Gray box container for Disqus commenting system */}
          <div className="disqus-container">
-            <Disqus.DiscussionEmbed
-            shortname={disqusShortname}
-            config={disqusConfig}
-            />
+            <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
          </div>
       </div>
    );
