@@ -9,20 +9,16 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, props}) => {
     //pass empty array that will be filled with page numbers 
     //let array = returnPaginationRange(props.totalPage, props.currentPage, props.limit, props.siblings);
     let pages = [];
-    const [nextpage, setNextPage] = useState();
-    const [prevpage, setPrevPage] = useState();
+    const [nextpage, setNextPage] = useState(2);
+    const [prevpage, setPrevPage] = useState(1);
     let i;
     //math.ceil rounds to nearest greater integer
     for(i = 1; i<= Math.ceil(totalPosts/postsPerPage); i++) {
         //set each page number starting from 1 
         pages.push(i);
     }
-    //set upper bound on total number of pages
+    //set total number of pages available 
     let totalPage = i-1;
-
-    async function handleClick(page){
-        setCurrentPage(page);
-    }
 
     //handles pressing next button to click to next page 
      function handleNext (currentPage){
@@ -31,36 +27,38 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, props}) => {
             //set to next page 
             setNextPage(currentPage+1)
             console.log(totalPage);
-            console.log("set up next page successfully");
+            console.log(nextpage);
+            console.log("Next button available");
 
         }else{
             setNextPage(currentPage);
-            console.log("exceeded page index");
+            console.log("Next button unavailable - bounds exceeded");
             console.log(totalPage);
         }
      }
 
      //handles pressing previous button to click to previous page 
      function handlePrevious (currentPage){
-        // if current page index is not less than 1
+        // if current page index is greater than 1 (first page)
         if(currentPage> 1){
-            //set to next page 
+            //set to previous page
             setPrevPage(currentPage-1)
             console.log(totalPage);
-            console.log("set up previous page successfully");
+            console.log("Prev button available");
 
         }else{
+            //do not switch page
             setPrevPage(currentPage);
-            console.log("exceeded min page index");
+            console.log("Prev button unavailable - bounds exceeded");
             console.log(totalPage);
         }
      }
 
 
     return (
-        //displays all page numbers 
+        //displays all page indices and next, prev, first and last page
         <div className="page-container">
-            <button className="extra-button">First</button>
+            <button className="extra-button" onClick={()=> {setCurrentPage(1), handleNext(1), handlePrevious(1)}}>First</button>
             <button className="extra-button" onClick={()=> {setCurrentPage(prevpage), handleNext(prevpage), handlePrevious(prevpage)}}>Previous</button>
             {pages.map((page, index)=> {
                     return (
@@ -71,7 +69,7 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, props}) => {
                     
             })}
             <button className="extra-button" onClick={()=> {setCurrentPage(nextpage), handleNext(nextpage), handlePrevious(nextpage)}}>Next</button>
-            <button className="extra-button">Last</button>
+            <button className="extra-button" onClick={()=> {setCurrentPage(totalPage), handleNext(totalPage), handlePrevious(totalPage)}}>Last</button>
             
         </div>
     );
