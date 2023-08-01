@@ -9,6 +9,7 @@ import { RecipeContext } from "./utils/RecipeContext";
 import { useNavigate } from "react-router-dom";
 import "./styles/ApiRecipeDisplay.css";
 import printJS from "print-js";
+import Disqus from "disqus-react";
 
 const ApiRecipeDisplay = () => {
    const { isChef, isModerator } = useContext(UserContext);
@@ -76,7 +77,12 @@ const ApiRecipeDisplay = () => {
    });
    };
 
-
+   const disqusShortname = "replicake";
+   const disqusConfig = {
+     url: `https://replicake.onrender.com/recipes/view/${rid}`,
+     identifier: `recipe_${rid}`,
+     title: recipe.title,
+   };
 
    return (
       <div className="display-fullpage" >
@@ -136,6 +142,10 @@ const ApiRecipeDisplay = () => {
                </div>
             </div>
          </div>
+         <Disqus.DiscussionEmbed
+         shortname={disqusShortname}
+         config={disqusConfig}
+         />
       </div>
    );
 };
