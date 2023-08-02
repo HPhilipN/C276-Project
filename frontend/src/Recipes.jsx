@@ -69,7 +69,7 @@ const Recipes = () => {
             );
          });
          setFilteredRecipes(newRecipes);
-      };
+      }
       else {
          console.log("The filter is not the right shape");
          return apiRecipes;
