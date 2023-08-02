@@ -88,6 +88,15 @@ const Cookbook = () => {
             const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
             const difficulty = filteredArray[1];
             const noCuisine = filteredArray[2] == "";
+            if (prepTime < 0) {
+               prepTime = 0;
+            }
+            if (difficulty < 0) {
+               difficulty = 0;
+            }
+            else if (difficulty > 10) {
+               difficulty = 10;
+            }
             return (
               recipe.prepTime <= prepTime && 
               recipe.recipeDifficulty <= difficulty &&

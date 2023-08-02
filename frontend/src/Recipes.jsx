@@ -59,9 +59,19 @@ const Recipes = () => {
       if (filteredArray.length == 3 && Array.isArray(filteredArray)) {
          const newRecipes = apiRecipes.filter((recipe) => {
             // 165 prep time is just infinity
-            const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+            const prepTime = filteredArray[0] <= 165 ? filteredArray[0] : Infinity;
+            if (prepTime < 0) {
+               prepTime = 0;
+            }
             const healthiness = filteredArray[1];
+            if (healthiness < 0) {
+               healthiness = 0;
+            }
+            else if (healthiness > 100) {
+               healthiness = 100;
+            }
             const noCuisine = filteredArray[2] == "";
+
             return (
               recipe.readyInMinutes <= prepTime && 
               recipe.healthScore >= healthiness &&
