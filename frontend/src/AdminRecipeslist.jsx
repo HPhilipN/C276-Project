@@ -1,15 +1,12 @@
-import React, { Component, useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./NavbarAdmin";
 import Modal from "react-modal";
-import { UserContext } from "./utils/UserContext";
-import "./styles/AdminRecipelist.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faKitchenSet } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { redirect } from "react-router-dom";
+import { faX, faKitchenSet, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import "./styles/AdminSearchBar.css";
+import "./styles/AdminRecipelist.css";
+import NoRecipesExist from "./NoRecipesExist";
 
 const customStyles = {
    overlay: {
@@ -31,17 +28,14 @@ const customStyles = {
 };
 
 export default function AdminRecipelist() {
-   const { isModerator, userId } = useContext(UserContext);
    const [category, setCategory] = useState([]);
    const [message, setMessage] = useState("");
    const [recipeId, setRecipeId] = useState(null);
    const [modalOpen, setModalOpen] = useState(false);
+   const [searchTerm, setSearchTerm] = useState(""); // State variable for search term
 
    // redirect to home if chef or logged out
    const navigate = useNavigate();
-   if (!isModerator) {
-      navigate("/");
-   }
 
    //Display all recipes present in the database
    useEffect(() => {
@@ -53,7 +47,7 @@ export default function AdminRecipelist() {
          //  console.log(getData);
       };
       getcategory();
-   });
+   }, []);
 
    // should redirect to full recipe view cookbook/view/rid
    function displayRecipe(rid) {
@@ -82,11 +76,26 @@ export default function AdminRecipelist() {
             console.log(error);
          });
    }
-     // Function to handle back button click
-  const handleBack = () => {
-   // Navigate back to the Adminhome page
-   navigate("/admin/home");
- };
+
+   // Function to handle back button click
+   const handleBack = () => {
+      // Navigate back to the Adminhome page
+      navigate("/admin/home");
+   };
+
+   // Create a function to handle search bar input change
+   const handleSearchInputChange = (event) => {
+      setSearchTerm(event.target.value);
+   };
+
+   // Filter the recipes based on the search term
+   const filteredRecipes = category.filter((recipe) => {
+      return (
+         recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+         recipe.authorName.toLowerCase().startsWith(searchTerm.toLowerCase())||
+         recipe.rid.toString().startsWith(searchTerm) // Search by ID
+      );
+   });
 
    return (
       <>
@@ -112,48 +121,76 @@ export default function AdminRecipelist() {
                </button>
             </div>
          </Modal>
-         <div className="recipebox">
-            <table className="recipedisplay">
-               <thead></thead>
-               <tbody>
-                  <tr>
-                     <th>Recipe</th>
-                     <th>Author</th>
-
-                     <th>Manage</th>
-                  </tr>
-                  {category.map((getcate) => (
-                     <tr className="reciperow" key={getcate.rid}>
-                        <td>
-                           <FontAwesomeIcon icon={faKitchenSet} /> {getcate.title} #{getcate.rid}
-                        </td>
-                        <td>
-                           <FontAwesomeIcon icon={faUser} /> {getcate.authorName}
-                        </td>
-                        <td>
-                           <button
-                              className="viewbtn btn-hover"
-                              onClick={() => displayRecipe(getcate.rid)}
-                           >
-                              View
-                           </button>
-                        </td>
-                        <td>
-                           <button
-                              className="deletebtn btn-hover"
-                              onClick={() => confirmDelete(getcate.rid)}
-                           >
-                              Delete
-                           </button>
-                        </td>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
-                           {/* Back button */}
-      <button className="back-btn" onClick={handleBack}>
-        Back
-      </button>
+         <div className="recipeboxes">
+            {/* Center the search bar */}
+            <div className="search-bar-container">
+               <div className="searchbar-wraps">
+                  <span className="searchbar-icons">
+                     {/* You can add a search icon here if needed */}
+                     <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
+                  </span>
+                  {/* Add the search bar */}
+                  <div className="search-bar">
+                     <input
+                        type="text"
+                        placeholder="Search by author/recipe/id"
+                        value={searchTerm}
+                        onChange={handleSearchInputChange}
+                     />
+                  </div>
+               </div>
+            </div>
+            {filteredRecipes.length > 0 ? (
+               <>
+                  <table className="recipedisplay">
+                     <thead></thead>
+                     <tbody>
+                        <tr>
+                           <th>Recipe</th>
+                           <th>Author</th>
+                           <th>Manage</th>
+                        </tr>
+                        {filteredRecipes.map((recipe) => (
+                           <tr className="reciperow" key={recipe.rid}>
+                              <td>
+                                 <FontAwesomeIcon icon={faKitchenSet} /> {recipe.title} #
+                                 {recipe.rid}
+                              </td>
+                              <td>
+                                 <FontAwesomeIcon icon={faUser} /> {recipe.authorName}
+                              </td>
+                              <td>
+                                 <button
+                                    className="viewbtn btn-hover"
+                                    onClick={() => displayRecipe(recipe.rid)}
+                                 >
+                                    View
+                                 </button>
+                              </td>
+                              <td>
+                                 <button
+                                    className="deletebtn btn-hover"
+                                    onClick={() => confirmDelete(recipe.rid)}
+                                 >
+                                    Delete
+                                 </button>
+                              </td>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
+               </>
+            ) : (
+               <div className="no-recipes-found">
+                  <h3>No Recipes with those parameters exist</h3>
+               </div>
+            )}
+            <div className="back-btn-containers">
+               {/* Back button */}
+               <button className="back-btn btn-hover" onClick={handleBack}>
+                  Back
+               </button>
+            </div>
          </div>
       </>
    );

@@ -7,8 +7,7 @@ function RecipeProvider({ children }) {
    const [apiRecipes, setApiRecipes] = useState([]); //all recipes
    const [recipeOfTheDay, setRecipeOfTheDay] = useState(null);
 
-   //    const apiKey = process.env.VITE_APP_API_KEY; // prod key
-   const apiKey = import.meta.env.VITE_APP_API_KEY; // dev key
+   const apiKey = import.meta.env.VITE_APP_API_KEY;
 
    return (
       <RecipeContext.Provider

@@ -5,6 +5,7 @@
 .recipe-display-fullpage {
    display: flex;
    justify-content: center;
+   background-color: #eeeeee;
 }
 
 .recipe-display {
@@ -151,3 +152,8 @@
    }
  }
 
+ .disqus-container {
+   padding: 20px;
+   max-width: 100%; /* Adjust the maximum width to your preference */
+   border-top: 2px solid #ccc; /* Add a top border with a desired color */
+}

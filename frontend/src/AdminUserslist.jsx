@@ -4,8 +4,11 @@ import Modal from "react-modal";
 import { UserContext } from "./utils/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import "./styles/AdminRecipelist.css";
+import "./styles/AdminSearchBar.css";
+import { faMagnifyingGlass, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const customStyles = {
    overlay: {
@@ -32,6 +35,7 @@ export default function AdminUserlist() {
    const [errormodalOpen, seterrormodalOpen] = useState(false);
    const [deleteuser, setDeleteuser] = useState(null);
    const [modalOpen, setModalOpen] = useState(false);
+   const [searchTerm, setSearchTerm] = useState(""); // State variable for search term
 
    // redirect to home if chef or logged out
    const navigate = useNavigate();
@@ -39,17 +43,29 @@ export default function AdminUserlist() {
       navigate("/");
    }
 
-   //Display all users present in the database
+   // Display all users present in the database
    useEffect(() => {
       const getcategory = async () => {
          const res = await fetch("https://replicake.onrender.com/users/view");
          const getData = await res.json();
-         //need to allow moderators/admin not to be shown (use isModerator?)
-         setCategory(getData);
-         //  console.log(getData);
+
+         // Filter users based on search term
+         const filteredUsers = getData.filter(
+            (user) =>
+               user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               user.uid.toString().startsWith(searchTerm) // Search by ID
+         );
+
+         setCategory(filteredUsers);
       };
       getcategory();
-   });
+   }, [searchTerm]); //Add searchTerm as a dependency to re-run the effect when it changes
+
+   //Create a function to handle search bar input change
+   const handleSearchInputChange = (event) => {
+      setSearchTerm(event.target.value);
+   };
 
    //confirm delete via popup modal and pass uid to modal
    function confirmDelete(deleteuser) {
@@ -78,10 +94,10 @@ export default function AdminUserlist() {
       }
    }
    // Function to handle back button click
-  const handleBack = () => {
-   // Navigate back to the Adminhome page
-   navigate("/admin/home");
- };
+   const handleBack = () => {
+      // Navigate back to the Adminhome page
+      navigate("/admin/home");
+   };
 
    return (
       <div>
@@ -99,62 +115,93 @@ export default function AdminUserlist() {
                ERROR: You cannot delete yourself from the database.
             </div>
          </Modal>
-         <div className="recipebox">
-            <table className="recipedisplay">
-               <thead></thead>
-               <tbody>
-                  <tr>
-                     <th>Username ID</th>
-                     <th>Email</th>
-                     <th>Manage</th>
-                  </tr>
-                  {category.map((getcate) => (
-                     <tr className="reciperow" key={getcate.uid}>
-                        <td>
-                           {getcate.name} #{getcate.uid}
-                        </td>
-                        <td> {getcate.email} </td>
-                        <td>
-                           <button
-                              className="deletebtn  btn-hover"
-                              onClick={() => confirmDelete(getcate.uid)}
-                           >
-                              Delete
-                           </button>
-                        </td>
-                        <Modal
-                           isOpen={modalOpen}
-                           onRequestClose={() => setModalOpen(false)}
-                           style={customStyles}
-                        >
-                           <button className="x-button" onClick={() => setModalOpen(false)}>
-                              <FontAwesomeIcon icon={faX} />
-                           </button>
-                           <div className="confirmdelbox">
-                              <p>Are you sure you want to delete this user?</p>
-                              <br />
-                              <button
-                                 className="confirmbtn"
-                                 onClick={() => {
-                                    deleteUser(deleteuser);
-                                    setModalOpen(false);
-                                 }}
+         <div className="recipeboxes">
+            {/* Center the search bar */}
+            <div className="search-bar-container">
+               <div className="searchbar-wraps">
+                  <span className="searchbar-icons">
+                     {/* You can add a search icon here if needed */}
+                     <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
+                  </span>
+                  {/* Add the search bar */}
+                  <div className="search-bar">
+                     <input
+                        type="text"
+                        placeholder="Search by username/email/id"
+                        value={searchTerm}
+                        onChange={handleSearchInputChange}
+                     />
+                  </div>
+               </div>
+            </div>
+            {category.length > 0 ? (
+               <>
+                  <table className="recipedisplay">
+                     <thead></thead>
+                     <tbody>
+                        <tr>
+                           <th>Username ID</th>
+                           <th>Email</th>
+                           <th>Manage</th>
+                        </tr>
+                        {category.map((getcate) => (
+                           <tr className="reciperow" key={getcate.uid}>
+                              <td>
+                                 <FontAwesomeIcon icon={faUser} /> {getcate.name} #{getcate.uid}
+                              </td>
+                              <td> {getcate.email} </td>
+                              <td>
+                                 <button
+                                    className="deletebtn  btn-hover"
+                                    onClick={() => confirmDelete(getcate.uid)}
+                                 >
+                                    Delete
+                                 </button>
+                              </td>
+                              <Modal
+                                 isOpen={modalOpen}
+                                 onRequestClose={() => setModalOpen(false)}
+                                 style={customStyles}
                               >
-                                 Yes
-                              </button>
-                              <button className="cancelbtn" onClick={() => setModalOpen(false)}>
-                                 Cancel
-                              </button>
-                           </div>
-                        </Modal>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
-                    {/* Back button */}
-        <button className="back-btn" onClick={handleBack}>
-          Back
-        </button>
+                                 <button className="x-button" onClick={() => setModalOpen(false)}>
+                                    <FontAwesomeIcon icon={faX} />
+                                 </button>
+                                 <div className="confirmdelbox">
+                                    <p>Are you sure you want to delete this user?</p>
+                                    <br />
+                                    <button
+                                       className="confirmbtn"
+                                       onClick={() => {
+                                          deleteUser(deleteuser);
+                                          setModalOpen(false);
+                                       }}
+                                    >
+                                       Yes
+                                    </button>
+                                    <button
+                                       className="cancelbtn"
+                                       onClick={() => setModalOpen(false)}
+                                    >
+                                       Cancel
+                                    </button>
+                                 </div>
+                              </Modal>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
+               </>
+            ) : (
+               <div className="no-recipes-found">
+                  <h3>No Users with those parameters exist</h3>
+               </div>
+            )}
+            <div className="back-btn-container">
+               {/* Back button */}
+               <button className="back-btn btn-hover" onClick={handleBack}>
+                  Back
+               </button>
+            </div>
          </div>
       </div>
    );

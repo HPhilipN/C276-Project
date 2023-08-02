@@ -1,0 +1,38 @@
+.search-bar-container {
+   /* Center the search bar horizontally */
+   display: flex;
+   justify-content: center;
+   /* margin-top: 20px; Add some top margin to move the search bar down */
+   margin-bottom: -20px; /* Add some top margin to move the search bar down */
+}
+
+.search-bar-container input {
+   /* Add any additional styles for the search bar input */
+   width: 300px; /* Set the desired width for the search bar */
+   padding: 8px;
+   border: 1px solid #ccc;
+}
+
+.searchbar-wraps {
+   display: flex;
+   border-bottom: 1px solid transparent;
+   padding: 1.5rem 1rem;
+}
+
+.searchbar-wraps input {
+   font-size: 18px;
+   padding-left: 40px;
+   outline: none;
+   height: 100%;
+
+   width: 115%;
+   border-radius: 25px;
+   border: 1px solid #ccc;
+}
+
+.searchbar-icons {
+   color: green;
+   margin-right: -40px;
+   position: sticky;
+   padding: 10px;
+}

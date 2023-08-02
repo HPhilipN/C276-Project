@@ -18,6 +18,7 @@
       "@mui/icons-material": "^5.11.16",
       "@mui/material": "^5.13.6",
       "@react-pdf/renderer": "^3.1.12",
+      "disqus-react": "^1.1.5",
       "print-js": "^1.6.0",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",

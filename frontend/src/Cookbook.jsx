@@ -12,6 +12,7 @@ import "./styles/Recipes.css";
 import { UserContext } from "./utils/UserContext";
 import { useNavigate } from "react-router-dom";
 import InfoButton from "./utils/InfoButton";
+import Pagination from "./Pagination";
 
 const Cookbook = () => {
    const { isChef, isModerator, userId } = useContext(UserContext);
@@ -21,7 +22,10 @@ const Cookbook = () => {
 
    // State to manage pagination
    const [currentPage, setCurrentPage] = useState(1);
-   const recipesPerPage = 2; // Number of recipes to display per page
+   const [postsPerPage, setpostsPerPage] = useState(8);
+   // const recipesPerPage = 2; // Number of recipes to display per page
+   //limit for showing ...
+   const [limit, setLimit] = useState(5);
 
    // redirect to home if logged out
    const navigate = useNavigate();
@@ -53,6 +57,7 @@ const Cookbook = () => {
       console.log("== getUserRecipesFromDB ==");
       try {
          const response = await fetch(
+            //`https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`
             `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`,
             {
                method: "GET",
@@ -81,20 +86,21 @@ const Cookbook = () => {
          const newRecipes = userRecipes.filter((recipe) => {
             // 165 prep time is just infinity
             const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
-            const difficulty = filteredArray[1]
+            const difficulty = filteredArray[1];
             const noCuisine = filteredArray[2] == "";
-            // console.log(filteredArray)
-            return recipe.prepTime <= prepTime && 
-            recipe.recipeDifficulty <= difficulty &&
-            (recipe.tags.includes(filteredArray[2]) || noCuisine)
-         })
+            return (
+              recipe.prepTime <= prepTime && 
+              recipe.recipeDifficulty <= difficulty &&
+              (recipe.tags.includes(filteredArray[2]) || noCuisine)
+            );
+         });
          setFilteredRecipes(newRecipes);
       }
       else {
-         console.log("The filter is not the right shape")
-         return userRecipes
-      }
-   }
+         console.log("The filter is not the right shape");
+         return userRecipes;
+      };
+   };
 
    // search bar functionality
    const searchRecipes = (searchTerm) => {
@@ -111,25 +117,6 @@ const Cookbook = () => {
          console.log("Data is not an array:", data);
          setFilteredRecipes([]);
       }
-   }
-
-   // Handler for page change
-   const handlePageChange = (pageNumber) => {
-      setCurrentPage(pageNumber);
-   };
-
-   // Go to the previous page
-   const handlePreviousPage = () => {
-      if (currentPage > 1) {
-         setCurrentPage((prevPage) => prevPage - 1);
-      }
-   };
-
-   // Go to the next page
-   const handleNextPage = () => {
-      if (currentPage < Math.ceil(userRecipes.length / recipesPerPage)) {
-         setCurrentPage((prevPage) => prevPage + 1);
-      }
    };
 
    // Fetch data when the page state or recipesPerPage changes
@@ -141,7 +128,15 @@ const Cookbook = () => {
          }
       }
       fetchData();
-   }, [userId, recipesExistInDatabase, currentPage, recipesPerPage]);
+   }, [userId, recipesExistInDatabase, currentPage]);
+
+   // calculate first and last post to be displayed on current page
+   const lastPostIndex = currentPage * postsPerPage;
+   const firstPostIndex = lastPostIndex - postsPerPage;
+   //hide data that is not shown
+   const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
+   //get total pages
+   const totalPages = Math.ceil(filteredRecipes.length / limit);
 
    return (
       <div className="dashboard">
@@ -159,25 +154,14 @@ const Cookbook = () => {
             {/* check if userRecipes is loaded before rendering */}
             {recipesExistInDatabase && filteredRecipes.length > 0 ? (
                <>
-                  <RecipeList recipes={filteredRecipes} />
-                  {/* Basic paginator */}
-                  {userRecipes.length > recipesPerPage && (
-                     <div className="pagination">
-                        <button onClick={handlePreviousPage}>Prev</button>
-                        {[...Array(Math.ceil(userRecipes.length / recipesPerPage))].map(
-                           (_, index) => (
-                              <button
-                                 key={index + 1}
-                                 onClick={() => handlePageChange(index + 1)}
-                                 className={currentPage === index + 1 ? "active" : ""}
-                              >
-                                 {index + 1}
-                              </button>
-                           )
-                        )}
-                        <button onClick={handleNextPage}>Next</button>
-                     </div>
-                  )}
+                  <RecipeList recipes={currentPost} />
+                  {/* Pagination here - grab current content on page and display */}
+                  <Pagination
+                     totalPosts={filteredRecipes.length}
+                     postsPerPage={postsPerPage}
+                     setCurrentPage={setCurrentPage}
+                     currentPage={currentPage}
+                  />
                </>
             ) : null}
             {/* Info Button on Bottom Right */}

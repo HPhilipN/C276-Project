@@ -218,10 +218,6 @@ function Login() {
                <p className={signInError ? "invalid-login" : "invisible"}>
                   Incorrect email or password
                </p>
-               {/* Anchor for forgot password, basically like the "a" tag */}
-               <Components.Anchor className="forgot-password" href="#">
-                  Forgot your password?
-               </Components.Anchor>
                {/* Sign-in button */}
                <Components.Button className="btn-hover" onClick={loginUser}>
                   Log In

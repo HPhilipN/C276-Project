@@ -12,6 +12,7 @@ import { RecipeContext } from "./utils/RecipeContext";
 import InfoButton from "./utils/InfoButton";
 import RefreshRecipes from "./RefreshRecipes";
 import recipeInfoImg from "./assets/recipe-display.png";
+import Pagination from "./Pagination";
 
 // API generated recipes
 const Recipes = () => {
@@ -19,7 +20,11 @@ const Recipes = () => {
    const { apiRecipes, setApiRecipes, apiKey } = useContext(RecipeContext);
    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-   const numOfRecipesToFetch = 2;
+   const numOfRecipesToFetch = 36;
+
+   // State to manage pagination
+   const [currentPage, setCurrentPage] = useState(1);
+   const [postsPerPage, setpostsPerPage] = useState(8);
 
    // get all recipes from Spoonacular
    async function getRecipesFromAPI() {
@@ -55,29 +60,29 @@ const Recipes = () => {
          const newRecipes = apiRecipes.filter((recipe) => {
             // 165 prep time is just infinity
             const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
-            const healthiness = filteredArray[1]
+            const healthiness = filteredArray[1];
             const noCuisine = filteredArray[2] == "";
-            // console.log(filteredArray)
-            return recipe.readyInMinutes <= prepTime && 
-            recipe.healthScore >= healthiness &&
-            (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
-         })
+            return (
+              recipe.readyInMinutes <= prepTime && 
+              recipe.healthScore >= healthiness &&
+              (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
+            );
+         });
          setFilteredRecipes(newRecipes);
-      }
+      };
       else {
-         console.log("The filter is not the right shape")
-         return apiRecipes
-      }
-   }
-
+         console.log("The filter is not the right shape");
+         return apiRecipes;
+      };
+   };
    // search bar functionality
    const searchRecipes = (searchTerm) => {
       if (Array.isArray(apiRecipes)) {
          const filter = searchTerm
             ? apiRecipes.filter(
-                  (recipe) =>
-                     recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-               )
+                 (recipe) =>
+                    recipe.title && recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+              )
             : apiRecipes;
 
          setFilteredRecipes(filter);
@@ -85,10 +90,9 @@ const Recipes = () => {
          console.log("Data is not an array:", data);
          setFilteredRecipes([]);
       }
-   }
+   };
 
    // Fetch data from Spoonacular
-   // TODO; getRecipesFromAPI gets called twice
    useEffect(() => {
       if (apiRecipes.length === 0) {
          getRecipesFromAPI();
@@ -100,6 +104,12 @@ const Recipes = () => {
       setFilteredRecipes(apiRecipes);
       //   console.log(apiRecipes);
    }, []);
+
+   // calculate first and last post to be displayed on current page
+   const lastPostIndex = currentPage * postsPerPage;
+   const firstPostIndex = lastPostIndex - postsPerPage;
+   //hide data that is not shown
+   const currentPost = filteredRecipes.slice(firstPostIndex, lastPostIndex);
 
    return (
       <div className="dashboard">
@@ -116,7 +126,14 @@ const Recipes = () => {
             {/* check if apiRecipes is loaded before rendering */}
             {filteredRecipes.length > 0 ? (
                <>
-                  <ApiRecipeList recipes={filteredRecipes} />
+                  <ApiRecipeList recipes={currentPost} />
+                  {/* Pagination here - grab current content on page and display */}
+                  <Pagination
+                     totalPosts={filteredRecipes.length}
+                     postsPerPage={postsPerPage}
+                     setCurrentPage={setCurrentPage}
+                     currentPage={currentPage}
+                  />
                </>
             ) : (
                <NoRecipesExist />
