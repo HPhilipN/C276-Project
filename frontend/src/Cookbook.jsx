@@ -77,17 +77,23 @@ const Cookbook = () => {
 
    // filter functionality
    const filterRecipes = (filteredArray) => {
-      const newRecipes = userRecipes.filter((recipe) => {
-         // 165 prep time is just infinity
-         const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
-         const difficulty = filteredArray[1]
-         const noCuisine = filteredArray[2] == "";
-         // console.log(filteredArray)
-         return recipe.prepTime <= prepTime && 
-         recipe.recipeDifficulty <= difficulty &&
-         (recipe.tags.includes(filteredArray[2]) || noCuisine)
-      })
-      setFilteredRecipes(newRecipes);
+      if (filteredArray.length == 3 && Array.isArray(filteredArray)) {
+         const newRecipes = userRecipes.filter((recipe) => {
+            // 165 prep time is just infinity
+            const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+            const difficulty = filteredArray[1]
+            const noCuisine = filteredArray[2] == "";
+            // console.log(filteredArray)
+            return recipe.prepTime <= prepTime && 
+            recipe.recipeDifficulty <= difficulty &&
+            (recipe.tags.includes(filteredArray[2]) || noCuisine)
+         })
+         setFilteredRecipes(newRecipes);
+      }
+      else {
+         console.log("The filter is not the right shape")
+         return userRecipes
+      }
    }
 
    // search bar functionality

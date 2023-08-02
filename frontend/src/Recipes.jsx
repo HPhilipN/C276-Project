@@ -51,17 +51,23 @@ const Recipes = () => {
 
    // filter functionality
    const filterRecipes = (filteredArray) => {
-      const newRecipes = apiRecipes.filter((recipe) => {
-         // 165 prep time is just infinity
-         const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
-         const healthiness = filteredArray[1]
-         const noCuisine = filteredArray[2] == "";
-         // console.log(filteredArray)
-         return recipe.readyInMinutes <= prepTime && 
-         recipe.healthScore >= healthiness &&
-         (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
-      })
-      setFilteredRecipes(newRecipes);
+      if (filteredArray.length == 3 && Array.isArray(filteredArray)) {
+         const newRecipes = apiRecipes.filter((recipe) => {
+            // 165 prep time is just infinity
+            const prepTime = filteredArray[0] != 165 ? filteredArray[0] : Infinity;
+            const healthiness = filteredArray[1]
+            const noCuisine = filteredArray[2] == "";
+            // console.log(filteredArray)
+            return recipe.readyInMinutes <= prepTime && 
+            recipe.healthScore >= healthiness &&
+            (recipe.cuisines.includes(filteredArray[2]) || noCuisine)
+         })
+         setFilteredRecipes(newRecipes);
+      }
+      else {
+         console.log("The filter is not the right shape")
+         return apiRecipes
+      }
    }
 
    // search bar functionality
