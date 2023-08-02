@@ -23,7 +23,7 @@ const Cookbook = () => {
    // State to manage pagination
    const [currentPage, setCurrentPage] = useState(1);
    const [postsPerPage, setpostsPerPage] = useState(8);
-   // const recipesPerPage = 2; // Number of recipes to display per page
+   const recipesPerPage = 12; // Number of recipes to display per page
    //limit for showing ...
    const [limit, setLimit] = useState(5);
 
