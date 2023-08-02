@@ -97,7 +97,7 @@ class UserControllerTest {
 
         // Password changed at different endpoint thus not needed here
         // DO NOT change email here, crucial to test functionality
-        User updatedUser = new User("updatedUser", "user2@test.com", "", true, false);
+        User updatedUser = new User("Updateduser", "user2@test.com", "", true, false);
 
         // Perform the PUT request
         mockMvc.perform(MockMvcRequestBuilders.put("/users/update/{uid}", existingUser.getUid())

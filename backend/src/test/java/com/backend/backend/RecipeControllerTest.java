@@ -29,8 +29,8 @@ public class RecipeControllerTest {
     @Autowired
     private RecipeRepository recipeRepository;
     private Recipe testRecipe = new Recipe(
-            123,
-            "testAuthor",
+            68,
+            "User3",
             "deletusTitle",
             2,
             0,
@@ -55,7 +55,7 @@ public class RecipeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/recipes/view/{rid}", testRecipeRid))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.recipeDifficulty").value(9));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.recipeDifficulty").value(7));
 
         System.out.println("Passed test for /recipes/view/{rid}");
     }
@@ -76,6 +76,7 @@ public class RecipeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/recipes/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"authorId\":\"" + testRecipe.getAuthorId()
+                        + "\",\"authorName\":\"" + testRecipe.getAuthorName()
                         + "\",\"title\":\"" + testRecipe.getTitle()
                         + "\",\"recipeDifficulty\":" + testRecipe.getRecipeDifficulty()
                         + ",\"prepTime\":" + testRecipe.getPrepTime()
@@ -113,7 +114,8 @@ public class RecipeControllerTest {
 
     @Test
     public void testFindRecipeUid() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/find/{uid}", 2))
+        // user3
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/find/68"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").value("Fake Cake"));
