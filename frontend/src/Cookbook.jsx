@@ -58,7 +58,7 @@ const Cookbook = () => {
       try {
          const response = await fetch(
             //`https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`
-            `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${postsPerPage}`,
+            `https://replicake.onrender.com/recipes/view?page=${currentPage}&limit=${recipesPerPage}`,
             {
                method: "GET",
             }

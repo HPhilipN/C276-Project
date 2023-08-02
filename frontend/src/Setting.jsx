@@ -343,7 +343,7 @@ const Setting = () => {
    const accountTab = (
       <>
          <h3 className="mb-4">Account Settings</h3>
-         <div className="row">
+         <div className="row accountTab">
             <div className="col-md-4">
                <div className="form-group">
                   <label>Name</label>
@@ -370,7 +370,7 @@ const Setting = () => {
             </div>
             {/* More form groups for other fields */}
          </div>
-         <div>
+         <div className="update-cancel">
             <button className="btn btn-primary" onClick={handleAccountUpdate}>
                Update
             </button>
@@ -395,8 +395,8 @@ const Setting = () => {
    const passwordTab = (
       <>
          <h3 className="mb-4">Password Settings</h3>
-         <div className="row">
-            <div className="col-md-8">
+         <div className="row passwordTab">
+            <div className="col-md-9">
                <div className="form-group">
                   <label>Old Password</label>
                   <div className="password-input-container">
@@ -417,7 +417,7 @@ const Setting = () => {
                   </div>
                </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-9">
                <div className="form-group">
                   <label>New Password</label>
                   <div className="password-input-container">
@@ -477,7 +477,7 @@ const Setting = () => {
             </div>
             {/* More form groups for other fields */}
          </div>
-         <div>
+         <div className="update-cancel">
             <button className="btn btn-primary" onClick={handlePasswordUpdate}>
                Update
             </button>

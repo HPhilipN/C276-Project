@@ -1,98 +1,126 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
 body {
-	background: #f9f9f9;
-	font-family: "Roboto", sans-serif;
+   background: #f9f9f9;
+   font-family: "Roboto", sans-serif;
 }
 
 .shadow {
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-	border-radius: 15px; /* Round the corners of the box */
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+   border-radius: 15px; /* Round the corners of the box */
 }
 
 .profile-tab-nav {
-	min-width: 250px;
-	max-width: 2500px;
+   min-width: 250px;
+   max-width: 2500px;
 }
 
 .tab-content {
-	flex: 1;
+   flex: 1;
 }
 
 .form-group {
-	margin-bottom: 1.5rem;
+   margin-bottom: 1.5rem;
 }
 
 .nav-pills a.nav-link {
-	padding: 15px 20px;
-	border-bottom: 3px solid #ddd;
-	border-radius: 0;
-	color: #333;
+   padding: 15px 20px;
+   border-bottom: 3px solid #ddd;
+   border-radius: 0;
+   color: #333;
 }
 .nav-pills a.nav-link i {
-	width: 20px;
+   width: 20px;
 }
 
 .img-circle img {
-	height: 100px;
-	width: 100px;
-	border-radius: 100%;
-	border: 5px solid #fff;
+   height: 100px;
+   width: 100px;
+   border-radius: 100%;
+   border: 5px solid #fff;
 }
 
-.containers{
-	display: flex;
-	flex-direction: column;
-	align-items: center; 
+.containers {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
-  /* CSS for the input elements */
+/* CSS for the input elements */
 .form-control {
-	width: 225px; /* Adjust this value to your desired width */
-  }
-  
+   width: 225px; /* Adjust this value to your desired width */
+}
+
 /* Add a new CSS class for the password input container */
 .password-input-container {
-	display: flex;
-	margin-left: 35px;
-  }
+   display: flex;
+   margin-left: 35px;
+}
 
-  
 .pw-strengths {
-	margin-left: 35px;
-	width: 220px; /* Adjust the width as a percentage */
-  }
+   margin-left: 35px;
+   width: 220px; /* Adjust the width as a percentage */
+}
 
-  
 /* Change the color of the tab */
 .nav-pills .nav-link.active {
-	background-color: #91B48C;
-	color: white;
-  }
-  
- 
-  /* Change the color of the buttons to green */
-  .btn-primary {
-	
-	background-color: #91B48C;
-	color: white;
-	
-	border: none; /* Remove the border */
-  }
-  
-  .btn-primary:hover {
-	background-color: #749768; /* Similar color to the primary button */
-  }
-  
-  .btn-light {
-	background-color: #FF9E0D;
-	color: black;
-  }
-  
-  .btn-light:hover {
-	background-color: #e48f0f; /* Similar color to the light button */
-  }
+   background-color: #91b48c;
+   color: white;
+}
 
-  .unselectable {
-	user-select: none;
-  }
-  
+/* Change the color of the buttons to green */
+.btn-primary {
+   background-color: #91b48c;
+   color: white;
+
+   border: none; /* Remove the border */
+}
+
+.btn-primary:hover {
+   background-color: #749768; /* Similar color to the primary button */
+}
+
+.btn-light {
+   background-color: #ff9e0d;
+   color: black;
+}
+
+.btn-light:hover {
+   background-color: #e48f0f; /* Similar color to the light button */
+}
+
+.unselectable {
+   user-select: none;
+}
+
+.tab-content {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.tab-pane {
+   background-color: transparent;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.tab-pane:hover {
+   background-color: transparent;
+}
+
+.accountTab {
+   display: inline;
+   justify-content: center;
+   align-items: center;
+}
+
+.passwordTab {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.update-cancel button {
+   margin: 0 10px;
+}
