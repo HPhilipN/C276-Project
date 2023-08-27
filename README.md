@@ -1,6 +1,10 @@
 # RepliCake - Recipe App
 
-Video Demo of the webiste: https://cdn.discordapp.com/attachments/1106762442337427458/1136930642270113842/Untitled1.mp4
+Video Demo of the webiste:
+
+
+https://github.com/HPhilipN/C276-Project/assets/71118130/af57fd16-3856-4ec2-8b77-169151995a82
+
 
 
 Group Members:
