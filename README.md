@@ -1,6 +1,7 @@
 # RepliCake - Recipe App
 
-~Access on [Replicake](https://replicake.onrender.com/)~
+Video Demo of the webiste: https://cdn.discordapp.com/attachments/1106762442337427458/1136930642270113842/Untitled1.mp4
+
 
 Group Members:
 * Jai Malhi
