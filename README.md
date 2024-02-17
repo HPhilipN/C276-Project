@@ -1,6 +1,6 @@
 # RepliCake - Recipe App
 
-Video Demo of the webiste:
+Video Demo of the website:
 
 
 https://github.com/HPhilipN/C276-Project/assets/71118130/af57fd16-3856-4ec2-8b77-169151995a82
